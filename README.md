@@ -1,7 +1,17 @@
-# Education for Revitalization ![Documentation](https://camo.githubusercontent.com/5e1e40bde51a836bec3ce9c7493e453f64ac1f1b/687474703a2f2f696e63682d63692e6f72672f6769746875622f6477796c2f686170692d617574682d6a7774322e7376673f6272616e63683d6d6173746572)
+# Education for Revitalization 
+<a href="#"> 
+  <img src="https://forthebadge.com/images/badges/gluten-free.svg"
+       alt="Gluten Free"></a>
 
-![Gluten Free](https://forthebadge.com/images/badges/gluten-free.svg) ![Be a Good Person](https://forthebadge.com/images/badges/makes-people-smile.svg) ![Built with Love](https://forthebadge.com/images/badges/built-with-love.svg)
+<a href="#"> 
+  <img src="https://forthebadge.com/images/badges/makes-people-smile.svg"
+       alt="Be a good person"></a>
 
+<a href="#"> 
+  <img src="https://forthebadge.com/images/badges/built-with-love.svg"
+       alt="Made with Love"></a>
+
+<br>
 A non-profit web application that allow users to solve a range of subjects to earn revenue from ads and donate to a selected charity of choice.
 
 P.S (Revenue generated from ads will not be kept by Users or the E4R team, it will go to the user's charity of choice)
