@@ -1,0 +1,190 @@
+html, body, hr, hd, h1, h2, h3, td, tr, table, t, li,
+ul, a, div, span, nav{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+ul, li {
+    list-style: none;
+}
+
+li {
+    float: left;
+    margin-right: 30px;
+}
+
+#navagations {
+    background: #3B404B;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    z-index: 9999;
+    color: white;
+}
+
+.initials {
+    margin: 10px 0 10px 30px;
+    font-size: 3em;
+}
+
+.motto {
+    position: absolute;
+    margin: 46px 0 0 150px;
+}
+
+#sun {
+    margin: 42px 0 0 245px;
+}
+
+.navs {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    color: white;
+}
+
+.navs a {
+    color: white;
+}
+
+.filler {
+    height: 58px;
+}
+
+#contents {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+}
+
+#testimg {
+    margin-top: 25px;
+    width: 1450px;
+    height: 800px;
+}
+
+#img-con {
+    display: flex;
+    justify-content: center;
+}
+
+#lives {
+    top: 630px;
+    left: 0px;
+    font-size: 6em;
+}
+
+#solving {
+    left: 80px;
+    top: 790px;
+    font-size: 9em;
+}
+
+.floating {
+    background: #272A31;
+    position: absolute;
+    color: white;
+}
+
+#recent {
+    color: #3B404B;
+    margin-top: 30px;
+    box-shadow: 0 1px 3px 0 black;
+    width: 86%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#rec {
+    margin: 80px 0 0 80px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 4em;
+    border-bottom: 1px solid black;
+}
+
+#eve {
+    margin: 80px 0 0 20px;
+    font-size: 3em;
+}
+
+#underline {
+    display: block;
+    margin: 0 0 0 83px;
+}
+
+#recent h1 {
+    display: inline-block;
+}
+
+#rec-contents {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 88.5%;
+    color: #3B404B;
+}
+
+#rec-contents a {
+    color: white;
+}
+
+#rec-kevin {
+    width: 45%;
+    display: inline-block;
+}
+
+#tsu-sushi {
+    width: 45%;
+    display: inline-block;
+}
+
+p {
+    line-height: 1.7;
+}
+
+.rec-donate {
+    margin-top: 30px;
+    color: #FF837E;
+}
+
+.learn {
+    margin-left: 20px;
+}
+
+.learn a {
+    background: #FF837E;
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+
+.join a{
+    background: #FF837E;
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+
+canvas {
+    margin-top: 100px;
+}
+
+#t-heads {
+    display: flex;
+    justify-content: center;
+    background: #3B404B;
+    height: 50px;
+}
+#t-heads span {
+    margin-right: 20px;
+    color: white;
+    line-height: 50px;
+}
