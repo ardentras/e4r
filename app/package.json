@@ -1,0 +1,17 @@
+{
+	"name": "Education4Revitalization",
+	"version": "0.0.1",
+	"description": "NodeJS Server for E4R",
+	"author": "Shaun Rasmusen <shaunrasmusen@gmail.com>",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ardentras/e4r"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {	
+	}
+}
