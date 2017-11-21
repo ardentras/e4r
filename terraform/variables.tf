@@ -39,7 +39,7 @@ variable "rds_engine_type" {
   # - sqlserver-*
   # See http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html
   # --engine
-  default = "sqserver-ex"
+  default = "sqlserver-ex"
 }
 
 variable "rds_engine_version" {

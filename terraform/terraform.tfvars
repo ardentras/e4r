@@ -12,7 +12,7 @@ rds_allocated_storage = 20
 #Instance size, eg. db.t2.micro
 rds_instance_class = "db.t2.micro"
 #Name of the dabatase
-database_name = "e4rdb"
+database_name = ""
 #User name (admin user)
 database_user = "cooluser"
 #Admin password - must be longer than 8 characters

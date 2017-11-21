@@ -34,4 +34,6 @@ module "rds" {
 	rds_vpc_id = "${data.aws_vpc.vpc.id}"
 	#Multi Availability Zone, set to true on production
 	rds_is_multi_az = "${var.rds_is_multi_az}"
+
+	publicly_accessible = "${var.publicly_accessible}"
 }

@@ -33,7 +33,7 @@ variable "rds_engine_type" {
   # - sqlserver-*
   # See http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html
   # --engine
-  default = "postgres"
+  default = "sqlserver-ex"
 }
 
 variable "rds_engine_version" {
@@ -42,7 +42,7 @@ variable "rds_engine_version" {
   # For valid engine versions, see:
   # See http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html
   # --engine-version
-  default = "9.6.1"
+  default = "13.00.4422.0.v1"
 }
 
 variable "rds_instance_class" {
@@ -78,7 +78,7 @@ variable "db_parameter_group" {
   description = "Parameter group, depends on DB engine used"
 
   # default = "mysql5.6"
-  default = "postgres9.6"
+  default = "sqlserver-ex-13.0"
 }
 
 variable "publicly_accessible" {
