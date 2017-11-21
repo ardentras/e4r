@@ -13,6 +13,7 @@
 		"start": "node server.js"
 	},
 	"dependencies": {
-		"express": "^4.16.1"
+		"express": "^4.16.1",
+		"mssql": "^4.1.0"
 	}
 }
