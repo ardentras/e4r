@@ -4,16 +4,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const TDatabase = require('./TDatabase');
 
-const HOST = "e4rdb.cz5nhcw7ql0u.us-west-2.rds.amazonaws.com";
-const DB_PORT = "1433";
-const DB_USER = "cooluser";
-const DB_PW = "coolpassword";
+const HOST = "apptest.co4ebczraatr.us-west-2.rds.amazonaws.com";
+const DB_PORT = "3306";
+const DB_USER = "kevinjxu";
+const DB_PW = "apptest1";
+const DB = "er";
 
 const db = new TDatabase(
-    HOST,
-    DB_PORT,
-    DB_USER,
-    DB_PW);
+    HOST, 
+    DB_PORT, 
+    DB_USER, 
+    DB_PW, 
+    DB);
 
 //BASIC REST API
 //GET - List/Retrieve
@@ -23,7 +25,7 @@ const db = new TDatabase(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(cors());
+app.use(cors());
 
 app.get('/', (req, res)=>{
     console.log('Welcome to API');
@@ -38,5 +40,5 @@ app.get('/api/test/display', (req, res) => {
     db.Display(res);
 });
 
- app.listen(2000);
+app.listen(2000);
 console.log("Running on Port 2000");

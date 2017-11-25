@@ -1,31 +1,29 @@
-const mssql = require('mssql');
+const mysql = require('mysql');
 const nodemailer = require('nodemailer');
+const fs = require('fs');
 
 const fromEmail = "e4rtesting@gmail.com";
 
 class TDatabase {
-    constructor(db_host="localhost", db_port="1433", db_user="root", db_pw="root", db_name="") {
-				var config = {
-						user: db_user,
-						password: db_pw,
-						server: db_host,
-						database: db_name,
-						port: db_port,
-						options: {
-								encrypt: true
-						}
-				};
-        this.db = mssql.ConnectionPool(config);
-          	this.db.connect((err) => {
-		            if (err) {
-		                console.log("ErrorNo: " + err.errorno);
-		                console.log("Code: " + err.code);
-		                console.log("Call: " + err.syscall);
-		                console.log("Fatal: " + err.fatal);
-		            }
-		            else {
-		                console.log('Connected to Database: ' + db_name);
-		            }
+    constructor(db_host="localhost", db_port="8080", db_user="root", db_pw="root", db_name="") {
+        this.db = mysql.createConnection({
+            host: db_host,
+            port: db_port,
+            user: db_user,
+            password: db_pw,
+            database: db_name,
+            timeout: 60000
+          });
+          this.db.connect((err)=>{
+            if (err) {
+                console.log("ErrorNo: " + err.errorno);
+                console.log("Code: " + err.code);
+                console.log("Call: " + err.syscall);
+                console.log("Fatal: " + err.fatal);
+            }
+            else {
+                console.log('Connected to Database: ' + db_name);
+            }
           });
     }
     confirmationEmail(data) {
@@ -102,7 +100,7 @@ class TDatabase {
                 }
             }
         });
-
+        
     }
     AccountCreation(client, data) {
         const sanitized = this.sanitizeInput(data.email);
