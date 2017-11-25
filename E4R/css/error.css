@@ -1,0 +1,13 @@
+#error {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+}
+
+.error-header {
+    color: #ADADAD;
+}
+
+#error h1 {
+    font-size: 4em;
+}
