@@ -1,19 +1,39 @@
 import React from "react";
 import ReactDom from "react-dom";
-import Header from "./components/Header";
-import Content from './components/Content';
+
+import Home from "./components/Home/Home";
+import Navs from "./components/Common/Navs";
+import errorPath from "./components/Common/errorPath";
+import Contact from "./components/Contacts/Contact";
+import Login from "./components/Login/Login";
+
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+  } from 'react-router-dom';
 
 import "../css/style.css";
-import "./components/Draw";
-
+import "../css/error.css";
+import "../css/mobile.css";
 
 function UI(props) {
     return (
-        <div id="wrapper">
-            <Header/>
-            <div className="filler"></div>
-            <Content/>
-        </div>
+        <Router>
+            <div>
+                <div id="wrapper">
+                    <div className="nav-wrapper">
+                        <Navs/>
+                    </div>
+                </div>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                    <Route path='/contacts' component={Contact}/>
+                    <Route path='/login' component={Login}/>
+                    <Route component={errorPath}/>
+                </Switch>
+            </div>
+        </Router>  
     )
 };
 
