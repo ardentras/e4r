@@ -47,7 +47,7 @@ app.use(bodyParser.json());
 // app.use(cors());
 
 app.get('/', (req, res)=>{
-    console.log('Welcome to API');
+    console.log('Welcome to the API');
 	res.send('Welcome to the API');
 });
 app.post('/api/login', (req,res) => {

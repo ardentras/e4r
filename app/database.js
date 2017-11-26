@@ -2,6 +2,9 @@ const mssql = require('mssql');
 const nodemailer = require('nodemailer');
 
 const fromEmail = "e4rtesting@gmail.com";
+const USERNAME_LENGTH = 50;
+const EMAIL_LENGTH = 100;
+const PASSWORD_LENGTH = 1000;
 
 class TDatabase {
     constructor(db_host="localhost", db_port="1433", db_user="root", db_pw="root", db_name="") {
@@ -89,27 +92,31 @@ class TDatabase {
         return check;
     }
 
+	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","password":"defaultpass"}}'
     attemptLogin (client, data) {
-        this.db.query("SELECT * FROM EFRAcc.Users WHERE Email=?", data.email, (err, users) => {
+        this.db.request().input('username', mssql.NVarChar(EMAIL_LENGTH), data.username)
+				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username", (err, users) => {
             if (err) {
-                client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
+                client.json({response: "Failed", type: "GET" ,code: 500, reason: "Unknown database error"});
             }
             else {
-                if (users && users.length) {
-                    if (users[0].Password === data.password) {
-                        client.json({response: true});
-						//client.json({response: users[0].UserObject});
+                if (users.rowsAffected > 0) {
+                    if (users.recordsets[0][0].PasswordHash === data.password) {
+						this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), users.recordsets[0][0].Username)
+										.query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
+											console.log(res);
+											client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", result: res.recordsets[0][0].UserObject});
+										});
                     }
                     else {
-                        client.json({response: false});
+						client.json({response: "Failed", type: "GET", code: 403, reason: "Invalid Password"});
                     }
                 }
                 else {
-                    client.json({response: false});
+                    client.json({response: "Failed", type: "GET", code: 403, reason: "User not found", result: err});
                 }
             }
         });
-
     }
 
 	// curl -XPOST localhost:3002/api/signup -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com","password":"defaultpass"}}'
@@ -117,8 +124,8 @@ class TDatabase {
         const sanitized = this.sanitizeInput(data.email);
         console.log("SIGNUP Request");
         if (sanitized === true) {
-            this.db.request().input('email', mssql.NVarChar(100), data.email)
-							.input('username', mssql.NVarChar(50), data.username)
+            this.db.request().input('email', mssql.NVarChar(EMAIL_LENGTH), data.email)
+							.input('username', mssql.NVarChar(USERNAME_LENGTH), data.username)
 							.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;", (err, users) => {
                 if (err) {
                     client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
@@ -128,13 +135,13 @@ class TDatabase {
                         client.json({response: "Failed", type: "GET",code: 100, reason: "User already exists"});
                     }
                     else {
-                        this.db.request().input('username', mssql.NVarChar(50), data.username)
-								.input('email', mssql.NVarChar(100), data.email)
-								.input('password', mssql.NVarChar(1000), data.password)
+                        this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), data.username)
+								.input('email', mssql.NVarChar(EMAIL_LENGTH), data.email)
+								.input('password', mssql.NVarChar(PASSWORD_LENGTH), data.password)
 								.query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST('{}' AS VARBINARY(MAX)), NULL);", (err, res) => {
                             if (err) {
                                 console.log("SIGNUP Error");
-                                client.json({response: "Failed", type: "POST", code: 500, reason: "Create User error", data: err});
+                                client.json({response: "Failed", type: "POST", code: 500, reason: "Create User error", result: err});
                             }
                             else {
                                 console.log('SIGNUP SUCCEED Email: ' + data.email );
@@ -159,7 +166,7 @@ class TDatabase {
                 client.json({response: "Failed", type: "GET", code: 404, reason: err});
             }
             else {
-                client.json({response: 'Successful', type: "GET" ,code: 200, action:"DISPLAY", userCount: result.length, result});
+                client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: result.length, result});
             }
         });
     }
