@@ -3,11 +3,13 @@ const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
 
 const fromEmail = "e4rtesting@gmail.com";
+
 const USERNAME_LENGTH = 50;
 const EMAIL_LENGTH = 100;
 const PASSWORD_LENGTH = 1000;
 
 class TDatabase {
+	// Creates the connection to the database given the passed parameters.
     constructor(db_host="localhost", db_port="1433", db_user="root", db_pw="root", db_name="") {
 		var config = {
 			user: db_user,
@@ -31,6 +33,7 @@ class TDatabase {
         });
     }
 
+	// Prints details given the passed error.
 	printErrorDetails(err) {
 		console.log("ErrorNo: " + err.number);
 		console.log("Code: " + err.state);
@@ -38,6 +41,7 @@ class TDatabase {
 		console.log("Class: " + err.class);
 	}
 
+	// Sends a confirmation email to the user to confirm the email used to create their account.
     confirmationEmail (data) {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -47,8 +51,8 @@ class TDatabase {
             }
             });
         let HelperOptions = {
-            from: "Education For Revitalization <email@gmail.com>",
-            to: "shaunrasmusen@gmail.com",
+            from: "Education For Revitalization <" + fromEmail + ">",
+            to: data.email,
             subject: "Account Confirmation",
             html: "<p>Hello " + data.name + ",</p>" +
                   "<p style='margin-left: 20px'>Thanks for signing up for Education for Revitalization.</p>" +
@@ -57,7 +61,7 @@ class TDatabase {
                   "<p style='margin-left: 20px'>Verify: <span style='margin-left: 100px'><a href='https://google.com'>Google</a></span></p>" +
                   "<p style='margin-left: 20px'>If you haven't already, install our app for <span style='color: #15c'>Android</span></p>" +
                   "<p style='margin-left: 20px'>If you have any questions, please <span style='color: #15c'>Contact Us</span>.</p>" +
-                  "<p>sincerely,</p>" +
+                  "<p>Sincerely,</p>" +
                   "<p style='font-size: 90%;'>The E4R Team</p>"
         };
         transporter.sendMail(HelperOptions, (err, response)=>{
@@ -69,6 +73,7 @@ class TDatabase {
         console.log("Confirmation Email Sent: " + data.email);
     }
 
+	// Verifies a user's email via regex.
     isEmail (data) {
         let check = false;
         const format = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|edu)\b/;
@@ -78,6 +83,7 @@ class TDatabase {
         return check;
     }
 
+	// Verifies an email has no special characters
     hasSpecialChar (data) {
         let check = false;
         const format = /[ !#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]+/;
@@ -87,6 +93,7 @@ class TDatabase {
         return check;
     }
 
+	// Sanitizes user input.
     sanitizeInput (data) {
         let check = false;
         const specialChar = this.hasSpecialChar(data);
@@ -97,6 +104,9 @@ class TDatabase {
         return check;
     }
 
+	// Attempts to log the user in given a certain username and Password
+	//
+	// Example:
 	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","password":"defaultpass"}}'
     attemptLogin (client, data) {
         this.db.request().input('username', mssql.NVarChar(EMAIL_LENGTH), data.username)
@@ -130,6 +140,9 @@ class TDatabase {
         });
     }
 
+	// Attempts to create an account with the given username, email, and password
+	//
+	// Example:
 	// curl -XPOST localhost:3002/api/signup -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com","password":"defaultpass"}}'
     createAccount(client, data) {
         const sanitized = this.sanitizeInput(data.email);
@@ -176,6 +189,9 @@ class TDatabase {
         }
     }
 
+	// Displays all current user accounts from the database.
+	// TODO Remove in production.
+	//
 	// curl -XGET localhost:3002/api/test/display
     displayUsers(client) {
         this.db.request().query("SELECT * FROM EFRAcc.Users", (err, result) => {
@@ -190,6 +206,7 @@ class TDatabase {
         });
     }
 
+	// Ensures that the database connection is closed on object destruction.
 	gracefulShutdown() {
 		this.db.close();
 	}
