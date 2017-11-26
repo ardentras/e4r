@@ -17,6 +17,8 @@
 		"mssql": "^4.1.0",
 		"nodemailer": "^4.4.0",
 		"cors": "^2.8.4",
-		"body-parser": "^1.18.2"
+		"body-parser": "^1.18.2",
+		"sha.js": "^2.4.9",
+		"uuid": "^3.1.0"
 	}
 }
