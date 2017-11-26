@@ -1,6 +1,7 @@
 const mssql = require('mssql');
 const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
+const uuidv4 = require('uuid/v4');
 
 const fromEmail = "e4rtesting@gmail.com";
 
@@ -104,6 +105,14 @@ class TDatabase {
         return check;
     }
 
+	// Attempts to verify a user's existing token and renews it if valid, else logs the user out.
+	//
+	// Example:
+	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"session":""}'
+	renewLoginToken(client, data) {
+
+	}
+
 	// Attempts to log the user in given a certain username and Password
 	//
 	// Example:
@@ -123,10 +132,15 @@ class TDatabase {
 					let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
 
                     if (users.recordsets[0][0].PasswordHash === hashedPassword) {
+						let sessionid = uuidv4();
+
+						this.db.request().input('sessionid', mssql.VarChar(32), sessionid)
+										.input('exptime', mssql.Date, new Date(Date.now()).toISOString())
+										.input('userid', mssql.Int, users.recordsets[0][0].UserID)
+										.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)");
 						this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), users.recordsets[0][0].Username)
 										.query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
-											console.log(res);
-											client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", result: res.recordsets[0][0].UserObject});
+											client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: res.recordsets[0][0].UserObject});
 										});
                     }
                     else {

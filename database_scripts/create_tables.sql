@@ -35,8 +35,8 @@ CREATE TABLE EFRAcc.PasswordRecovery
 );
 
 CREATE TABLE EFRAcc.Sessions
- (SessionID         INT            NOT NULL IDENTITY PRIMARY KEY,
-  ExpirationTime    TIME           NOT NULL,
+ (SessionID         VARCHAR(32)    NOT NULL PRIMARY KEY,
+  ExpirationTime    DATETIME       NOT NULL,
   UserID            INT            FOREIGN KEY REFERENCES
                                    EFRAcc.Users(UserID)
 );
