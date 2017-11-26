@@ -27,8 +27,7 @@ class TDatabase {
       	this.db.connect((err) => {
             if (err) {
                 printErrorDetails(err);
-            }
-            else {
+            } else {
                 console.log('Connected to database' + (db_name == '' ? ' ' : ' ' + db_name + ' ') + 'at ' + db_host + ':' + db_port);
             }
         });
@@ -108,9 +107,42 @@ class TDatabase {
 	// Attempts to verify a user's existing token and renews it if valid, else logs the user out.
 	//
 	// Example:
-	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"session":""}'
-	renewLoginToken(client, data) {
+	// curl -XPUT localhost:3002/api/renew -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5"}}'
+	renewSessionToken(client, data) {
+		this.db.request().input('token', mssql.VarChar(32), data.session)
+						.query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token", (err, res) => {
+							if (res.rowsAffected == 0) {
+								client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
+							} else {
+								this.db.request().input('token', mssql.VarChar(32), data.session)
+												.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
 
+								if (Date.parse(res.recordsets[0][0].ExpirationTime) < Date.now()) {
+									client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token is invalid."});
+								} else {
+									let sessionid = this.setSessionID(res.recordsets[0][0].UserID);
+									client.json({response: "Success", type: "GET", code: 200, action: "RENEW_SESSION", session_id: sessionid});
+								}
+							}
+						});
+	}
+
+	// Sets a new session ID for a given user.
+	setSessionID(userID) {
+		let sessionid = uuidv4();
+		this.db.request().input('token', mssql.VarChar(32), sessionid)
+						.query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token", (err, res) => {
+							if (res.rowsAffected != 0) {
+								sessionid = setSessionID(userID);
+							} else {
+								this.db.request().input('sessionid', mssql.VarChar(32), sessionid)
+												.input('exptime', mssql.DateTime2, new Date(Date.now()).toISOString())
+												.input('userid', mssql.Int, userID)
+												.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)");
+							}
+						});
+
+		return sessionid;
 	}
 
 	// Attempts to log the user in given a certain username and Password
@@ -124,29 +156,22 @@ class TDatabase {
 				printErrorDetails();
 				console.log("LOGIN Fail");
                 client.json({response: "Failed", type: "GET" ,code: 500, reason: "Unknown database error"});
-            }
-            else {
+            } else {
                 if (users.rowsAffected > 0) {
 					//TODO Update this with a call to the salt table
 					let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
 					let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
 
                     if (users.recordsets[0][0].PasswordHash === hashedPassword) {
-						let sessionid = uuidv4();
-						this.db.request().input('sessionid', mssql.VarChar(32), sessionid)
-										.input('exptime', mssql.DateTime2, new Date(Date.now()).toISOString())
-										.input('userid', mssql.Int, users.recordsets[0][0].UserID)
-										.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)");
+						let sessionid = this.setSessionID(users.recordsets[0][0].UserID);
 						this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), users.recordsets[0][0].Username)
 										.query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
 											client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: res.recordsets[0][0].UserObject});
 										});
-                    }
-                    else {
+                    } else {
 						client.json({response: "Failed", type: "GET", code: 403, reason: "Invalid Password"});
                     }
-                }
-                else {
+                } else {
                     client.json({response: "Failed", type: "GET", code: 403, reason: "User not found", result: err});
                 }
             }
@@ -168,12 +193,10 @@ class TDatabase {
 					printErrorDetails();
 					console.log("SIGNUP Error");
                     client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
-                }
-                else {
+                } else {
                     if (users.rowsAffected > 0) {
                         client.json({response: "Failed", type: "GET",code: 100, reason: "User already exists"});
-                    }
-                    else {
+                    } else {
 						//TODO Update this with a call to the salt table
 						let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
 						let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
@@ -186,18 +209,16 @@ class TDatabase {
 								printErrorDetails();
                                 console.log("SIGNUP Error");
                                 client.json({response: "Failed", type: "POST", code: 500, reason: "Create User error", result: err});
-                            }
-                            else {
+                            } else {
                                 console.log('SIGNUP SUCCEED Email: ' + data.email );
-                                client.json({response: "Succeed", type: "POST", code: 200, action: "SIGNUP"});
+                                client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP"});
                                 //this.confirmationEmail(data);
                             }
                         });
                     }
                 }
             });
-        }
-        else {
+        } else {
             client.json({response: "Rejected", Code: 500, reason: "Invalid Email"});
         }
     }
@@ -212,8 +233,7 @@ class TDatabase {
 				printErrorDetails();
                 console.log("GET Error");
                 client.json({response: "Failed", type: "GET", code: 404, reason: err});
-            }
-            else {
+            } else {
                 client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: result.length, result});
             }
         });
