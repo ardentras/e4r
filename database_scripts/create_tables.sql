@@ -41,6 +41,13 @@ CREATE TABLE EFRAcc.Sessions
                                    EFRAcc.Users(UserID)
 );
 
+-- CREATE TRIGGER SessionsExpDate_TRIG ON testdb.EFRAcc.Sessions
+--     AFTER INSERT, UPDATE
+-- AS
+--     UPDATE EFRAcc.Sessions
+--     SET ExpirationTime = DATEADD(DAY, 1, ExpirationTime)
+--     WHERE SessionID IN (SELECT SessionID FROM Inserted);
+
 CREATE TABLE EFRAcc.Achievements
  (AchievementID     INT            NOT NULL IDENTITY PRIMARY KEY,
   AchievementName   NVARCHAR(100)  NOT NULL,

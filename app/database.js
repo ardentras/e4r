@@ -133,9 +133,8 @@ class TDatabase {
 
                     if (users.recordsets[0][0].PasswordHash === hashedPassword) {
 						let sessionid = uuidv4();
-
 						this.db.request().input('sessionid', mssql.VarChar(32), sessionid)
-										.input('exptime', mssql.Date, new Date(Date.now()).toISOString())
+										.input('exptime', mssql.DateTime2, new Date(Date.now()).toISOString())
 										.input('userid', mssql.Int, users.recordsets[0][0].UserID)
 										.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)");
 						this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), users.recordsets[0][0].Username)
