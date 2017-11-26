@@ -1,5 +1,6 @@
 const mssql = require('mssql');
 const nodemailer = require('nodemailer');
+const shajs = require('sha.js');
 
 const fromEmail = "e4rtesting@gmail.com";
 const USERNAME_LENGTH = 50;
@@ -22,16 +23,20 @@ class TDatabase {
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
             if (err) {
-                console.log("ErrorNo: " + err.errorno);
-                console.log("Code: " + err.code);
-                console.log("Call: " + err.syscall);
-                console.log("Fatal: " + err.fatal);
+                printErrorDetails(err);
             }
             else {
                 console.log('Connected to database' + (db_name == '' ? ' ' : ' ' + db_name + ' ') + 'at ' + db_host + ':' + db_port);
             }
         });
     }
+
+	printErrorDetails(err) {
+		console.log("ErrorNo: " + err.number);
+		console.log("Code: " + err.state);
+		console.log("Call: " + err.procname);
+		console.log("Class: " + err.class);
+	}
 
     confirmationEmail (data) {
         var transporter = nodemailer.createTransport({
@@ -97,11 +102,17 @@ class TDatabase {
         this.db.request().input('username', mssql.NVarChar(EMAIL_LENGTH), data.username)
 				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username", (err, users) => {
             if (err) {
+				printErrorDetails();
+				console.log("LOGIN Fail");
                 client.json({response: "Failed", type: "GET" ,code: 500, reason: "Unknown database error"});
             }
             else {
                 if (users.rowsAffected > 0) {
-                    if (users.recordsets[0][0].PasswordHash === data.password) {
+					//TODO Update this with a call to the salt table
+					let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
+					let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
+
+                    if (users.recordsets[0][0].PasswordHash === hashedPassword) {
 						this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), users.recordsets[0][0].Username)
 										.query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
 											console.log(res);
@@ -128,6 +139,8 @@ class TDatabase {
 							.input('username', mssql.NVarChar(USERNAME_LENGTH), data.username)
 							.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;", (err, users) => {
                 if (err) {
+					printErrorDetails();
+					console.log("SIGNUP Error");
                     client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
                 }
                 else {
@@ -135,11 +148,16 @@ class TDatabase {
                         client.json({response: "Failed", type: "GET",code: 100, reason: "User already exists"});
                     }
                     else {
+						//TODO Update this with a call to the salt table
+						let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
+						let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
+
                         this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), data.username)
 								.input('email', mssql.NVarChar(EMAIL_LENGTH), data.email)
-								.input('password', mssql.NVarChar(PASSWORD_LENGTH), data.password)
+								.input('password', mssql.NVarChar(PASSWORD_LENGTH), hashedPassword)
 								.query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST('{}' AS VARBINARY(MAX)), NULL);", (err, res) => {
                             if (err) {
+								printErrorDetails();
                                 console.log("SIGNUP Error");
                                 client.json({response: "Failed", type: "POST", code: 500, reason: "Create User error", result: err});
                             }
@@ -162,6 +180,7 @@ class TDatabase {
     displayUsers(client) {
         this.db.request().query("SELECT * FROM EFRAcc.Users", (err, result) => {
             if (err) {
+				printErrorDetails();
                 console.log("GET Error");
                 client.json({response: "Failed", type: "GET", code: 404, reason: err});
             }
