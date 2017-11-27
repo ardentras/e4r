@@ -21,5 +21,5 @@ API Calls:
           Renew Session -> server:port/api/renew -> PUT
 
 TEST API Calls:
-          Display Users Information -> server:port/test/display
+          Display Users Information -> server:port/test/display -> GET
 ```
