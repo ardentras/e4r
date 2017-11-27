@@ -14,7 +14,7 @@ SERVER PUBLIC IP: 34.208.210.218
 SERVER PUBLIC PORT: 3002
 
 API Calls: 
-          API Welcome -> server:port/api -> GET
+          API Welcome -> server:port/api -> ALL
           Log In -> server:port/api/login -> POST
           Log Out -> server:port/api/logout -> PUT
           Sign Up -> server:port/api/signup -> POST
