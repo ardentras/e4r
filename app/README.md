@@ -14,12 +14,12 @@ SERVER PUBLIC IP: 34.208.210.218
 SERVER PUBLIC PORT: 3002
 
 API Calls: 
-          API Welcome -> server:port/api
-          Log In -> server:port/api/login
-          Log Out -> server:port/api/logout
-          Sign Up -> server:port/api/signup
-          Renew Session -> server:port/api/renew
+          API Welcome -> server:port/api -> GET
+          Log In -> server:port/api/login -> POST
+          Log Out -> server:port/api/logout -> PUT
+          Sign Up -> server:port/api/signup -> POST
+          Renew Session -> server:port/api/renew -> PUT
 
 TEST API Calls:
-          Display Users Information -> server:port/test/display
+          Display Users Information -> server:port/test/display -> GET
 ```
