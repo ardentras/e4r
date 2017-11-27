@@ -166,18 +166,19 @@ class TDatabase {
 	// Attempts to log the user out. If successful, user object will be saved,
 	// and current session token will expire.
 	//
-	// curl -XPUT localhost:3002/api/logout -H 'Content-type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5", "userobject":"{}"}}'
+	// curl -XPUT localhost:3002/api/logout -H 'Content-type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d", "userobject":"{}"}}'
 	attemptLogout(client, data) {
-		this.db.request().input('token', mssql.VarChar(32), data.sessionid)
+		this.db.request().input('token', mssql.VarChar(32), data.session)
 						.query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token", (err, res) => {
 			if (res.rowsAffected == 0) {
 				client.json({response: "Failed", type: "PUT", code: 500, reason: "Session invalid. User object could not be saved"});
 			} else {
-				this.db.request().input('token', mssql.VarChar(32), data.sessionid)
+				this.db.request().input('token', mssql.VarChar(32), data.session)
 								.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
-				this.db.request().input('userobject', mssql.VarBinary, data.userobject)
+                                console.log(data.userobject);
+				this.db.request().input('userobject', mssql.VarChar, data.userobject)
 								.input('userid', mssql.Int, res.UserID)
-								.query("UPDATE EFRAcc.Sessions SET UserObject = @userobject WHERE UserID = @userid");
+								.query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
 				client.json({response: "Success", type: "PUT", code: 200, reason: "User successfully logged out."});
 			}
 		});

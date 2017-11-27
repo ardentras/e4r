@@ -16,13 +16,14 @@ const db = new TDatabase(DB_CONFIG);
 const HTTPport = 3002;
 const HTTPsport = 3003;
 
-const key = fs.readFileSync('encryption/private.key');
-const cert = fs.readFileSync( 'encryption/mydomain.crt' );
+//const key = fs.readFileSync('encryption/private.key');
+//const cert = fs.readFileSync( 'encryption/mydomain.crt' );
 
-const options = {
-	key: key,
-	cert: cert,
-  };
+// const options = {
+// 	key: key,
+// 	cert: cert,
+//   };
+
 //BASIC REST API
 //GET - List/Retrieve
 //PUT - Replace/Update
@@ -75,6 +76,6 @@ Router.get('/test/display', (req, res) => {
 
 app.use('/api', Router);
 http.createServer(app).listen(HTTPport);
-https.createServer(options, app).listen(HTTPsport);
+//https.createServer(options, app).listen(HTTPsport);
 console.log("HTTP running on port " + HTTPport);
-console.log("HTTPs running on port " + HTTPsport);
+//console.log("HTTPs running on port " + HTTPsport);
