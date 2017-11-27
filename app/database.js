@@ -2,33 +2,18 @@ const mssql = require('mssql');
 const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
 const uuidv4 = require('uuid/v4');
-
-const fromEmail = "e4rtesting@gmail.com";
-
-const USERNAME_LENGTH = 50;
-const EMAIL_LENGTH = 100;
-const PASSWORD_LENGTH = 1000;
+const User = require('./configurations/config').DB_USER_CONFIG;
+const adminEmail = require('./configurations/config').EMAIL_CONFIG;
 
 class TDatabase {
 	// Creates the connection to the database given the passed parameters.
-    constructor(db_host="localhost", db_port="1433", db_user="root", db_pw="root", db_name="") {
-		var config = {
-			user: db_user,
-			password: db_pw,
-			server: db_host,
-			database: db_name,
-			port: db_port,
-			options: {
-				encrypt: true
-			}
-		};
-
+    constructor(config) {
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
             if (err) {
                 printErrorDetails(err);
             } else {
-                console.log('Connected to database' + (db_name == '' ? ' ' : ' ' + db_name + ' ') + 'at ' + db_host + ':' + db_port);
+                console.log('Connected to database' + (config.database == '' ? ' ' : ' ' + config.database + ' ') + 'at ' + config.server + ':' + config.port);
             }
         });
     }
@@ -46,12 +31,12 @@ class TDatabase {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: fromEmail,
+                user: adminEmail.username,
                 pass: 'xiaozhu541'
             }
             });
         let HelperOptions = {
-            from: "Education For Revitalization <" + fromEmail + ">",
+            from: "Education For Revitalization <" + adminEmail.username + ">",
             to: data.email,
             subject: "Account Confirmation",
             html: "<p>Hello " + data.name + ",</p>" +
@@ -150,7 +135,7 @@ class TDatabase {
 	// Example:
 	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","password":"defaultpass"}}'
     attemptLogin (client, data) {
-        this.db.request().input('username', mssql.NVarChar(EMAIL_LENGTH), data.username)
+        this.db.request().input('username', mssql.NVarChar(User.EMAIL_LENGTH), data.username)
 				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username", (err, users) => {
             if (err) {
 				printErrorDetails();
@@ -164,7 +149,7 @@ class TDatabase {
 
                     if (users.recordsets[0][0].PasswordHash === hashedPassword) {
 						let sessionid = this.setSessionID(users.recordsets[0][0].UserID);
-						this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), users.recordsets[0][0].Username)
+						this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), users.recordsets[0][0].Username)
 										.query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
 							client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: res.recordsets[0][0].UserObject});
 						});
@@ -206,8 +191,8 @@ class TDatabase {
         const sanitized = this.sanitizeInput(data.email);
         console.log("SIGNUP Request");
         if (sanitized === true) {
-            this.db.request().input('email', mssql.NVarChar(EMAIL_LENGTH), data.email)
-							.input('username', mssql.NVarChar(USERNAME_LENGTH), data.username)
+            this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+							.input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
 							.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;", (err, users) => {
                 if (err) {
 					printErrorDetails();
@@ -221,9 +206,9 @@ class TDatabase {
 						let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
 						let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
 
-                        this.db.request().input('username', mssql.NVarChar(USERNAME_LENGTH), data.username)
-								.input('email', mssql.NVarChar(EMAIL_LENGTH), data.email)
-								.input('password', mssql.NVarChar(PASSWORD_LENGTH), hashedPassword)
+                        this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+								.input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+								.input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
 								.query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST('{}' AS VARBINARY(MAX)), NULL);", (err, res) => {
                             if (err) {
 								printErrorDetails();

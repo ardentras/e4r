@@ -1,29 +1,25 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+const Router = express.Router();
+
 const bodyParser = require('body-parser');
 const TDatabase = require('./database');
-
-const DB_HOST = "e4rdb.cz5nhcw7ql0u.us-west-2.rds.amazonaws.com";
-const DB_PORT = "1433";
-const DB_USER = "cooluser";
-const DB_PW = "coolpassword";
-const DB_NAME = "testdb";
-
-const db = new TDatabase(
-    DB_HOST,
-    DB_PORT,
-    DB_USER,
-    DB_PW,
-	DB_NAME);
-
+const DB_CONFIG = require('./configurations/config').DB_CONFIG;
+const db = new TDatabase(DB_CONFIG);
 const port = 3002;
+
+//Local Testing
+// const cors = require('cors');
+// app.use(cors());
 
 //BASIC REST API
 //GET - List/Retrieve
 //PUT - Replace/Update
 //POST - Create New
 //DELETE - Removal/Erase
+
+//Prepend Api path to all HTTP Request
+app.use('/api', Router);
 
 function terminator(sig) {
 	if (typeof sig === "string") {
@@ -44,24 +40,23 @@ process.on('exit', function() { terminator(); });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(cors());
 
-app.get('/', (req, res)=>{
+Router.get('/', (req, res)=>{
 	res.send('Welcome to the API');
 });
-app.post('/api/signup', (req, res) => {
+Router.post('/signup', (req, res) => {
     db.createAccount(res, req.body.user);
 });
-app.post('/api/login', (req,res) => {
+Router.post('/login', (req,res) => {
     db.attemptLogin(res, req.body.user);
 });
-app.put('/api/renew', (req, res) => {
+Router.put('/renew', (req, res) => {
 	db.renewSessionToken(res, req.body.user);
 });
-app.put('/api/logout', (req, res) => {
+Router.put('/logout', (req, res) => {
 	db.attemptLogout(res, req.body.user);
 });
-app.get('/api/test/display', (req, res) => {
+Router.get('/test/display', (req, res) => {
     db.displayUsers(res);
 });
 
