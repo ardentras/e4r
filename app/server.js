@@ -17,16 +17,6 @@ const db = new TDatabase(DB_CONFIG);
 const HTTPport = 3002;
 const HTTPsport = 3003;
 
-if (USE_HTTPS) {
-	const key = fs.readFileSync('encryption/private.key');
-	const cert = fs.readFileSync( 'encryption/mydomain.crt' );
-
-	const options = {
-		key: key,
-		cert: cert,
-	};
-}
-
 //BASIC REST API
 //GET - List/Retrieve
 //PUT - Replace/Update
@@ -82,6 +72,14 @@ http.createServer(app).listen(HTTPport);
 console.log("HTTP running on port " + HTTPport);
 
 if (USE_HTTPS) {
+	const key = fs.readFileSync('./encryption/private.key');
+	const cert = fs.readFileSync( './encryption/mydomain.crt' );
+
+	const options = {
+		key: key,
+		cert: cert,
+	};
+	
 	https.createServer(options, app).listen(HTTPsport);
 	console.log("HTTPs running on port " + HTTPsport);
 }

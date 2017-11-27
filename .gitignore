@@ -60,3 +60,5 @@ typings/
 # Terraform modules
 .terraform/
 *.tfstate.backup
+
+encryption/
