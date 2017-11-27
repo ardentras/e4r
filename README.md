@@ -56,7 +56,7 @@ If not, You'll be a good person once you use this application. (:
 * [React](https://reactjs.org) - Javascript library for UI
 * [Confluence](https://www.atlassian.com/software/confluence) - Collaborations application
 
-* [REST API](http://www.restapitutorial.com) - Application Programming Interface(HTTP Protocols)
+* [REST API](http://www.restapitutorial.com) - Application Programming Interface(HTTP Protocols Using Express.js)
 
 ## Authors
 
