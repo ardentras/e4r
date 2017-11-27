@@ -12,17 +12,20 @@ const http = require('http');
 const https = require('https');
 const TDatabase = require('./database');
 const DB_CONFIG = require('./configurations/config').DB_CONFIG;
+const USE_HTTPS = require('./configurations/config').USE_HTTPS;
 const db = new TDatabase(DB_CONFIG);
 const HTTPport = 3002;
 const HTTPsport = 3003;
 
-//const key = fs.readFileSync('encryption/private.key');
-//const cert = fs.readFileSync( 'encryption/mydomain.crt' );
+if (USE_HTTPS) {
+	const key = fs.readFileSync('encryption/private.key');
+	const cert = fs.readFileSync( 'encryption/mydomain.crt' );
 
-// const options = {
-// 	key: key,
-// 	cert: cert,
-//   };
+	const options = {
+		key: key,
+		cert: cert,
+	};
+}
 
 //BASIC REST API
 //GET - List/Retrieve
@@ -76,6 +79,9 @@ Router.get('/test/display', (req, res) => {
 
 app.use('/api', Router);
 http.createServer(app).listen(HTTPport);
-//https.createServer(options, app).listen(HTTPsport);
 console.log("HTTP running on port " + HTTPport);
-//console.log("HTTPs running on port " + HTTPsport);
+
+if (USE_HTTPS) {
+	https.createServer(options, app).listen(HTTPsport);
+	console.log("HTTPs running on port " + HTTPsport);
+}

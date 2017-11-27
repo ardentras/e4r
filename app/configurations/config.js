@@ -21,8 +21,11 @@ const EMAIL_CONFIG = {
     password: "xiaozhu541"
 };
 
+const USE_HTTPS = true;
+
 module.exports = {
 	DB_CONFIG: DB_CONFIG,
 	DB_USER_CONFIG: DB_USER_CONFIG,
-	EMAIL_CONFIG: EMAIL_CONFIG
+	EMAIL_CONFIG: EMAIL_CONFIG,
+	USE_HTTPS: USE_HTTPS
 }
