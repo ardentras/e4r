@@ -2,23 +2,34 @@ const express = require('express');
 const app = express();
 const Router = express.Router();
 
+//Generate private key file and certificate file
+// openssl req -new -newkey rsa:2048 -nodes -out mydomain.csr -keyout private.key
+// openssl x509 -req -days 365 -in mydomain.csr -signkey private.key -out mydomain.crt
+
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
 const TDatabase = require('./database');
 const DB_CONFIG = require('./configurations/config').DB_CONFIG;
 const db = new TDatabase(DB_CONFIG);
-const port = 3002;
+const HTTPport = 3002;
+const HTTPsport = 3003;
 
-//Local Testing
-// const cors = require('cors');
-// app.use(cors());
+const key = fs.readFileSync('encryption/private.key');
+const cert = fs.readFileSync( 'encryption/mydomain.crt' );
 
+const options = {
+	key: key,
+	cert: cert,
+  };
 //BASIC REST API
 //GET - List/Retrieve
 //PUT - Replace/Update
 //POST - Create New
 //DELETE - Removal/Erase
 
-//Prepend Api path to all HTTP Request
+//Prepend Api path to all HTTP Request and HTTPS request
 
 function terminator(sig) {
 	if (typeof sig === "string") {
@@ -41,14 +52,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 Router.all('/', (req, res)=>{
+	console.log('test');
 	res.send('Welcome to the API');
 });
 Router.post('/signup', (req, res) => {
+	console.log('ok');
     db.createAccount(res, req.body.user);
 });
 Router.post('/login', (req, res) => {
+	console.log('ok');
 	db.attemptLogin(res, req.body.user);
-})
+});
 Router.put('/renew', (req, res) => {
 	db.renewSessionToken(res, req.body.user);
 });
@@ -60,5 +74,7 @@ Router.get('/test/display', (req, res) => {
 });
 
 app.use('/api', Router);
-app.listen(port);
-console.log("Running on port " + port);
+http.createServer(app).listen(HTTPport);
+https.createServer(options, app).listen(HTTPsport);
+console.log("HTTP running on port " + HTTPport);
+console.log("HTTPs running on port " + HTTPsport);
