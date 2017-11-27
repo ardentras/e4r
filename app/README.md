@@ -11,7 +11,8 @@ Delete: Remove Information
 
 ```
 SERVER PUBLIC IP: 34.208.210.218
-SERVER PUBLIC PORT: 3002
+SERVER PUBLIC HTTP PORT: 3002
+SERVER PUBLIC HTTPS/SSL PORT: 3003
 
 API Calls: 
           API Welcome -> server:port/api -> ALL
@@ -29,52 +30,52 @@ TEST API Calls:
 
 #### LOG IN/SIGN UP:
 ```
-          {
-	   "user": {
-	        "username": "test1",
-	        "email": "test@test.com",
-	        "password": "testpassword"
+{
+  "user": {
+      "username": "test1",
+      "email": "test@test.com",
+      "password": "testpassword"
 	   }
-          }
+}
 ```
 
 #### LOG IN RESPONSE:
 ```
-          {
-            "response": "Success",
-            "type": "GET",
-            "code": 200,
-            "action": "LOGIN",
-            "session_id": "{session_token}",
-            "user_object": "{}"
-          }
+{
+  "response": "Success",
+  "type": "GET",
+  "code": 200,
+  "action": "LOGIN",
+  "session_id": "{session_token}",
+  "user_object": "{}"
+}
           
-          OR
+OR
           
-          {
-            "response": "Failed",
-            "type": "GET",
-            "code": 403,
-            "reason": "User not found",
-            "result": null
-          }
+{
+  "response": "Failed",
+  "type": "GET",
+  "code": 403,
+  "reason": "User not found",
+  "result": null
+}
 ```    
 #### SIGN UP RESPONSE:
 ```
-          {
-            "response": "Succeed",
-            "type": "POST",
-            "code": 201,
-            "action": "SIGNUP"
-          }
+{
+  "response": "Succeed",
+  "type": "POST",
+  "code": 201,
+  "action": "SIGNUP"
+}
 
-          OR
+OR
           
-          {
-            "response": "Failed",
-            "type": "GET",
-            "code": 403,
-            "reason": "User not found",
-            "result": null
-          }
+{
+  "response": "Failed",
+  "type": "GET",
+  "code": 403,
+  "reason": "User not found",
+  "result": null
+}
 ```

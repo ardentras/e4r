@@ -239,7 +239,7 @@ class TDatabase {
                 console.log("GET Error");
                 client.json({response: "Failed", type: "GET", code: 404, reason: err});
             } else {
-                client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: result.length, result});
+                client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: result.length, result: result.recordset});
             }
         });
     }
