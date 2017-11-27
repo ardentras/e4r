@@ -26,10 +26,6 @@ P.S (Revenue generated from ads will not be kept by Users or the E4R team, it wi
 6. Solve
 7. Donate!!!
 
-```
-[Insert Images of Registration]
-```
-
 ### Prerequisites
 
 ```
@@ -39,9 +35,14 @@ If not, You'll be a good person once you use this application. (:
 
 ## User Navagation
 
-```
-[Insert Images of User Menu]
-```
+##### BROWSER HOME
+<img width="1677" alt="home" src="https://user-images.githubusercontent.com/26973140/33268972-fb12956c-d333-11e7-9dc4-61498ce782de.png">
+
+##### MOBILE BROWSER HOME
+<img width="200" alt="m-home" src="https://user-images.githubusercontent.com/26973140/33268908-b5dc839a-d333-11e7-8750-78e5642b3122.png">
+
+##### MOBILE BROWSER LOGIN
+<img width="200" alt="login" src="https://user-images.githubusercontent.com/26973140/33268867-96e7a9ec-d333-11e7-801f-313bd27f8d4e.png">
 
 ## Built With
 
@@ -56,7 +57,7 @@ If not, You'll be a good person once you use this application. (:
 * [React](https://reactjs.org) - Javascript library for UI
 * [Confluence](https://www.atlassian.com/software/confluence) - Collaborations application
 
-* [REST API](http://www.restapitutorial.com) - Application Programming Interface(HTTP Protocols)
+* [REST API](http://www.restapitutorial.com) - Application Programming Interface(HTTP Protocols Using Express.js)
 
 ## Authors
 
