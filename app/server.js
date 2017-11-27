@@ -19,7 +19,6 @@ const port = 3002;
 //DELETE - Removal/Erase
 
 //Prepend Api path to all HTTP Request
-app.use('/api', Router);
 
 function terminator(sig) {
 	if (typeof sig === "string") {
@@ -41,15 +40,15 @@ process.on('exit', function() { terminator(); });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-Router.get('/', (req, res)=>{
+Router.all('/', (req, res)=>{
 	res.send('Welcome to the API');
 });
 Router.post('/signup', (req, res) => {
     db.createAccount(res, req.body.user);
 });
-Router.post('/login', (req,res) => {
-    db.attemptLogin(res, req.body.user);
-});
+Router.post('/login', (req, res) => {
+	db.attemptLogin(res, req.body.user);
+})
 Router.put('/renew', (req, res) => {
 	db.renewSessionToken(res, req.body.user);
 });
@@ -60,5 +59,6 @@ Router.get('/test/display', (req, res) => {
     db.displayUsers(res);
 });
 
+app.use('/api', Router);
 app.listen(port);
 console.log("Running on port " + port);
