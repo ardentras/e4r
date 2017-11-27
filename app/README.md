@@ -22,4 +22,59 @@ API Calls:
 
 TEST API Calls:
           Display Users Information -> server:port/test/display -> GET
+          
+
+```
+## JSON Formats: 
+
+#### LOG IN/SIGN UP:
+```
+          {
+	   "user": {
+	        "username": "test1",
+	        "email": "test@test.com",
+	        "password": "testpassword"
+	   }
+          }
+```
+
+#### LOG IN RESPONSE:
+```
+          {
+            "response": "Success",
+            "type": "GET",
+            "code": 200,
+            "action": "LOGIN",
+            "session_id": "{session_token}",
+            "user_object": "{}"
+          }
+          
+          OR
+          
+          {
+            "response": "Failed",
+            "type": "GET",
+            "code": 403,
+            "reason": "User not found",
+            "result": null
+          }
+```    
+#### SIGN UP RESPONSE:
+```
+          {
+            "response": "Succeed",
+            "type": "POST",
+            "code": 201,
+            "action": "SIGNUP"
+          }
+
+          OR
+          
+          {
+            "response": "Failed",
+            "type": "GET",
+            "code": 403,
+            "reason": "User not found",
+            "result": null
+          }
 ```
