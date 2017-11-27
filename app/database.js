@@ -175,9 +175,9 @@ class TDatabase {
 			} else {
 				this.db.request().input('token', mssql.VarChar(32), data.session)
 								.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
-                                console.log(data.userobject);
+                                console.log(res.recordsets[0][0].UserID);
 				this.db.request().input('userobject', mssql.VarChar, data.userobject)
-								.input('userid', mssql.Int, res.UserID)
+								.input('userid', mssql.Int, res.recordsets[0][0].UserID)
 								.query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
 				client.json({response: "Success", type: "PUT", code: 200, reason: "User successfully logged out."});
 			}
