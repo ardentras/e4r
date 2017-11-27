@@ -108,7 +108,7 @@ namespace EFRFrontEndTest2
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
             request.ContentType = "application/json";
             request.Method = "POST";
-            byte[] temp = Encoding.ASCII.GetBytes(string.Format("{ \"user\":{ \"username\":\"{0}\",\"password\":\"{1}\"} }",username, password));
+            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
             request.GetRequestStream().Write(temp, 0, temp.Length);
 
             // Send the request to the server and wait for the response:
