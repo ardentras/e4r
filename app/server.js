@@ -56,7 +56,10 @@ app.post('/api/login', (req,res) => {
     db.attemptLogin(res, req.body.user);
 });
 app.put('/api/renew', (req, res) => {
-	db.renewSessionToken(res, req.body.user)
+	db.renewSessionToken(res, req.body.user);
+});
+app.put('/api/logout', (req, res) => {
+	db.attemptLogout(res, req.body.user);
 });
 app.get('/api/test/display', (req, res) => {
     db.displayUsers(res);
