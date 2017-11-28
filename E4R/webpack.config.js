@@ -1,25 +1,40 @@
-const Path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
-module.exports = {
-    entry: "./controls/UI.js",
-    module: {
-        rules: [
-            {test: /\.(js)$/, exclude: /node_modules/, use: "babel-loader"},
-            {test: /\.css$/, use: ["style-loader", "css-loader"]}
-        ]
-    },
-    output: {
-        path: Path.resolve(__dirname, ""),
-        filename: "./controls/UI_bundle.js",
-        publicPath: "/"
-    },
-    devServer: {
-        historyApiFallback: true
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/index.html"
-        })
+const config = {
+  entry: './app/index.js',
+  output: {
+    path: Path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js',
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      { test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
+      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]},
+      { test: /\.(png|jpg)$/, loader: 'file-loader' }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'app/index.html'
+    })
+  ]
+};
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  )
 }
+
+module.exports = config;
