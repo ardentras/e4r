@@ -17,7 +17,6 @@ namespace EFRFrontEndTest2
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        public SqlConnection connection;
         public void ShowKeyboard(View pView)
         {
             pView.RequestFocus();
@@ -33,17 +32,6 @@ namespace EFRFrontEndTest2
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            try
-            {
-                //connection.Open();
-                Console.WriteLine("Success");
-                //JPDatabase.Close();
-            }
-            catch (Exception _)
-            {
-                Console.WriteLine(_.Message);
-            }
-
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -81,11 +69,11 @@ namespace EFRFrontEndTest2
 
             login.Click += async (sender, e) =>
             {
-                JsonValue json;
                 string url = "http://34.208.210.218:3002/api/login";
-                    // Fetch the login information asynchronously, 
-                    // parse the results, then update the screen:
-                    json = await FetchLoginAsync(url, userBox.Text, passBox.Text);
+                // Fetch the login information asynchronously, 
+                // parse the results, then update the screen:
+                JsonValue json = await FetchLoginAsync(url, userBox.Text, passBox.Text);
+                var stuff = json.ToString().Split(',');
                 // ParseAndDisplay (json);
                 ;
             };
@@ -108,7 +96,8 @@ namespace EFRFrontEndTest2
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
             request.ContentType = "application/json";
             request.Method = "POST";
-            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            //byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
             request.GetRequestStream().Write(temp, 0, temp.Length);
 
             // Send the request to the server and wait for the response:
