@@ -18,7 +18,7 @@ P.S (Revenue generated from ads will not be kept by Users or the E4R team, it wi
 
 ## Getting Started
 
-1. Go to [url]
+1. Go to <a href="https://efrweb.firebaseapp.com" target="_blank">https://efrweb.firebaseapp.com</a>
 2. Register with UserInfo
 3. Login
 4. Set up Profile
