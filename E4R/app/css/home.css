@@ -1,0 +1,332 @@
+.h-parallex {
+    position: absolute;
+    background-image: url('../assets/backgrounds/moutain.jpg');
+    min-height: 400px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    z-index: -1;
+}
+
+.content-top {
+    width: 100%;
+    height: 700px;
+    color: white;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h-support-charities-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 130px;
+    opacity: 0.5;
+}
+
+.h-support-charities-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-sizing: border-box;
+    padding: 50px 0 30px 0;
+}
+
+.h-support-charities {
+    display: flex;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 0 150px;
+    margin-bottom: 60px;
+    opacity: 0.7;
+}
+
+.h-support-1 {
+    justify-content: space-between;
+}
+
+#follow-btn {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 33px;
+    left: 0;
+    top: 15%;
+    z-index: 9998;
+    transform: translateX(-30px);
+    background-image: url('../assets/backgrounds/Follow.png');
+    background-size: 100%;
+    background-size: cover;
+    transition: transform 1s ease;
+}
+
+#follow-btn:hover {
+    transform: translateX(0px);
+}
+
+.welcome {
+    font-size: 48px;
+}
+
+.n-item {
+    position:relative;
+    transition: letter-spacing 0.5s ease;
+    display: inline-block;
+}
+
+.project-description {
+    font-size: 20px;
+    opacity: 0.7;
+}
+
+#good {
+    background: linear-gradient(137deg, #62857f, #49ffc8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#join-btn {
+    transform: translateY(100%);
+    border-radius: 16px;
+    border: 1px solid #ffffff;
+    padding: 5px 10px;
+    font-size: 2vmax;
+}
+
+#join-btn:hover {
+    cursor: pointer;
+}
+
+.h-parallex {
+    min-height: 800px;
+}
+.n-but::before {
+    width:0;
+    height:2px;
+    content:" ";
+    background-color:#69cabb;
+    position:absolute;
+    bottom: 0;
+    left:50%;
+    transition: all 0.3s ease;
+}
+
+.n-but:hover {
+    /* @extend .three:before; */
+    letter-spacing:4px;
+}
+
+.n-but:hover:before {
+    width: 98%;
+    left: 0%;
+}
+.h-cells-container {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+.h-cells {
+    box-sizing: border-box;
+    padding: 15px;
+    width: 33.2%;
+    text-align: center;
+    background: #6CC5BA;
+    min-height: 230px;
+    border-radius: 6px;
+    box-shadow: 0 10px 0 1px rgba(62, 114, 106, 0.753);
+}
+
+.h-cells h1 {
+    margin-top: 15px;
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 2vmax;
+    font-weight: bold;
+}
+
+.h-d-icons {
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+}
+
+.icon-1 {
+    background-image: url('./../assets/description/mission.png');
+    width: 35px;
+    height: 35px;
+    left: 160px;
+}
+
+.icon-2 {
+    background-image: url('./../assets/description/Hat.png');
+    transform: translateY(-10px);
+    left: 130px;
+    width: 50px;
+    height: 50px;
+}
+
+.icon-3 {
+    background-image: url('./../assets/description/hand.png');
+    transform: translateY(-15px);
+    left: 135px;
+    width: 60px;
+    height: 50px;
+}
+
+.h-cells p {
+    font-size: 1.3vmax;
+    line-height: 36px;
+    font-weight: light;
+    box-sizing: border-box;
+    padding: 0 70px;
+}
+
+.h-latest {
+    position: relative;
+    margin: 70px 0 70px 0;
+}
+
+.h-latest h1{
+    box-sizing: border-box;
+    padding: 0 5% 3% 5%;
+    color: #707070;
+}
+
+.h-latest-container {
+    display: flex;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    overflow-y: visible;
+}
+
+.h-latest-container::-webkit-scrollbar {
+    display: none;
+}
+
+.h-latest-modules::-webkit-scrollbar {
+    display: none;
+}
+
+.h-latest-modules {
+    box-sizing: border-box;
+    padding-top: 30px;
+    min-height: 100%;
+    white-space:nowrap;
+    overflow-x: scroll;
+    overflow-y: visible;
+    -webkit-overflow-scrolling:hide;
+}
+
+.h-latest-module {
+    display:inline-block;
+    min-width:270px;
+    min-height:430px;
+    line-height:50px;
+    text-align:center;
+    background: white;
+    transition: transform 0.2s linear, box-shadow 0.2s linear;
+    position: relative;
+}
+
+.h-latest-module:hover {
+    transform: translateY(-30px);
+    box-shadow: 0 2px 5px 0 #000000;
+}
+
+.h-learn-btn {
+    opacity: 0;
+    border-radius: 16px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    transition: opacity 0.1s linear;
+}
+
+.h-learn-btn:hover {
+    cursor: pointer;
+}
+
+.h-latest-module:hover .h-learn-btn{
+    opacity: 1;
+}
+
+.h-latest-module + .h-latest-module {
+    margin-left: 40px
+}
+
+.h-latest-module p {
+    width: 100%;
+    max-width: 270px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    text-align: left;
+    white-space: normal;
+}
+
+@media screen and (max-width: 1560px) {
+    .h-cells {
+        width: 33%;
+    }
+    .h-cells h1 {
+        font-size: 38px;
+    }
+    .h-d-icons {
+        display: none;
+    }
+    .h-cells p {
+        font-size: 1vmax;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .h-cells {
+        background: white;  
+        color: #000000;
+        box-shadow: none;
+    }
+    .h-cells p {
+        padding: 10px 10px;
+    }
+
+    .h-support-charities  {
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .h-support-charities  {
+        justify-content: space-between;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .h-cells {
+        min-height: 0;
+    }
+    .h-cells h1{
+        font-size: 2vmax;
+        margin: 0;
+    }
+    .h-cells p {
+        line-height: 15px;
+    }
+    .h-support-charities img {
+        width: 30px;
+        height: 25px;
+        display: block;
+    }
+    .h-support-charities {
+        justify-content: space-around;
+    }
+}

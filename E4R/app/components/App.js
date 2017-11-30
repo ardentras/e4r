@@ -1,15 +1,33 @@
-import React from 'react';
-import Nav from './Nav';
-import Home from './Home';
-import Contact from './Contact';
-import ErrorPath from './ErrorPath';
-import Login from './Login';
+import React, { Component } from 'react';
+import Nav from './public/Nav';
+import Home from './public/Home';
+import Contact from './public/Contact';
+import ErrorPath from './public/ErrorPath';
+import Login from './public/Login';
+import iAuth from './libraries/iAuth';
+import Dashboard from './protected/dashboard'
+
 import {
     BrowserRouter as Router,
     Route,
     NavLink,
-    Switch
+    Switch,
+    Redirect
   } from 'react-router-dom';
+import { setInterval } from 'timers';
+
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => (
+        iAuth.ifAuthorized() ? (
+        <Component {...props}/>
+      ) : (
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }}/>
+      )
+    )}/>
+  )
 
 export default class App extends React.Component {
     constructor(props) {
@@ -25,7 +43,8 @@ export default class App extends React.Component {
                         <Switch>
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/contact' component={Contact}/>
-                            <Route exact path='/login' component={Login}/>
+                            <Route exact path={iAuth.ifAuthorized() === false ? '/login' : '/protected'} component={Login}/>
+                            <PrivateRoute path='/protected' component={Dashboard}/>
                             <Route component={ErrorPath} />
                         </Switch>
                     </div>

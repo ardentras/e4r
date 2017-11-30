@@ -6,13 +6,15 @@
   "babel": {
     "presets": [
       "env",
-      "react"
+      "react",
+      "stage-2"
     ]
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
