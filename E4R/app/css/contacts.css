@@ -48,11 +48,16 @@
     font-size: 1.5vmax;
 }
 
+#form {
+    padding-bottom: 30px;
+}
+
 .available {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     padding-top: 230px;
+    margin-left: 20px;
 }
 
 .contactinfo {
@@ -88,14 +93,27 @@
     #Contacts {
         padding-left: 20px;
         padding-right: 20px;
+        justify-content: space-between;
+    }
+    .available {
+        width: auto;
     }
 }
 
-@media screen and (max-width: 1003px) {
-    #Contacts {
-        justify-content: center;
+@media screen and (max-width: 414px){
+    #c-lasth {
+        padding: 0;
     }
     .available {
         display: none;
+    }
+    #submit-btn {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    #c-lasth {
+        font-size: 2vmax;
     }
 }

@@ -16,7 +16,7 @@ const JustVisiting = props => {
       <p>Start exploring our application as a visitor.</p>
       <button>Continue</button>
       <span>OR</span>
-      <button onClick={props.onsignup}>{check ? 'Cancle' : 'Register'}</button>
+      <button id='l-v-btn' onClick={props.onsignup}>{check ? 'Cancle' : 'Register'}</button>
       <a href="/contact">NEED HELP?</a>
     </div>
   );
@@ -53,6 +53,7 @@ const Returning = props => {
     <div className='returning'>
       <h1>{check? 'Register' : 'Returning'}</h1>
       <FormFields onchange={props.onchange} onsubmit={props.onsubmit} ifSignUp={props.ifSignUp}/>
+      <button id='l-r-btn' onClick={props.onsignup}>{check ? 'Cancle' : 'Register'}</button>
     </div>
   );
 }
@@ -62,7 +63,7 @@ const LoginForm = props => {
     <div className='l-form'>
       <JustVisiting onsignup={props.onsignup} ifSignUp={props.ifSignUp}/>
       <hr/>
-      <Returning onchange={props.onchange} onsubmit={props.onsubmit} ifSignUp={props.ifSignUp}/>
+      <Returning onchange={props.onchange} onsubmit={props.onsubmit} ifSignUp={props.ifSignUp} onsignup={props.onsignup}/>
     </div>
   );
 }

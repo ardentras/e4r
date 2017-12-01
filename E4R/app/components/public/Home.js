@@ -33,21 +33,32 @@ const DescriptionCells = props => {
     return (
         <div className='h-cells-container'>
             <div className='h-cells'>
-            <h1><span className='h-d-icons icon-1'></span>Mission</h1>
+            <h1>Mission</h1>
                 <p>We are a non-profit organization who
                     seeks to provide a platform for those
                     who seek education and donation.</p>
+                <span className='h-learn-btn'>LEARN MORE</span>
             </div>
             <div className='h-cells'>
-                <h1><span className='h-d-icons icon-2'></span>Education</h1>
-                <p>We offer a wide range of subjects for
-                     users to solve and learn.</p>
+                <h1>Education</h1>
+                <p>We offer a wide range of subjects for users to solve such 
+                    as History, Science, and Math. </p>
+                <span className='h-learn-btn'>LEARN MORE</span>
             </div>
             <div className='h-cells'>
-            <h1><span className='h-d-icons icon-3'></span>Donation</h1>
-                <p>We will donated the revenue made 
-                     from ads to a user selected reputable
-                     charity.</p>
+                <h1>Donation</h1>
+                <p>We work by providing our users many selections of 
+                    reputable choices of charities such as Red Cross, Life
+                     for Asians and BeGood.</p>
+                <span className='h-learn-btn'>LEARN MORE</span>
+            </div>
+            <div className='h-cells'>
+                <h1>Contribution</h1>
+                <p>You can contribute without
+                    spending any money, but rather,
+                    contribute while you learn.
+                </p>
+                <span className='h-learn-btn'>LEARN MORE</span>
             </div>
         </div>
     )
@@ -58,16 +69,16 @@ const SupportingCharities = props => {
         <div className='h-support-charities-container'>
             <div className='h-support-charities-title'><h2>Helping millions of those in need.</h2></div>
             <div className='h-support-charities h-support-1'>
-                <img src={c1} alt="" width='150px' height='50px'/>
-                <img src={c2} alt="" width='150px' height='100px'/>
-                <img src={c3} alt="" width='100px' height='60px'/>
-                <img src={c4} alt="" width='140px' height='80px'/>  
+                <img src={c1} id='h-s-icon1' className='h-s-icons' alt="" width='150px' height='50px'/>
+                <img src={c2} id='h-s-icon2' className='h-s-icons' alt="" width='150px' height='100px'/>
+                <img src={c3} id='h-s-icon3' className='h-s-icons' alt="" width='100px' height='60px'/>
+                <img src={c4} id='h-s-icon4' className='h-s-icons' alt="" width='140px' height='80px'/>  
             </div>
             <div className='h-support-charities h-support-2'>
-                <img src={c5} alt="" width='60px' height='70px'/>
-                <img src={c6} alt="" width='170px' height='50px'/>
-                <img src={c7} alt="" width='100px' height='90px'/>
-                <img src={c8} alt="" width='150px' height='60px'/>
+                <img src={c5} id='h-s-icon4' className='h-s-icons' alt="" width='60px' height='70px'/>
+                <img src={c6} id='h-s-icon5' className='h-s-icons' alt="" width='170px' height='50px'/>
+                <img src={c7} id='h-s-icon6' className='h-s-icons' alt="" width='100px' height='90px'/>
+                <img src={c8} id='h-s-icon7' className='h-s-icons' alt="" width='150px' height='60px'/>
             </div>
         </div>
     );

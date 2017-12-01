@@ -86,9 +86,6 @@ a {
     .header {
         justify-content: center;
     }
-    footer {
-        height: 10%;
-    }
     .navagations {
         position: absolute;
         display: block;
@@ -150,9 +147,6 @@ a {
         height: 100%;
         width: 100%;
         bottom: -150%;
-    }
-    footer * {
-        margin-left: 10px;
     }
     #error img {
         width: 130px;
