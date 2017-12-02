@@ -1,4 +1,4 @@
-## <a href='https://efr.firebaseapp.com'>Education for Revitalization Website</a>
+## <a href='https://efrweb.firebaseapp.com' target='_blank'>Education for Revitalization Website</a>
 
 ## General Info
 ```
@@ -45,5 +45,49 @@ babel-preset-stage-2 - This is not needed, it is for ES7 but I didn't use any of
 9. [ npm firebase-init ] - this initialize what service you wanna use, which is hosting.
 10. [ npm run deploy ] - this will bundle all the files and deploy to the project in firebase.
 8. ENJOY CODING!!!
+```
+#### How to configure webpack.config.js
+
+```
+const Path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
+const config = {
+  entry: './app/index.js',
+  output: {
+    path: Path.resolve(__dirname, 'dist'),
+    filename: 'index_bundle.js',
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      { test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader' },
+      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]},
+      { test: /\.(png|jpg)$/, loader: 'file-loader' }
+    ]
+  },
+  devServer: {
+    historyApiFallback: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'app/index.html'
+    })
+  ]
+};
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  )
+}
+
+module.exports = config;
 ```
 
