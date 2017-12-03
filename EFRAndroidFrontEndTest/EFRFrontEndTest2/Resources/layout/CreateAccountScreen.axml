@@ -29,7 +29,8 @@
         p1:layout_row="4"
         p1:layout_rowSpan="2"
         p1:layout_rowWeight="1"
-        p1:clickable="true" />
+        p1:clickable="true"
+        p1:inputType="textEmailAddress" />
     <TextView
         p1:id="@+id/textView2"
         p1:layout_column="0"
@@ -72,7 +73,7 @@
         p1:layout_rowWeight="1"
         p1:gravity="center" />
     <EditText
-        p1:id="@+id/editText1"
+        p1:id="@+id/UsernameBox"
         p1:layout_column="5"
         p1:layout_columnSpan="7"
         p1:layout_columnWeight="1"
@@ -114,7 +115,7 @@
         p1:gravity="center" />
     <EditText
         p1:inputType="textPassword"
-        p1:id="@+id/PasswordBox"
+        p1:id="@+id/PasswordBoxOne"
         p1:clickable="true"
         p1:layout_column="5"
         p1:layout_columnSpan="7"
@@ -156,7 +157,7 @@
         p1:gravity="center" />
     <EditText
         p1:inputType="textPassword"
-        p1:id="@+id/editText2"
+        p1:id="@+id/PasswordBoxTwo"
         p1:clickable="true"
         p1:layout_column="5"
         p1:layout_columnSpan="7"
@@ -208,7 +209,7 @@
         p1:id="@+id/textView12"
         p1:clickable="false"
         p1:layout_column="5"
-        p1:layout_columnSpan="3"
+        p1:layout_columnSpan="4"
         p1:layout_columnWeight="1"
         p1:layout_row="17"
         p1:layout_rowSpan="2"
@@ -220,18 +221,9 @@
         p1:layout_row="17"
         p1:layout_rowSpan="2"
         p1:layout_rowWeight="1"
-        p1:layout_column="8"
+        p1:layout_column="9"
         p1:layout_columnSpan="3"
         p1:layout_columnWeight="1" />
-    <TextView
-        p1:id="@+id/textView13"
-        p1:clickable="false"
-        p1:layout_column="11"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="17"
-        p1:layout_rowSpan="2"
-        p1:layout_rowWeight="1" />
     <TextView
         p1:id="@+id/textView14"
         p1:clickable="false"

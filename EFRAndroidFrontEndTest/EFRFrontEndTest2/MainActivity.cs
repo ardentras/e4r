@@ -50,7 +50,7 @@ namespace EFRFrontEndTest2
             Button creatAccount = FindViewById<Button>(Resource.Id.createAccountButton);
 
             //Sets up an overlay over username/password and makes it disappear when clicked.
-            //This needs to be redone to keep the functionality but make it less complicated.
+//TODO: Needs to be redone to keep the functionality but make it less complicated.
             ViewStates visible = ViewStates.Visible;
             ViewStates invisible = ViewStates.Invisible;
 
