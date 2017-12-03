@@ -47,6 +47,7 @@ namespace EFRFrontEndTest2
             EditText userCover = FindViewById<EditText>(Resource.Id.usernameCover);
             EditText passCover = FindViewById<EditText>(Resource.Id.passwordCover);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
+            Button creatAccount = FindViewById<Button>(Resource.Id.createAccountButton);
 
             //Sets up an overlay over username/password and makes it disappear when clicked.
             //This needs to be redone to keep the functionality but make it less complicated.
@@ -85,7 +86,12 @@ namespace EFRFrontEndTest2
                 JsonValue json = await FetchLoginAsync(url, userBox.Text, passBox.Text);
                 var stuff = json.ToString().Split(',');
                 // ParseAndDisplay (json);
-                ;
+            };
+
+            creatAccount.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+                StartActivity(intent);
             };
         }
 
