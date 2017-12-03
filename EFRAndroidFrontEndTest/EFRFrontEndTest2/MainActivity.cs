@@ -16,6 +16,15 @@ namespace EFRFrontEndTest2
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
     public class MainActivity : Activity
     {
+
+        /*<AbsoluteLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/absoluteLayout1" />*/
+
+
         //Pops up the keyboard and bind it to the currently selected object.
         //For manual calls
         public void ShowKeyboard(View pView)

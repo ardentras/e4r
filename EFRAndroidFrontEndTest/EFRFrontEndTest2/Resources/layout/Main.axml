@@ -106,7 +106,7 @@
         p1:focusable="false"
         p1:cursorVisible="false" />
     <ImageView
-        p1:src="@drawable/redcross2"
+        p1:src="@drawable/unicornpoop"
         p1:id="@+id/loginPageCharity"
         p1:layout_column="0"
         p1:layout_columnSpan="6"
