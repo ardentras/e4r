@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Json;
 using Android.App;
 using Android.Content;
@@ -17,6 +16,8 @@ namespace EFRFrontEndTest2
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
     public class MainActivity : Activity
     {
+        //Pops up the keyboard and bind it to the currently selected object.
+        //For manual calls
         public void ShowKeyboard(View pView)
         {
             pView.RequestFocus();
@@ -24,6 +25,8 @@ namespace EFRFrontEndTest2
             inputMethodManager.ShowSoftInput(pView, ShowFlags.Forced);
             inputMethodManager.ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.ImplicitOnly);
         }
+
+        //Makes the keyboard disappear. Only needs to be called on an object that uses the ShowKeyboard() function.
         public void HideKeyboard(View pView)
         {
             InputMethodManager inputMethodManager = Application.GetSystemService(Context.InputMethodService) as InputMethodManager;
@@ -41,6 +44,8 @@ namespace EFRFrontEndTest2
             EditText passCover = FindViewById<EditText>(Resource.Id.passwordCover);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
 
+            //Sets up an overlay over username/password and makes it disappear when clicked.
+            //This needs to be redone to keep the functionality but make it less complicated.
             ViewStates visible = ViewStates.Visible;
             ViewStates invisible = ViewStates.Invisible;
 
@@ -67,6 +72,7 @@ namespace EFRFrontEndTest2
                 }
             };
 
+            //Made this async so while we wait for the server to reply, the GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
                 string url = "http://34.208.210.218:3002/api/login";
@@ -79,6 +85,10 @@ namespace EFRFrontEndTest2
             };
         }
 
+        //An override that is supposed to be called when the app goes into the background.
+        //Meant to hide the keyboard if ShowKeyboard() function is called and the user presses
+        //the home button or opens a different app.
+        //Not working as of 12/2/17
         protected void onPause()
         {
             this.onPause();
