@@ -41,7 +41,7 @@ namespace EFRFrontEndTest2
 
             emailBox.FocusChange += (sender, e) =>
             {
-                if (!emailformat(emailBox.Text))
+                if (!emailformat(emailBox.Text) && emailBox.Text.Length > 0)
                     emailErrorBox.Visibility = visible;
                 else
                     emailErrorBox.Visibility = invisible;
@@ -53,17 +53,19 @@ namespace EFRFrontEndTest2
 
             };
 
+            //Error appears if the passwords arent the same but both password fields have text entered into them
             passwordBoxOne.FocusChange += (sender, e) =>
             {
-                if (passwordBoxOne.Text != passwordBoxTwo.Text)
+                if (passwordBoxOne.Text != passwordBoxTwo.Text && passwordBoxTwo.Text.Length > 0)
                     passwordErrorBox.Visibility = visible;
                 else
                     passwordErrorBox.Visibility = invisible;
             };
 
+            //Error appears if the passwords arent the same but both password fields have text entered into them
             passwordBoxTwo.FocusChange += (sender, e) =>
             {
-                if (passwordBoxOne.Text != passwordBoxTwo.Text)
+                if (passwordBoxOne.Text != passwordBoxTwo.Text && passwordBoxOne.Text.Length > 0)
                     passwordErrorBox.Visibility = visible;
                 else
                     passwordErrorBox.Visibility = invisible;
@@ -71,6 +73,10 @@ namespace EFRFrontEndTest2
 
             createAccountButton.Click += (sender, e) =>
             {
+                //Final check on password cases, this doesnt care if a field is blank
+                if (passwordBoxOne.Text != passwordBoxTwo.Text)
+                    passwordErrorBox.Visibility = visible;
+
                 //Checks if all information is correct, if not then a final error is shown
                 //if so, then the account is created
                 if (emailErrorBox.Visibility == visible
@@ -91,12 +97,18 @@ namespace EFRFrontEndTest2
             };
         }
 
-//TODO
         //Checks if the string is [something][@][provider][.][extention] format
         private bool emailformat(string email)
         {
-
-            return false;
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

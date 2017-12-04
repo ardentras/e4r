@@ -26,32 +26,24 @@ namespace EFRFrontEndTest2
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
-            TextView creatAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
-
-
-            creatAccount.Click += OnTapGestureRecognizerTapped;
+            TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
+            
 
             //Made this async so while we wait for the server to reply, the GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
                 string url = "http://34.208.210.218:3002/api/login";
-                // Fetch the login information asynchronously, 
-                // parse the results, then update the screen:
+                // Fetch the login information asynchronously, parse the results, then update the screen.
                 JsonValue json = await FetchLoginAsync(url, userBox.Text, passBox.Text);
                 var stuff = json.ToString().Split(',');
-                // ParseAndDisplay (json);
             };
 
-            //creatAccount.Click += (sender, e) =>
-            //{
-            //    var intent = new Intent(this, typeof(CreateAccountScreenActivity));
-            //    StartActivity(intent);
-            //};
-        }
-
-        private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
-        {
-            SetContentView(Resource.Layout.CreateAccountScreen);
+            //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
+            createAccount.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+                StartActivity(intent);
+            };
         }
 
         private async Task<JsonValue> FetchLoginAsync(string url, string username, string password)
@@ -82,3 +74,11 @@ namespace EFRFrontEndTest2
     }
 }
 
+
+//Great reference for calling event function out of main. Though transition is immediate and not an animated transition.
+
+/*createAccount.Click += OnTapGestureRecognizerTapped;
+private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
+{
+    SetContentView(Resource.Layout.CreateAccountScreen);
+}*/
