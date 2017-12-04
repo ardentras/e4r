@@ -18,6 +18,8 @@ namespace EFRFrontEndTest2
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //Removes title bar
+            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
 
             RequestWindowFeature(WindowFeatures.NoTitle);
