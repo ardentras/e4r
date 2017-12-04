@@ -22,60 +22,65 @@ namespace EFRFrontEndTest2
 
         //Pops up the keyboard and bind it to the currently selected object.
         //For manual calls
-        public void ShowKeyboard(View pView)
-        {
-            pView.RequestFocus();
-            InputMethodManager inputMethodManager = Application.GetSystemService(Context.InputMethodService) as InputMethodManager;
-            inputMethodManager.ShowSoftInput(pView, ShowFlags.Forced);
-            inputMethodManager.ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.ImplicitOnly);
-        }
+        //public void ShowKeyboard(View pView)
+        //{
+        //    pView.RequestFocus();
+        //    InputMethodManager inputMethodManager = Application.GetSystemService(Context.InputMethodService) as InputMethodManager;
+        //    inputMethodManager.ShowSoftInput(pView, ShowFlags.Forced);
+        //    inputMethodManager.ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.ImplicitOnly);
+        //}
 
         //Makes the keyboard disappear. Only needs to be called on an object that uses the ShowKeyboard() function.
-        public void HideKeyboard(View pView)
-        {
-            InputMethodManager inputMethodManager = Application.GetSystemService(Context.InputMethodService) as InputMethodManager;
-            inputMethodManager.HideSoftInputFromWindow(pView.WindowToken, HideSoftInputFlags.None);
-        }
+        //public void HideKeyboard(View pView)
+        //{
+        //    InputMethodManager inputMethodManager = Application.GetSystemService(Context.InputMethodService) as InputMethodManager;
+        //    inputMethodManager.HideSoftInputFromWindow(pView.WindowToken, HideSoftInputFlags.None);
+        //}
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            RequestWindowFeature(WindowFeatures.NoTitle);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.Template);
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             EditText userCover = FindViewById<EditText>(Resource.Id.usernameCover);
             EditText passCover = FindViewById<EditText>(Resource.Id.passwordCover);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
-            Button creatAccount = FindViewById<Button>(Resource.Id.createAccountButton);
+            TextView creatAccount = FindViewById<TextView>(Resource.Id.createaccount);
 
+
+            creatAccount.Click += OnTapGestureRecognizerTapped;
             //Sets up an overlay over username/password and makes it disappear when clicked.
 //TODO: Needs to be redone to keep the functionality but make it less complicated.
-            ViewStates visible = ViewStates.Visible;
-            ViewStates invisible = ViewStates.Invisible;
+            //ViewStates visible = ViewStates.Visible;
+            //ViewStates invisible = ViewStates.Invisible;
 
-            userBox.Visibility = invisible;
-            passBox.Visibility = invisible;
-            userCover.Click += (sender, e) =>
-            {
-                if (userBox.Visibility == invisible)
-                {
-                    userBox.Visibility = visible;
-                    userCover.Visibility = invisible;
-                    userBox.RequestFocus();
-                    ShowKeyboard(userBox);
-                }
-            };
-            passCover.Click += (sender, e) =>
-            {
-                if (passBox.Visibility == invisible)
-                {
-                    passBox.Visibility = visible;
-                    passCover.Visibility = invisible;
-                    passBox.RequestFocus();
-                    ShowKeyboard(passBox);
-                }
-            };
+            //userBox.Visibility = invisible;
+            //passBox.Visibility = invisible;
+            //userCover.Click += (sender, e) =>
+            //{
+            //    if (userBox.Visibility == invisible)
+            //    {
+            //        userBox.Visibility = visible;
+            //        userCover.Visibility = invisible;
+            //        userBox.RequestFocus();
+            //        ShowKeyboard(userBox);
+            //    }
+            //};
+            //passCover.Click += (sender, e) =>
+            //{
+            //    if (passBox.Visibility == invisible)
+            //    {
+            //        passBox.Visibility = visible;
+            //        passCover.Visibility = invisible;
+            //        passBox.RequestFocus();
+            //        ShowKeyboard(passBox);
+            //    }
+            //};
 
             //Made this async so while we wait for the server to reply, the GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
@@ -88,25 +93,30 @@ namespace EFRFrontEndTest2
                 // ParseAndDisplay (json);
             };
 
-            creatAccount.Click += (sender, e) =>
-            {
-                var intent = new Intent(this, typeof(CreateAccountScreenActivity));
-                StartActivity(intent);
-            };
+            //creatAccount.Click += (sender, e) =>
+            //{
+            //    var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+            //    StartActivity(intent);
+            //};
+        }
+
+        private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
+        {
+            SetContentView(Resource.Layout.CreateAccountScreen);
         }
 
         //An override that is supposed to be called when the app goes into the background.
         //Meant to hide the keyboard if ShowKeyboard() function is called and the user presses
         //the home button or opens a different app.
         //Not working as of 12/2/17
-        protected void onPause()
-        {
-            this.onPause();
+        //protected void onPause()
+        //{
+        //   this.onPause();
 
-            EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
-            if (userBox.HasFocus)
-                HideKeyboard(FindViewById<EditText>(Resource.Id.usernameBox));
-        }
+        //    EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
+        //    if (userBox.HasFocus)
+        //        HideKeyboard(FindViewById<EditText>(Resource.Id.usernameBox));
+        //}
 
         private async Task<JsonValue> FetchLoginAsync(string url, string username, string password)
         {

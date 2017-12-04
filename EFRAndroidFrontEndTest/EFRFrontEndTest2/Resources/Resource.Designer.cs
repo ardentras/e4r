@@ -45,10 +45,13 @@ namespace EFRFrontEndTest2
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int redcross2 = 2130837504;
+			public const int background = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int unicornpoop = 2130837505;
+			public const int redcross2 = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int unicornpoop = 2130837506;
 			
 			static Drawable()
 			{
@@ -96,8 +99,26 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060019
 			public const int createAccountButton = 2131099673;
 			
+			// aapt resource value: 0x7f060024
+			public const int createaccount = 2131099684;
+			
+			// aapt resource value: 0x7f060020
+			public const int frameLayout1 = 2131099680;
+			
 			// aapt resource value: 0x7f060000
 			public const int gridLayout1 = 2131099648;
+			
+			// aapt resource value: 0x7f060021
+			public const int imageView1 = 2131099681;
+			
+			// aapt resource value: 0x7f060022
+			public const int imageView2 = 2131099682;
+			
+			// aapt resource value: 0x7f06001f
+			public const int layout = 2131099679;
+			
+			// aapt resource value: 0x7f060023
+			public const int linearLayout1 = 2131099683;
 			
 			// aapt resource value: 0x7f060018
 			public const int loginButton = 2131099672;
@@ -174,6 +195,9 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f040001
 			public const int Main = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int Template = 2130968578;
 			
 			static Layout()
 			{
