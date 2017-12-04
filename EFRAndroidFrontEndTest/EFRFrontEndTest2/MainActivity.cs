@@ -1,15 +1,14 @@
-﻿using System;
-using System.Json;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.Widget;
 using Android.OS;
-using Android.Views.InputMethods;
 using Android.Views;
-using System.Threading.Tasks;
-using System.Net;
+using Android.Widget;
+using System;
 using System.IO;
+using System.Json;
+using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EFRFrontEndTest2
 {
@@ -33,9 +32,8 @@ namespace EFRFrontEndTest2
             //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
-                string url = "http://34.208.210.218:3002/api/login";
                 // Fetch the login information asynchronously, parse the results, then update the screen.
-                JsonValue json = await FetchLoginAsync(url, userBox.Text, passBox.Text);
+                JsonValue json = await FetchLoginAsync(userBox.Text, passBox.Text);
                 var stuff = json.ToString().Split(',');
             };
 
@@ -49,14 +47,14 @@ namespace EFRFrontEndTest2
             StartActivity(intent);
         }
 
-        private async Task<JsonValue> FetchLoginAsync(string url, string username, string password)
+        private async Task<JsonValue> FetchLoginAsync(string username, string password)
         {
             // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/login"));
             request.ContentType = "application/json";
             request.Method = "POST";
-            //byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
+            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            //byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
             request.GetRequestStream().Write(temp, 0, temp.Length);
 
             // Send the request to the server and wait for the response:

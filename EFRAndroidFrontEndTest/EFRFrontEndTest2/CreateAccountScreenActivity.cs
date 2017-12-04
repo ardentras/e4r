@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.IO;
+using System.Json;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EFRFrontEndTest2
 {
@@ -46,11 +45,21 @@ namespace EFRFrontEndTest2
                 else
                     emailErrorBox.Visibility = invisible;
             };
-
-//TODO: Check to see if username is already made in database. Does Shaun have API functionality for this set up?
-            usernameBox.FocusChange += (sender, e) =>
+            
+            usernameBox.FocusChange += async (sender, e) =>
             {
+                if (usernameBox.Text.Length > 0)
+                {
+                    //Pings the server to check if the username already exists
+                    JsonValue responce = await CheckUsername(usernameBox.Text, "1234");
 
+                    //Parses JSON responce to see if (User not found) returns, if so then username is acceptable
+                    if (responce.ToString().Split(',')[1].Contains("User not found"))
+                        usernameErrorBox.Visibility = invisible;
+                    else
+                        usernameErrorBox.Visibility = visible;
+                    ;
+                }
             };
 
             //Error appears if the passwords arent the same but both password fields have text entered into them
@@ -71,7 +80,7 @@ namespace EFRFrontEndTest2
                     passwordErrorBox.Visibility = invisible;
             };
 
-            createAccountButton.Click += (sender, e) =>
+            createAccountButton.Click += async (sender, e) =>
             {
                 //Final check on password cases, this doesnt care if a field is blank
                 if (passwordBoxOne.Text != passwordBoxTwo.Text)
@@ -86,7 +95,8 @@ namespace EFRFrontEndTest2
                 else
                 {
                     finalErrorBox.Visibility = invisible;
-//TODO: Need to write create account functionality
+                    JsonValue responce = await CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
+                    ;
                 }
             };
 
@@ -95,8 +105,6 @@ namespace EFRFrontEndTest2
                 //Closes the current view
                 Finish();
             };
-
-            //emailBox.OnCommitCompletion += (s, e) => usernameBox.Focus();
         }
 
         //Checks if the string is [something][@][provider][.][extention] format
@@ -110,6 +118,55 @@ namespace EFRFrontEndTest2
             catch
             {
                 return false;
+            }
+        }
+
+        private async Task<JsonValue> CheckUsername(string username, string password)
+        {            // Create an HTTP web request using the URL:
+            // Create an HTTP web request using the URL:
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/login"));
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            //byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
+            request.GetRequestStream().Write(temp, 0, temp.Length);
+
+            // Send the request to the server and wait for the response:
+            using (WebResponse response = await request.GetResponseAsync())
+            {
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = response.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+
+                    // Return the JSON document:
+                    return jsonDoc;
+                }
+            }
+        }
+
+        private async Task<JsonValue> CreateAccount(string username, string email, string password)
+        {            // Create an HTTP web request using the URL:
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/signup"));
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
+            request.GetRequestStream().Write(temp, 0, temp.Length);
+            // Send the request to the server and wait for the response:
+            using (WebResponse response = await request.GetResponseAsync())
+            {
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = response.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = JsonObject.Load(stream);
+                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+
+                    // Return the JSON document:
+                    return jsonDoc;
+                }
             }
         }
     }
