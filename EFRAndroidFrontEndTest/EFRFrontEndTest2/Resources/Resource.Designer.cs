@@ -75,8 +75,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060002
 			public const int EmailBox = 2131099650;
 			
-			// aapt resource value: 0x7f060005
-			public const int EmailErrorBox = 2131099653;
+			// aapt resource value: 0x7f060006
+			public const int EmailErrorBox = 2131099654;
 			
 			// aapt resource value: 0x7f060010
 			public const int FinalErrorBox = 2131099664;
@@ -84,20 +84,20 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f06001f
 			public const int ForgotPasswordButton = 2131099679;
 			
-			// aapt resource value: 0x7f06000b
-			public const int PasswordBoxOne = 2131099659;
+			// aapt resource value: 0x7f060008
+			public const int PasswordBoxOne = 2131099656;
 			
-			// aapt resource value: 0x7f06000f
-			public const int PasswordBoxTwo = 2131099663;
+			// aapt resource value: 0x7f06000c
+			public const int PasswordBoxTwo = 2131099660;
 			
-			// aapt resource value: 0x7f06000d
-			public const int PasswordErrorBox = 2131099661;
+			// aapt resource value: 0x7f06000e
+			public const int PasswordErrorBox = 2131099662;
 			
-			// aapt resource value: 0x7f060007
-			public const int UsernameBox = 2131099655;
+			// aapt resource value: 0x7f060003
+			public const int UsernameBox = 2131099651;
 			
-			// aapt resource value: 0x7f060009
-			public const int UsernameErrorBox = 2131099657;
+			// aapt resource value: 0x7f06000a
+			public const int UsernameErrorBox = 2131099658;
 			
 			// aapt resource value: 0x7f060021
 			public const int createAccountButton = 2131099681;
@@ -144,26 +144,26 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060017
 			public const int textView15 = 2131099671;
 			
-			// aapt resource value: 0x7f060003
-			public const int textView2 = 2131099651;
-			
 			// aapt resource value: 0x7f060004
-			public const int textView3 = 2131099652;
+			public const int textView2 = 2131099652;
 			
-			// aapt resource value: 0x7f060006
-			public const int textView4 = 2131099654;
+			// aapt resource value: 0x7f060005
+			public const int textView3 = 2131099653;
 			
-			// aapt resource value: 0x7f060008
-			public const int textView5 = 2131099656;
+			// aapt resource value: 0x7f060007
+			public const int textView4 = 2131099655;
 			
-			// aapt resource value: 0x7f06000a
-			public const int textView6 = 2131099658;
+			// aapt resource value: 0x7f060009
+			public const int textView5 = 2131099657;
 			
-			// aapt resource value: 0x7f06000c
-			public const int textView7 = 2131099660;
+			// aapt resource value: 0x7f06000b
+			public const int textView6 = 2131099659;
 			
-			// aapt resource value: 0x7f06000e
-			public const int textView8 = 2131099662;
+			// aapt resource value: 0x7f06000d
+			public const int textView7 = 2131099661;
+			
+			// aapt resource value: 0x7f06000f
+			public const int textView8 = 2131099663;
 			
 			// aapt resource value: 0x7f06001d
 			public const int usernameBox = 2131099677;

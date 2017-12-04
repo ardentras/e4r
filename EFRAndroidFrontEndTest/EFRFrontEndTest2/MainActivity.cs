@@ -16,6 +16,7 @@ namespace EFRFrontEndTest2
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
     public class MainActivity : Activity
     {
+        //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -29,7 +30,7 @@ namespace EFRFrontEndTest2
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
             
 
-            //Made this async so while we wait for the server to reply, the GUI thread doesn't freeze up.
+            //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
                 string url = "http://34.208.210.218:3002/api/login";
@@ -39,11 +40,13 @@ namespace EFRFrontEndTest2
             };
 
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
-            createAccount.Click += (sender, e) =>
-            {
-                var intent = new Intent(this, typeof(CreateAccountScreenActivity));
-                StartActivity(intent);
-            };
+            createAccount.Click += StartAccountActivity;
+        }
+
+        private void StartAccountActivity(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+            StartActivity(intent);
         }
 
         private async Task<JsonValue> FetchLoginAsync(string url, string username, string password)
@@ -75,7 +78,8 @@ namespace EFRFrontEndTest2
 }
 
 
-//Great reference for calling event function out of main. Though transition is immediate and not an animated transition.
+//Great reference for calling event function out of main.
+//SetContentView doesnt give a transition animation
 
 /*createAccount.Click += OnTapGestureRecognizerTapped;
 private void OnTapGestureRecognizerTapped(object sender, EventArgs e)

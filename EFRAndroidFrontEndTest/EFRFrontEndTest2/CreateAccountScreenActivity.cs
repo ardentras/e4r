@@ -56,7 +56,7 @@ namespace EFRFrontEndTest2
             //Error appears if the passwords arent the same but both password fields have text entered into them
             passwordBoxOne.FocusChange += (sender, e) =>
             {
-                if (passwordBoxOne.Text != passwordBoxTwo.Text && passwordBoxTwo.Text.Length > 0)
+                if (passwordBoxOne.Text != passwordBoxTwo.Text && passwordBoxTwo.Text.Length > 0 && passwordBoxOne.Text.Length > 0)
                     passwordErrorBox.Visibility = visible;
                 else
                     passwordErrorBox.Visibility = invisible;
@@ -65,7 +65,7 @@ namespace EFRFrontEndTest2
             //Error appears if the passwords arent the same but both password fields have text entered into them
             passwordBoxTwo.FocusChange += (sender, e) =>
             {
-                if (passwordBoxOne.Text != passwordBoxTwo.Text && passwordBoxOne.Text.Length > 0)
+                if (passwordBoxOne.Text != passwordBoxTwo.Text && passwordBoxTwo.Text.Length > 0 && passwordBoxOne.Text.Length > 0)
                     passwordErrorBox.Visibility = visible;
                 else
                     passwordErrorBox.Visibility = invisible;
@@ -95,6 +95,8 @@ namespace EFRFrontEndTest2
                 //Closes the current view
                 Finish();
             };
+
+            //emailBox.OnCommitCompletion += (s, e) => usernameBox.Focus();
         }
 
         //Checks if the string is [something][@][provider][.][extention] format
