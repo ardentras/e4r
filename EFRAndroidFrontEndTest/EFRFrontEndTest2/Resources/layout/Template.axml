@@ -69,13 +69,14 @@
                     p1:layout_width="300px"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/passwordBox"
-                    p1:gravity="center" />
+                    p1:gravity="center"
+                    p1:inputType="textPassword" />
                 <TextView
-                    p1:text="forgot password?"
+                    p1:text="Forgot Password?"
                     p1:textAppearance="?android:attr/textAppearanceSmall"
                     p1:layout_width="match_parent"
                     p1:layout_height="100px"
-                    p1:id="@+id/textView3"
+                    p1:id="@+id/ForgotPasswordButton"
                     p1:textColor="#ffffffff"
                     p1:gravity="center" />
                 <Button
@@ -90,7 +91,7 @@
                     p1:text="Join Us"
                     p1:layout_width="match_parent"
                     p1:layout_height="100px"
-                    p1:id="@+id/createaccount"
+                    p1:id="@+id/createAccountButton"
                     p1:textColor="#ffffffff"
                     p1:gravity="center"
                     p1:clickable="true" />

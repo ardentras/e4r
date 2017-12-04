@@ -2,117 +2,100 @@
 <GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
-    p1:id="@+id/gridLayout1"
+    p1:id="@+id/layout"
     p1:columnCount="6"
     p1:rowCount="10"
     p1:alignmentMode="alignBounds"
     p1:orientation="horizontal"
     p1:columnOrderPreserved="true"
     p1:rowOrderPreserved="true"
-    p1:useDefaultMargins="false">
-    <TextView
-        p1:id="@+id/textView2"
-        p1:layout_column="0"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="5"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="0.3"
-        p1:visibility="visible" />
-    <Button
-        p1:text="Log In"
-        p1:id="@+id/loginButton"
-        p1:layout_column="1"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="5"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="0.3" />
-    <TextView
-        p1:id="@+id/textView3"
-        p1:layout_column="2"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="5"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="0.3" />
-    <Button
-        p1:text="Create Account"
-        p1:id="@+id/createAccountButton"
-        p1:layout_column="4"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="5"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="0.3" />
-    <TextView
-        p1:id="@+id/textView4"
-        p1:layout_column="5"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="5"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="0.3" />
-    <TextView
-        p1:id="@+id/textView5"
-        p1:layout_column="0"
-        p1:layout_columnSpan="6"
-        p1:layout_columnWeight="6"
-        p1:layout_row="6"
-        p1:layout_rowSpan="4"
-        p1:layout_rowWeight="4" />
-    <EditText
-        p1:inputType="textEmailAddress"
-        p1:id="@+id/usernameBox"
-        p1:layout_column="1"
-        p1:layout_columnSpan="4"
-        p1:layout_columnWeight="4"
-        p1:layout_row="3"
-        p1:layout_rowSpan="1"
-        p1:text="" />
-    <EditText
-        p1:id="@+id/usernameCover"
-        p1:layout_column="1"
-        p1:layout_columnSpan="4"
-        p1:layout_columnWeight="4"
-        p1:layout_row="3"
-        p1:layout_rowSpan="1"
-        p1:text="Username"
-        p1:editable="false"
-        p1:enabled="true"
-        p1:textIsSelectable="false"
-        p1:cursorVisible="false" />
-    <EditText
-        p1:inputType="textPassword"
-        p1:id="@+id/passwordBox"
-        p1:layout_column="1"
-        p1:layout_columnSpan="4"
-        p1:layout_columnWeight="4"
-        p1:layout_row="4"
-        p1:layout_rowSpan="1"
-        p1:text="" />
-    <EditText
-        p1:inputType="textPassword"
-        p1:id="@+id/passwordCover"
-        p1:layout_column="1"
-        p1:layout_columnSpan="4"
-        p1:layout_columnWeight="4"
-        p1:layout_row="4"
-        p1:layout_rowSpan="1"
-        p1:text="Password"
-        p1:editable="false"
-        p1:enabled="true"
-        p1:textIsSelectable="false"
-        p1:focusable="false"
-        p1:cursorVisible="false" />
+    p1:useDefaultMargins="false"
+    p1:minWidth="25px"
+    p1:minHeight="25px">
+  <FrameLayout
+      p1:minWidth="25px"
+      p1:minHeight="25px"
+      p1:layout_width="match_parent"
+      p1:layout_height="match_parent"
+      p1:id="@+id/frameLayout1">
     <ImageView
-        p1:src="@drawable/unicornpoop"
-        p1:id="@+id/loginPageCharity"
-        p1:layout_column="0"
-        p1:layout_columnSpan="6"
-        p1:layout_row="0"
-        p1:layout_rowSpan="3"
-        p1:scaleType="centerInside"
-        p1:adjustViewBounds="true"
-        p1:cropToPadding="true" />
+        p1:src="@drawable/background"
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:id="@+id/imageView1"
+        p1:scaleType="centerCrop" />
+    <ImageView
+        p1:src="#58000000"
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:id="@+id/imageView2" />
+    <GridLayout
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:id="@+id/gridLayout1"
+        p1:useDefaultMargins="false"
+        p1:minWidth="25px"
+        p1:minHeight="25px">
+      <LinearLayout
+          p1:orientation="vertical"
+          p1:minWidth="25px"
+          p1:minHeight="25px"
+          p1:id="@+id/linearLayout1"
+          p1:layout_width="match_parent"
+          p1:layout_height="match_parent"
+          p1:gravity="center">
+        <TextView
+            p1:text="Username:"
+            p1:textAppearance="?android:attr/textAppearanceSmall"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/textView1"
+            p1:textColor="#ffffffff"
+            p1:gravity="center" />
+        <EditText
+            p1:layout_width="300px"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/usernameBox"
+            p1:gravity="center" />
+        <TextView
+            p1:text="Password: "
+            p1:textAppearance="?android:attr/textAppearanceSmall"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/textView2"
+            p1:textColor="#ffffffff"
+            p1:gravity="center" />
+        <EditText
+            p1:layout_width="300px"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/passwordBox"
+            p1:gravity="center"
+            p1:inputType="textPassword" />
+        <TextView
+            p1:text="Forgot Password?"
+            p1:textAppearance="?android:attr/textAppearanceSmall"
+            p1:layout_width="match_parent"
+            p1:layout_height="100px"
+            p1:id="@+id/ForgotPasswordButton"
+            p1:textColor="#ffffffff"
+            p1:gravity="center" />
+        <Button
+            p1:text="LOG IN"
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/loginButton"
+            p1:gravity="center"
+            p1:background="#ffffffff"
+            p1:textColor="#ff081929" />
+        <TextView
+            p1:text="Join Us"
+            p1:layout_width="match_parent"
+            p1:layout_height="100px"
+            p1:id="@+id/createAccountButton"
+            p1:textColor="#ffffffff"
+            p1:gravity="center"
+            p1:clickable="true" />
+      </LinearLayout>
+    </GridLayout>
+  </FrameLayout>
 </GridLayout>
