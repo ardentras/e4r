@@ -34,17 +34,30 @@ namespace EFRFrontEndTest2
             {
                 // Fetch the login information asynchronously, parse the results, then update the screen.
                 JsonValue json = await FetchLoginAsync(userBox.Text, passBox.Text);
-                var stuff = json.ToString().Split(',');
-
-
-                Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                AlertDialog alert = dialog.Create();
-                alert.SetTitle("You've Logged In!");
-                alert.SetMessage("Now to create the app");
-                alert.SetButton("OK", (c, ev) =>
+                if (json.ToString().Contains("Success"))
                 {
-                });
-                alert.Show();
+                    Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("You've Logged In!");
+                    alert.SetMessage("Now to create the app");
+                    alert.SetButton("OK", (c, ev) =>
+                    {
+                    });
+                    alert.Show();
+                }
+                else
+                {
+
+                    Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("You couldn't log in");
+                    alert.SetMessage("Invalid Credentials");
+                    alert.SetButton("OK", (c, ev) =>
+                    {
+                        passBox.Text = "";
+                    });
+                    alert.Show();
+                }
             };
 
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
