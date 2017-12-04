@@ -56,7 +56,9 @@
                     p1:layout_width="300px"
                     p1:layout_height="wrap_content"
                     p1:id="@+id/usernameBox"
-                    p1:gravity="center" />
+                    p1:gravity="center"
+                    p1:inputType="text"
+                    p1:nextFocusForward="@+id/passwordBox" />
                 <TextView
                     p1:text="Password: "
                     p1:textAppearance="?android:attr/textAppearanceSmall"
@@ -70,7 +72,8 @@
                     p1:layout_height="wrap_content"
                     p1:id="@+id/passwordBox"
                     p1:gravity="center"
-                    p1:inputType="textPassword" />
+                    p1:inputType="textPassword"
+                    p1:imeOptions="actionDone" />
                 <TextView
                     p1:text="Forgot Password?"
                     p1:textAppearance="?android:attr/textAppearanceSmall"

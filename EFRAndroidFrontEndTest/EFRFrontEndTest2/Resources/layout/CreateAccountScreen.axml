@@ -85,7 +85,7 @@
                 p1:visibility="invisible"
                 p1:gravity="center"
                 p1:textColor="#ff0000"
-                p1:background="#8000"/>
+                p1:background="#8000" />
             <TextView
                 p1:text="Username:"
                 p1:id="@+id/textView4"

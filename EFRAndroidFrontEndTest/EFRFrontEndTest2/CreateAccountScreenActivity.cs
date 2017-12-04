@@ -96,7 +96,30 @@ namespace EFRFrontEndTest2
                 {
                     finalErrorBox.Visibility = invisible;
                     JsonValue responce = await CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
-                    ;
+                    if (responce.ToString().Contains("Succeed"))
+                    {
+                        Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        AlertDialog alert = dialog.Create();
+                        alert.SetTitle("");
+                        alert.SetMessage("Account Created!");
+                        alert.SetButton("OK", (c, ev) =>
+                        {
+                            Finish();
+                        });
+                        alert.Show();
+                    }
+//TODO: Check for all errors
+                    else
+                    {
+                        Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        AlertDialog alert = dialog.Create();
+                        alert.SetTitle("");
+                        alert.SetMessage("Unknown error");
+                        alert.SetButton("OK", (c, ev) =>
+                        {
+                        });
+                        alert.Show();
+                    }
                 }
             };
 
