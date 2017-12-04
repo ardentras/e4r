@@ -60,7 +60,7 @@
                     p1:gravity="center"
                     p1:inputType="text"
                     p1:imeOptions="actionNext" />
-               <TextView
+                <TextView
                     p1:text="Password: "
                     p1:clickable="false"
                     p1:textAppearance="?android:attr/textAppearanceSmall"

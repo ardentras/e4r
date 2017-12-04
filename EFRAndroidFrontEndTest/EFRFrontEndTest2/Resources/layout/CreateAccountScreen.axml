@@ -86,6 +86,17 @@
                 p1:gravity="center"
                 p1:textColor="#ff0000"
                 p1:background="#8000" />
+            <EditText
+                p1:id="@+id/UsernameBox"
+                p1:layout_column="5"
+                p1:layout_columnSpan="7"
+                p1:layout_columnWeight="1"
+                p1:layout_row="7"
+                p1:layout_rowSpan="2"
+                p1:layout_rowWeight="1"
+                p1:clickable="true"
+                p1:nextFocusForward="@+id/PasswordBoxOne"
+                p1:inputType="text" />
             <TextView
                 p1:text="Username:"
                 p1:id="@+id/textView4"
@@ -98,17 +109,6 @@
                 p1:layout_rowWeight="1"
                 p1:gravity="center"
                 p1:textColor="#ffffffff" />
-            <EditText
-                p1:id="@+id/UsernameBox"
-                p1:layout_column="5"
-                p1:layout_columnSpan="7"
-                p1:layout_columnWeight="1"
-                p1:layout_row="7"
-                p1:layout_rowSpan="2"
-                p1:layout_rowWeight="1"
-                p1:clickable="true"
-                p1:nextFocusForward="@+id/PasswordBoxOne"
-                p1:inputType="text" />
             <TextView
                 p1:id="@+id/textView5"
                 p1:clickable="false"

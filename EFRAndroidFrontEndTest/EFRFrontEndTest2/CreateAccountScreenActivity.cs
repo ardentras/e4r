@@ -152,9 +152,9 @@ namespace EFRFrontEndTest2
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/login"));
             request.ContentType = "application/json";
             request.Method = "POST";
-            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            //byte[] temp = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
-            request.GetRequestStream().Write(temp, 0, temp.Length);
+            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            //byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
+            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
 
             // Send the request to the server and wait for the response:
             using (WebResponse response = await request.GetResponseAsync())
@@ -177,8 +177,8 @@ namespace EFRFrontEndTest2
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/signup"));
             request.ContentType = "application/json";
             request.Method = "POST";
-            byte[] temp = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
-            request.GetRequestStream().Write(temp, 0, temp.Length);
+            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
+            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
             // Send the request to the server and wait for the response:
             using (WebResponse response = await request.GetResponseAsync())
             {
