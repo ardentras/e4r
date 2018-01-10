@@ -196,3 +196,7 @@ namespace EFRFrontEndTest2
         }
     }
 }
+
+
+
+//look up data context for windows (updated data in real time)

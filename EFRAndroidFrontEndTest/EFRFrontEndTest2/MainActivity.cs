@@ -37,14 +37,8 @@ namespace EFRFrontEndTest2
                 JsonValue json = await FetchLoginAsync(userBox.Text, passBox.Text);
                 if (json.ToString().Contains("Success"))
                 {
-                    Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    AlertDialog alert = dialog.Create();
-                    alert.SetTitle("You've Logged In!");
-                    alert.SetMessage("Now to create the app");
-                    alert.SetButton("OK", (c, ev) =>
-                    {
-                    });
-                    alert.Show();
+                    var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+                    StartActivity(intent);
                 }
                 else
                 {
