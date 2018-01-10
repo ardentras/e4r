@@ -16,7 +16,6 @@ namespace EFRFrontEndTest2
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.HomeScreen);
