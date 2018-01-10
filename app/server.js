@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const Router = express.Router();
 
-//Generate private key file and certificate file
-// openssl req -new -newkey rsa:2048 -nodes -out mydomain.csr -keyout private.key
-// openssl x509 -req -days 365 -in mydomain.csr -signkey private.key -out mydomain.crt
 const bodyParser = require('body-parser');
 const http = require('http');
 const TDatabase = require('./database');
@@ -32,6 +29,8 @@ process.on('exit', function() { terminator(); });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Enable CORS
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -65,8 +64,12 @@ console.log("HTTP running on port " + HTTPport);
 if (USE_HTTPS) {
 	const fs = require('fs');
 	const https = require('https');
+
+	// Generate private key file and certificate file
+	// openssl req -new -newkey rsa:2048 -nodes -out mydomain.csr -keyout private.key
+	// openssl x509 -req -days 365 -in mydomain.csr -signkey private.key -out mydomain.crt
 	const key = fs.readFileSync('./encryption/private.key');
-	const cert = fs.readFileSync( './encryption/mydomain.crt' );
+	const cert = fs.readFileSync( '../.well-known/mydomain.crt');
 	const options = {
 		key: key,
 		cert: cert,
