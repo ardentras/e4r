@@ -149,7 +149,7 @@ namespace EFRFrontEndTest2
         private async Task<JsonValue> CheckUsername(string username, string password)
         {            // Create an HTTP web request using the URL:
             // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/login"));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.163.221.182:3002/api/login"));
             request.ContentType = "application/json";
             request.Method = "POST";
             byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
@@ -174,7 +174,7 @@ namespace EFRFrontEndTest2
 
         private async Task<JsonValue> CreateAccount(string username, string email, string password)
         {            // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.208.210.218:3002/api/signup"));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.163.221.182:3002/api/signup"));
             request.ContentType = "application/json";
             request.Method = "POST";
             byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
@@ -196,3 +196,7 @@ namespace EFRFrontEndTest2
         }
     }
 }
+
+
+
+//look up data context for windows (updated data in real time)
