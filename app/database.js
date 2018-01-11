@@ -95,7 +95,10 @@ class TDatabase {
 					client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token is invalid."});
 				} else {
 					let sessionid = this.setSessionID(res.recordsets[0][0].UserID);
-					client.json({response: "Success", type: "GET", code: 200, action: "RENEW_SESSION", session_id: sessionid});
+                    this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                    .query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE UserID = @userid;", (err, res) => {
+                        client.json({response: "Success", type: "GET", code: 200, action: "RENEW_SESSION", session_id: sessionid, user_object: res.recordsets[0][0].UserObject});
+                    });
 				}
 			}
 		});
@@ -127,7 +130,7 @@ class TDatabase {
         this.db.request().input('username', mssql.NVarChar(User.EMAIL_LENGTH), data.username)
 				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username", (err, users) => {
             if (err) {
-				printErrorDetails();
+				this.printErrorDetails();
 				console.log("LOGIN Fail");
                 client.json({response: "Failed", type: "GET" ,code: 500, reason: "Unknown database error", data: err});
             } else {
@@ -184,7 +187,7 @@ class TDatabase {
 							.input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
 							.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;", (err, users) => {
                 if (err) {
-					printErrorDetails();
+					this.printErrorDetails();
 					console.log("SIGNUP Error");
                     client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
                 } else {
@@ -200,7 +203,7 @@ class TDatabase {
 								.input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
 								.query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST('{}' AS VARBINARY(MAX)), NULL);", (err, res) => {
                             if (err) {
-								printErrorDetails();
+								this.printErrorDetails();
                                 console.log("SIGNUP Error");
                                 client.json({response: "Failed", type: "POST", code: 500, reason: "Create User error", data: err});
                             } else {
@@ -226,7 +229,7 @@ class TDatabase {
                         .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
                         .query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;", (err, users) => {
             if (err) {
-                printErrorDetails();
+                this.printErrorDetails();
                 console.log("Database Error");
                 client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
             } else {
@@ -246,13 +249,17 @@ class TDatabase {
     displayUsers(client) {
         this.db.request().query("SELECT * FROM EFRAcc.Users", (err, result) => {
             if (err) {
-				printErrorDetails();
+				this.printErrorDetails();
                 console.log("GET Error");
                 client.json({response: "Failed", type: "GET", code: 404, reason: err});
             } else {
                 client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: result.length, result: result.recordset});
             }
         });
+    }
+
+    printErrorDetails() {
+        return;
     }
 
 	// Ensures that the database connection is closed on object destruction.
