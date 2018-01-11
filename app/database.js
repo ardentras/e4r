@@ -58,16 +58,6 @@ class TDatabase {
         console.log("Confirmation Email Sent: " + data.email);
     }
 
-	// Verifies a user's email via regex.
-    isEmail (data) {
-        let check = false;
-        const format = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|edu)\b/;
-        if (format.test(data)) {
-            check = true;
-        }
-        return check;
-    }
-
 	// Verifies an email has no special characters
     hasSpecialChar (data) {
         let check = false;
@@ -82,8 +72,7 @@ class TDatabase {
     sanitizeInput (data) {
         let check = false;
         const specialChar = this.hasSpecialChar(data);
-        const verifyEmail = this.isEmail(data);
-        if (specialChar === false && verifyEmail === true) {
+        if (specialChar === false) {
             check = true;
         }
         return check;
@@ -225,6 +214,28 @@ class TDatabase {
             });
         } else {
             client.json({response: "Rejected", Code: 500, reason: "Invalid Email"});
+        }
+    }
+
+    // Attempts to create an account with the given username, email
+	//
+	// Example:
+	// curl -XPOST localhost:3002/api/check_username -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com"}}'
+    checkUsername(client, data) {
+        this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                        .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                        .query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;", (err, users) => {
+            if (err) {
+                printErrorDetails();
+                console.log("Database Error");
+                client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
+            } else {
+                if (users.rowsAffected > 0) {
+                    client.json({response: "Failed", type: "GET",code: 100, reason: "User already exists"});
+                } else {
+                    client.json({response: "Success", type: "GET", code: 200, reason: "User not found"});
+                }
+            }
         }
     }
 

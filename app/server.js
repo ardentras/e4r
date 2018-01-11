@@ -54,6 +54,9 @@ Router.put('/renew', (req, res) => {
 Router.put('/logout', (req, res) => {
 	db.attemptLogout(res, req.body.user);
 });
+Router.put('/check_username', (req, res) => {
+	db.checkUsername(res, req.body.user);
+});
 Router.get('/test/display', (req, res) => {
     db.displayUsers(res);
 });

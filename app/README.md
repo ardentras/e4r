@@ -157,3 +157,32 @@ On invalid session:
     "code": 500,
     "reason": "Session invalid. User object could not be saved"
 }
+```
+## Misc Requests:
+#### CHECK_USERNAME REQUEST:
+```
+{
+    "user": {
+      "username": "test1",
+      "email": "test@test.com",
+    }
+}
+```
+#### CHECK_USERNAME RESPONSE:
+```
+On user not found:
+{
+  "response": "Succeed",
+  "type": "GET",
+  "code": 200,
+  "reason": "User not found"
+}
+
+On user already exists:
+{
+  "response": "Failed",
+  "type": "GET",
+  "code": 100,
+  "reason": "User already exists",
+}
+```
