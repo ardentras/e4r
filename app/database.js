@@ -236,7 +236,7 @@ class TDatabase {
                     client.json({response: "Success", type: "GET", code: 200, reason: "User not found"});
                 }
             }
-        }
+        });
     }
 
 	// Displays all current user accounts from the database.
