@@ -11,7 +11,7 @@ class TDatabase {
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
             if (err) {
-                printErrorDetails(err);
+                this.printErrorDetails();
             } else {
                 console.log('Connected to database' + (config.database == '' ? ' ' : ' ' + config.database + ' ') + 'at ' + config.server + ':' + config.port);
             }
@@ -81,7 +81,7 @@ class TDatabase {
 	// Attempts to verify a user's existing token and renews it if valid, else logs the user out.
 	//
 	// Example:
-	// curl -XPUT localhost:3002/api/renew -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5"}}'
+	// curl -XPUT localhost:3002/api/renew -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a"}}'
 	renewSessionToken(client, data) {
 		this.db.request().input('token', mssql.VarChar(32), data.session)
 						.query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token", (err, res) => {
