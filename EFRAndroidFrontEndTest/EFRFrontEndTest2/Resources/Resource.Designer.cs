@@ -45,22 +45,31 @@ namespace EFRFrontEndTest2
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int background = 2130837504;
+			public const int BackArrowIcon = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int background2 = 2130837505;
+			public const int background = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int BackgroundGradient = 2130837506;
+			public const int background2 = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int OptionsIcon = 2130837507;
+			public const int BackgroundGradient = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int redcross2 = 2130837508;
+			public const int ForwardArrowIcon = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int RedCrossIcon = 2130837509;
+			public const int GreenButtonIcon = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int OptionsIcon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int redcross2 = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int RedCrossIcon = 2130837512;
 			
 			static Drawable()
 			{
@@ -122,6 +131,24 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f060000
 			public const int gridLayout1 = 2131099648;
+			
+			// aapt resource value: 0x7f060025
+			public const int imageButton2 = 2131099685;
+			
+			// aapt resource value: 0x7f060026
+			public const int imageButton3 = 2131099686;
+			
+			// aapt resource value: 0x7f060027
+			public const int imageButton4 = 2131099687;
+			
+			// aapt resource value: 0x7f060028
+			public const int imageButton5 = 2131099688;
+			
+			// aapt resource value: 0x7f060029
+			public const int imageButton6 = 2131099689;
+			
+			// aapt resource value: 0x7f06002a
+			public const int imageButton7 = 2131099690;
 			
 			// aapt resource value: 0x7f060002
 			public const int imageView1 = 2131099650;
@@ -209,7 +236,10 @@ namespace EFRFrontEndTest2
 			public const int Main = 2130968578;
 			
 			// aapt resource value: 0x7f040003
-			public const int Template = 2130968579;
+			public const int SelectSubjectScreen = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int Template = 2130968580;
 			
 			static Layout()
 			{
