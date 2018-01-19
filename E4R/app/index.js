@@ -1,15 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
+/****************************************************************************
+ * 
+ *->Name: index.js 
+ *->Purpose: Root of React components.
+ *
+*****************************************************************************/
 
-import css from './css/style.css';
-import home from './css/home.css';
-import footer from './css/footer.css';
-import contacts from './css/contacts.css';
-import login from './css/login.css';
-import dashboard from './css/dashboard.css';
+import React from "react"; // eslint-disable-line no-unused-vars
+import { Provider } from "react-redux"; // eslint-disable-line no-unused-vars
+import ReactDOM from "react-dom";
+import App from "./public/All/App"; // eslint-disable-line no-unused-vars
+import store from "./redux/store";
 
+/****************************************************************************
+ * 
+ *->React Name: render 
+ *->Purpose: Render the App component, also wrapping it with the provider component
+ *           Allowing linking between redux tree with the components.
+ *
+*****************************************************************************/
 ReactDOM.render(
-    <App/>,
-    document.getElementById('app')
-)
+	<Provider store={store}>
+		<App/>
+	</Provider>,
+	document.getElementById("app")
+);
