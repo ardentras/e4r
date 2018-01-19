@@ -36,13 +36,7 @@ If not, You'll be a good person once you use this application. (:
 ## User Navagation
 
 ##### BROWSER HOME
-<img width="1677" alt="home" src="https://user-images.githubusercontent.com/26973140/33268972-fb12956c-d333-11e7-9dc4-61498ce782de.png">
-
-##### MOBILE BROWSER HOME
-<img width="200" alt="m-home" src="https://user-images.githubusercontent.com/26973140/33268908-b5dc839a-d333-11e7-8750-78e5642b3122.png">
-
-##### MOBILE BROWSER LOGIN
-<img width="200" alt="login" src="https://user-images.githubusercontent.com/26973140/33268867-96e7a9ec-d333-11e7-801f-313bd27f8d4e.png">
+<img width="1677" alt="home" src="https://user-images.githubusercontent.com/26973140/35130015-6d5e81ae-fc73-11e7-92a7-f3e2b0908cc7.png">
 
 ## Built With
 
