@@ -231,6 +231,14 @@ class TDatabase {
         }
     }
 
+    // Returns a new block of questions from the database
+    //
+    // Example:
+    // curl -XPOST localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d", "userobject":"{}"}}'
+    async requestQuestionBlock(client, data) {
+
+    }
+
 	// Displays all current user accounts from the database.
 	// TODO Remove in production.
 	//
