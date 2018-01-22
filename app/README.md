@@ -28,6 +28,28 @@ Debugging API Calls:
 ```
 ## JSON Formats:
 
+#### User Object Definition:
+```
+{
+    "user_data": {
+        "username": "test1",
+        "email": "test@test.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "charity_name": "ACME Charity, LLC"
+    },
+    "game_data": {
+        "subject_name": "Math",
+        "subject_id": "0",
+        "difficulty": "0",
+        "completed_blocks": {
+            "0", "5", "21"
+        }
+    }
+}
+```
+
+
 #### SIGN UP REQUEST:
 ```
 {
