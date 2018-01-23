@@ -88,10 +88,10 @@
     <AndroidResource Include="Resources\layout\HomeScreen2.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\BubbleLiveFeed.axml">
+    <AndroidResource Include="Resources\layout\settingsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\settingsPage.axml">
+    <AndroidResource Include="Resources\layout\BubbleLiveFeed.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

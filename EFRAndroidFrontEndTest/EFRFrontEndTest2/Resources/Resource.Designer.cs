@@ -210,11 +210,14 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f040003
 			public const int Main = 2130968579;
-			
-			// aapt resource value: 0x7f040004
-			public const int Template = 2130968580;
-			
-			static Layout()
+
+            // aapt resource value: 0x7f040004
+            public const int Template = 2130968580;
+
+            // aapt resource value: 0x7f040005
+            public const int BubbleLiveFeed = 2130968581;
+
+            static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 			}
