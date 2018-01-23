@@ -24,7 +24,6 @@
         android:layout_rowSpan="1"
         android:layout_rowWeight="1"
         android:layout_height="wrap_content"
-        android:scaleX="true"
         android:id="@+id/seekBar1" />
     <TextView
         android:gravity="center"

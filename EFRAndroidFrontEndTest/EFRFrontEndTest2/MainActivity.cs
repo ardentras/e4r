@@ -37,7 +37,7 @@ namespace EFRFrontEndTest2
                 JsonValue json = await FetchLoginAsync(userBox.Text, passBox.Text);
                 if (json.ToString().Contains("Success"))
                 {
-                    var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+                    var intent = new Intent(this, typeof(HomeScreenActivity));
                     StartActivity(intent);
                 }
                 else
