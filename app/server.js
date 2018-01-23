@@ -56,6 +56,9 @@ Router.put('/logout', (req, res) => {
 Router.get('/check_username', (req, res) => {
 	db.checkUsername(res, req.body.user);
 });
+Router.get('/q/request_block', (req, res) => {
+	db.requestQuestionBlock(res, req.body.user);
+});
 Router.get('/test/display', (req, res) => {
     db.displayUsers(res);
 });

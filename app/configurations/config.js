@@ -10,6 +10,23 @@ const DB_CONFIG = {
 	}
 };
 
+const DEFAULT_USER_OBJECT = {
+    "user_data": {
+        "username": "",
+        "email": "",
+        "first_name": "",
+        "last_name": "",
+        "charity_name": ""
+    },
+    "game_data": {
+        "subject_name": "",
+        "subject_id": "0",
+        "difficulty": "0",
+        "completed_blocks": {
+        }
+    }
+}
+
 const DB_USER_CONFIG = {
 		USERNAME_LENGTH: 50,
 		EMAIL_LENGTH: 100,
@@ -26,6 +43,7 @@ const USE_HTTPS = false;
 module.exports = {
 	DB_CONFIG: DB_CONFIG,
 	DB_USER_CONFIG: DB_USER_CONFIG,
+	DEFAULT_USER_OBJECT: DEFAULT_USER_OBJECT,
 	EMAIL_CONFIG: EMAIL_CONFIG,
 	USE_HTTPS: USE_HTTPS
 }

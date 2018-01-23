@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
 const uuidv4 = require('uuid/v4');
 const User = require('./configurations/config').DB_USER_CONFIG;
+const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
 
 class TDatabase {
@@ -138,7 +139,7 @@ class TDatabase {
                 if (res.recordsets[0][0].PasswordHash === hashedPassword) {
                     let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
                     this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].Username)
-                                    .query("SELECT CAST(UserObject AS VARCHAR) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
+                                    .query("SELECT CAST(UserObject AS VARCHAR(4096)) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
                         client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: res.recordsets[0][0].UserObject});
                     });
                 } else {
@@ -192,10 +193,16 @@ class TDatabase {
                     let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
                     let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
 
+                    let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
+                    newUserObject.user_data.username = data.username;
+                    newUserObject.user_data.email = data.email;
+                    let newUserObjectStr = JSON.stringify(newUserObject);
+
                     await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
                                             .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                             .input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
-                                            .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST('{}' AS VARBINARY(MAX)), NULL);");
+                                            .input('newuo', mssql.VarChar(newUserObjectStr.length), newUserObjectStr)
+                                            .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
 
                     console.log('SIGNUP SUCCEED Email: ' + data.email);
                     client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP"});
@@ -203,6 +210,7 @@ class TDatabase {
                 }
             } catch (err) {
                 console.log("SIGNUP Error");
+                console.log(err);
                 client.json({response: "Failed", type: "POST", code: 500, reason: "User signup error", data: err});
             }
         } else {
@@ -234,7 +242,24 @@ class TDatabase {
     // Returns a new block of questions from the database
     //
     // Example:
-    // curl -XPOST localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d", "userobject":"{}"}}'
+    // curl -XPOST localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d", "userobject":"{
+    //     "user_data": {
+    //         "username": "test1",
+    //         "email": "test@test.com",
+    //         "first_name": "John",
+    //         "last_name": "Doe",
+    //         "charity_name": "ACME Charity, LLC"
+    //     },
+    //     "game_data": {
+    //         "subject_name": "Math",
+    //         "subject_id": "0",
+    //         "difficulty": "0",
+    //         "completed_blocks": {
+    //             "0", "5", "21"
+    //         }
+    //     }
+    // }"
+    // }}'
     async requestQuestionBlock(client, data) {
 
     }
