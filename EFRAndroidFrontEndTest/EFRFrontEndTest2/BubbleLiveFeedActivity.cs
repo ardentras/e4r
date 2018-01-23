@@ -1,15 +1,14 @@
-﻿using Android.App;
-using Android.OS;
-using Android.Views;
-using Android.Content;
-using Android.Widget;
-using System;
-using System.IO;
-using System.Json;
-using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
 
 namespace EFRFrontEndTest2
 {
@@ -18,17 +17,10 @@ namespace EFRFrontEndTest2
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.);
+            SetContentView(Resource.Layout.BubbleLiveFeed);
         }
-
-        BubbleButton.Click += (sender, e) =>
-            {
-                //Closes the current view
-            }
-    
-    };
-}
-
+    }
 }

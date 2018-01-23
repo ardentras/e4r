@@ -21,8 +21,8 @@
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="1"
         p1:scaleType="fitXY"
-        p1:layout_height="50"
-        p1:layout_width="50"
+        p1:layout_height="50dp"
+        p1:layout_width="50dp"
         p1:background="@drawable/optionsicon" />
     <ImageButton
         p1:id="@+id/imageView1"
@@ -35,8 +35,8 @@
         p1:adjustViewBounds="true"
         p1:cropToPadding="false"
         p1:scaleType="fitXY"
-        p1:layout_height="50"
-        p1:layout_width="50"
+        p1:layout_height="50dp"
+        p1:layout_width="50dp"
         p1:background="@drawable/redcrossicon" />
     <Button
         p1:text="Bubble Live Feed"
@@ -56,7 +56,7 @@
         p1:layout_row="3"
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="1"
-        p1:layout_height="50"
-        p1:layout_width="100"
+        p1:layout_height="50dp"
+        p1:layout_width="100dp"
         p1:scaleType="fitXY" />
 </GridLayout>
