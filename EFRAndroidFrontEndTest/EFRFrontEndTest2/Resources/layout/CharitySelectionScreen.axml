@@ -15,7 +15,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:id="@+id/imageButton1"
+            android:id="@+id/backButton"
             android:layout_weight="1"
             android:src="@drawable/BackArrowIcon"
             android:scaleType="fitXY"

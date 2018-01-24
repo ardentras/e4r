@@ -7,7 +7,7 @@
     p1:rowCount="4"
     p1:background="@drawable/BackgroundGradient">
     <ImageButton
-        p1:id="@+id/optionButton"
+        p1:id="@+id/physicsOption"
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -21,7 +21,7 @@
         p1:background="@drawable/GreenButtonIcon"
         p1:src="@drawable/PhysicsIcon" />
     <ImageButton
-        p1:id="@+id/imageButton2"
+        p1:id="@+id/chemistryOption"
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -34,7 +34,7 @@
         p1:src="@drawable/ChemistryIcon"
         p1:scaleType="fitXY" />
     <ImageButton
-        p1:id="@+id/imageButton3"
+        p1:id="@+id/biologyOption"
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -47,7 +47,7 @@
         p1:scaleType="fitXY"
         p1:src="@drawable/BiologyIcon" />
     <ImageButton
-        p1:id="@+id/imageButton4"
+        p1:id="@+id/mathOption"
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -60,7 +60,7 @@
         p1:scaleType="fitXY"
         p1:src="@drawable/MathIcon" />
     <ImageButton
-        p1:id="@+id/imageButton5"
+        p1:id="@+id/historyOption"
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -73,7 +73,7 @@
         p1:scaleType="fitXY"
         p1:src="@drawable/HistoryIcon" />
     <ImageButton
-        p1:id="@+id/imageButton6"
+        p1:id="@+id/shuffleOption"
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -86,7 +86,7 @@
         p1:src="@drawable/shuffleicon"
         p1:scaleType="fitXY" />
     <ImageButton
-        p1:id="@+id/imageButton7"
+        p1:id="@+id/backButton"
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -95,7 +95,7 @@
         p1:layout_rowWeight="0.1"
         p1:background="@drawable/BackArrowIcon" />
     <ImageButton
-        p1:id="@+id/imageButton8"
+        p1:id="@+id/continueButton"
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"

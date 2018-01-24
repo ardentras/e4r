@@ -82,9 +82,6 @@
     <AndroidResource Include="Resources\layout\CreateAccountScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Template.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\background.jpeg" />
     <AndroidResource Include="Resources\layout\HomeScreen.axml">
       <SubType>Designer</SubType>

@@ -21,12 +21,19 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.HomeScreen);
             ImageButton settingsButton = FindViewById<ImageButton>(Resource.Id.settingsButton);
+            ImageButton charityButton = FindViewById<ImageButton>(Resource.Id.charityButton);
             Button playButton = FindViewById<Button>(Resource.Id.playButton);
             Button bubbleLiveFeedButton = FindViewById<Button>(Resource.Id.bubbleLiveFeedButton);
 
             settingsButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(settingsPageActivity));
+                StartActivity(intent);
+            };
+
+            charityButton.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(CharitySelectionScreenActivity));
                 StartActivity(intent);
             };
 

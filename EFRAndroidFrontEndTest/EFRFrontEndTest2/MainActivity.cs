@@ -23,7 +23,7 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Template);
+            SetContentView(Resource.Layout.Main);
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
