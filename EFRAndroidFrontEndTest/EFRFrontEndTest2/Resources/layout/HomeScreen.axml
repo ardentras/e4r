@@ -5,7 +5,7 @@
     p1:id="@+id/gridLayout1">
     <Button
         p1:text="Play"
-        p1:id="@+id/button1"
+        p1:id="@+id/playButton"
         p1:layout_columnSpan="2"
         p1:layout_columnWeight="1"
         p1:layout_row="0"
@@ -40,7 +40,7 @@
         p1:background="@drawable/redcrossicon" />
     <Button
         p1:text="Bubble Live Feed"
-        p1:id="@+id/button4"
+        p1:id="@+id/bubbleLiveFeedButton"
         p1:layout_column="0"
         p1:layout_columnSpan="2"
         p1:layout_columnWeight="1"

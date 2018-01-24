@@ -14,7 +14,7 @@
         p1:layout_row="0"
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="1"
-        p1:background="@drawable/BackArrowIcon"
+        p1:background="@drawable/GreenButtonIcon"
         p1:layout_height="50dp"
         p1:layout_width="50dp" />
     <ImageButton
@@ -73,7 +73,6 @@
         p1:layout_width="50dp"
         p1:background="@drawable/GreenButtonIcon" />
     <ImageButton
-        p1:src="@android:drawable/ic_menu_gallery"
         p1:id="@+id/imageButton7"
         p1:layout_column="0"
         p1:layout_columnSpan="1"
@@ -82,4 +81,13 @@
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="0.1"
         p1:background="@drawable/BackArrowIcon" />
+    <ImageButton
+        p1:id="@+id/imageButton8"
+        p1:layout_column="1"
+        p1:layout_columnSpan="1"
+        p1:layout_columnWeight="1"
+        p1:layout_row="3"
+        p1:layout_rowSpan="1"
+        p1:layout_rowWeight="0.1"
+        p1:background="@drawable/forwardarrowicon" />
 </GridLayout>
