@@ -16,9 +16,10 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
-        p1:src="@drawable/ScienceIcon"
+        p1:padding="10dp"
         p1:scaleType="fitXY"
-        p1:background="@drawable/GreenButtonIcon" />
+        p1:background="@drawable/GreenButtonIcon"
+        p1:src="@drawable/PhysicsIcon" />
     <ImageButton
         p1:id="@+id/imageButton2"
         p1:layout_column="1"
@@ -29,7 +30,9 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
-        p1:background="@drawable/GreenButtonIcon" />
+        p1:background="@drawable/GreenButtonIcon"
+        p1:src="@drawable/ChemistryIcon"
+        p1:scaleType="fitXY" />
     <ImageButton
         p1:id="@+id/imageButton3"
         p1:layout_column="0"
@@ -40,7 +43,9 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
-        p1:background="@drawable/GreenButtonIcon" />
+        p1:background="@drawable/GreenButtonIcon"
+        p1:scaleType="fitXY"
+        p1:src="@drawable/BiologyIcon" />
     <ImageButton
         p1:id="@+id/imageButton4"
         p1:layout_column="1"
@@ -51,7 +56,9 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
-        p1:background="@drawable/GreenButtonIcon" />
+        p1:background="@drawable/GreenButtonIcon"
+        p1:scaleType="fitXY"
+        p1:src="@drawable/MathIcon" />
     <ImageButton
         p1:id="@+id/imageButton5"
         p1:layout_column="0"
@@ -62,7 +69,9 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
-        p1:background="@drawable/GreenButtonIcon" />
+        p1:background="@drawable/GreenButtonIcon"
+        p1:scaleType="fitXY"
+        p1:src="@drawable/HistoryIcon" />
     <ImageButton
         p1:id="@+id/imageButton6"
         p1:layout_column="1"
@@ -73,7 +82,9 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
-        p1:background="@drawable/GreenButtonIcon" />
+        p1:background="@drawable/GreenButtonIcon"
+        p1:src="@drawable/shuffleicon"
+        p1:scaleType="fitXY" />
     <ImageButton
         p1:id="@+id/imageButton7"
         p1:layout_column="0"
