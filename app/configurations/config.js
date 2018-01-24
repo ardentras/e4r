@@ -20,7 +20,7 @@ const DEFAULT_USER_OBJECT = {
     },
     "game_data": {
         "subject_name": "",
-        "subject_id": "0",
+        "subject_id": "1",
         "difficulty": "0",
         "completed_blocks": {
         }
