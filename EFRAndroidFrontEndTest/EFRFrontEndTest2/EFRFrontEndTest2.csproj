@@ -87,9 +87,6 @@
     <AndroidResource Include="Resources\layout\HomeScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\HomeScreen2.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\settingsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
