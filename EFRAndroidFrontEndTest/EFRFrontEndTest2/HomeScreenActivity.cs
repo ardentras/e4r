@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -19,7 +20,13 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.HomeScreen);
-            
+            ImageButton settingsButton = FindViewById<ImageButton>(Resource.Id.settingsButton);
+
+            settingsButton.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(settingsPageActivity));
+                StartActivity(intent);
+            };
         }
     }
 }
