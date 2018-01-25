@@ -1,0 +1,12 @@
+.clearfix::after, .clearfix::before{
+    content: " ";
+    display: table;
+    clear: both;
+    margin: 0 auto;
+    min-height: 71px;
+}
+
+.contents {
+    display: flex;
+    flex-flow: row nowrap;
+}

@@ -1,0 +1,14 @@
+.dashboard {
+    display: flex;
+    flex-flow: column;
+    background: #749FF2;
+    color: white;
+}
+
+.dlinkactive {
+    color: rgb(42, 174, 250);
+}
+.dlinks {
+    margin: 10px 0;
+    height: 100%;
+}
