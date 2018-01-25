@@ -10,7 +10,7 @@ DELETE: Remove Information
 ## Using Education for Revitalization Api
 
 ```
-SERVER PUBLIC IP: 34.208.210.218
+SERVER PUBLIC IP: 35.163.221.182
 SERVER PUBLIC HTTP PORT: 3002
 SERVER PUBLIC HTTPS/SSL PORT: 3003
 
@@ -157,3 +157,32 @@ On invalid session:
     "code": 500,
     "reason": "Session invalid. User object could not be saved"
 }
+```
+## Misc Requests:
+#### CHECK_USERNAME REQUEST:
+```
+{
+    "user": {
+      "username": "test1",
+      "email": "test@test.com",
+    }
+}
+```
+#### CHECK_USERNAME RESPONSE:
+```
+On user not found:
+{
+  "response": "Succeed",
+  "type": "GET",
+  "code": 200,
+  "reason": "User not found"
+}
+
+On user already exists:
+{
+  "response": "Failed",
+  "type": "GET",
+  "code": 100,
+  "reason": "User already exists",
+}
+```

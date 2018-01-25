@@ -1,0 +1,121 @@
+/****************************************************************************
+ * 
+ *->Name: style.css 
+ *->Purpose: Declare all styles for the Returning and Visitor component in Returning.js and Visitor.js
+ *
+*****************************************************************************/
+
+.fields {
+    margin: 5px 0 15px 0;
+    border-bottom: 1px solid #24292e; 
+    font-size: .8em;
+    min-width: 300px;
+}
+
+.formcontainer {
+    display: flex;
+    flex-direction: column;
+    color: #24292e;
+    border-left: 1px solid rgb(184, 184, 184);
+    padding-left: 30px;
+}
+
+.heading {
+    margin-bottom: 30px;
+    font-weight: lighter;
+    font-size: 2em;
+}
+
+.forgot {
+    opacity: 0.7;
+    text-align: center;
+    margin: 15px 0; 
+}
+
+.userform {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    border: 1px solid white;
+    border-radius: 10px;
+    background: #69cabb;
+    padding: 8px 0;
+    color: white;
+    font-size: 1em;
+    text-align: center;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.description {
+    font-weight: lighter;
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.visitorContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    padding-right: 30px;
+}
+
+.cons {
+    padding: 20px 20px;
+}
+
+.vbtn {
+    border: 1px solid #24292e;
+    border-radius: 10px;
+    background: none;
+    padding: 5px 0;
+    color: #24292e;
+    font-size: 1em;
+    margin: 10px 10px 10px 0;
+}
+
+.vbtn:hover {
+    cursor: pointer;
+}
+
+.or {
+    text-align: center;
+    opacity: 0.5;
+}
+
+.needhelp {
+    margin-top: 20px;
+    background: none;
+    font-size: 15px;
+    opacity: 0.6;
+    text-align: center;
+}
+
+.ssuccessful {  
+    background: #E0FFC5;
+    color: #729951;
+}
+
+.ssuccessful h1 {
+    font-size: 15px;
+}
+
+.ssuccessful span {
+    font-size: 15px;
+}
+
+.warning {
+    border-radius: 3px;
+    text-align: center;
+    padding: 8px 0;
+    margin-bottom: 15px;
+}
+
+.lfail {
+    background: rgb(255, 204, 204);;
+    color: rgb(252, 90, 90);;
+}
