@@ -18,7 +18,7 @@ import iCookie from "./iCookie";
  * @param { string } universalPath - Define the universal api path
  * @param { string } api - The api extension path
  * @param { Object } user - The user object to be saved
- */
+ **/
 
 const iAuth = (()=>{
 	let m_onError = new WeakMap();
