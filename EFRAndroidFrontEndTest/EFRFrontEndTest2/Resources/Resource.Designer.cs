@@ -192,6 +192,24 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060026
 			public const int layout = 2131099686;
 			
+			// aapt resource value: 0x7f060025
+			public const int imageButton2 = 2131099685;
+			
+			// aapt resource value: 0x7f060026
+			public const int imageButton3 = 2131099686;
+			
+			// aapt resource value: 0x7f060027
+			public const int imageButton4 = 2131099687;
+			
+			// aapt resource value: 0x7f060028
+			public const int imageButton5 = 2131099688;
+			
+			// aapt resource value: 0x7f060029
+			public const int imageButton6 = 2131099689;
+			
+			// aapt resource value: 0x7f06002a
+			public const int imageButton7 = 2131099690;
+			
 			// aapt resource value: 0x7f060002
 			public const int linearLayout1 = 2131099650;
 			
