@@ -94,6 +94,8 @@ namespace EFRFrontEndTest2
 }
 
 
+// Testing
+
 //Great reference for calling event function out of main.
 //SetContentView doesnt give a transition animation
 
