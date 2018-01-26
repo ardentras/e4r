@@ -7,13 +7,18 @@
     p1:rowCount="4"
     p1:background="@drawable/BackgroundGradient">
     <ImageButton
+<<<<<<< HEAD
         p1:id="@+id/physicsOption"
+=======
+        p1:id="@+id/optionButton"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
         p1:layout_row="0"
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="1"
+<<<<<<< HEAD
         p1:layout_height="50dp"
         p1:layout_width="50dp"
         p1:padding="10dp"
@@ -22,6 +27,13 @@
         p1:src="@drawable/PhysicsIcon" />
     <ImageButton
         p1:id="@+id/chemistryOption"
+=======
+        p1:background="@drawable/BackArrowIcon"
+        p1:layout_height="50dp"
+        p1:layout_width="50dp" />
+    <ImageButton
+        p1:id="@+id/imageButton2"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -30,11 +42,17 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
+<<<<<<< HEAD
         p1:background="@drawable/GreenButtonIcon"
         p1:src="@drawable/ChemistryIcon"
         p1:scaleType="fitXY" />
     <ImageButton
         p1:id="@+id/biologyOption"
+=======
+        p1:background="@drawable/GreenButtonIcon" />
+    <ImageButton
+        p1:id="@+id/imageButton3"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -43,11 +61,17 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
+<<<<<<< HEAD
         p1:background="@drawable/GreenButtonIcon"
         p1:scaleType="fitXY"
         p1:src="@drawable/BiologyIcon" />
     <ImageButton
         p1:id="@+id/mathOption"
+=======
+        p1:background="@drawable/GreenButtonIcon" />
+    <ImageButton
+        p1:id="@+id/imageButton4"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -56,11 +80,17 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
+<<<<<<< HEAD
         p1:background="@drawable/GreenButtonIcon"
         p1:scaleType="fitXY"
         p1:src="@drawable/MathIcon" />
     <ImageButton
         p1:id="@+id/historyOption"
+=======
+        p1:background="@drawable/GreenButtonIcon" />
+    <ImageButton
+        p1:id="@+id/imageButton5"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -69,11 +99,17 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
+<<<<<<< HEAD
         p1:background="@drawable/GreenButtonIcon"
         p1:scaleType="fitXY"
         p1:src="@drawable/HistoryIcon" />
     <ImageButton
         p1:id="@+id/shuffleOption"
+=======
+        p1:background="@drawable/GreenButtonIcon" />
+    <ImageButton
+        p1:id="@+id/imageButton6"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="1"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -82,11 +118,18 @@
         p1:layout_rowWeight="1"
         p1:layout_height="50dp"
         p1:layout_width="50dp"
+<<<<<<< HEAD
         p1:background="@drawable/GreenButtonIcon"
         p1:src="@drawable/shuffleicon"
         p1:scaleType="fitXY" />
     <ImageButton
         p1:id="@+id/backButton"
+=======
+        p1:background="@drawable/GreenButtonIcon" />
+    <ImageButton
+        p1:src="@android:drawable/ic_menu_gallery"
+        p1:id="@+id/imageButton7"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
         p1:layout_column="0"
         p1:layout_columnSpan="1"
         p1:layout_columnWeight="1"
@@ -94,6 +137,7 @@
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="0.1"
         p1:background="@drawable/BackArrowIcon" />
+<<<<<<< HEAD
     <ImageButton
         p1:id="@+id/continueButton"
         p1:layout_column="1"
@@ -103,4 +147,6 @@
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="0.1"
         p1:background="@drawable/forwardarrowicon" />
+=======
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
 </GridLayout>
