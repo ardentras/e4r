@@ -1,0 +1,37 @@
+.supported {
+    margin-top: 10px;
+    padding-top: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    background: white;
+}
+
+.stitle {
+    opacity: 0.6;
+    width: 100%;
+    text-align: center;
+}
+
+.charities {
+    display: flex;
+    flex-flow: row wrap;
+    width: 70%;
+    padding: 30px 30px 50px 30px;
+    white-space: nowrap;
+    justify-content: center;
+}
+
+.charity {
+    margin: 10px 30px;
+    font-size: 28px;
+    text-align: center;
+    text-decoration: none;
+    opacity: 0.3;
+    transition: all 1s ease;
+}
+
+.charity:hover {
+    color: #141b22;
+    opacity: 1;
+}

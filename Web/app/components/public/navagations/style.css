@@ -4,53 +4,51 @@
  *->Purpose: Declare all styles for the Nav component in Nav.js
  *
 *****************************************************************************/
-
-.navagations {
-    display: flex;
-    align-items: flex-end;
-}
 .navagation {
-    float: left;
-    list-style: none;
-    padding: 0 20px;
-}
-
-.testbanner {
-    background: #749FF2;
-    color: white;
-    font-family: Helvetica, Arial, sans-serif;
-    justify-content: center;
-    display: flex;
-    padding: 5px 0;
-}
-
-.cat {
-    height: 35px;
-    width: 35px;
-}
-
-.bannertext {
-    font-weight: lighter;
-    padding: 10px;
-}
-
-.head {
     position: fixed;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
     width: 100%;
     z-index: 9999;
 }
 
-.navcontainer {
+.navagation::after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.header {
     box-sizing: border-box;
     display: flex;
     background: white;
     color: #707070;
     flex-flow: row wrap;
     justify-content: space-around;
+    align-items: flex-end;
     padding: 30px 0;
+    position: relative;
+}
+
+.brand {
+    
 }
 
 #logo {
     height: 28px;
     width: 28px; 
+}
+
+.navagations {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navselector {
+    margin: 0 10px;
+}
+
+.activelink {
+    color: #007BFE;
 }

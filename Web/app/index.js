@@ -6,10 +6,13 @@
 *****************************************************************************/
 
 import React from "react"; // eslint-disable-line no-unused-vars
-import { Provider } from "react-redux"; // eslint-disable-line no-unused-vars
 import ReactDOM from "react-dom";
-import App from "./public/All/App"; // eslint-disable-line no-unused-vars
+import { Provider } from "react-redux"; // eslint-disable-line no-unused-vars
 import store from "./redux/store";
+
+import App from "./components/public"; // eslint-disable-line no-unused-vars
+
+import "./style.css";
 
 /****************************************************************************
  * 

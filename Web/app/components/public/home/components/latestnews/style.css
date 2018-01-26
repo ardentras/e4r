@@ -1,0 +1,42 @@
+.latestnews {
+    display: flex;
+    flex-flow: column;
+    padding: 100px 0;
+}
+
+.latestnews h1 {
+    text-align: center;
+}
+
+.newscontainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.newscontainer i{
+    font-size: 48px;
+}
+
+.latestmodules::-webkit-scrollbar {
+    display: none;
+}
+
+.latestmodules {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    overflow-x: scroll;
+}
+
+.news {
+    min-height: 300px;
+    margin: 0 40px;
+    transition: transform 0.3s ease;
+}
+
+.news:hover {
+    transform: translateY(-20px);
+}

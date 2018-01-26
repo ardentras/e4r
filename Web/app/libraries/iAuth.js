@@ -9,6 +9,9 @@
 
 import axios from "axios";
 import iCookie from "./iCookie";
+import "babel-polyfill";
+import { promisify } from "util";
+
 /**
  * @param { boolean } http - Define if to use http request
  * @param { function } onError - Define the function to be call when error
@@ -18,7 +21,7 @@ import iCookie from "./iCookie";
  * @param { string } universalPath - Define the universal api path
  * @param { string } api - The api extension path
  * @param { Object } user - The user object to be saved
- */
+ **/
 
 const iAuth = (()=>{
 	let m_onError = new WeakMap();
@@ -39,9 +42,20 @@ const iAuth = (()=>{
 			m_register_path.set(this, undefined);
 			this.ifPersist = this.ifPersist.bind(this);
 		}
+		config({ http=true, onError=undefined, // eslint-disable-line no-unused-vars
+			host=undefined, universalPath=undefined,
+			loginPath=undefined, logoutPath=undefined, registerPath=undefined}) {
+			http ? m_http.set(this, http) : null;
+			host ? m_host.set(this, host) : null;
+			onError ? m_onError.set(this, onError) : null;
+			universalPath ? m_universalPath.set(this, universalPath) : null;
+			loginPath ? m_login_path.set(this, loginPath) : null;
+			logoutPath ? m_logout_path.set(this, logoutPath) : null;
+			registerPath ? m_register_path.set(this, registerPath) : null;
+		}
 		createJSON({username=undefined, email=undefined, first_name=undefined, last_name=undefined, charity_name=undefined,
 			subject_id=undefined, subject_name=undefined, difficulty=undefined, completed_blocks=undefined}) {
-			return {
+			return Promise.resolve({
 				user_data: {
 					username: username,
 					email: email,
@@ -55,100 +69,57 @@ const iAuth = (()=>{
 					difficulty: difficulty,
 					completed_blocks: completed_blocks
 				}
-			};
+			});
 		}
 		getUserFromCookie() {
-			return {
+			return Promise.resolve({
 				username: iCookie.get("username"),
 				session: iCookie.get("session"),
 				userobject: {}
-			};
+			});
 		}
-		config({ http=true, onError=undefined, // eslint-disable-line no-unused-vars
-			host=undefined, universalPath=undefined,
-			loginPath=undefined, logoutPath=undefined, registerPath=undefined}) {
-			http ? m_http.set(this, http) : null;
-			host ? m_host.set(this, host) : null;
-			onError ? m_onError.set(this, onError) : null;
-			universalPath ? m_universalPath.set(this, universalPath) : null;
-			loginPath ? m_login_path.set(this, loginPath) : null;
-			logoutPath ? m_logout_path.set(this, logoutPath) : null;
-			registerPath ? m_register_path.set(this, registerPath) : null;
-		}
-		ifPersist() {
+		async ifPersist() {
+			let result = false;
 			if (document.cookie) {
-				const uid = iCookie.get("username");
 				const session = iCookie.get("session");
-				const user = {
-					username: uid,
-					session: session	
-				};
 				if (session) {
-					return axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + "/renew", {user});
-				}
-				else {
-					return new Promise((resolve, reject)=>{
-						resolve(false);
-					});
+					result = await axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + "/renew", {user: {session: session}});
 				}
 			}
-			else {
-				return new Promise((resolve, reject)=>{
-					resolve(false);
-				});
+			return Promise.resolve(result);
+		}
+		async Authenticate(user, onSuccess, api=undefined) {
+			let result = null;
+			let error = null;
+			try {
+				result = await axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_login_path.get(this) ? m_login_path.get(this) : null), {user});
 			}
+			catch(err) {
+				error = false;
+			}
+			return Promise.resolve(error ? error : result);
 		}
-		Authenticate(user, onSuccess, api=undefined) {
-			return new Promise((resolve, reject) => {
-				axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_login_path.get(this) ? m_login_path.get(this) : null), {user})
-					.then((result)=>{
-						if (result.data.response === "Success") {
-							resolve(onSuccess ? onSuccess() : result.data.session_id);
-						}
-						else {
-							reject(result.data);
-						}
-					})
-					.catch((error) => {
-						reject(m_onError.get(this) ?
-							typeof m_onError.get(this) === "function" ?
-								m_onError.get(this)() : m_onError.get(this) : error);
-					});
-			});
+		async Deauthenticate(user, onSuccess=undefined, api=undefined) {
+			let result = null;
+			let error = null;
+			try {
+				result = await axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_logout_path.get(this) ? m_logout_path.get(this) : null), {user})
+			}
+			catch(err) {
+				error = false;
+			}
+			return Promise.resolve(error ? error : result);
 		}
-		Deauthenticate(user, onSuccess=undefined, api=undefined) {
-			return new Promise((resolve, reject)=>{
-				axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_logout_path.get(this) ? m_logout_path.get(this) : null), {user})
-					.then((result)=>{
-						if (result.data.response === "Success") {
-							resolve(onSuccess ? onSuccess() : result.data);
-						}
-						else {
-							reject(result.data);
-						}
-					})
-					.catch((error)=>{
-						reject(m_onError.get(this) ?
-							typeof m_onError.get(this) === "function" ?
-								m_onError.get(this)() : m_onError.get(this) : error);
-					});
-			});
-		}
-		Register(user, onSuccess=undefined, api=undefined) {
-			return new Promise((resolve, reject)=>{
-				axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_register_path.get(this) ? m_register_path.get(this) : null), {user})
-					.then((result)=>{
-						if (result.data.response === "Succeed") {
-							resolve(onSuccess ? onSuccess() : result.data);
-						}
-						else {
-							reject(result.data);
-						}
-					})
-					.catch((error)=>{
-						reject(error);
-					});
-			});
+		async Register(user, onSuccess=undefined, api=undefined) {
+			let result = null;
+			let error = null;
+			try {
+				result = await axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_register_path.get(this) ? m_register_path.get(this) : null), {user});
+			}
+			catch(err) {
+				error = false;
+			}
+			return Promise.resolve(error ? error : result);
 		}
 	}
 	return iAuth;

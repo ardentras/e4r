@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {
     Route,
     Redirect
-  } from 'react-router-dom'
+  } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -18,5 +18,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )}/>
 );
 
-export default connect((state) => ({states: state.state}))(PrivateRoute);
-
+export default PrivateRoute;

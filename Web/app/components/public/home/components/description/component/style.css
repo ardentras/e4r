@@ -1,0 +1,34 @@
+.mission {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10%;
+    flex-flow: row wrap;
+    position: relative;
+}
+
+.mcells {
+    max-width: 250px;
+    padding: 20px 0;
+    font-weight: normal;
+}
+
+.mcells h1 {
+    font-weight: inherit;
+    font-size: 1.5rem;
+}
+
+.mcells p {
+    padding: 10px 0;
+    font-weight: lighter;
+}
+
+.solve {
+}
+
+.donate {
+
+}
+
+.learn {
+    
+}
