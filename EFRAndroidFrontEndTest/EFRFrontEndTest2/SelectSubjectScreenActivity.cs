@@ -1,5 +1,8 @@
 ﻿using Android.App;
+<<<<<<< HEAD
 using Android.Content;
+=======
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -19,6 +22,7 @@ namespace EFRFrontEndTest2
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
+<<<<<<< HEAD
             SetContentView(Resource.Layout.SelectSubjectScreen);
 
             ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
@@ -27,6 +31,9 @@ namespace EFRFrontEndTest2
             {
                 Finish();
             };
+=======
+            SetContentView(Resource.Layout.HomeScreen);
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
 
         }
     }
