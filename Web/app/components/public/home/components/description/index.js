@@ -12,8 +12,8 @@ const Description = props => (
 			<div className={Styles.aboutus}>
 				<span>BE A BETTER PERSON.</span>
 				<span className={Styles.pdescription}>A project to help learning and those in need of charity.</span>
-				<Link className={Styles.jbtn} to="/login">
-					<span>JOIN US</span>
+				<Link className={Styles.jlink} to="/login">
+					<span className={Styles.jbtn}>JOIN US</span>
 				</Link>
 				<div className={Styles.pselectors}>
 					<i id={Styles.psactive} className="fa fa-circle" aria-hidden="true" onClick={null}></i>

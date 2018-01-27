@@ -21,7 +21,7 @@ export default class Home extends React.Component { // eslint-disable-line no-un
 	render() {
 		return (
 			<div>
-				<div className={Styles.clear}/>
+				<div className={Styles.clearfix}/>
 				<Description/>
 				<Charity/>
 				<LatestNews/>

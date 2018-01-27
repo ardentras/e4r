@@ -35,3 +35,9 @@
     color: #141b22;
     opacity: 1;
 }
+
+@media (max-width: 500px) {
+    .charity {
+        font-size: 3vmax;
+    }
+}

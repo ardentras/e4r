@@ -44,17 +44,18 @@
     opacity: 0.7;
 }
 
-.jbtn {
-    font-size: 30px;
+.jlink {
     border: 1px solid white;
     border-radius: 26px;
-    box-sizing: border-box;
     padding: 2px 25px;
     transform: translateY(70px);
     padding-top: 6px;
+    font-size: 2vmax;
+    overflow: hidden;
+    transition: all 0.3 ease;
 }
 
-.jbtn:hover {
+.jlink:hover {
     cursor: pointer;
 }
 
