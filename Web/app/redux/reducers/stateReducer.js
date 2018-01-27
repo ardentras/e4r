@@ -14,7 +14,8 @@ import {
 	SIGNUP_SUCCESSFUL,
 	SIGN_UP,
 	ERROR,
-	REFER } from "../../types/types";
+	REFER,
+	RESET } from "../types";
 
 const initialState = {
 	IS_AUTH: false,
@@ -63,8 +64,10 @@ const stateReducer = (state=initialState, action) => {
 		});
 	case REFER:
 		return Object.assign({}, state, {
-			redirectToReferrer: true
+			redirectToReferrer: action.value
 		});
+	case RESET:
+		return Object.assign({}, initialState);
 	default:
 		return Object.assign({}, state);
 	}

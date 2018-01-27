@@ -15,19 +15,16 @@ const iCookie = (()=>{
 	class iCookie {
 		constructor() {}
 		set(cookie) {
-			return new Promise((resolve, reject)=>{
-				document.cookie = cookie;
-				if (!document.cookie) {
-					reject(false);
-				}
-				else {
-					resolve(true);
-				}
-			});
+			document.cookie = cookie;
 		}
 		get(key) {
 			let match = document.cookie.match(new RegExp(key + "=([^;]+)"));
 			return match ? match[1] : undefined;
+		}
+		time() {
+			const date = new Date();
+			date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+			return date.toUTCString();
 		}
 		reset() {
 			document.cookie.split(";").forEach(function(c) { 

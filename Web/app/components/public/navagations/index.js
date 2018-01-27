@@ -18,6 +18,7 @@ class Navagation extends React.Component {
 		super(props);
 	}
 	render() {
+		console.log(this.props);
 		return (
 			<div className={Styles.navagation}>
 				<Testbanner/>
@@ -28,7 +29,14 @@ class Navagation extends React.Component {
 					</div>
 					<div className={Styles.navagations}>
 						{Routes.map((elem,index)=>(
-							<NavLink key={index} exact={elem.exact} to={elem.path} className={Styles.navselector} activeClassName={Styles.activelink}>{elem.label}</NavLink>
+							elem.label === "Login" && this.props.IS_AUTH ?
+							<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>Hello, Kevin</NavLink> :
+							<NavLink 
+							key={index} 
+							exact={elem.exact} 
+							to={elem.path} 
+							className={Styles.navselector} 
+							activeClassName={Styles.activelink}>{elem.label}</NavLink>
 						))}
 					</div>
 				</div>
@@ -38,9 +46,3 @@ class Navagation extends React.Component {
 }
 
 export default Navagation;
-// Navagation.propTypes = {
-// 	states: Proptypes.object
-// };
-
-// export default connect(
-// 	(state) => ({states: state.states}))(Navagation);

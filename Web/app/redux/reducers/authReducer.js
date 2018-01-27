@@ -5,9 +5,7 @@
  *
 *****************************************************************************/
 
-import { 
-	SET_USER_INFO,
-	SET_SESSION_TOKEN } from "../../types/types";
+import { SET_UID } from "../types";
 
 /****************************************************************************
  * 
@@ -16,23 +14,14 @@ import {
  *
 *****************************************************************************/
 const initialState = {
-	username: undefined,
-	email: undefined,
-	password: undefined,
-	session: undefined
+	uid: undefined,
 };
 
 const authReducer = (state=initialState, action) => {
 	switch(action.type) {
-	case SET_USER_INFO:
+	case SET_UID:
 		return Object.assign({}, state, {
-			email: action.email,
-			username: action.username,
-			password: action.password
-		});
-	case SET_SESSION_TOKEN:
-		return Object.assign({}, state, {
-			session: action.session
+			uid: action.value
 		});
 	default:
 		return Object.assign({}, state);

@@ -7,8 +7,8 @@
 
 import {createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import authReducer from "./actions/auth/authReducer";
-import stateReducer from "./actions/state/stateReducer";
+import authReducer from "./reducers/authReducer";
+import stateReducer from "./reducers/stateReducer";
 import { combineReducers } from "redux";
 
 /****************************************************************************

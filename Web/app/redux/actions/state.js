@@ -4,7 +4,8 @@ import {
 	ERROR, 
 	SIGN_UP,
 	SIGNUP_SUCCESSFUL,
-	REFER } from "../../types/types";
+	REFER,
+	RESET } from "../types";
     
 /****************************************************************************
  * 
@@ -58,12 +59,12 @@ export function setSignUpSuccessful(state) {
 	};
 }
 
-/****************************************************************************
- * 
- *->Action Name: DeAuthenticateSuccess
- *->Action Purpose: To set the success state in the store.
- *
-*****************************************************************************/
+export function Reset() {
+	return {
+		type: RESET
+	}
+}
+
 export function Error(err=undefined) {
 	return {
 		type: ERROR,
@@ -71,8 +72,9 @@ export function Error(err=undefined) {
 	};
 }
 
-export function Refer() {
+export function Refer(value=true) {
 	return {
-		type: REFER
+		type: REFER,
+		value: value
 	};
 }

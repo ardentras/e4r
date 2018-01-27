@@ -1,7 +1,6 @@
 import Home from "../home";
 import Contact from "../contact";
-// import Login from "../login";
-// import Private from "./private";
+import Login from "../login";
 
 const Routes = [
 	{
@@ -15,16 +14,11 @@ const Routes = [
 		label: "Contact Us",
 		component: Contact 
 	},
-	// {
-	// 	path: "/login",
-	// 	label: "Login",
-	// 	component: Login 
-	// },
-	// {
-	// 	path: "/dashboard",
-	// 	label: "Dashboard",
-	// 	component: Private
-	// }
+	{
+		path: "/login",
+		label: "Login",
+		component: Login 
+	}
 ];
 
 export default Routes;

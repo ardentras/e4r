@@ -6,10 +6,9 @@
 *****************************************************************************/
 
 "use strict";
-
+import "babel-polyfill";
 import axios from "axios";
 import iCookie from "./iCookie";
-import "babel-polyfill";
 import { promisify } from "util";
 
 /**
@@ -73,53 +72,22 @@ const iAuth = (()=>{
 		}
 		getUserFromCookie() {
 			return Promise.resolve({
-				username: iCookie.get("username"),
 				session: iCookie.get("session"),
 				userobject: {}
 			});
 		}
-		async ifPersist() {
-			let result = false;
-			if (document.cookie) {
-				const session = iCookie.get("session");
-				if (session) {
-					result = await axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + "/renew", {user: {session: session}});
-				}
-			}
-			return Promise.resolve(result);
+		ifPersist() {
+			const session = iCookie.get("session");
+			return axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + "/renew", {user: {session: session}});
 		}
-		async Authenticate(user, onSuccess, api=undefined) {
-			let result = null;
-			let error = null;
-			try {
-				result = await axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_login_path.get(this) ? m_login_path.get(this) : null), {user});
-			}
-			catch(err) {
-				error = false;
-			}
-			return Promise.resolve(error ? error : result);
+		Authenticate(user) {
+			return axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (m_login_path.get(this) ? m_login_path.get(this) : null), {user});
 		}
-		async Deauthenticate(user, onSuccess=undefined, api=undefined) {
-			let result = null;
-			let error = null;
-			try {
-				result = await axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_logout_path.get(this) ? m_logout_path.get(this) : null), {user})
-			}
-			catch(err) {
-				error = false;
-			}
-			return Promise.resolve(error ? error : result);
+		Deauthenticate(user) {
+			return axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (m_logout_path.get(this) ? m_logout_path.get(this) : null), {user})
 		}
-		async Register(user, onSuccess=undefined, api=undefined) {
-			let result = null;
-			let error = null;
-			try {
-				result = await axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (api ? api : m_register_path.get(this) ? m_register_path.get(this) : null), {user});
-			}
-			catch(err) {
-				error = false;
-			}
-			return Promise.resolve(error ? error : result);
+		Register(user) {
+			return axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (m_register_path.get(this) ? m_register_path.get(this) : null), {user});
 		}
 	}
 	return iAuth;
