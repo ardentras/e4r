@@ -20,6 +20,8 @@ API Calls:
           Log Out -> hostname:port/api/logout -> PUT
           Sign Up -> hostname:port/api/signup -> POST
           Renew Session -> hostname:port/api/renew -> PUT
+          Check Username -> hostname:port/api/check_username -> GET
+          Request Question Block -> hostname:port/api/q/request_block -> GET
 
 Debugging API Calls:
           Display Users Information -> hostname:port/test/display -> GET
@@ -27,6 +29,26 @@ Debugging API Calls:
 
 ```
 ## JSON Formats:
+
+#### User Object Definition:
+```
+"userobject": {
+    "user_data": {
+        "username": "test1",
+        "email": "test@test.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "charity_name": "ACME Charity, LLC"
+    },
+    "game_data": {
+        "subject_name": "Math",
+        "subject_id": "1",
+        "difficulty": "0",
+        "completed_blocks": [1, 3, 4]
+    },
+    "timestamp":"2018-01-24T02:06:58+00:00"
+}
+```
 
 #### SIGN UP REQUEST:
 ```
@@ -185,4 +207,30 @@ On user already exists:
   "code": 100,
   "reason": "User already exists",
 }
+```
+## Game Requests:
+#### REQUEST_BLOCK REQUEST:
+```
+{
+    "user": {
+        "session":"{session_id}",
+        "userobject": {user_object}
+    }
+}
+```
+#### REQUEST_BLOCK RESPONSE:
+```
+[
+    {
+        "QuestionID":{id},
+        "QuestionText":"{text}",
+        "QuestionOne":"{answer1}",
+        "QuestionTwo":"{answer2}",
+        "QuestionThree":"{answer3}",
+        "QuestionFour":"{answer4}",
+        "CorrectAnswer":"{correct_answer}",
+        "QuestionBlockID":"{block_id}"
+    },
+    {...},
+]
 ```
