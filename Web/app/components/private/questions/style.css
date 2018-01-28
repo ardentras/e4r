@@ -1,0 +1,119 @@
+.question {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+}
+
+.progresscontainer {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0 30px;
+}
+
+.selection {
+    display: flex;
+    flex-flow: column;
+    background: white;
+    width: 100%;
+    padding: 20px 20px;
+    margin: 0 10px 10px 0;
+}
+
+.subject {
+    margin: 3px 0;
+    border-radius: 16px;
+    padding: 5px 5px;
+    text-align: center;
+    border: 1px solid #141b2275;
+}
+
+.choice {
+    border-radius: 16px;
+    margin: 10px 0;
+    background: rgb(65, 157, 255);
+    max-width: 100px;
+    color: white;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice:hover {
+    cursor: pointer;
+}
+
+.choices {
+    display: flex;
+    flex-flow: column;
+    padding: 20px 0;
+}
+
+.topic {
+    padding: 10px 0 30px 0;
+    border-bottom: 1px solid #141b22;
+}
+
+.topic h1 {
+    margin-bottom: 5px;
+}
+
+.subject:hover {
+    cursor: pointer;
+}
+
+.remove {
+    padding: 0 5px 0 0;
+}
+
+.questioncontents {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+}
+
+.subjects {
+    display: flex;
+    flex-flow: column;
+    background: white;
+    margin: 0 10px 10px 10px;
+    padding: 20px 30px;
+}
+
+.subjects h2 {
+    margin-bottom: 5px;
+}
+
+.progress {
+    width: 300px;
+    height: 20px;
+    background: #f1f1f1;
+    position: relative;
+    margin-left: 10px;
+    border-radius: 16px;
+}
+
+.progressbar {
+    background: #83FF7E;
+    border-radius: 16px;
+    width: 70%;
+    height: 100%;
+    color: white;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px;
+    padding: 20px 0px;
+    background: white;
+}
+
+.header h1 {
+    font-size: 2vmax;
+    padding: 0 30px;
+}

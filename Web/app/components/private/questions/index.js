@@ -8,7 +8,40 @@ class Question extends React.Component {
     render() {
         return (
             <div className={Styles.question}>
-                <div>This is Questions.</div>
+                <div className={Styles.header}>
+                    <h1>All Questions</h1>
+                    <div className={Styles.progresscontainer}>
+                        <span>Current Progress:</span>
+                        <div className={Styles.progress}>
+                            <div className={Styles.progressbar} role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                70%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={Styles.questioncontents}>
+                    <div className={Styles.subjects}>
+                        <h2>Subjects</h2>
+                        <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>Math</span>
+                        <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>Science</span>
+                        <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>History</span>
+                        <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>Add...</span>
+                    </div>
+                    <div className={Styles.selection}>
+                        <div className={Styles.topic}>
+                            <h1>Question 1:</h1>
+                            <p>Find the antiderivative of f(x)=4x.</p>
+                            <span>(use C as constant arbitrary)</span>
+                        </div>
+                        <div className={Styles.choices}>
+                            <span>Answers: </span>
+                            <span className={Styles.choice}>A) Hi</span>
+                            <span className={Styles.choice}>B) Hi</span>
+                            <span className={Styles.choice}>C) Hi</span>
+                            <span className={Styles.choice}>D) Hi</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

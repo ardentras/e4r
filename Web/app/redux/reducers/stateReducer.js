@@ -56,7 +56,7 @@ const stateReducer = (state=initialState, action) => {
 		return Object.assign({}, initialState);
 	case SIGNUP_SUCCESSFUL:
 		return Object.assign({}, state, {
-			SIGNUP_SUCCESSFUL: true
+			SIGNUP_SUCCESSFUL: action.value
 		});
 	case ERROR:
 		return Object.assign({}, state, {

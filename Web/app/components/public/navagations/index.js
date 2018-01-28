@@ -18,7 +18,6 @@ class Navagation extends React.Component {
 		super(props);
 	}
 	render() {
-		console.log(this.props);
 		return (
 			<div className={Styles.navagation}>
 				<Testbanner/>
@@ -30,7 +29,7 @@ class Navagation extends React.Component {
 					<div className={Styles.navagations}>
 						{Routes.map((elem,index)=>(
 							elem.label === "Login" && this.props.IS_AUTH ?
-							<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>Hello, Kevin</NavLink> :
+							<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + this.props.UID}</NavLink> :
 							<NavLink 
 							key={index} 
 							exact={elem.exact} 

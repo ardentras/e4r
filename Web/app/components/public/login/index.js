@@ -13,7 +13,9 @@ import { Redirect, Link } from 'react-router-dom'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { handlerAuth, handlerRegister } from "../../../redux/actions/auth";
+import { ifSignUp, setSignUpSuccessful } from "../../../redux/actions/state";
 import Visit from "./components/visit";
+import Signup from "./components/signup";
 import Return from "./components/return";
 import Styles from "./style.css";
 
@@ -21,20 +23,24 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.login = this.login.bind(this);
-		this.visitor = this.visitor.bind(this);
+		this.signup = this.signup.bind(this);
+		this.register = this.register.bind(this);
 	}
 	login(event) {
 		event.preventDefault();
 		this.props.handlerAuth({username: event.target.uid.value, password: event.target.pw.value});
 	}
-	visitor(event) {
+	signup(event) {
 		event.preventDefault();
-		console.log(event.target);
-		// this.props.handlerRegister();
+		this.props.setSignUpSuccessful(false);
+		this.props.ifSignUp(!this.props.states.IS_SIGNUP);
+	}
+	register(event) {
+		event.preventDefault();
+		this.props.handlerRegister({email: event.target.email.value, username: event.target.uid.value, password: event.target.pw.value});
 	}
 	render() {
 		const { redirectToReferrer } = this.props.states;
-		console.log(this.props.states);
 		if (redirectToReferrer) {
 			return (
 				<Redirect to="/dashboard"/>
@@ -45,9 +51,10 @@ class Login extends React.Component {
 				<div className={Styles.clearfix}/>
 				<div className={Styles.formcontainer}>
 					<div className={Styles.forms}>	
-						<Visit func={{visitor: this.visitor}}/>
+						<Visit func={{signup: this.signup}}/>
 						<hr/>
-						<Return error={this.props.states.error} AUTHING={this.props.states.AUTHING} func={{auth: this.login}}/>
+						{ !this.props.states.IS_SIGNUP && <Return error={this.props.states.error} AUTHING={this.props.states.AUTHING} func={{auth: this.login}} SIGN_SUC={this.props.states.SIGNUP_SUCCESSFUL}/>}
+						{ this.props.states.IS_SIGNUP && <Signup error={this.props.states.error} func={{register: this.register}}/>}
 					</div>
 				</div>
 			</div>
@@ -61,5 +68,5 @@ Login.propTypes = {
 
 export default connect(
 	(state) => ({states: state.state}),
-	(dispatch) => bindActionCreators({handlerAuth,handlerRegister}, dispatch)
+	(dispatch) => bindActionCreators({handlerAuth,handlerRegister,ifSignUp,setSignUpSuccessful}, dispatch)
 )(Login);
