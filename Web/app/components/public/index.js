@@ -26,6 +26,7 @@ class App extends React.Component {
 		if (!this.props.states.IS_AUTH) {
 			this.props.handlerPersist();
 		}
+		console.log(window.location.protocol);
 	}
 	render() {
 		return (

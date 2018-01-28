@@ -1,0 +1,17 @@
+{
+    "hosting": {
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "app",
+        ".vscode",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  }
