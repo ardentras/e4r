@@ -35,10 +35,10 @@ class Question extends React.Component {
                         </div>
                         <div className={Styles.choices}>
                             <span>Answers: </span>
-                            <span className={Styles.choice}>A) Hi</span>
-                            <span className={Styles.choice}>B) Hi</span>
-                            <span className={Styles.choice}>C) Hi</span>
-                            <span className={Styles.choice}>D) Hi</span>
+                            <span className={Styles.choice}>A) 2x^2 + C</span>
+                            <span className={Styles.choice}>B) 5x^2 + C</span>
+                            <span className={Styles.choice}>C) x^3 + C</span>
+                            <span className={Styles.choice}>D) None of the above</span>
                         </div>
                     </div>
                 </div>
