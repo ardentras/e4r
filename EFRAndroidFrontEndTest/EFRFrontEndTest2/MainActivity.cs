@@ -23,7 +23,7 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Template);
+            SetContentView(Resource.Layout.Main);
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
@@ -37,7 +37,7 @@ namespace EFRFrontEndTest2
                 JsonValue json = await FetchLoginAsync(userBox.Text, passBox.Text);
                 if (json.ToString().Contains("Success"))
                 {
-                    var intent = new Intent(this, typeof(CreateAccountScreenActivity));
+                    var intent = new Intent(this, typeof(HomeScreenActivity));
                     StartActivity(intent);
                 }
                 else
@@ -68,7 +68,7 @@ namespace EFRFrontEndTest2
         private async Task<JsonValue> FetchLoginAsync(string username, string password)
         {
             // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.163.221.182:3002/api/login"));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/login"));
             request.ContentType = "application/json";
             request.Method = "POST";
             byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
@@ -93,6 +93,8 @@ namespace EFRFrontEndTest2
     }
 }
 
+
+// Testing
 
 //Great reference for calling event function out of main.
 //SetContentView doesnt give a transition animation

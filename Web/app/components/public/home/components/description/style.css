@@ -1,0 +1,83 @@
+.welcome {
+    position: relative;
+    height: 700px;
+    color: white;
+}
+
+.feature {
+    background-image: url("/static/background.jpg");
+}
+/* 
+.featuretwo {
+    background-image: url("/static/hope.jpg");
+}
+
+.featurethree {
+    background-image: url("/static/kids.jpg");
+} */
+
+.parallex {
+    background-attachment: fixed;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: all 1s ease;
+}
+
+.aboutus {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 4vmax;
+    z-index: 9998;
+}
+
+.pdescription {
+    font-size: 2vmax;
+    opacity: 0.7;
+}
+
+.jlink {
+    border: 1px solid white;
+    border-radius: 26px;
+    padding: 2px 25px;
+    transform: translateY(70px);
+    padding-top: 6px;
+    font-size: 2vmax;
+    overflow: hidden;
+    transition: all 0.3 ease;
+}
+
+.jlink:hover {
+    cursor: pointer;
+}
+
+.pselectors {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    padding: 20px 20px 0 0;
+}
+
+.pselectors i {
+    margin: 10px 0;
+    opacity: 0.5;
+}
+
+.pselectors i:hover {
+    cursor: pointer;
+}
+
+.psactive {
+    color: #007BFE;
+}

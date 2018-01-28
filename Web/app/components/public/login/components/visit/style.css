@@ -1,0 +1,41 @@
+.visitor {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 20px 10% 20px 10%;
+    font-weight: lighter;
+    width: 100%;
+}
+
+.visitor a {
+    margin: 5px 0;
+}
+
+.visitor span {
+    max-width: 250px;
+    font-size: 1.2vmax;
+}
+
+.headers {
+    font-weight: lighter;
+    font-size: 3vmax;
+}
+
+.inputs {
+    border: 1px solid #141b22;
+    outline: 0;
+    width: 100%;
+    font-size: 1vmax;
+    margin: 10px 0;
+    color: #141b22;
+    background: transparent;
+    border-radius: 16px;
+    width: 70%;
+    padding: 5px 0;
+    font-weight: lighter;
+}
+
+.inputs:hover {
+    cursor: pointer;
+}
+

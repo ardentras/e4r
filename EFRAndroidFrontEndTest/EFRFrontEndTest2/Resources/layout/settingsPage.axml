@@ -24,8 +24,7 @@
         android:layout_rowSpan="1"
         android:layout_rowWeight="1"
         android:layout_height="wrap_content"
-        android:scaleX="true"
-        android:id="@+id/seekBar1" />
+        android:id="@+id/music" />
     <TextView
         android:gravity="center"
         android:layout_column="0"
@@ -44,7 +43,7 @@
         android:layout_row="1"
         android:layout_rowSpan="1"
         android:layout_rowWeight="1"
-        android:id="@+id/seekBar2" />
+        android:id="@+id/sound" />
     <TextView
         android:gravity="center"
         android:layout_column="0"

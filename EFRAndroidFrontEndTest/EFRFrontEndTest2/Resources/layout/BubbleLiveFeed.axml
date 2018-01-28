@@ -1,3 +1,24 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bubble_layout"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <Button
+        android:text="$0.00"
+        android:textColor="#0000"
+        android:textSize="28dp"
+        android:background="@drawable/bigbubble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bigbubble"
+        android:layout_marginLeft="7.5dp"
+        android:layout_marginRight="5.5dp"
+        android:layout_marginBottom="311.5dp" />
+=======
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -15,4 +36,5 @@
         android:background="@drawable/BigBubble"
         android:onClick=""
         android:id="@+id/BubbleButton" />
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
 </LinearLayout>

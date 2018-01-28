@@ -1,26 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/linearLayout1">
+<GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+<<<<<<< HEAD
+    p1:id="@+id/gridLayout1">
     <Button
-        android:text="Play"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50px" />
+        p1:text="Play"
+        p1:id="@+id/playButton"
+=======
+    p1:id="@+id/gridLayout1"
+    p1:background="@drawable/BackgroundGradient">
     <Button
-        android:text="Bubble Feed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2" />
+        p1:text="Play"
+        p1:id="@+id/button1"
+        p1:layout_column="0"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+        p1:layout_columnSpan="2"
+        p1:layout_columnWeight="1"
+        p1:layout_row="0"
+        p1:layout_rowSpan="1"
+<<<<<<< HEAD
+        p1:layout_rowWeight="1"
+        p1:layout_column="0" />
+    <ImageButton
+        p1:id="@+id/settingsButton"
+=======
+        p1:layout_rowWeight="1" />
+    <ImageButton
+        p1:id="@+id/optionButton"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+        p1:layout_column="1"
+        p1:layout_columnSpan="1"
+        p1:layout_columnWeight="1"
+        p1:layout_row="1"
+        p1:layout_rowSpan="1"
+        p1:layout_rowWeight="1"
+        p1:scaleType="fitXY"
+        p1:layout_height="50dp"
+        p1:layout_width="50dp"
+        p1:background="@drawable/optionsicon" />
+    <ImageButton
+        p1:id="@+id/imageView1"
+        p1:layout_column="0"
+        p1:layout_columnSpan="1"
+        p1:layout_columnWeight="1"
+        p1:layout_row="1"
+        p1:layout_rowSpan="1"
+        p1:layout_rowWeight="1"
+        p1:adjustViewBounds="true"
+        p1:cropToPadding="false"
+        p1:scaleType="fitXY"
+        p1:layout_height="50dp"
+        p1:layout_width="50dp"
+        p1:background="@drawable/redcrossicon" />
+    <Button
+        p1:text="Bubble Live Feed"
+<<<<<<< HEAD
+        p1:id="@+id/bubbleLiveFeedButton"
+=======
+        p1:id="@+id/button4"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+        p1:layout_column="0"
+        p1:layout_columnSpan="2"
+        p1:layout_columnWeight="1"
+        p1:layout_row="2"
+        p1:layout_rowSpan="1"
+        p1:layout_rowWeight="1" />
+<<<<<<< HEAD
+    <ImageButton
+        p1:id="@+id/charityButton"
+=======
     <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView1" />
-</LinearLayout>
+        p1:src="@drawable/redcross2"
+        p1:id="@+id/imageView2"
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+        p1:layout_column="0"
+        p1:layout_columnSpan="2"
+        p1:layout_columnWeight="1"
+        p1:layout_row="3"
+        p1:layout_rowSpan="1"
+        p1:layout_rowWeight="1"
+        p1:layout_height="50dp"
+        p1:layout_width="100dp"
+<<<<<<< HEAD
+        p1:background="@drawable/redcross2" />
+=======
+        p1:scaleType="fitXY" />
+>>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+</GridLayout>

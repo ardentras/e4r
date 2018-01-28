@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/BackgroundGradient">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:background="@android:color/black">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:id="@+id/backButton"
+            android:layout_weight="1"
+            android:src="@drawable/BackArrowIcon"
+            android:scaleType="fitXY"
+            android:background="@android:color/black" />
+        <TextView
+            android:text="Favorite Charities"
+            android:layout_height="45dp"
+            android:id="@+id/textView1"
+            android:layout_weight="9"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textScaleX="1.75" />
+    </LinearLayout>
+    <ExpandableListView
+        android:minWidth="25dp"
+        android:minHeight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expandableListView1"
+        android:layout_marginBottom="0.0dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2">
+        <SearchView
+            android:minWidth="25dp"
+            android:minHeight="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchView1"
+            android:background="@android:color/black" />
+    </LinearLayout>
+    <ExpandableListView
+        android:minWidth="25dp"
+        android:minHeight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expandableListView2"
+        android:layout_marginBottom="0.0dp" />
+</LinearLayout>

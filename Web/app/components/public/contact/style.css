@@ -1,0 +1,106 @@
+.clearfix::after {
+    content: " ";
+    display: table;
+    clear: both;
+    display: block;
+    height: 140px;
+}
+
+.ccontents {
+    display: flex;
+    justify-content: center;
+    padding: 2% 0;
+}
+
+.cmain {
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 2vmax;
+    background: white;
+    color: #141b22;
+    font-weight: lighter;
+    border: 1px solid #141b223d;
+    padding: 5% 5%;
+}
+
+.info {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    border-right: 1px solid rgb(163, 163, 163);
+}
+
+.topway {
+    border-bottom: 1px solid rgb(163, 163, 163);
+}
+.bottomway {
+    border-top: 1px solid rgb(163, 163, 163);
+}
+
+.ways {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 200px;
+    text-align: center;
+    height: 100%;
+    position: relative;
+}
+
+.ways h1 {
+    font-weight: lighter;
+    font-size: 2vmax;
+}
+
+.wayheader::after {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    font-size: 1.5vmax;
+    overflow: hidden;
+    background: #007BFE;
+}
+
+.phone::after {
+    content: "(123)456-7890";
+}
+.email::after {
+    content: "efr@admin.com";
+}
+.location::after {
+    content: "Klamath Falls, OR";
+}
+
+.ways:hover h1::after {
+    display: flex;
+}
+
+.wayinfo {
+    display: none;
+    font-size: 3vmin;
+    position: relative;
+}
+
+.form {
+    display: flex;
+    flex-flow: column;
+    padding: 30px 30px;
+}
+
+.form h1 {
+    font-size: 2vmax;
+    font-weight: lighter;
+}
+
+.form input, .form textarea {
+   border: 1px solid #141b224d;
+   outline: 0;
+   font-size: 1.5vmax;
+   background: white;
+   color: #141b22;
+}

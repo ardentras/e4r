@@ -1,0 +1,17 @@
+.testbanner {
+    background: #749FF2;
+    justify-content: center;
+    display: flex;
+    padding: 5px 0;
+}
+
+.bannerimg {
+    height: 35px;
+    width: 35px;
+}
+
+.bannertext {
+    font-weight: lighter;
+    padding: 10px;
+    color: white;
+}

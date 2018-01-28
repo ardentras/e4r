@@ -293,8 +293,8 @@ class TDatabase {
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected == 0) {
-			client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
-		} else {
+			      client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
+		    } else {
             let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
                                                 .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE UserID = @userid;");
 
@@ -313,7 +313,7 @@ class TDatabase {
                                         .input('userid', mssql.Int, res.recordsets[0][0].UserID)
                                         .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
             }
-		}
+		    }
 
         return data.userobject;
     }
@@ -322,16 +322,16 @@ class TDatabase {
 	// TODO Remove in production.
 	//
 	// curl -XGET localhost:3002/api/test/display
-    displayUsers(client) {
-        this.db.request().query("SELECT * FROM EFRAcc.Users", (err, res) => {
-            if (err) {
-                console.log("GET Error");
-                client.json({response: "Failed", type: "GET", code: 404, reason: err});
-            } else {
-                client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: res.length, result: res.recordset});
-            }
-        });
-    }
+  displayUsers(client) {
+      this.db.request().query("SELECT * FROM EFRAcc.Users", (err, res) => {
+          if (err) {
+              console.log("GET Error");
+              client.json({response: "Failed", type: "GET", code: 404, reason: err});
+          } else {
+              client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: res.length, result: res.recordset});
+          }
+      });
+  }
 
 	// Ensures that the database connection is closed on object destruction.
 	gracefulShutdown() {
