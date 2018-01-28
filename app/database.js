@@ -209,11 +209,13 @@ class TDatabase {
                     let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
                     newUserObject.user_data.username = data.username;
                     newUserObject.user_data.email = data.email;
+                    var uostring = JSON.stringify(newUserObject);
+                    uostring = uostring.replace("\\", "");
 
                     await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
                                             .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                             .input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
-                                            .input('newuo', mssql.VarChar(5000), newUserObject)
+                                            .input('newuo', mssql.VarChar(5000), uostring)
                                             .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
 
                     console.log('SIGNUP SUCCEED Email: ' + data.email);
@@ -258,9 +260,12 @@ class TDatabase {
     async requestQuestionBlock(client, data) {
         let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
                                                 .input('subject_id', mssql.Int, data.userobject.game_data.subject_id)
-                                                .query("SELECT COUNT(*) AS totalBlocks FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id");
+                                                .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID");
 
-        var totalBlocks = res.recordset[0].totalBlocks;
+        var questionBlocks = res.recordset;
+        var totalBlocks = questionBlocks.length;
+        console.log(totalBlocks);
+
 
         try {
             data.userobject = await this.verifyUserObject(client, data);
@@ -270,7 +275,7 @@ class TDatabase {
 
         var missing_blocks = [];
         for (var i = 0; i < totalBlocks; i++) {
-            if (!data.userobject.game_data.completed_blocks.includes(i + 1))
+            if (!data.userobject.game_data.completed_blocks.includes(questionBlocks[i].QuestionBlockID))
                 missing_blocks.push(i + 1);
         }
 
