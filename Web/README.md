@@ -7,10 +7,3 @@
 4. run command " npm i "
 5. wait for packages to install
 ```
-
-### Current working pages
-
-Home - static
-Contact - partial
-Login
-Questions page - static - need api
