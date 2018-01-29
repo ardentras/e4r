@@ -129,16 +129,17 @@ On invalid password:
 On successful renewal:
 {
     "response": "Success",
-    "type": "GET",
+    "type": "PUT",
     "code": 200,
     "action": "RENEW_SESSION",
     "session_id": {session_token}
+    "user_object": {user_object}
 }
 
 On invalid/expired session:
 {
     "response": "Failed",
-    "type": "GET",
+    "type": "PUT",
     "code": 403,
     "action": "LOGOUT",
     "reason": "User's session token is invalid."
@@ -147,7 +148,7 @@ On invalid/expired session:
 On non-existant session:
 {
     "response": "Failed",
-    "type": "GET",
+    "type": "PUT",
     "code": 403,
     "action": "LOGOUT",
     "reason": "User's session token was not found."
