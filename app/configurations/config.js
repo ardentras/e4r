@@ -22,9 +22,9 @@ const DEFAULT_USER_OBJECT = {
         "subject_name": "",
         "subject_id": "1",
         "difficulty": "0",
-        "completed_blocks": {
-        }
-    }
+        "completed_blocks": []
+    },
+    "timestamp":""
 }
 
 const DB_USER_CONFIG = {

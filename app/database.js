@@ -146,11 +146,31 @@ class TDatabase {
 
                 if (res.recordsets[0][0].PasswordHash === hashedPassword) {
                     let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
-                    this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].Username)
-                                    .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE Username=@username", (err, res) => {
-                        var uo = JSON.parse(res.recordsets[0][0].UserObject);
+                    try {
+                        let res2 = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].Username)
+                                        .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE Username=@username");
+
+                        if (res2.recordsets[0][0].UserObject == "[object Object]") {
+                            console.log("ERROR: Invalid User Object was saved.");
+
+                            let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
+                            newUserObject.user_data.username = data.username;
+                            newUserObject.user_data.email = data.email;
+                            var uostring = JSON.stringify(newUserObject);
+                            uostring = uostring.replace("\\", "");
+
+                            this.db.request().input('userobject', mssql.VarChar, uostring)
+                        					.input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                        					.query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+
+                            res2.recordsets[0][0].UserObject = uostring;
+                        }
+
+                        var uo = JSON.parse(res2.recordsets[0][0].UserObject);
                         client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
-                    });
+                    } catch (err) {
+                        console.log(err);
+                    }
                 } else {
                     client.json({response: "Failed", type: "GET", code: 403, reason: "Invalid Password"});
                 }
