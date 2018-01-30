@@ -314,14 +314,14 @@ class TDatabase {
 
                 var date = new Date();
                 data.userobject.timestamp = date.toISOString();
-
-                var uostring = JSON.stringify(data.userobject);
-                uostring = uostring.replace("\\", "");
-
-                await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                        .input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                        .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
             }
+
+            var uostring = JSON.stringify(data.userobject);
+            uostring = uostring.replace("\\", "");
+
+            await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
+                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
 	    }
 
         return data.userobject;
