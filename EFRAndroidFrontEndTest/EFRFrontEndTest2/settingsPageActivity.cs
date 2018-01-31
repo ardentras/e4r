@@ -22,7 +22,7 @@ namespace EFRFrontEndTest2
             SeekBar sound = FindViewById<SeekBar>(Resource.Id.sound);
             sound.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
             {
-                //SetVolume(play(), e.Progress, e.Progress);
+                
             };
 
         }

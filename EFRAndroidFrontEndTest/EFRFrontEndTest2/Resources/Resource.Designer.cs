@@ -147,8 +147,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060001
 			public const int bigbubble = 2131099649;
 			
-			// aapt resource value: 0x7f06002f
-			public const int biologyOption = 2131099695;
+			// aapt resource value: 0x7f060034
+			public const int biologyOption = 2131099700;
 			
 			// aapt resource value: 0x7f060024
 			public const int bubbleLiveFeedButton = 2131099684;
@@ -159,11 +159,11 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060025
 			public const int charityButton = 2131099685;
 			
-			// aapt resource value: 0x7f06002e
-			public const int chemistryOption = 2131099694;
-			
 			// aapt resource value: 0x7f060033
-			public const int continueButton = 2131099699;
+			public const int chemistryOption = 2131099699;
+			
+			// aapt resource value: 0x7f060038
+			public const int continueButton = 2131099704;
 			
 			// aapt resource value: 0x7f06002c
 			public const int createAccountButton = 2131099692;
@@ -180,8 +180,23 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060009
 			public const int gridLayout1 = 2131099657;
 			
+			// aapt resource value: 0x7f060036
+			public const int historyOption = 2131099702;
+			
+			// aapt resource value: 0x7f06002d
+			public const int imageButton1 = 2131099693;
+			
+			// aapt resource value: 0x7f06002e
+			public const int imageButton2 = 2131099694;
+			
+			// aapt resource value: 0x7f06002f
+			public const int imageButton3 = 2131099695;
+			
+			// aapt resource value: 0x7f060030
+			public const int imageButton4 = 2131099696;
+			
 			// aapt resource value: 0x7f060031
-			public const int historyOption = 2131099697;
+			public const int imageButton5 = 2131099697;
 			
 			// aapt resource value: 0x7f06000b
 			public const int imageView1 = 2131099659;
@@ -201,17 +216,17 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f06002b
 			public const int loginButton = 2131099691;
 			
-			// aapt resource value: 0x7f060030
-			public const int mathOption = 2131099696;
+			// aapt resource value: 0x7f060035
+			public const int mathOption = 2131099701;
 			
-			// aapt resource value: 0x7f060034
-			public const int music = 2131099700;
+			// aapt resource value: 0x7f060039
+			public const int music = 2131099705;
 			
 			// aapt resource value: 0x7f060029
 			public const int passwordBox = 2131099689;
 			
-			// aapt resource value: 0x7f06002d
-			public const int physicsOption = 2131099693;
+			// aapt resource value: 0x7f060032
+			public const int physicsOption = 2131099698;
 			
 			// aapt resource value: 0x7f060022
 			public const int playButton = 2131099682;
@@ -222,11 +237,11 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060023
 			public const int settingsButton = 2131099683;
 			
-			// aapt resource value: 0x7f060032
-			public const int shuffleOption = 2131099698;
+			// aapt resource value: 0x7f060037
+			public const int shuffleOption = 2131099703;
 			
-			// aapt resource value: 0x7f060035
-			public const int sound = 2131099701;
+			// aapt resource value: 0x7f06003a
+			public const int sound = 2131099706;
 			
 			// aapt resource value: 0x7f060004
 			public const int textView1 = 2131099652;
@@ -299,10 +314,13 @@ namespace EFRFrontEndTest2
 			public const int Main = 2130968580;
 			
 			// aapt resource value: 0x7f040005
-			public const int SelectSubjectScreen = 2130968581;
+			public const int QuestionsPage = 2130968581;
 			
 			// aapt resource value: 0x7f040006
-			public const int settingsPage = 2130968582;
+			public const int SelectSubjectScreen = 2130968582;
+			
+			// aapt resource value: 0x7f040007
+			public const int settingsPage = 2130968583;
 			
 			static Layout()
 			{

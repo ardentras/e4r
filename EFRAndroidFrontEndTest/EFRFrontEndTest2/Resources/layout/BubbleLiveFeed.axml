@@ -8,7 +8,7 @@
     android:minHeight="25px">
     <Button
         android:text="$0.00"
-        android:textColor="#0000"
+        android:textColor="#f000"
         android:textSize="28dp"
         android:background="@drawable/bigbubble"
         android:layout_width="match_parent"

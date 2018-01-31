@@ -13,7 +13,7 @@
         android:maxHeight="50dp"
         android:textSize="32sp"
         android:textAlignment="center"
-        android:textColor="BLACK"
+        android:textColor="#f000"
         android:background="@drawable/greenbuttonicon"
         android:text="Math" />
     <ImageButton
