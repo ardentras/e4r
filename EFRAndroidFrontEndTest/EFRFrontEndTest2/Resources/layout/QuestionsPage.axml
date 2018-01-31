@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
-    p1:layout_width="match_parent"
-    p1:layout_height="match_parent"
-    p1:id="@+id/gridLayout1">
-    <Button
-        p1:text="Button"
-        p1:id="@+id/button1"
-        p1:layout_column="0"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="0"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="1" />
-    <Button
-        p1:text="Button"
-        p1:id="@+id/button2"
-        p1:layout_column="1"
-        p1:layout_columnSpan="1"
-        p1:layout_columnWeight="1"
-        p1:layout_row="0"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="1" />
-    <Button
-        p1:text="Button"
-        p1:id="@+id/button3"
-        p1:layout_column="0"
-        p1:layout_columnSpan="2"
-        p1:layout_columnWeight="1"
-        p1:layout_row="1"
-        p1:layout_rowSpan="1"
-        p1:layout_rowWeight="2" />
-</GridLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@drawable/backgroundgradient">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton1"
+        android:maxHeight="50dp"
+        android:textSize="32sp"
+        android:textAlignment="center"
+        android:textColor="BLACK"
+        android:background="@drawable/greenbuttonicon"
+        android:text="Math" />
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/imageButton2"
+        android:background="@drawable/greenbuttonicon"
+        android:maxHeight="20dp" />
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/imageButton3"
+        android:maxHeight="20dp"
+        android:background="@drawable/greenbuttonicon" />
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/imageButton4"
+        android:maxHeight="20dp"
+        android:background="@drawable/greenbuttonicon" />
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/imageButton5"
+        android:maxHeight="20dp"
+        android:background="@drawable/greenbuttonicon" />
+</LinearLayout>

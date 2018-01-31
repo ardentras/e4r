@@ -69,6 +69,7 @@
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="HomeScreenActivity.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="QuestionspageActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectSubjectScreenActivity.cs" />
@@ -96,6 +97,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CharitySelectionScreen.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\QuestionsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
