@@ -22,7 +22,7 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.BubbleLiveFeed);
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
-            bubble.Click += async (sender, e) =>
+            bubble.Click +=  (sender, e) =>
             {
                 LinearLayout layoutBase = FindViewById<LinearLayout>(Resource.Id.bubble_layout);
                 ImageView img = new ImageView(this);
