@@ -16,16 +16,25 @@ namespace EFRFrontEndTest2
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            RequestWindowFeature(WindowFeatures.NoTitle);
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.CharitySelectionScreen);
-
-            ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
-
-            backButton.Click += (sender, e) =>
+            try
             {
-                Finish();
-            };
+                RequestWindowFeature(WindowFeatures.NoTitle);
+                base.OnCreate(savedInstanceState);
+                SetContentView(Resource.Layout.CharitySelectionScreen);
+
+
+                ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
+
+                backButton.Click += (sender, e) =>
+                {
+                    Finish();
+                };
+            }
+            catch(Exception x)
+            {
+                RequestWindowFeature(WindowFeatures.NoTitle);
+                base.OnCreate(savedInstanceState);
+            }
         }
     }
 }
