@@ -17,9 +17,16 @@ namespace EFRFrontEndTest2
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.SelectSubjectScreen);
 
-            // Create your application here
+            ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
+
+            imageButton6.Click += (sender, e) =>
+                {
+                    Finish();
+                };
         }
-    }
+
 }

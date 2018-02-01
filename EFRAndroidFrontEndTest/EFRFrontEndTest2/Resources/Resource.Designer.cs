@@ -284,8 +284,9 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f060028
 			public const int usernameBox = 2131099688;
-			
-			static Id()
+            internal static int imageButton6;
+
+            static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 			}

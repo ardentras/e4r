@@ -12,32 +12,60 @@
         android:id="@+id/imageButton1"
         android:maxHeight="50dp"
         android:textSize="32sp"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="#f000"
-        android:background="@drawable/greenbuttonicon"
-        android:text="Math" />
-    <ImageButton
+        android:background="@drawable/button_glossy_round_circle_light_grey_grey_gray_50"
+        android:text="7 + 12" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:id="@+id/imageButton2"
-        android:background="@drawable/greenbuttonicon"
-        android:maxHeight="20dp" />
-    <ImageButton
+        android:background="@drawable/gray_button2x_48"
+        android:maxHeight="20dp"
+        android:gravity="center"
+        android:textColor="#f000"
+        android:textSize="32sp"
+        android:text="14" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:id="@+id/imageButton3"
         android:maxHeight="20dp"
-        android:background="@drawable/greenbuttonicon" />
-    <ImageButton
+        android:background="@drawable/gray_button2x_48"
+        android:gravity="center"
+        android:textColor="#f000"
+        android:textSize="32sp"
+        android:text="19" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:id="@+id/imageButton4"
         android:maxHeight="20dp"
-        android:background="@drawable/greenbuttonicon" />
-    <ImageButton
+        android:background="@drawable/gray_button2x_48"
+        android:gravity="center"
+        android:textColor="#f000"
+        android:textSize="32sp"
+        android:text="20" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:id="@+id/imageButton5"
         android:maxHeight="20dp"
-        android:background="@drawable/greenbuttonicon" />
+        android:background="@drawable/gray_button2x_48"
+        android:gravity="center"
+        android:textColor="#f000"
+        android:textSize="32sp"
+        android:text="16" />
+    <ImageButton
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:id="@+id/imageButton6"
+        android:background="@drawable/backarrowicon" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:maxHeight="20dp"
+        android:id="@+id/imageView1"
+        android:background="@drawable/hrblock"
+        android:layout_gravity="bottom" />
 </LinearLayout>
