@@ -19,7 +19,7 @@ namespace EFRFrontEndTest2
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.SelectSubjectScreen);
+            SetContentView(Resource.Layout.QuestionsPage);
 
             ImageButton imageButton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
             ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
