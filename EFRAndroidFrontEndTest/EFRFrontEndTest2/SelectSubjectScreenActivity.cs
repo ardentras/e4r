@@ -29,11 +29,17 @@ namespace EFRFrontEndTest2
                 Finish();
             };
 
-            continueButton.Click += (sender, e) =>
+            /*continueButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(QuestionspageActivity));
                 StartActivity(intent);
-            };
+            };*/
+
+            continueButton.Click += OnTapGestureRecognizerTapped;
+        }
+        private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
+        {
+            SetContentView(Resource.Layout.QuestionsPage);
         }
     }
 }

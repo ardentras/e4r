@@ -35,13 +35,13 @@ namespace EFRFrontEndTest2
 
             imageButton6.Click += (sender, e) =>
             {
-                    Finish();
+                Finish();
             };
         }
 
         private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
         {
-            SetContentView(Resource.Layout.CreateAccountScreen);
+            SetContentView(Resource.Layout.WinPage);
         }
     }
 }

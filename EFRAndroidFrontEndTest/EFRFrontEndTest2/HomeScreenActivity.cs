@@ -31,11 +31,11 @@ namespace EFRFrontEndTest2
                 StartActivity(intent);
             };
 
-            charityButton.Click += (sender, e) =>
+            /*charityButton.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(CharitySelectionScreenActivity));
                 StartActivity(intent);
-            };
+            };*/
 
             playButton.Click += (sender, e) =>
             {

@@ -20,7 +20,6 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CharitySelectionScreen);
 
-
             ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
 
             backButton.Click += (sender, e) =>
