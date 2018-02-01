@@ -71,7 +71,8 @@
         p1:layout_width="50dp"
         p1:background="@drawable/GreenButtonIcon"
         p1:scaleType="fitXY"
-        p1:src="@drawable/HistoryIcon" />
+        p1:src="@drawable/HistoryIcon"
+        p1:tint="#00000000" />
     <ImageButton
         p1:id="@+id/shuffleOption"
         p1:layout_column="1"
@@ -93,7 +94,8 @@
         p1:layout_row="3"
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="0.1"
-        p1:background="@drawable/BackArrowIcon" />
+        p1:background="@drawable/BackArrowIcon"
+        p1:tint="#00000000" />
     <ImageButton
         p1:id="@+id/continueButton"
         p1:layout_column="1"

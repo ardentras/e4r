@@ -22,12 +22,12 @@ namespace EFRFrontEndTest2
             SetContentView(Resource.Layout.SelectSubjectScreen);
 
             ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
+            ImageButton continueButton = FindViewById<ImageButton>(Resource.Id.continueButton);
 
             backButton.Click += (sender, e) =>
             {
                 Finish();
             };
-
         }
     }
 }
