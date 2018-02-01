@@ -28,6 +28,12 @@ namespace EFRFrontEndTest2
             {
                 Finish();
             };
+
+            continueButton.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                StartActivity(intent);
+            };
         }
     }
 }
