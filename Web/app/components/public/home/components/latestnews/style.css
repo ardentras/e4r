@@ -6,6 +6,7 @@
 
 .latestnews h1 {
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .newscontainer {
@@ -39,16 +40,50 @@
     position: relative;
 }
 
+.description {
+    border-bottom: 1px solid rgb(235, 235, 235);
+    margin: 10px;
+    padding: 15px 10px;
+    line-height:30px;
+    font-family: "Open sans", sans-serif;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.origin {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.origin span {
+    opacity: 0.4;
+}
+
+.newsimg {
+    border-radius: 100%;
+    width: 64px;
+    height: 64px;
+    margin: 0 20px 0 0;
+    object-fit: contain;
+}
+
+.newscontent {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 10px 30px 20px 30px;
+}
+
 .news {
     display:inline-block;
-    max-width:270px;
-    min-height:300px;
-    line-height:40px;
     text-align:center;
     background: white;
     transition: transform 0.2s linear, box-shadow 0.2s linear;
     position: relative;
-    box-shadow: 0 2px 5px 0 #000000;
+    box-shadow: 0 1px 10px 0px #cccccc;
+    border-radius: 5px;
 }
 
 .news:hover {
@@ -56,7 +91,7 @@
 }
 
 .newspad {
-    padding: 0 40px;
+    padding: 0 35px;
 }
 
 @media (max-width: 600px) {
@@ -69,9 +104,5 @@
     .news {
         max-width: 200px;
         line-height:40px;
-    }
-
-    .news img {
-        max-width: 200px;
     }
 }

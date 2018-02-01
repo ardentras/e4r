@@ -14,6 +14,7 @@ const Signup = props => (
         <span>password:</span>
         <input className={Styles.inputs}  type="password" name="pw" placeholder="password" required/>
         <input className={Styles.sbtn}  type="submit" value="Sign Up"/>
+        <span onClick={props.func.signup} className={Styles.returnbtn}>already have an account?</span>
     </form>
 );
 

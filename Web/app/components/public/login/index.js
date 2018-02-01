@@ -53,8 +53,8 @@ class Login extends React.Component {
 					<div className={Styles.forms}>	
 						<Visit func={{signup: this.signup}}/>
 						<hr/>
-						{ !this.props.states.IS_SIGNUP && <Return error={this.props.states.error} AUTHING={this.props.states.AUTHING} func={{auth: this.login}} SIGN_SUC={this.props.states.SIGNUP_SUCCESSFUL}/>}
-						{ this.props.states.IS_SIGNUP && <Signup error={this.props.states.error} func={{register: this.register}}/>}
+						{ !this.props.states.IS_SIGNUP && <Return error={this.props.states.error} AUTHING={this.props.states.AUTHING} func={{auth: this.login, signup: this.signup}} SIGN_SUC={this.props.states.SIGNUP_SUCCESSFUL}/>}
+						{ this.props.states.IS_SIGNUP && <Signup error={this.props.states.error} func={{register: this.register, signup: this.signup}}/>}
 					</div>
 				</div>
 			</div>

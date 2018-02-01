@@ -23,17 +23,16 @@ class App extends React.Component {
 		super(props);
 	}
 	async componentWillMount() {
-		if (!this.props.states.IS_AUTH) {
-			this.props.handlerPersist();
-		}
-		console.log(window.location.protocol);
+		// if (!this.props.states.IS_AUTH) {
+		// 	this.props.handlerPersist();
+		// }
 	}
 	render() {
 		return (
 			<BrowserRouter>
 				<div className={Styles.container}>
 					<div>
-						<Navagations IS_AUTH={this.props.states.IS_AUTH} UID={this.props.uid}/>
+						<Navagations IS_AUTH={this.props.states.IS_AUTH} uid={this.props.uid}/>
 					</div>
 					{Routes.map((elem, index)=>(
 						<Route key={index} exact={elem.exact} path={elem.path} component={elem.component}/>
@@ -46,6 +45,6 @@ class App extends React.Component {
 }
 
 export default connect(
-	(state) => ({states: state.state, uid: state.user.uid}),
+	(state) => ({states: state.state, uid: state.auth.uid}),
 	(dispatch) => bindActionCreators({handlerPersist}, dispatch)
 )(App);

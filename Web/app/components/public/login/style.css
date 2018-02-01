@@ -27,3 +27,14 @@
     border: 1px solid #141b2244;
     border-radius: 15px;
 }
+
+@media (max-width: 414px) {
+    hr {
+        display: none;
+    }
+
+    .forms {
+        width: 100%;
+        border: none;
+    }
+}
