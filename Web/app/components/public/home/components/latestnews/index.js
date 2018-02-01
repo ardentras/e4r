@@ -20,7 +20,7 @@ function sideScroll(element, direction, speed, distance, step) {
 
 function scroll(left) {
 	const latest = document.getElementsByClassName(Styles.latestmodules)[0];
-	const distance = Math.floor((latest.scrollWidth - latest.clientWidth)/6) + 220;
+	const distance = Math.floor(latest.clientWidth);
 	if (left) {
 		sideScroll(latest, "left", 10, distance, 10);
 	}
@@ -32,15 +32,21 @@ function scroll(left) {
 const News = props => (
 	<div className={Styles.newspad}>
 	    <div className={Styles.news}>
-			<img src={props.img} alt="event2" width='270px' height='184x'/>
-			<p>{props.description}</p>
-			<span className='h-learn-btn'>LEARN MORE</span>
+			<p className={Styles.description}>{props.description}</p>
+			<div className={Styles.newscontent}>
+				<img className={Styles.newsimg} src={props.img} alt="X"/>
+				<div className={Styles.origin}>
+					<h4>American Red Cross</h4>
+					<span><a href="http://www.redcross.org" target="_blank">+ Follow</a></span>
+				</div>
+			</div>
 		</div>
 	</div>
 );
 
 const LatestNews = props => (
 	<div className={Styles.latestnews}>
+		<h1>Recent News</h1>
 		<div className={Styles.newscontainer}>
 			<i className="fa fa-arrow-circle-left" aria-hidden="true" onClick={scroll.bind(null,true)}></i>
 			<div className={Styles.latestmodules}>

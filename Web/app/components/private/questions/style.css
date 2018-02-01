@@ -28,7 +28,7 @@
     border: 1px solid #141b2275;
 }
 
-.choice {
+.choicelabel {
     border-radius: 16px;
     margin: 10px 0;
     background: rgb(65, 157, 255);
@@ -36,11 +36,26 @@
     color: white;
     padding: 5px 20px;
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.choice {
+    display: none;
+}
+
+.nextbtn {
+    background: rgb(114, 255, 173);
+    border-radius: 16px;
+    margin: 10px 0;
+    padding: 5px 20px;
+    max-width: 200px;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.choice:hover {
+.choicelabel:hover, .nextbtn:hover {
     cursor: pointer;
 }
 
@@ -88,19 +103,9 @@
 .progress {
     width: 300px;
     height: 20px;
-    background: #f1f1f1;
     position: relative;
     margin-left: 10px;
     border-radius: 16px;
-}
-
-.progressbar {
-    background: #83FF7E;
-    border-radius: 16px;
-    width: 70%;
-    height: 100%;
-    color: white;
-    text-align: center;
 }
 
 .header {

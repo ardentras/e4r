@@ -25,9 +25,10 @@
     border: 0;
     outline: 0;
     width: 100%;
-    border-bottom: 1px solid #141b22;
+    border-bottom: 1px solid #969696;
     font-size: 1vmax;
     margin: 5px 0;
+    padding-bottom: 10px;
 }
 
 .sbtn {
@@ -55,4 +56,28 @@
 
 .auth {
     background: #beff81;
+}
+
+.returnbtn {
+    text-align: center;
+}
+
+.returnbtn:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 414px) {
+    .headers {
+        text-align: center;
+    }
+    .signup span, .inputs {
+        font-size: 2vmax;
+    }
+    .signup *{
+        margin: 5px 0;
+    }
+    .sbtn {
+        font-size: 2vmax;
+        margin: 20px 0;
+    }
 }

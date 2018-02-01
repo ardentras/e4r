@@ -14,6 +14,7 @@ import {
 	setSignUpSuccessful,
 	Reset,
 	ifSignUp} from "./state";
+import { setUserObject } from "./user";
 import httpCodes from "../httpCodes";
 import iAuth from "../../libraries/iAuth";
 import iCookie from "../../libraries/iCookie";
@@ -74,6 +75,7 @@ export function handlerAuth(user=undefined) {
 			const result = await iAuth.Authenticate(user);
 			if (result.data.code === httpCodes.Ok) {
 				dispatch(setAuthenticateSuccess(true));
+				dispatch(setUserObject(result.data.user_object));
 				dispatch(setUID(user.username));
 				const expire = "expires=" + iCookie.time();
 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";

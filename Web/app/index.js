@@ -18,7 +18,8 @@ iAuth.config({
 	universalPath: "/api",
 	loginPath: "/login",
 	logoutPath: "/logout",
-	registerPath: "/signup"
+	registerPath: "/signup",
+	gamePath: "/q/request_block"
 });
 /****************************************************************************
  * 

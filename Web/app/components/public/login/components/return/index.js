@@ -15,6 +15,7 @@ const Return = props =>(
         <input className={Styles.inputs}  type="password" name="pw" placeholder="password" required/>
         <Link to="/contacts">forgot password?</Link>
         <input className={Styles.sbtn}  type="submit" value="Log In"/>
+        <span onClick={props.func.signup} className={Styles.signupbtn}>Sign Up</span>
     </form>
 );
 

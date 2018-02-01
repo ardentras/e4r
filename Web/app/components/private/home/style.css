@@ -1,0 +1,136 @@
+.home {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding: 10px 10px;
+}
+
+.recentactivity {
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    background: white;
+    padding: 30px 0;
+}
+
+.recentactivity h1{
+    font-weight: lighter;
+}
+
+.activities {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.rowheaders {
+    margin-top: 30px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.discussions {
+    display: flex;
+    flex-flow: column;
+    box-shadow: 0 1px 1px 1px rgb(228, 228, 228);
+    padding: 30px 50px 30px 5px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.msg {
+    box-shadow: 0 1px 1px 1px rgb(182, 181, 181);
+    border-radius:10px;
+    padding: 5px 5px;
+    margin: 5px;
+}
+
+.star {
+    color: rgb(255, 230, 0);
+}
+
+.feeds {
+    display: flex;
+    flex-flow: column;
+}
+
+.feed {
+    box-shadow: 0 1px 1px 1px rgb(182, 181, 181);
+    border-radius:10px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.trophy {
+    color: orange;
+}
+
+.heart {
+    color: rgb(255, 102, 102);
+}
+
+.records {
+    background: #749FF2;
+    width: 100%;
+    padding: 20px 0;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    text-align: center;
+    color: white;
+    font-size: 1vmax;
+}
+
+.recordcontent {
+    padding: 10% 0;
+    font-size: 2vmax;
+}
+
+.progresstonext {
+    height: 0px;
+    text-align: center;
+    margin: 40px auto;
+    display: flex;
+    width: 80%;
+    flex-flow: row nowrap;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.progressbar {
+    width: 80%;
+    height: 20px;
+}
+
+.progressheading {
+    font-size: 1.5vmax;
+    font-weight: lighter;
+    margin-right: 10px;
+}
+
+.number {
+    padding: 0 20px;
+}
+
+.activity {
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    border: 1px solid #749FF2;
+}
+
+.charities {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.heading {
+    padding: 20px 20px;
+}

@@ -12,10 +12,6 @@
     width: 100%;
 }
 
-.returning span {
-    font-size: 1.2vmax;
-}
-
 .headers {
     font-weight: lighter;
     font-size: 3vmax;
@@ -25,7 +21,8 @@
     border: 0;
     outline: 0;
     width: 100%;
-    border-bottom: 1px solid #141b22;
+    border-bottom: 1px solid #969696;
+    padding-bottom: 10px;
     font-size: 1vmax;
     margin: 5px 0;
 }
@@ -54,4 +51,35 @@
 
 .auth {
     background: #beff81;
+}
+
+.signupbtn {
+    text-align: center;
+    margin: 10px 0;
+    display: none;
+}
+
+.signupbtn:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 414px) {
+    .returning *{
+        margin: 5px 0;
+    }
+    .signupbtn {
+        display: block;
+        font-size: 2vmax;
+        margin: 20px 0;
+    }
+    .sbtn {
+        font-size: 2vmax;
+        margin: 10px 0 5px 0;
+    }
+    .headers {
+        text-align: center;
+    }
+    .returning span, .inputs {
+        font-size: 2vmax;
+    }
 }

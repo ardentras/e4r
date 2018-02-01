@@ -52,24 +52,6 @@ const iAuth = (()=>{
 			logoutPath ? m_logout_path.set(this, logoutPath) : null;
 			registerPath ? m_register_path.set(this, registerPath) : null;
 		}
-		createJSON({username=undefined, email=undefined, first_name=undefined, last_name=undefined, charity_name=undefined,
-			subject_id=undefined, subject_name=undefined, difficulty=undefined, completed_blocks=undefined}) {
-			return Promise.resolve({
-				user_data: {
-					username: username,
-					email: email,
-					first_name: first_name,
-					last_name: last_name,
-					charity_name: charity_name,
-				},
-				game_data: {
-					subject_id: subject_id,
-					subject_name: subject_name,
-					difficulty: difficulty,
-					completed_blocks: completed_blocks
-				}
-			});
-		}
 		getUserFromCookie() {
 			return Promise.resolve({
 				session: iCookie.get("session"),

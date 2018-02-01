@@ -1,11 +1,44 @@
 import React from "react";
 import Styles from "./style.css";
+import { Line } from "rc-progress";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock } from "../../../redux/actions/questions";
+
+const Choice = props => (
+    <div>
+        <input className={Styles.choice} onClick={props.check} type="button" name="choice" id={"choice" + props.index} value={props.value}/>
+        <label className={Styles.choicelabel} htmlFor={"choice" + props.index}>{props.letter + ") " + props.value}</label>
+    </div>
+);
 
 class Question extends React.Component {
     constructor(props) {
         super(props);
+        this.checkAnswer = this.checkAnswer.bind(this);
+        this.next = this.next.bind(this);
+    }
+    checkAnswer(event) {
+        if (!this.props.answer || this.props.answer === "incorrect") {
+            const selected = document.getElementById(event.target.id);
+            if (event.target.value === this.props.questions[this.props.index].CorrectAnswer) {
+                this.props.correctAnswer();
+            }
+            else {
+                this.props.incorrectAnswer();
+            }
+        }
+    }
+    next() {
+        if (this.props.index < 9) {
+            this.props.nextQuestion();
+        } 
+        else {
+            this.props.getNextBlock(this.props.questions[0].QuestionBlockID, this.props.user);
+        }
     }
     render() {
+        const percent = (parseFloat(((this.props.index) / this.props.questions.length)) * 100).toString();
         return (
             <div className={Styles.question}>
                 <div className={Styles.header}>
@@ -13,9 +46,7 @@ class Question extends React.Component {
                     <div className={Styles.progresscontainer}>
                         <span>Current Progress:</span>
                         <div className={Styles.progress}>
-                            <div className={Styles.progressbar} role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                70%
-                            </div>
+                            <Line className={Styles.progressbar} percent={percent} strokeWidth="4" strokeColor="#88FF95" trailWidth="4"/>
                         </div>
                     </div>
                 </div>
@@ -23,22 +54,22 @@ class Question extends React.Component {
                     <div className={Styles.subjects}>
                         <h2>Subjects</h2>
                         <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>Math</span>
-                        <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>Science</span>
-                        <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>History</span>
                         <span className={Styles.subject}><i className={["fa", "fa-times", Styles.remove].join(" ")} aria-hidden="true"/>Add...</span>
                     </div>
                     <div className={Styles.selection}>
                         <div className={Styles.topic}>
-                            <h1>Question 1:</h1>
-                            <p>Find the antiderivative of f(x)=4x.</p>
-                            <span>(use C as constant arbitrary)</span>
+                            <h1>{"Question " + (this.props.index + 1) + ":"}</h1>
+                            <p>{this.props.questions[this.props.index].QuestionText}</p>
                         </div>
                         <div className={Styles.choices}>
-                            <span>Answers: </span>
-                            <span className={Styles.choice}>A) 2x^2 + C</span>
-                            <span className={Styles.choice}>B) 5x^2 + C</span>
-                            <span className={Styles.choice}>C) x^3 + C</span>
-                            <span className={Styles.choice}>D) None of the above</span>
+                            {this.props.answer === "correct" && <span>Correct!</span> }
+                            {this.props.answer === "incorrect" && <span>Incorrect!</span> }
+                            <div>Answers: </div>
+                            <Choice index="1" letter="A" value={this.props.questions[this.props.index].QuestionOne} check={this.checkAnswer}/>
+                            <Choice index="2" letter="B" value={this.props.questions[this.props.index].QuestionTwo} check={this.checkAnswer}/>
+                            <Choice index="3" letter="C" value={this.props.questions[this.props.index].QuestionThree} check={this.checkAnswer}/>
+                            <Choice index="4" letter="D" value={this.props.questions[this.props.index].QuestionFour} check={this.checkAnswer}/>
+                            {this.props.answer === "correct" && <div onClick={this.next} className={Styles.nextbtn}>Next</div> }
                         </div>
                     </div>
                 </div>
@@ -47,4 +78,7 @@ class Question extends React.Component {
     }
 }
 
-export default Question;
+export default connect(
+	(state) => ({user: state.user, states: state.state, questions: state.questions.questions, index: state.questions.index, answer: state.questions.selectedAnswer}),
+	(dispatch) => bindActionCreators({incorrectAnswer,correctAnswer,nextQuestion, getNextBlock }, dispatch)
+)(Question);
