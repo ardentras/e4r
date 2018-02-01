@@ -95,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectSubjectScreenActivity.cs" />
     <Compile Include="settingsPageActivity.cs" />
+    <Compile Include="WinPageActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -121,6 +122,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\QuestionsPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\WinPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
