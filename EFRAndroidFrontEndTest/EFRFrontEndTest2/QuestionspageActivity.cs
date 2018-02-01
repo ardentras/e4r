@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.IO;
+using System.Json;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EFRFrontEndTest2
 {
@@ -21,12 +21,19 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SelectSubjectScreen);
 
+            ImageButton imageButton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
             ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
 
+            imageButton3.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(WinPageActivity));
+                StartActivity(intent);
+            };
+
             imageButton6.Click += (sender, e) =>
-                {
+            {
                     Finish();
-                };
+            };
         }
     }
 }
