@@ -3,18 +3,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/bubble_layout"
+    android:background="@drawable/backgroundgradient"
     android:minWidth="25px"
     android:minHeight="25px">
-    <Button
-        android:text="$0.00"
-        android:textColor="#f000"
-        android:textSize="28dp"
-        android:background="@drawable/bigbubble"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bigbubble"
-        android:layout_marginLeft="7.5dp"
-        android:layout_marginRight="5.5dp"
-        android:layout_marginBottom="311.5dp" />
+        android:id="@+id/imageButton1"
+        android:maxHeight="50dp"
+        android:textSize="60sp"
+        android:gravity="center"
+        android:textColor="#f000"
+        android:background="@drawable/button_glossy_round_circle_light_grey_grey_gray_50"
+        android:text="Win" />
 </LinearLayout>

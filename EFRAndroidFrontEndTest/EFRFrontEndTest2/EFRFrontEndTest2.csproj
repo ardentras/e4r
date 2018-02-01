@@ -52,6 +52,27 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>PdbOnly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,13 +90,12 @@
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="HomeScreenActivity.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="QuestionspageActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectSubjectScreenActivity.cs" />
-<<<<<<< HEAD
     <Compile Include="settingsPageActivity.cs" />
-=======
->>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+    <Compile Include="WinPageActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -89,7 +109,6 @@
     <AndroidResource Include="Resources\layout\HomeScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-<<<<<<< HEAD
     <AndroidResource Include="Resources\layout\settingsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -100,9 +119,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CharitySelectionScreen.axml">
-=======
-    <AndroidResource Include="Resources\layout\SelectSubjectScreen.axml">
->>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\QuestionsPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\WinPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -143,7 +165,6 @@
     <AndroidResource Include="Resources\drawable\RedCrossIcon.jpg" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <AndroidResource Include="Resources\drawable\BigBubble.png" />
   </ItemGroup>
   <ItemGroup>
@@ -178,18 +199,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ShuffleIcon.png" />
-=======
-    <AndroidResource Include="Resources\drawable\BackgroundGradient.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\GreenButtonIcon.png" />
+    <AndroidResource Include="Resources\drawable\button-glossy-round-circle-light-grey-grey-gray_50.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ForwardArrowIcon.png" />
+    <AndroidResource Include="Resources\drawable\gray-button2x_48.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\BackArrowIcon.png" />
->>>>>>> 0b8aa8398c4a62d5478089e2cd442602fd9e574a
+    <AndroidResource Include="Resources\drawable\HRBlock.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
