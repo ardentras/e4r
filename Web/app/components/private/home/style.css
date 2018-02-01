@@ -74,7 +74,7 @@
 }
 
 .records {
-    background: #749FF2;
+    /* background: #749FF2; */
     width: 100%;
     padding: 20px 0;
     border-top-left-radius: 9px;
@@ -122,7 +122,7 @@
     justify-content: center;
     align-items: center;
     width: 30%;
-    border: 1px solid #749FF2;
+    /* border: 1px solid #749FF2; */
 }
 
 .charities {
