@@ -201,13 +201,16 @@
     <AndroidResource Include="Resources\drawable\ShuffleIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\button-glossy-round-circle-light-grey-grey-gray_50.png" />
+    <AndroidResource Include="Resources\drawable\LightGreyCircle.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\gray-button2x_48.png" />
+    <AndroidResource Include="Resources\drawable\GreyButton.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\HRBlock.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\GreenBackgroundGradient.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
