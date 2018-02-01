@@ -4,7 +4,8 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/gridLayout1">
+    android:id="@+id/gridLayout1"
+    android:background="@drawable/backgroundgradient">
     <TextView
         android:gravity="center"
         android:layout_column="0"
@@ -15,7 +16,8 @@
         android:layout_rowWeight="1"
         android:text="Music:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView1" />
+        android:id="@+id/textView1"
+        android:textColor="black" />
     <SeekBar
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -33,9 +35,10 @@
         android:layout_row="1"
         android:layout_rowSpan="1"
         android:layout_rowWeight="1"
-        android:text="sfx:"
+        android:text="SFX:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:textColor="black" />
     <SeekBar
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -52,9 +55,10 @@
         android:layout_row="2"
         android:layout_rowSpan="1"
         android:layout_rowWeight="1"
-        android:text="notifications:"
+        android:text="Notifications:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:textColor="black" />
     <Switch
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -74,7 +78,8 @@
         android:layout_rowWeight="1"
         android:text="BLF notifications:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:textColor="black" />
     <Switch
         android:layout_column="1"
         android:layout_columnSpan="1"

@@ -2,7 +2,8 @@
 <GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
-    p1:id="@+id/gridLayout1">
+    p1:id="@+id/gridLayout1"
+    p1:background="@drawable/backgroundgradient">
     <Button
         p1:text="Play"
         p1:id="@+id/playButton"
@@ -11,7 +12,9 @@
         p1:layout_row="0"
         p1:layout_rowSpan="1"
         p1:layout_rowWeight="1"
-        p1:layout_column="0" />
+        p1:layout_column="0"
+        p1:background="@drawable/GreenButtonIcon"
+        p1:layout_height="100dp" />
     <ImageButton
         p1:id="@+id/settingsButton"
         p1:layout_column="1"
@@ -46,7 +49,10 @@
         p1:layout_columnWeight="1"
         p1:layout_row="2"
         p1:layout_rowSpan="1"
-        p1:layout_rowWeight="1" />
+        p1:layout_rowWeight="1"
+        p1:maxHeight="50dp"
+        p1:background="@drawable/GreenButtonIcon"
+        p1:layout_height="150dp" />
     <ImageButton
         p1:id="@+id/charityButton"
         p1:layout_column="0"

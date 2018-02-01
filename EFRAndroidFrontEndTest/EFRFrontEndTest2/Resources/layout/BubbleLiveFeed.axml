@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:id="@+id/bubble_layout"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:background="@/drawable/GreenBackgroundGradient">
     <Button
         android:text="$0.00"
         android:textColor="#f000"
