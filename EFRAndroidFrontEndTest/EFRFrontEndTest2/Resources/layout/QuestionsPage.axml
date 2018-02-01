@@ -57,10 +57,10 @@
         android:textSize="32sp"
         android:text="16" />
     <ImageButton
-        android:src="@android:drawable/ic_menu_gallery"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton6" />
+        android:layout_width="match_parent"
+        android:id="@+id/imageButton6"
+        android:background="@drawable/backarrowicon" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="65dp"
