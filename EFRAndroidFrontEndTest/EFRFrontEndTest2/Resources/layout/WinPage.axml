@@ -14,6 +14,6 @@
         android:textSize="60sp"
         android:gravity="center"
         android:textColor="#f000"
-        android:background="@drawable/button_glossy_round_circle_light_grey_grey_gray_50"
+        android:background="@drawable/LightGreyCircle"
         android:text="Win" />
 </LinearLayout>

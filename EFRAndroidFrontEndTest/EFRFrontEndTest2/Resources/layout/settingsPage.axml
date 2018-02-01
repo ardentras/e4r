@@ -17,7 +17,7 @@
         android:text="Music:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView1"
-        android:textColor="black" />
+        android:textColor="#000000" />
     <SeekBar
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -38,7 +38,7 @@
         android:text="SFX:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView2"
-        android:textColor="black" />
+        android:textColor="#000000" />
     <SeekBar
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -58,7 +58,7 @@
         android:text="Notifications:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView2"
-        android:textColor="black" />
+        android:textColor="#000000" />
     <Switch
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -79,7 +79,7 @@
         android:text="BLF notifications:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textView2"
-        android:textColor="black" />
+        android:textColor="#000000" />
     <Switch
         android:layout_column="1"
         android:layout_columnSpan="1"
