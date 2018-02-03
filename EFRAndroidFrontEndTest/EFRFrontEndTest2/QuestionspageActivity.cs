@@ -21,27 +21,19 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton imageButton3 = FindViewById<ImageButton>(Resource.Id.imageButton3);
+            TextView imageButton3 = FindViewById<TextView>(Resource.Id.imageButton3);
             ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
 
-
-            imageButton3.Click += OnTapGestureRecognizerTapped;
-
-            /*imageButton3.Click += (sender, e) =>
+            imageButton3.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(WinPageActivity));
                 StartActivity(intent);
-            };*/
+            };
 
             imageButton6.Click += (sender, e) =>
             {
                 Finish();
             };
-        }
-
-        private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
-        {
-            SetContentView(Resource.Layout.WinPage);
         }
     }
 }
