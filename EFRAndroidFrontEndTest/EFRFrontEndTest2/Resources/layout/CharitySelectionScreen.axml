@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/linearLayout1"
     android:background="@drawable/BackgroundGradient">
     <LinearLayout
         android:orientation="horizontal"
@@ -10,7 +11,7 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linearLayout2"
         android:background="@android:color/black">
         <ImageButton
             android:layout_width="wrap_content"
@@ -22,6 +23,7 @@
             android:background="@android:color/black" />
         <TextView
             android:text="Favorite Charities"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:id="@+id/textView1"
             android:layout_weight="9"
@@ -29,13 +31,5 @@
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textScaleX="1.75" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
     </LinearLayout>
 </LinearLayout>
