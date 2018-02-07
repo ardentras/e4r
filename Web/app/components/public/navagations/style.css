@@ -68,12 +68,12 @@
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     content: " ";
-    position: relative;
     height: 2px;
     background: #007BFE;
     margin: 0 auto;
     width: 100%;
     display: block;
+    transition: all 0.3s ease-in-out;
     margin-top: 5px;
 }
  
@@ -82,6 +82,16 @@
 }
 
 @media (max-width: 500px) {
+    .navselector::after {
+        display: none;
+        transition: none;
+    }
+    .activelink::after {
+        transition: none;
+        margin: 0;
+        display: inline-block;
+        bottom: 20%;
+    }
     .header {
         padding-bottom: 0;
         padding-top: 10px;

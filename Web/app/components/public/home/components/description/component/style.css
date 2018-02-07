@@ -4,6 +4,7 @@
     padding: 0 10%;
     flex-flow: row wrap;
     position: relative;
+    background: white;
 }
 
 .mcells {
@@ -21,15 +22,4 @@
     padding: 10px 0;
     font-weight: lighter;
     opacity: 0.6;
-}
-
-.solve {
-}
-
-.donate {
-
-}
-
-.learn {
-    
 }

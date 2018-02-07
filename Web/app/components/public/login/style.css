@@ -28,7 +28,7 @@
     border-radius: 15px;
 }
 
-@media (max-width: 414px) {
+@media (max-width: 740px) {
     hr {
         display: none;
     }

@@ -40,4 +40,7 @@
     .charity {
         font-size: 3vmax;
     }
+    .supported {
+        margin: 0;
+    }
 }

@@ -40,8 +40,22 @@ Be a good person, or just kind at heart.
 If not, You'll be a good person once you use this application. (:
 ```
 
+<<<<<<< HEAD
 ## Example
 <img width="1600" alt="home" src="https://user-images.githubusercontent.com/26973140/35903926-023d11f6-0b96-11e8-8538-0a7f4a372607.png">
+=======
+## User Navagation
+
+##### Web HOME
+<img width="1677" alt="home" src="https://user-images.githubusercontent.com/26973140/35130015-6d5e81ae-fc73-11e7-92a7-f3e2b0908cc7.png">
+>>>>>>> c9726378d91b649ebc4979eeadef7e5b2366e0e0
+
+##### Web Login
+<img width="1677" alt="login" src="https://user-images.githubusercontent.com/26973140/35478571-95f72aa2-0395-11e8-8d5c-28abe41f7e6e.png">
+
+##### Web Questions
+<img width="1677" alt="question" src="https://user-images.githubusercontent.com/26973140/35478591-01aa1138-0396-11e8-9b8e-1ce65ade98f6.png">
+
 
 ## Built With
 

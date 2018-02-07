@@ -104,20 +104,28 @@
     border: 1px solid #749FF2;
 }
 
-.heading {
-    padding: 20px 20px;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 500px) {
+@media (max-width: 740px) {
+    #percentage {
+        opacity: 0.6;
+    }
+    #heart {
+        width: 100px;
+        height: 100px;
+    }
     .home {
         padding: 0;
         background: #F4F6F9;
         padding-bottom: 56px;
+        min-height: 468px;
     }
-    .heading {
-        margin-bottom: 10px;
-        padding: 10px 10px;
+    .userdata {
+        background: white;
+        margin: 5px 0;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
     }
     .activities {
         flex-flow: column;
@@ -137,6 +145,22 @@
     .recentactivity {
         background: #F4F6F9;
         padding: 0 10px;
+    }
+    .uidcontainer {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .uid {
+        font-size: 3vmax;
+        font-weight: 500;
+    }
+    .welcome {
+        font-size: 2vmax;
+        opacity: 0.6;
+        color: #141b22;
+        padding: 10px 0;
     }
     .records {
         background: none;

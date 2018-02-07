@@ -65,7 +65,7 @@
     cursor: pointer;
 }
 
-@media (max-width: 414px) {
+@media (max-width: 740px) {
     .returning *{
         margin: 5px 0;
     }
