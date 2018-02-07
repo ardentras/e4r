@@ -33,9 +33,7 @@ Be a good person, or just kind at heart.
 If not, You'll be a good person once you use this application. (:
 ```
 
-## User Navagation
-
-##### Layout
+## Example
 <img width="1600" alt="home" src="https://user-images.githubusercontent.com/26973140/35903926-023d11f6-0b96-11e8-8538-0a7f4a372607.png">
 
 ## Built With
