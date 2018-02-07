@@ -8,8 +8,13 @@
             "type": "node",
             "request": "launch",
             "name": "debugWebsite",
-            "program": "${workspaceRoot}/node_modules/.bin/webpack-dev-server",
-            "runtimeExecutable": null,
+            "cwd": "${workspaceFolder}",
+            "osx": {
+                "program": "${workspaceRoot}/node_modules/.bin/webpack-dev-server"
+            },
+            "windows": {
+                "program": "${workspaceRoot}/node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+            },
             "args": [
                 "--open"
             ]

@@ -51,6 +51,7 @@
     padding: 5px 20px;
     max-width: 200px;
     display: flex;
+    color: white;
     justify-content: center;
     align-items: center;
 }
@@ -121,4 +122,68 @@
 .header h1 {
     font-size: 2vmax;
     padding: 0 30px;
+}
+
+.choice:checked+label {
+    background: #141b22;
+}
+
+@media (max-width: 500px) {
+    .header {
+        display: none;
+    }
+    .subjects {
+        display: none;
+    }
+    .progresscontainer {
+        display: none;
+    }
+    .questioncontents {
+        padding-bottom: 56px;
+    }
+    .selection{
+        margin: 0;
+        padding: 0 20px;
+    }
+    .choicelabel {
+        padding: 3% 10px;
+        max-width: none;
+        margin: 0;
+    }
+    .multiplechoice {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 100%;
+    }
+    .multiplechoice div {
+        width: 100%;
+    }
+    .topic {
+        padding: 0;
+        margin: 0;
+        font-size: 2vmax;
+        display: flex;
+        flex-flow: column;
+    }
+    .topic h1 {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+    }
+    .topic p {
+        font-size: 3vmax;
+        padding-bottom: 10px;
+    }
+    .choices {
+        position: relative;
+        height: 100%;
+    }
+    .nextbtn {
+        padding: 3% 10px;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
 }
