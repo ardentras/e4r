@@ -31,10 +31,6 @@
     position: relative;
 }
 
-.brand {
-    
-}
-
 #logo {
     height: 28px;
     width: 28px; 
@@ -83,4 +79,14 @@
  
 .activelink {
     color: #007BFE;
+}
+
+@media (max-width: 500px) {
+    .header {
+        padding-bottom: 0;
+        padding-top: 10px;
+    }
+    .navagations {
+        padding-top: 10px;
+    }
 }

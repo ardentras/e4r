@@ -42,3 +42,34 @@
     justify-content: space-around;
     position: relative;
 }
+
+@media (max-width: 500px) {
+    .dashboard {
+        position: fixed;
+        bottom: 0;
+        height: auto;
+        width: 100%;
+        z-index: 9999;
+        padding: 10px 0;
+    }
+    .selectors {
+        flex-flow: row nowrap;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .linktext {
+        display: none;
+    }
+    .dlinks, .logout {
+        margin: 0;
+        padding: 0;
+    }
+    .dlinks:hover {
+        background: transparent;
+    }
+    .logout:hover {
+        background: transparent;
+        color: #007BFE;
+    }
+}

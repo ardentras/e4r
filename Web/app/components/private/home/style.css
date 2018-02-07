@@ -89,28 +89,6 @@
     font-size: 2vmax;
 }
 
-.progresstonext {
-    height: 0px;
-    text-align: center;
-    margin: 40px auto;
-    display: flex;
-    width: 80%;
-    flex-flow: row nowrap;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.progressbar {
-    width: 80%;
-    height: 20px;
-}
-
-.progressheading {
-    font-size: 1.5vmax;
-    font-weight: lighter;
-    margin-right: 10px;
-}
-
 .number {
     padding: 0 20px;
 }
@@ -122,16 +100,50 @@
     justify-content: center;
     align-items: center;
     width: 30%;
+    height: 100%;
     border: 1px solid #749FF2;
-}
-
-.charities {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
 }
 
 .heading {
     padding: 20px 20px;
     margin-bottom: 30px;
+}
+
+@media (max-width: 500px) {
+    .home {
+        padding: 0;
+        background: #F4F6F9;
+        padding-bottom: 56px;
+    }
+    .heading {
+        margin-bottom: 10px;
+        padding: 10px 10px;
+    }
+    .activities {
+        flex-flow: column;
+    }
+    .activity {
+        border: none;
+        border-radius: 0;
+        background: white;
+        margin-bottom: 5px;
+        padding: 20px 0;
+        width: 100%;
+    }
+    .recordcontent {
+        padding: 0;
+        font-size: 3vmax;
+    }
+    .recentactivity {
+        background: #F4F6F9;
+        padding: 0 10px;
+    }
+    .records {
+        background: none;
+        border-radius: 0;
+        color: #141b22;
+        font-size: 2vmax;
+        opacity: 0.6;
+        padding: 10px 0;
+    }
 }
