@@ -82,6 +82,10 @@ CREATE TABLE EFRQuest.Questions
   QuestionThree     NVARCHAR(250)  NOT NULL,
   QuestionFour      NVARCHAR(250)  NOT NULL,
   CorrectAnswer     NVARCHAR(250)  NOT NULL,
+  StatsOne          INT            NOT NULL DEFAULT 0,
+  StatsTwo          INT            NOT NULL DEFAULT 0,
+  StatsThree        INT            NOT NULL DEFAULT 0,
+  StatsFour         INT            NOT NULL DEFAULT 0,
   QuestionBlockID   INT            FOREIGN KEY REFERENCES
                                    EFRQuest.QuestionsDB(QuestionBlockID)
 );
