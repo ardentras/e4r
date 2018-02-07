@@ -14,6 +14,13 @@
 <br>
 A non-profit web application that allow users to solve a range of subjects to earn revenue from ads and donate to a selected charity of choice.
 
+##### Compatible Browsers
+```
+1. Safari
+2. Chrome
+3. Firefox
+```
+
 P.S (Revenue generated from ads will not be kept by Users or the E4R team, it will go to the user's charity of choice)
 
 ## Getting Started
@@ -33,10 +40,8 @@ Be a good person, or just kind at heart.
 If not, You'll be a good person once you use this application. (:
 ```
 
-## User Navagation
-
-##### BROWSER HOME
-<img width="1677" alt="home" src="https://user-images.githubusercontent.com/26973140/35130015-6d5e81ae-fc73-11e7-92a7-f3e2b0908cc7.png">
+## Example
+<img width="1600" alt="home" src="https://user-images.githubusercontent.com/26973140/35903926-023d11f6-0b96-11e8-8538-0a7f4a372607.png">
 
 ## Built With
 

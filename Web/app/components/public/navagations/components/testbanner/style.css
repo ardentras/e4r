@@ -15,3 +15,9 @@
     padding: 10px;
     color: white;
 }
+
+@media (max-width: 500px) {
+    .testbanner {
+        font-size: 2vmax;
+    }
+}

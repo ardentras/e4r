@@ -7,7 +7,7 @@ import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock } from "../.
 
 const Choice = props => (
     <div>
-        <input className={Styles.choice} onClick={props.check} type="button" name="choice" id={"choice" + props.index} value={props.value}/>
+        <input className={Styles.choice} onClick={props.check} type="radio" name="choice" id={"choice" + props.index} value={props.value}/>
         <label className={Styles.choicelabel} htmlFor={"choice" + props.index}>{props.letter + ") " + props.value}</label>
     </div>
 );
@@ -22,6 +22,10 @@ class Question extends React.Component {
         if (!this.props.answer || this.props.answer === "incorrect") {
             const selected = document.getElementById(event.target.id);
             if (event.target.value === this.props.questions[this.props.index].CorrectAnswer) {
+                const choices = document.getElementsByClassName(Styles.choice);
+                for(let i = 0; i < choices.length; ++i) {
+                    choices[i].disabled = true;
+                }
                 this.props.correctAnswer();
             }
             else {
@@ -30,6 +34,11 @@ class Question extends React.Component {
         }
     }
     next() {
+        const choices = document.getElementsByClassName(Styles.choice);
+        for(let i = 0; i < choices.length; ++i) {
+            choices[i].checked = false;
+            choices[i].disabled = false;
+        }
         if (this.props.index < 9) {
             this.props.nextQuestion();
         } 
@@ -65,11 +74,13 @@ class Question extends React.Component {
                             {this.props.answer === "correct" && <span>Correct!</span> }
                             {this.props.answer === "incorrect" && <span>Incorrect!</span> }
                             <div>Answers: </div>
-                            <Choice index="1" letter="A" value={this.props.questions[this.props.index].QuestionOne} check={this.checkAnswer}/>
-                            <Choice index="2" letter="B" value={this.props.questions[this.props.index].QuestionTwo} check={this.checkAnswer}/>
-                            <Choice index="3" letter="C" value={this.props.questions[this.props.index].QuestionThree} check={this.checkAnswer}/>
-                            <Choice index="4" letter="D" value={this.props.questions[this.props.index].QuestionFour} check={this.checkAnswer}/>
-                            {this.props.answer === "correct" && <div onClick={this.next} className={Styles.nextbtn}>Next</div> }
+                            <div className={Styles.multiplechoice}>
+                                <Choice index="1" letter="A" value={this.props.questions[this.props.index].QuestionOne} check={this.checkAnswer}/>
+                                <Choice index="2" letter="B" value={this.props.questions[this.props.index].QuestionTwo} check={this.checkAnswer}/>
+                                <Choice index="3" letter="C" value={this.props.questions[this.props.index].QuestionThree} check={this.checkAnswer}/>
+                                <Choice index="4" letter="D" value={this.props.questions[this.props.index].QuestionFour} check={this.checkAnswer}/>
+                                {this.props.answer === "correct" && <div onClick={this.next} className={Styles.nextbtn}>Next</div> }
+                            </div>
                         </div>
                     </div>
                 </div>
