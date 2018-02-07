@@ -57,6 +57,8 @@
     text-align: center;
     margin: 10px 0;
     display: none;
+    color: #007BFE;
+    text-decoration: underline;
 }
 
 .signupbtn:hover {

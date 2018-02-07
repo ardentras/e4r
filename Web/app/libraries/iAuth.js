@@ -23,53 +23,32 @@ import { promisify } from "util";
  **/
 
 const iAuth = (()=>{
-	let m_onError = new WeakMap();
-	let m_host = new WeakMap();
-	let m_universalPath = new WeakMap();
-	let m_http = new WeakMap();
-	let m_login_path = new WeakMap();
-	let m_logout_path = new WeakMap();
-	let m_register_path = new WeakMap();
+	let _request = new WeakMap();
 	class iAuth {
 		constructor() {
-			m_onError.set(this, undefined);
-			m_host.set(this, undefined);
-			m_universalPath.set(this, undefined);
-			m_http.set(this, undefined);
-			m_login_path.set(this, undefined);
-			m_logout_path.set(this, undefined);
-			m_register_path.set(this, undefined);
-			this.ifPersist = this.ifPersist.bind(this);
+			_request.set(this, axios);
 		}
-		config({ http=true, onError=undefined, // eslint-disable-line no-unused-vars
-			host=undefined, universalPath=undefined,
-			loginPath=undefined, logoutPath=undefined, registerPath=undefined}) {
-			http ? m_http.set(this, http) : null;
-			host ? m_host.set(this, host) : null;
-			onError ? m_onError.set(this, onError) : null;
-			universalPath ? m_universalPath.set(this, universalPath) : null;
-			loginPath ? m_login_path.set(this, loginPath) : null;
-			logoutPath ? m_logout_path.set(this, logoutPath) : null;
-			registerPath ? m_register_path.set(this, registerPath) : null;
+		config({host, timeout, headers=undefined}) {
+			_request.set(this, axios.create({
+				baseURL: host,
+				timeout: timeout
+			}));
+			headers ? _request.get(this).defaults.headers = headers : null;
 		}
 		getUserFromCookie() {
-			return Promise.resolve({
+			return {
 				session: iCookie.get("session"),
 				userobject: {}
-			});
+			};
 		}
-		ifPersist() {
-			const session = iCookie.get("session");
-			return axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + "/renew", {user: {session: session}});
+		Authenticate(user, path) {
+			return _request.get(this).post(path, {user});
 		}
-		Authenticate(user) {
-			return axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (m_login_path.get(this) ? m_login_path.get(this) : null), {user});
+		Deauthenticate(user, path) {
+			return _request.get(this).put(path, {user});
 		}
-		Deauthenticate(user) {
-			return axios.put(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (m_logout_path.get(this) ? m_logout_path.get(this) : null), {user})
-		}
-		Register(user) {
-			return axios.post(m_host.get(this) + (m_universalPath.get(this) ? m_universalPath.get(this) : "") + (m_register_path.get(this) ? m_register_path.get(this) : null), {user});
+		Register(user, path) {
+			return _request.get(this).post(path, {user});
 		}
 	}
 	return iAuth;
