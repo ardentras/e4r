@@ -218,6 +218,34 @@ On user already exists:
         "userobject": {user_object}
     }
 }
+
+OR
+
+{
+    "user": {
+        "session":"{session_id}",
+        "userobject": {user_object}
+    },
+    "game": {
+        "questions": [
+            {
+                "QuestionID":{id},
+                "QuestionText":"{text}",
+                "QuestionOne":"{answer1}",
+                "QuestionTwo":"{answer2}",
+                "QuestionThree":"{answer3}",
+                "QuestionFour":"{answer4}",
+                "CorrectAnswer":"{correct_answer}",
+                "StatsOne":"{statsAnswer1}",
+                "StatsTwo":"{statsAnswer2}",
+                "StatsThree":"{statsAnswer3}",
+                "StatsFour":"{statsAnswer4}",
+                "QuestionBlockID":"{block_id}"
+            },
+            {...},
+        ]
+    }
+}
 ```
 #### REQUEST_BLOCK RESPONSE:
 ```
@@ -230,6 +258,10 @@ On user already exists:
         "QuestionThree":"{answer3}",
         "QuestionFour":"{answer4}",
         "CorrectAnswer":"{correct_answer}",
+        "StatsOne":"{statsAnswer1}",
+        "StatsTwo":"{statsAnswer2}",
+        "StatsThree":"{statsAnswer3}",
+        "StatsFour":"{statsAnswer4}",
         "QuestionBlockID":"{block_id}"
     },
     {...},

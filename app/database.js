@@ -323,20 +323,40 @@ class TDatabase {
     // Returns a new block of questions from the database
     //
     // Example:
-    // curl -XGET localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}}'
-    async requestQuestionBlock(client, data) {
+    // curl -XPUT localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}, "game": {"questions":
+    //                                                                                      [{"QuestionID":{id},"QuestionText":"{text}","QuestionOne":"{answer1}","QuestionTwo":"{answer2}","QuestionThree":"{answer3}", "QuestionFour":"{answer4}","CorrectAnswer":"{correct_answer}","StatsOne":"{statsAnswer1}","StatsTwo":"{statsAnswer2}","StatsThree":"{statsAnswer3}","StatsFour":"{statsAnswer4}","QuestionBlockID":"{block_id}"},{...}]}}'
+    async requestQuestionBlock(client, data, gameData) {
+        try {
+            data.userobject = await this.verifyUserObject(client, data);
+        } catch (err) {
+            client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
+        }
+
+        if (gameData != undefined) {
+            try {
+                var queryStr = "INSERT INTO EFRQuest.Questions (QuestionID,StatsOne,StatsTwo,StatsThree,StatsFour) VALUES ";
+
+                for (var i = 0; i < gameData.questions.length; i++) {
+                    queryStr = queryStr + "(" + gameData.questions[i].QuestionID + "," + gameData.questions[i].StatsOne + "," + gameData.questions[i].StatsTwo + "," + gameData.questions[i].StatsThree + "," + gameData.questions[i].StatsFour + ")";
+                    if (i != gameData.questions.length - 1)
+                        queryStr = queryStr + ",";
+                }
+
+                queryStr = queryStr + "ON DUPLICATE KEY UPDATE StatsOne=VALUES(StatsOne),StatsTwo=VALUES(StatsTwo),StatsThree=VALUES(StatsThree),StatsFour=VALUES(StatsFour)";
+
+                console.log(queryStr);
+                await this.db.request().query(queryStr);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
         let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
                                                 .input('subject_id', mssql.Int, data.userobject.game_data.subject_id)
                                                 .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID");
 
         var questionBlocks = res.recordset;
         var totalBlocks = questionBlocks.length;
-
-        try {
-            data.userobject = await this.verifyUserObject(client, data);
-        } catch (err) {
-            client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
-        }
 
         var missing_blocks = [];
         for (var i = 0; i < totalBlocks; i++) {
@@ -356,7 +376,7 @@ class TDatabase {
 	// TODO Remove in production.
 	//
 	// curl -XGET localhost:3002/api/test/display
-  displayUsers(client) {
+    displayUsers(client) {
       this.db.request().query("SELECT * FROM EFRAcc.Users", (err, res) => {
           if (err) {
               console.log("GET Error");
@@ -365,7 +385,7 @@ class TDatabase {
               client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: res.length, result: res.recordset});
           }
       });
-  }
+    }
 
 	// Ensures that the database connection is closed on object destruction.
 	gracefulShutdown() {
