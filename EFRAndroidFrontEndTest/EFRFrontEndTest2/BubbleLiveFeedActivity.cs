@@ -33,14 +33,24 @@ namespace EFRFrontEndTest2
                 layoutBase.AddView(img,100,100);
                 Random rnd = new Random();
                 img.SetX(rnd.Next(0, 1000));
-                ValueAnimator animator = ValueAnimator.OfInt(0, -1000);
+                ValueAnimator animator = ValueAnimator.OfInt(0, -1100);
                 animator.SetDuration(1500);
                 animator.Start();
                 animator.Update += (object sender2, ValueAnimator.AnimatorUpdateEventArgs f) =>
                 {
+                    
                     int newValue = (int)f.Animation.AnimatedValue;
                     // Apply this new value to the object being animated.
                     img.TranslationY = newValue;
+                    if(newValue >= -900)
+                    img.TranslationX += 10*(float)Math.Sin(newValue/100);
+                    else
+                    {
+                        if (img.TranslationX > 500)
+                            img.TranslationX -= 2;
+                        else
+                            img.TranslationX += 2;
+                    }
                     if (1 == f.Animation.AnimatedFraction)
                     {
                         layoutBase.RemoveView(img);
