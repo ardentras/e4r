@@ -60,12 +60,6 @@
         android:layout_height="80dp"
         android:layout_width="match_parent"
         android:id="@+id/imageButton6"
-        android:background="@drawable/backarrowicon" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:maxHeight="20dp"
-        android:id="@+id/imageView1"
-        android:background="@drawable/hrblock"
-        android:layout_gravity="bottom" />
+        android:background="@drawable/silverarrow"
+        android:layout_marginRight="0.0dp" />
 </LinearLayout>

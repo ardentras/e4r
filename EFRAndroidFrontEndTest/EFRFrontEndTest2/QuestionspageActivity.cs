@@ -21,14 +21,7 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            TextView imageButton3 = FindViewById<TextView>(Resource.Id.imageButton3);
             ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
-
-            imageButton3.Click += (sender, e) =>
-            {
-                var intent = new Intent(this, typeof(WinPageActivity));
-                StartActivity(intent);
-            };
 
             imageButton6.Click += (sender, e) =>
             {
