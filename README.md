@@ -35,8 +35,8 @@ If not, You'll be a good person once you use this application. (:
 
 ## User Navagation
 
-##### BROWSER HOME
-<img width="1677" alt="home" src="https://user-images.githubusercontent.com/26973140/35130015-6d5e81ae-fc73-11e7-92a7-f3e2b0908cc7.png">
+##### Layout
+<img width="1600" alt="home" src="https://user-images.githubusercontent.com/26973140/35903926-023d11f6-0b96-11e8-8538-0a7f4a372607.png">
 
 ## Built With
 
