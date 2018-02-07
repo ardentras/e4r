@@ -22,12 +22,12 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.BubbleLiveFeed);
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
-            bubble.Click +=  (sender, e) =>
+            bubble.Click += (sender, e) =>
             {
                 LinearLayout layoutBase = FindViewById<LinearLayout>(Resource.Id.bubble_layout);
                 ImageView img = new ImageView(this);
                 Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
-                img.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
+                img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
                 img.Visibility = ViewStates.Visible;
                 img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
                 layoutBase.AddView(img,100,100);
@@ -47,15 +47,18 @@ namespace EFRFrontEndTest2
                     else
                     {
                         if (img.TranslationX > 500)
-                            img.TranslationX -= 2;
+                            img.TranslationX -= 3;
                         else
-                            img.TranslationX += 2;
+                            img.TranslationX += 3;
                     }
                     if (1 == f.Animation.AnimatedFraction)
                     {
                         layoutBase.RemoveView(img);
-                        string newvwal  = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
-                        bubbleButton.Text = newvwal;
+                        string newval  = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
+                        if (newval.IndexOf('.') - newval.Length == -2)
+                            newval += '0';
+                        bubbleButton.Text = newval;
+                        
 
                     }
                 };
