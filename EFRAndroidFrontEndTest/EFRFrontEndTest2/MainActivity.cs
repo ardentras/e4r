@@ -37,18 +37,16 @@ namespace EFRFrontEndTest2
             {
 
                 // Fetch the login information asynchronously, parse the results, then update the screen.
-                string loginCheck = await database.FetchLogin(userBox.Text, passBox.Text);
-                if (loginCheck.Contains("Success"))
+                Responce responce = await database.FetchLogin(userBox.Text, passBox.Text);
+                if (responce.m_responce == "Success")
                 {
-                    DataArchive userObject = new DataArchive(this);
-                    string user = await database.FetchUserObject(userBox.Text, passBox.Text);
-                    userObject.SetUserData(user);
+//TODO: Save User Object to file
                     var intent = new Intent(this, typeof(HomeScreenActivity));
                     StartActivity(intent);
                 }
                 else
                 {
-                    Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                     AlertDialog alert = dialog.Create();
                     alert.SetTitle("You couldn't log in");
                     alert.SetMessage("Invalid Credentials");
@@ -83,3 +81,5 @@ private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
 {
     SetContentView(Resource.Layout.CreateAccountScreen);
 }*/
+
+//"{\"action\": \"LOGIN\", \"code\": 200, \"response\": \"Success\", \"session_id\": \"855ce8c1-8577-4a84-9199-9b8efaebe8b3\", \"type\": \"GET\", \"user_object\": {\"game_data\": {\"completed_blocks\": [], \"difficulty\": \"0\", \"subject_id\": \"1\", \"subject_name\": \"\"}, \"timestamp\": \"\", \"user_data\": {\"charity_name\": \"\", \"first_name\": \"\", \"last_name\": \"\", \"username\": \"abc\"}}}"
