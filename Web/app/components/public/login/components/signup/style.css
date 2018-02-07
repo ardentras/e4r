@@ -60,6 +60,8 @@
 
 .returnbtn {
     text-align: center;
+    text-decoration: underline;
+    color: rgb(23, 131, 255);
 }
 
 .returnbtn:hover {

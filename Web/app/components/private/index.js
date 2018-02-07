@@ -8,14 +8,6 @@ import { connect } from "react-redux";
 import Routes from "./routes";
 import Dashboard from "./dashboard";
 import Styles from "./style.css";
-import efrApi from "../../libraries/efrApi";
-efrApi.config({
-    host: "35.163.221.182", 
-    port: 3002,
-    protocol: "http", 
-    gameRoute: "/api/q/request_block",
-    _renewRoute: "/api/renew"
-});
 
 class Private extends React.Component {
     constructor(props) {

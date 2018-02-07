@@ -10,16 +10,18 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux"; // eslint-disable-line no-unused-vars
 import store from "./redux/store";
 import App from "./components/public"; // eslint-disable-line no-unused-vars
-import iAuth from "./libraries/iAuth";
 import "./style.css";
+import efrApi from "./libraries/efrApi";
 
-iAuth.config({
-	host: "http://35.163.221.182:3002",
-	universalPath: "/api",
-	loginPath: "/login",
-	logoutPath: "/logout",
-	registerPath: "/signup",
-	gamePath: "/q/request_block"
+efrApi.config({
+    host: "35.163.221.182", 
+    port: 3002,
+    protocol: "http", 
+    gamePath: "/api/q/request_block",
+    renewPath: "/api/renew",
+    loginPath: "/api/login",
+    signupPath: "/api/signup",
+    logoutPath: "/api/logout"
 });
 /****************************************************************************
  * 

@@ -15,7 +15,8 @@ const config = {
 	entry: "./app/index.js",
 	output: {
 		path: Path.resolve(__dirname, "dist"), // eslint-disable-line no-undef
-		filename: "index_bundle.js"
+		filename: "index_bundle.js",
+		publicPath: Path.resolve("/")
 	},
 	devtool: "inline-source-map",
 	module: {
