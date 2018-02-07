@@ -78,6 +78,66 @@ class TDatabase {
         return check;
     }
 
+    // Verifies the user objects are in sync and corrects errors if they exist.
+    async verifyUserObject(client, data) {
+        let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+
+        if (res.rowsAffected == 0) {
+	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
+	    } else {
+            let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+
+            var cliTimestamp = data.userobject.timestamp;
+            var dbTimestamp = JSON.parse(user_object).timestamp;
+
+            if (cliTimestamp < dbTimestamp) {
+                var spliceBlocks = data.userobject.game_data.completed_blocks.concat(JSON.parse(user_object).game_data.completed_blocks)
+                spliceBlocks = spliceBlocks.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+                data.userobject.game_data.completed_blocks = spliceBlocks;
+
+                var date = new Date();
+                data.userobject.timestamp = date.toISOString();
+            }
+
+            var uostring = JSON.stringify(data.userobject);
+            uostring = uostring.replace("\\", "");
+
+            await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
+                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+	    }
+
+        return data.userobject;
+    }
+
+    // Retrieves the user object and ensures it was properly saved.
+    async getUserObject(userid, data) {
+        let res = await this.db.request().input('userid', mssql.Int, userid)
+                                        .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE UserID = @userid;");
+
+        if (res.recordsets[0][0].UserObject == "[object Object]" || res.recordsets[0][0].UserObject == "{}") {
+            console.log("ERROR: Invalid User Object was saved.");
+
+
+            let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
+            newUserObject.user_data.username = data.username;
+            newUserObject.user_data.email = data.email;
+            var uostring = JSON.stringify(newUserObject);
+            uostring = uostring.replace("\\", "");
+
+            await this.db.request().input('userobject', mssql.VarChar, uostring)
+                                    .input('userid', mssql.Int, userid)
+                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+
+            console.log("updated uo");
+
+            return newUserObject;
+        }
+
+        return res.recordsets[0][0].UserObject;
+    }
+
 	// Attempts to verify a user's existing token and renews it if valid, else logs the user out.
 	//
 	// Example:
@@ -90,7 +150,7 @@ class TDatabase {
 			client.json({response: "Failed", type: "PUT", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
 		} else {
             try {
-                await this.verifyUserObject(client, data);
+                data.userobject = await this.verifyUserObject(client, data);
             } catch (err) {
                 client.json({response: "Failed", type: "PUT", code: 500, reason: "Unknown user object verification error. Retry request"});
             }
@@ -104,9 +164,7 @@ class TDatabase {
 				let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
 
                 try {
-                    let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
-
-                    var uo = JSON.parse(user_object);
+                    var uo = JSON.parse(data.userobject);
                     client.json({response: "Success", type: "PUT", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
                 } catch (err) {
                     console.log(err);
@@ -292,66 +350,6 @@ class TDatabase {
                                                 .query("SELECT * FROM EFRQuest.Questions WHERE QuestionBlockID = @blockid");
 
         client.json(response.recordset);
-    }
-
-    // Verifies the user objects are in sync and corrects errors if they exist.
-    async verifyUserObject(client, data) {
-        let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
-
-        if (res.rowsAffected == 0) {
-	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
-	    } else {
-            let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
-
-            var cliTimestamp = data.userobject.timestamp;
-            var dbTimestamp = JSON.parse(user_object).timestamp;
-
-            if (cliTimestamp < dbTimestamp) {
-                var spliceBlocks = data.userobject.game_data.completed_blocks.concat(JSON.parse(user_object).game_data.completed_blocks)
-                spliceBlocks = spliceBlocks.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-                data.userobject.game_data.completed_blocks = spliceBlocks;
-
-                var date = new Date();
-                data.userobject.timestamp = date.toISOString();
-            }
-
-            var uostring = JSON.stringify(data.userobject);
-            uostring = uostring.replace("\\", "");
-
-            await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
-	    }
-
-        return data.userobject;
-    }
-
-    // Retrieves the user object and ensures it was properly saved.
-    async getUserObject(userid, data) {
-        let res = await this.db.request().input('userid', mssql.Int, userid)
-                                        .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE UserID = @userid;");
-
-        if (res.recordsets[0][0].UserObject == "[object Object]" || res.recordsets[0][0].UserObject == "{}") {
-            console.log("ERROR: Invalid User Object was saved.");
-
-
-            let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
-            newUserObject.user_data.username = data.username;
-            newUserObject.user_data.email = data.email;
-            var uostring = JSON.stringify(newUserObject);
-            uostring = uostring.replace("\\", "");
-
-            await this.db.request().input('userobject', mssql.VarChar, uostring)
-                                    .input('userid', mssql.Int, userid)
-                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
-
-            console.log("updated uo");
-
-            return newUserObject;
-        }
-
-        return res.recordsets[0][0].UserObject;
     }
 
 	// Displays all current user accounts from the database.

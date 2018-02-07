@@ -38,7 +38,7 @@ Debugging API Calls:
         "email": "test@test.com",
         "first_name": "John",
         "last_name": "Doe",
-        "charity_name": "ACME Charity, LLC"
+        "charity_names": ["ACME Charity, LLC"]
     },
     "game_data": {
         "subject_name": "Math",
