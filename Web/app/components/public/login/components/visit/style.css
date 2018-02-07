@@ -14,6 +14,8 @@
 .visitor span {
     max-width: 250px;
     font-size: 1.2vmax;
+    opacity: 0.6;
+    text-align: center;
 }
 
 .headers {
@@ -39,3 +41,8 @@
     cursor: pointer;
 }
 
+@media (max-width: 414px) {
+    .visitor {
+        display: none;
+    }
+}

@@ -14,8 +14,9 @@ import {
 	setSignUpSuccessful,
 	Reset,
 	ifSignUp} from "./state";
+import { setUserObject } from "./user";
 import httpCodes from "../httpCodes";
-import iAuth from "../../libraries/iAuth";
+import efrApi from "../../libraries/efrApi";
 import iCookie from "../../libraries/iCookie";
 
 export function setUID(name) {
@@ -45,24 +46,24 @@ export function DeAuthenticate() {
 	};
 }
 
-export function handlerPersist() {
-	return async (dispatch)=>{
-		try {
-			const result = await iAuth.ifPersist();
-			if (result.data.code === httpCodes.Ok) {
-				dispatch(setAuthenticateSuccess(true));
-				dispatch(setUID(result.data.uid ? result.data.uid : iCookie.get("uid")));
-				const expire = "expires=" + iCookie.time();
-				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
-				iCookie.set(cookie);
-				dispatch(Refer());
-			}
-		}
-		catch(error) {
-			dispatch(Error("PERSIST_ERROR"));
-		}
-	}
-}
+// export function handlerPersist() {
+// 	return async (dispatch)=>{
+// 		try {
+// 			const result = await iAuth.ifPersist();
+// 			if (result.data.code === httpCodes.Ok) {
+// 				dispatch(setAuthenticateSuccess(true));
+// 				dispatch(setUID(result.data.uid ? result.data.uid : iCookie.get("uid")));
+// 				const expire = "expires=" + iCookie.time();
+// 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
+// 				iCookie.set(cookie);
+// 				dispatch(Refer());
+// 			}
+// 		}
+// 		catch(error) {
+// 			dispatch(Error("PERSIST_ERROR"));
+// 		}
+// 	}
+// }
 
 export function handlerAuth(user=undefined) {
 	return async (dispatch)=>{
@@ -71,9 +72,10 @@ export function handlerAuth(user=undefined) {
 			dispatch(setSignUpSuccessful(false));
 			dispatch(Authenticate(true));
 			iCookie.reset();
-			const result = await iAuth.Authenticate(user);
+			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
 				dispatch(setAuthenticateSuccess(true));
+				dispatch(setUserObject(result.data.user_object));
 				dispatch(setUID(user.username));
 				const expire = "expires=" + iCookie.time();
 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
@@ -87,7 +89,7 @@ export function handlerAuth(user=undefined) {
 			}
 		}
 		catch(error) {
-			dispatch(Error("AUTH_ERROR"));
+			dispatch(Error(error.message.indexOf("timeout") >= 0 ? "AUTH_TIMEOUT" : "AUTH_ERROR"));
 		}
 		dispatch(Authenticate(false));
 	};
@@ -96,13 +98,11 @@ export function handlerAuth(user=undefined) {
 export function handlerDeAuth() {
 	return async (dispatch)=>{
 		try {
-			const user = await iAuth.getUserFromCookie();
+			const result = await efrApi.logout();
 			dispatch(Error());
 			iCookie.reset();
-			const result = await iAuth.Deauthenticate(user);
 			if (result.data.code === httpCodes.Ok) {
 				dispatch(Reset());
-				iCookie.reset();
 				window.location.reload();
 			}
 			else {
@@ -118,7 +118,7 @@ export function handlerDeAuth() {
 export function handlerRegister(user=undefined) {
 	return async (dispatch)=>{
 		try {
-			const result = await iAuth.Register(user);
+			const result = await efrApi.signup(user);
 			if (result.data.code === httpCodes.SignUpSuccess) {
 				dispatch(Error());
 				dispatch(setSignUpSuccessful(true));

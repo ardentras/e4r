@@ -10,6 +10,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+using EFRFrontEndTest2.Assets;
+
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
@@ -21,18 +23,18 @@ namespace EFRFrontEndTest2
             //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-            
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
-            
+
 
             //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
+
                 // Fetch the login information asynchronously, parse the results, then update the screen.
                 JsonValue json = await FetchLoginAsync(userBox.Text, passBox.Text);
                 if (json.ToString().Contains("Success"))
@@ -42,7 +44,6 @@ namespace EFRFrontEndTest2
                 }
                 else
                 {
-
                     Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                     AlertDialog alert = dialog.Create();
                     alert.SetTitle("You couldn't log in");

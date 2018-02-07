@@ -1,2 +1,2 @@
-export const NEWS_IMG = "/static/jacky.jpg";
-export const NEWS_DESCRIPTION = "This is Jacky Chan because Jacky Chan.because he kicks butt.Don’t question this.";
+export const NEWS_IMG = "/static/redcross.png";
+export const NEWS_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula at arcu eget elementum. Donec commodo, magna at efficitur hendrerit, diam tellus malesuada orci, ut iaculis mauris lorem eget magna. Duis fermentum non lectus ut accumsan. Aenean eget dolor sed elit pretium porta. Aliquam faucibus metus vitae orci pellentesque, nec.";

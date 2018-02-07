@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -23,7 +22,7 @@ namespace EFRFrontEndTest2
             SeekBar sound = FindViewById<SeekBar>(Resource.Id.sound);
             sound.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
             {
-                //SetVolume(play(), e.Progress, e.Progress);
+                
             };
 
         }

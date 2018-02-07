@@ -20,6 +20,7 @@
 .mcells p {
     padding: 10px 0;
     font-weight: lighter;
+    opacity: 0.6;
 }
 
 .solve {

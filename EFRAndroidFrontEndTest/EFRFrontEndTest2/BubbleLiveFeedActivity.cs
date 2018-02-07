@@ -22,27 +22,51 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.BubbleLiveFeed);
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
-            bubble.Click += async (sender, e) =>
+            bubble.Click += (sender, e) =>
             {
                 LinearLayout layoutBase = FindViewById<LinearLayout>(Resource.Id.bubble_layout);
                 ImageView img = new ImageView(this);
-                img.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.FillParent);
+                Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
+                img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
                 img.Visibility = ViewStates.Visible;
                 img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+                layoutBase.AddView(img,100,100);
                 Random rnd = new Random();
-                int x = rnd.Next(1, 101);
-                layoutBase.AddView(img,x,100);
-                ValueAnimator animator = ValueAnimator.OfInt(100, 10);
-                animator.SetDuration(3000);
+                img.SetX(rnd.Next(0, 1000));
+                ValueAnimator animator = ValueAnimator.OfInt(0, -1100);
+                animator.SetDuration(1500);
                 animator.Start();
                 animator.Update += (object sender2, ValueAnimator.AnimatorUpdateEventArgs f) =>
                 {
+                    
                     int newValue = (int)f.Animation.AnimatedValue;
                     // Apply this new value to the object being animated.
                     img.TranslationY = newValue;
+                    if(newValue >= -900)
+                    img.TranslationX += 10*(float)Math.Sin(newValue/100);
+                    else
+                    {
+                        if (img.TranslationX > 500)
+                            img.TranslationX -= 3;
+                        else
+                            img.TranslationX += 3;
+                    }
+                    if (1 == f.Animation.AnimatedFraction)
+                    {
+                        layoutBase.RemoveView(img);
+                        string newval  = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
+                        if (newval.IndexOf('.') - newval.Length == -2)
+                            newval += '0';
+                        bubbleButton.Text = newval;
+                        
+
+                    }
                 };
+
+
             };
-        }
+        }//
+        
 
 
     };
