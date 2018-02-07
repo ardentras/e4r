@@ -14,6 +14,13 @@
 <br>
 A non-profit web application that allow users to solve a range of subjects to earn revenue from ads and donate to a selected charity of choice.
 
+##### Compatible Browsers
+```
+1. Safari
+2. Chrome
+3. Firefox
+```
+
 P.S (Revenue generated from ads will not be kept by Users or the E4R team, it will go to the user's charity of choice)
 
 ## Getting Started
