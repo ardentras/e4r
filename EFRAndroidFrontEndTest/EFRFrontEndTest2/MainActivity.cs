@@ -26,6 +26,7 @@ namespace EFRFrontEndTest2
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             CallDatabase database = new CallDatabase(this);
+
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
@@ -40,7 +41,9 @@ namespace EFRFrontEndTest2
                 Responce responce = await database.FetchLogin(userBox.Text, passBox.Text);
                 if (responce.m_responce == "Success")
                 {
-//TODO: Save User Object to file
+                    LocalArchive archive;
+                    archive.SetUserData(database.GetUserObject.GetObjectString());
+
                     var intent = new Intent(this, typeof(HomeScreenActivity));
                     StartActivity(intent);
                 }

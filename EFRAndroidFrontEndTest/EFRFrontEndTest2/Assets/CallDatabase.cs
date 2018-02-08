@@ -136,7 +136,7 @@ namespace EFRFrontEndTest2.Assets
             m_userObject.SessionID = list[4];
         }
 
-        public UserObject User { get { return m_userObject; } }
+        public UserObject GetUserObject { get { return m_userObject; } }
         public Responce responce { get { return LastResponce; } }
 
         private Activity m_activity;
@@ -167,6 +167,44 @@ namespace EFRFrontEndTest2.Assets
         private string m_FirstName;
         private string m_LastName;
         private string m_Username;
+
+        public string GetObjectString()
+        {
+            string objectString = m_SessionID + ",";
+            objectString += m_CompletedBlocks + ",";
+            objectString += m_Difficulty + ",";
+            objectString += m_SubjectID.ToString() + ",";
+            objectString += m_Timestamp + ",";
+            objectString += m_Charity + ",";
+            objectString += m_FirstName + ",";
+            objectString += m_LastName + ",";
+            objectString += m_Username;
+//TODO: If someone has time, replace with a more effecient process
+
+            return objectString;
+        }
+
+        public bool SetObjectString(string objectString)
+        {
+            bool done = false;
+            string[] list = objectString.Split(',');
+            if (list.Length == 9)
+            {
+                try { m_SubjectID = Int32.Parse(list[3]); } //Ensures a corrupt string will not corrupt the object
+                catch (Exception e) { return false; }
+                m_SessionID = list[0];
+                m_CompletedBlocks = list[1];
+                m_Difficulty = list[2];
+                m_Timestamp = list[4];
+                m_Charity = list[5];
+                m_FirstName = list[6];
+                m_LastName = list[7];
+                m_Username = list[8];
+                done = true;
+            }
+
+            return done; //True if object is updated successfully
+        }
     }
 
 
