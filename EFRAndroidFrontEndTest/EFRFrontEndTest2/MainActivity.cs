@@ -41,7 +41,7 @@ namespace EFRFrontEndTest2
                 Responce responce = await database.FetchLogin(userBox.Text, passBox.Text);
                 if (responce.m_responce == "Success")
                 {
-                    LocalArchive archive;
+                    LocalArchive archive = new LocalArchive(this);
                     archive.SetUserData(database.GetUserObject.GetObjectString());
 
                     var intent = new Intent(this, typeof(HomeScreenActivity));
