@@ -56,10 +56,10 @@ namespace EFRFrontEndTest2
                 if (usernameBox.Text.Length > 0)
                 {
                     //Pings the server to check if the username already exists
-                    string responce = await database.CheckUsername(usernameBox.Text, "1234");
+                    Responce responce = await database.CheckUsername(usernameBox.Text, "1234");
 
                     //Parses JSON responce to see if (User not found) returns, if so then username is acceptable
-                    if (responce.Split(',')[1].Contains("User not found"))
+                    if (responce.m_responce == "Succeed")
                         usernameErrorBox.Visibility = invisible;
                     else
                         usernameErrorBox.Visibility = visible;
@@ -100,8 +100,8 @@ namespace EFRFrontEndTest2
                 else
                 {
                     finalErrorBox.Visibility = invisible;
-                    string responce = await database.CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
-                    if (responce.Contains("Succeed"))
+                    Responce responce = await database.CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
+                    if (responce.m_responce == "Succeed")
                     {
                         Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         AlertDialog alert = dialog.Create();

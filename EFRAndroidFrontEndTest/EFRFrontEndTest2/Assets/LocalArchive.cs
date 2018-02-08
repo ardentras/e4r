@@ -14,9 +14,9 @@ using Java.IO;
 
 namespace EFRFrontEndTest2.Assets
 {
-    public class DataArchive
+    public class LocalArchive
     {
-        public DataArchive(Activity activity, string filename = "UserData.txt")
+        public LocalArchive(Activity activity, string filename = "UserData.txt")
         {
             m_activity = activity;
             m_filename = filename;
