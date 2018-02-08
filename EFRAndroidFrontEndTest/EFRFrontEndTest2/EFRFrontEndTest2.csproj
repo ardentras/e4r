@@ -87,6 +87,7 @@
     <Compile Include="Activity1.cs" />
     <Compile Include="Assets\CallDatabase.cs" />
     <Compile Include="Assets\LocalArchive.cs" />
+    <Compile Include="Assets\UserObject.cs" />
     <Compile Include="BubbleLiveFeedActivity.cs" />
     <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />

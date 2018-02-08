@@ -15,6 +15,20 @@ using Android.Widget;
 
 namespace EFRFrontEndTest2.Assets
 {
+    public struct Responce
+    {
+        public Responce(string responce, int code, string reason = "None")
+        {
+            m_responce = responce;
+            m_reason = reason;
+            m_code = code;
+        }
+
+        public string m_responce;
+        public string m_reason;
+        public int m_code;
+    }
+
     class CallDatabase
     {
         public CallDatabase(Activity activity)
@@ -70,6 +84,7 @@ namespace EFRFrontEndTest2.Assets
                     // Use this stream to build a JSON document object:
                     JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+                    ParseJson(jsonDoc.ToString());
 
                     // Return the JSON document:
                     return LastResponce;
@@ -93,6 +108,7 @@ namespace EFRFrontEndTest2.Assets
                     // Use this stream to build a JSON document object:
                     JsonValue jsonDoc = JsonObject.Load(stream);
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+                    ParseJson(jsonDoc.ToString());
 
                     // Return the JSON document:
                     return LastResponce;
@@ -142,84 +158,6 @@ namespace EFRFrontEndTest2.Assets
         private Activity m_activity;
         private UserObject m_userObject;
         private Responce LastResponce;
-    }
-
-    public class UserObject
-    {
-        public UserObject() { }
-
-        public string CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } } //TODO: Make array once server functionality is implemented
-        public string Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
-        public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
-        public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
-        public string Charity { get { return m_Charity; } set { m_Charity = value; } }
-        public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
-        public string LastName { get { return m_LastName; } set { m_LastName = value; } }
-        public string Username { get { return m_Username; } set { m_Username = value; } }       //These should only be changed when loading a user object (I used this implementation for readability and consistancy)
-        public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }    //These should only be changed when loading a user object
-
-        private string m_SessionID;
-        private string m_CompletedBlocks;
-        private string m_Difficulty;
-        private int m_SubjectID;
-        private string m_Timestamp;
-        private string m_Charity;
-        private string m_FirstName;
-        private string m_LastName;
-        private string m_Username;
-
-        public string GetObjectString()
-        {
-            string objectString = m_SessionID + ",";
-            objectString += m_CompletedBlocks + ",";
-            objectString += m_Difficulty + ",";
-            objectString += m_SubjectID.ToString() + ",";
-            objectString += m_Timestamp + ",";
-            objectString += m_Charity + ",";
-            objectString += m_FirstName + ",";
-            objectString += m_LastName + ",";
-            objectString += m_Username;
-//TODO: If someone has time, replace with a more effecient process
-
-            return objectString;
-        }
-
-        public bool SetObjectString(string objectString)
-        {
-            bool done = false;
-            string[] list = objectString.Split(',');
-            if (list.Length == 9)
-            {
-                try { m_SubjectID = Int32.Parse(list[3]); } //Ensures a corrupt string will not corrupt the object
-                catch (Exception e) { return false; }
-                m_SessionID = list[0];
-                m_CompletedBlocks = list[1];
-                m_Difficulty = list[2];
-                m_Timestamp = list[4];
-                m_Charity = list[5];
-                m_FirstName = list[6];
-                m_LastName = list[7];
-                m_Username = list[8];
-                done = true;
-            }
-
-            return done; //True if object is updated successfully
-        }
-    }
-
-
-    public struct Responce
-    {
-        public Responce(string responce, int code, string reason = "None")
-        {
-            m_responce = responce;
-            m_reason = reason;
-            m_code = code;
-        }
-
-        public string m_responce;
-        public string m_reason;
-        public int m_code;
     }
 }
 
