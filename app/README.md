@@ -38,7 +38,7 @@ Debugging API Calls:
         "email": "test@test.com",
         "first_name": "John",
         "last_name": "Doe",
-        "charity_name": "ACME Charity, LLC"
+        "charity_names": ["ACME Charity, LLC"]
     },
     "game_data": {
         "subject_name": "Math",
@@ -103,7 +103,7 @@ On invalid username/email:
 {
   "response": "Failed",
   "type": "GET",
-  "code": 403,
+  "code": 401,
   "reason": "User not found",
   "result": null
 }
@@ -112,7 +112,7 @@ On invalid password:
 {
     "response": "Failed",
     "type": "GET",
-    "code": 403,
+    "code": 401,
     "reason": "Invalid Password"
 }
 ```
@@ -133,14 +133,13 @@ On successful renewal:
     "code": 200,
     "action": "RENEW_SESSION",
     "session_id": {session_token}
-    "user_object": {user_object}
 }
 
 On invalid/expired session:
 {
     "response": "Failed",
     "type": "PUT",
-    "code": 403,
+    "code": 401,
     "action": "LOGOUT",
     "reason": "User's session token is invalid."
 }
@@ -149,7 +148,7 @@ On non-existant session:
 {
     "response": "Failed",
     "type": "PUT",
-    "code": 403,
+    "code": 401,
     "action": "LOGOUT",
     "reason": "User's session token was not found."
 }
@@ -170,7 +169,17 @@ On successful logout:
     "response": "Success",
     "type": "PUT",
     "code": 200,
+    "action": "LOGOUT"
     "reason": "User successfully logged out."
+}
+
+On successful logout w/ invalid user object:
+{
+    response: "Success",
+    type: "PUT",
+    code: 409,
+    action: "LOGOUT",
+    reason: "Out of date user object cannot be saved. User logged out"
 }
 
 On invalid session:
@@ -179,6 +188,36 @@ On invalid session:
     "type": "PUT",
     "code": 500,
     "reason": "Session invalid. User object could not be saved"
+}
+```
+#### UPDATE_UO REQUEST:
+```
+{
+    "user": {
+        "session": "{session_token}",
+        "userobject": "{user_object}"
+    }
+}
+```
+#### UPDATE_UO RESPONSE:
+```
+On User Object current:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "SAVE UO",
+    userobject: {user_object}
+}
+
+On User Object out of date:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "RETRIEVE UO",
+    reason: "User object out of date. Retrieving from database.",
+    userobject: {user_object}
 }
 ```
 ## Misc Requests:
@@ -218,6 +257,34 @@ On user already exists:
         "userobject": {user_object}
     }
 }
+
+OR
+
+{
+    "user": {
+        "session":"{session_id}",
+        "userobject": {user_object}
+    },
+    "game": {
+        "questions": [
+            {
+                "QuestionID":{id},
+                "QuestionText":"{text}",
+                "QuestionOne":"{answer1}",
+                "QuestionTwo":"{answer2}",
+                "QuestionThree":"{answer3}",
+                "QuestionFour":"{answer4}",
+                "CorrectAnswer":"{correct_answer}",
+                "StatsOne":"{statsAnswer1}",
+                "StatsTwo":"{statsAnswer2}",
+                "StatsThree":"{statsAnswer3}",
+                "StatsFour":"{statsAnswer4}",
+                "QuestionBlockID":"{block_id}"
+            },
+            {...},
+        ]
+    }
+}
 ```
 #### REQUEST_BLOCK RESPONSE:
 ```
@@ -230,6 +297,10 @@ On user already exists:
         "QuestionThree":"{answer3}",
         "QuestionFour":"{answer4}",
         "CorrectAnswer":"{correct_answer}",
+        "StatsOne":"{statsAnswer1}",
+        "StatsTwo":"{statsAnswer2}",
+        "StatsThree":"{statsAnswer3}",
+        "StatsFour":"{statsAnswer4}",
         "QuestionBlockID":"{block_id}"
     },
     {...},

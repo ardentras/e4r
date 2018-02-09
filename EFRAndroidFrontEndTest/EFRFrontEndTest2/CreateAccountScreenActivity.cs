@@ -9,6 +9,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+using EFRFrontEndTest2.Assets;
+
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "CreateAccountScreenActivity")]
@@ -20,6 +22,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateAccountScreen);
+            CallDatabase database = new CallDatabase(this);
 
             EditText emailBox = FindViewById<EditText>(Resource.Id.EmailBox);
             EditText usernameBox = FindViewById<EditText>(Resource.Id.UsernameBox);
@@ -53,10 +56,10 @@ namespace EFRFrontEndTest2
                 if (usernameBox.Text.Length > 0)
                 {
                     //Pings the server to check if the username already exists
-                    JsonValue responce = await CheckUsername(usernameBox.Text, "1234");
+                    Responce responce = await database.CheckUsername(usernameBox.Text, "1234");
 
                     //Parses JSON responce to see if (User not found) returns, if so then username is acceptable
-                    if (responce.ToString().Split(',')[1].Contains("User not found"))
+                    if (responce.m_responce == "Succeed")
                         usernameErrorBox.Visibility = invisible;
                     else
                         usernameErrorBox.Visibility = visible;
@@ -97,8 +100,8 @@ namespace EFRFrontEndTest2
                 else
                 {
                     finalErrorBox.Visibility = invisible;
-                    JsonValue responce = await CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
-                    if (responce.ToString().Contains("Succeed"))
+                    Responce responce = await database.CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
+                    if (responce.m_responce == "Succeed")
                     {
                         Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         AlertDialog alert = dialog.Create();
@@ -143,55 +146,6 @@ namespace EFRFrontEndTest2
             catch
             {
                 return false;
-            }
-        }
-
-        private async Task<JsonValue> CheckUsername(string username, string password)
-        {            // Create an HTTP web request using the URL:
-            // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/login"));
-            request.ContentType = "application/json";
-            request.Method = "POST";
-            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            //byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
-            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
-
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
-                    // Return the JSON document:
-                    return jsonDoc;
-                }
-            }
-        }
-
-        private async Task<JsonValue> CreateAccount(string username, string email, string password)
-        {            // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/signup"));
-            request.ContentType = "application/json";
-            request.Method = "POST";
-            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
-            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = JsonObject.Load(stream);
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
-                    // Return the JSON document:
-                    return jsonDoc;
-                }
             }
         }
     }
