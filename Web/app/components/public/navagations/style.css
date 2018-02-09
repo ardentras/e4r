@@ -81,7 +81,7 @@
     color: #007BFE;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 740px) {
     .navselector::after {
         display: none;
         transition: none;

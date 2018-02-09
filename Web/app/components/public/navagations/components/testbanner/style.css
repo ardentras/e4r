@@ -21,3 +21,10 @@
         font-size: 2vmax;
     }
 }
+
+
+@media (max-width: 320px) {
+    .testbanner {
+        font-size: 1vmax;
+    }
+}

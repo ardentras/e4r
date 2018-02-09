@@ -128,7 +128,7 @@
     background: #141b22;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 740px) {
     .header {
         display: none;
     }
@@ -140,6 +140,7 @@
     }
     .questioncontents {
         padding-bottom: 56px;
+        min-height: 400px;
     }
     .selection{
         margin: 0;
