@@ -63,8 +63,8 @@ If not, You'll be a good person once you use this application. (:
 
 ## Authors
 
-* **Shaun Rasmusen** - (https://github.com/ardentras)
-* **Jimmy Atkinson** - (https://github.com/ymmijx)
-* **Jacob Chesley** - (https://github.com/TieRein)
-* **Kelcey Stauffer** - (https://github.com/kelceystauffer)
-* **Kevin Xu** - (https://github.com/kevinjiaxu96)
+* **Shaun Rasmusen (Backend)** - (https://github.com/ardentras)
+* **Jimmy Atkinson (Xamarin)** - (https://github.com/ymmijx)
+* **Jacob Chesley (Xamarin)** - (https://github.com/TieRein)
+* **Kelcey Stauffer (Xamarin)** - (https://github.com/kelceystauffer)
+* **Kevin Xu (Web)** - (https://github.com/kevinjiaxu96)
