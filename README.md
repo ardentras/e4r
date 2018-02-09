@@ -12,7 +12,7 @@
        alt="Made with Love"></a>
 
 <br>
-A non-profit web application that allow users to solve a range of subjects to earn revenue from ads and donate to a selected charity of choice.
+A non-profit web and android application that allow users to solve a range of subjects to earn revenue from ads and donate to a selected charity of choice.
 
 ##### Compatible Browsers
 ```
