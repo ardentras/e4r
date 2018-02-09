@@ -20,7 +20,7 @@ class Private extends React.Component {
 		}
     }
     logout() {
-        this.props.handlerDeAuth();
+        this.props.handlerDeAuth(this.props.user);
     }
     render() {
         return (

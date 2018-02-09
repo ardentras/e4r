@@ -72,6 +72,10 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        line-height: 30px;
+    }
+    .email p {
+        margin-bottom: 20px;
     }
     .email {
         justify-content: center;
@@ -81,7 +85,7 @@
         justify-content: space-between;
     }
     .infos input {
-        min-width: 135px;
+        width: 50%;
     }
     .email p {
         width: 90%;

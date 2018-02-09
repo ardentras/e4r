@@ -13,7 +13,6 @@ export function getQuestions(userObject) {
         catch(err) {
             console.log("err",err);
         }
-
     };
 }
 
