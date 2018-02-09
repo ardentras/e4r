@@ -4,6 +4,14 @@
  *->Purpose: Declare all styles for the Nav component in Nav.js
  *
 *****************************************************************************/
+.clearfix::after {
+    content: " ";
+    display: table;
+    clear: both;
+    display: block;
+    height: 140px;
+}
+
 .navagation {
     position: fixed;
     display: flex;

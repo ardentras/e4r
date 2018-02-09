@@ -48,7 +48,6 @@ class Login extends React.Component {
 		}
 		return (
 			<div>
-				<div className={Styles.clearfix}/>
 				<div className={Styles.formcontainer}>
 					<div className={Styles.forms}>	
 						<Visit func={{signup: this.signup}}/>

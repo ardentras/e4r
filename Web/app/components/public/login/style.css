@@ -4,13 +4,6 @@
  *->Purpose: Declare all styles for the Login component in Login.js
  *
 *****************************************************************************/
-.clearfix::after {
-    content: " ";
-    display: table;
-    clear: both;
-    display: block;
-    height: 140px;
-}
 .formcontainer {
     display: flex;
     width: 100%;

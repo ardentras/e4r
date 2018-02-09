@@ -74,6 +74,7 @@ export function handlerAuth(user=undefined) {
 			iCookie.reset();
 			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
+				console.log("auth", result.data);
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
 				dispatch(setUID(user.username));

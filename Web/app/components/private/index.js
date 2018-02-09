@@ -25,7 +25,6 @@ class Private extends React.Component {
     render() {
         return (
             <div className={Styles.private}>
-                <div className={Styles.clearfix}></div>
                 <div className={Styles.contents}>
                     <Dashboard func={{logout: this.logout}}/>
                     {Routes.map((elem, index)=>(

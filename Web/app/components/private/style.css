@@ -1,11 +1,3 @@
-.clearfix::after, .clearfix::before{
-    content: " ";
-    display: table;
-    clear: both;
-    margin: 0 auto;
-    min-height: 71px;
-}
-
 .private {
     position: relative;
     height: calc((100%) - 71px);
