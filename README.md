@@ -1,4 +1,4 @@
-# Education for Revitalization 
+# Education for Revitalization (Under developement)
 <a href="#"> 
   <img src="https://forthebadge.com/images/badges/gluten-free.svg"
        alt="Gluten Free"></a>
@@ -55,6 +55,8 @@ If not, You'll be a good person once you use this application. (:
 * [Google Adsense](https://www.google.com/adsense) - Revenue Generator(For donations)
 * [Bamboo](https://www.atlassian.com/software/bamboo) - Deployment Management
 * [React](https://reactjs.org) - Javascript library for UI
+* [Redux](https://redux.js.org) - State management library
+* [Wamp](http://www.wampserver.com/en/) - Current web hosting for testing
 * [Confluence](https://www.atlassian.com/software/confluence) - Collaborations application
 
 * [REST API](http://www.restapitutorial.com) - Application Programming Interface(HTTP Protocols Using Express.js)
