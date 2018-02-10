@@ -16,7 +16,7 @@ namespace EFRFrontEndTest2.Assets
     {
         public UserObject() { }
 
-        public string CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } } //TODO: Make array once server functionality is implemented
+        //public Array CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } } //TODO: Make array once server functionality is implemented
         public string Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
         public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
         public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
@@ -27,7 +27,7 @@ namespace EFRFrontEndTest2.Assets
         public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }    //These should only be changed when loading a user object
 
         private string m_SessionID;
-        private string m_CompletedBlocks;
+        //private Array m_CompletedBlocks;
         private string m_Difficulty;
         private int m_SubjectID;
         private string m_Timestamp;
@@ -39,7 +39,7 @@ namespace EFRFrontEndTest2.Assets
         public string GetObjectString()
         {
             string objectString = m_SessionID + ",";
-            objectString += m_CompletedBlocks + ",";
+            //objectString += m_CompletedBlocks + ",";
             objectString += m_Difficulty + ",";
             objectString += m_SubjectID.ToString() + ",";
             objectString += m_Timestamp + ",";
@@ -61,13 +61,13 @@ namespace EFRFrontEndTest2.Assets
                 try { m_SubjectID = Int32.Parse(list[3]); } //Ensures a corrupt string will not corrupt the object
                 catch (Exception e) { return false; }
                 m_SessionID = list[0];
-                m_CompletedBlocks = list[1];
-                m_Difficulty = list[2];
-                m_Timestamp = list[4];
-                m_Charity = list[5];
-                m_FirstName = list[6];
-                m_LastName = list[7];
-                m_Username = list[8];
+               // m_CompletedBlocks = list[1];
+                m_Difficulty = list[1];
+                m_Timestamp = list[3];
+                m_Charity = list[4];
+                m_FirstName = list[5];
+                m_LastName = list[6];
+                m_Username = list[7];
                 done = true;
             }
 

@@ -13,11 +13,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace EFRFrontEndTest2.Assets
+
+//TODO: Make this implement a singleton pattern
+namespace EFRFrontEndTest2.Assets 
 {
     public struct Responce
     {
-        public Responce(string responce, int code, string reason = "None")
+        public Responce(string responce, int code, string reason)
         {
             m_responce = responce;
             m_reason = reason;
@@ -55,10 +57,10 @@ namespace EFRFrontEndTest2.Assets
                 {
                     // Use this stream to build a JSON document object:
                     JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-                    string [] list = ParseJson(jsonDoc.ToString());
-                    if (list.Any("game_data".Contains))
-                        CreateUserObject(list);
+                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString()); //For debugging
+                    SaveLastResponce(jsonDoc);
+                    if (LastResponce.m_code == 200)
+                        CreateUserObject(jsonDoc);
 
                     return LastResponce;
                 }
@@ -84,7 +86,7 @@ namespace EFRFrontEndTest2.Assets
                     // Use this stream to build a JSON document object:
                     JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-                    ParseJson(jsonDoc.ToString());
+                    SaveLastResponce(jsonDoc);
 
                     // Return the JSON document:
                     return LastResponce;
@@ -108,7 +110,7 @@ namespace EFRFrontEndTest2.Assets
                     // Use this stream to build a JSON document object:
                     JsonValue jsonDoc = JsonObject.Load(stream);
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-                    ParseJson(jsonDoc.ToString());
+                    SaveLastResponce(jsonDoc);
 
                     // Return the JSON document:
                     return LastResponce;
@@ -116,40 +118,31 @@ namespace EFRFrontEndTest2.Assets
             }
         }
 
-        private string [] ParseJson(string json)
+        private void SaveLastResponce(JsonValue json)
         {
-            json = json.Replace("\"", string.Empty);
-            json = json.Trim(new char[] { '{', '}'});
-            string[] checks = new[] { "action: ", ", code: ", ", response: ", ", session_id: ", ", type: ", ", user_object: ", ", timestamp: ", ", user_data: " };
-            string[] list = json.Split(checks, StringSplitOptions.None);
+            string response = json["response"];
+            int code = json["code"];
+            string reason = "None";
+// TODO: Ask Shaun if he can link code to the existance of reason. Or at lease have a reason in every response.
+            try { reason = json["reason"]; } // Reason isnt linked to error code so must be checked every time.
+            catch (Exception) { }
 
-            LastResponce.m_reason = list[1];
-            Int32.TryParse(list[2], out LastResponce.m_code);
-            LastResponce.m_responce = list[3];
-
-            return list;
+            LastResponce = new Responce(response, code, reason);
         }
-
-        private void CreateUserObject(string [] list)
+        private void CreateUserObject(JsonValue json)
         {
-            list[6] = list[6].Trim(new char[] { '{', '}' });
-            string[] checks = new[] { "game_data: {completed_blocks: ", ", difficulty: ", ", subject_id: ", ", subject_name: " };
-            string[] game_data = list[6].Split(checks, StringSplitOptions.None);
-            checks = new[] { "{charity_name: ", ", first_name: ", ", last_name: ", ", username: " };
-            string[] user_data = list[8].Split(checks, StringSplitOptions.None);
-
-            int ID;
-            Int32.TryParse(game_data[2], out ID);
-            m_userObject.SubjectID = ID; //TODO: Talk to Shaun about removing subject_name, we will have it saved locally
-
-            m_userObject.CompletedBlocks = game_data[0];
-            m_userObject.Difficulty = game_data[1];
-            m_userObject.Timestamp = list[7];
-            m_userObject.Charity = user_data[0]; //TODO: Talk to Shaun about using an ID instead of a name
-            m_userObject.FirstName = user_data[1];
-            m_userObject.LastName = user_data[2];
-            m_userObject.Username = user_data[3];
-            m_userObject.SessionID = list[4];
+            JsonValue user = json["user_object"];
+            JsonValue game = user["game_data"];
+//TODO: Fix once implemented
+           // m_userObject.CompletedBlocks = game["completed_blocks"];
+            m_userObject.Difficulty = game["difficulty"];
+            m_userObject.SubjectID = game["subject_id"];
+            m_userObject.Timestamp = user["timestamp"];
+            user = user["user_data"];
+            m_userObject.Charity = user["charity_name"];
+            m_userObject.FirstName = user["first_name"];
+            m_userObject.LastName = user["last_name"];
+            m_userObject.Username = user["username"];
         }
 
         public UserObject GetUserObject { get { return m_userObject; } }
@@ -161,9 +154,33 @@ namespace EFRFrontEndTest2.Assets
     }
 }
 
-//"{\"action\": \"LOGIN\", \"code\": 200, \"response\": \"Success\", \"session_id\": \"855ce8c1-8577-4a84-9199-9b8efaebe8b3\", \"type\": \"GET\", 
-//\"user_object\": {\"game_data\": {\"completed_blocks\": [], \"difficulty\": \"0\", \"subject_id\": \"1\", \"subject_name\": \"\"}, \"timestamp\": \"\", \"user_data\": {\"charity_name\": \"\", \"first_name\": \"\", \"last_name\": \"\", \"username\": \"abc\"}}}"
 
+/* "{
+ *      "action": "LOGIN",
+ *      "code": 200,
+ *      "response": "Success",
+ *      "session_id": "77b96593-1516-481e-8479-e944c83ff587",
+ *      "type": "GET",
+ *          "user_object": 
+ *          {
+ *              "game_data": 
+ *              {
+ *                  "completed_blocks": [],
+ *                  "difficulty": "0",
+ *                  "subject_id": "1",
+ *                  "subject_name": ""
+ *              },
+ *          "timestamp": "",
+ *          "user_data": 
+ *          {
+ *              "charity_name": "",
+ *              "first_name": "",
+ *              "last_name": "",
+ *              "username": "abc"
+ *          }
+ *      }
+ * }"
+ */
 
 /*
 list

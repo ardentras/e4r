@@ -36,12 +36,12 @@ namespace EFRFrontEndTest2
             //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
-
                 // Fetch the login information asynchronously, parse the results, then update the screen.
                 Responce responce = await database.FetchLogin(userBox.Text, passBox.Text);
+
                 if (responce.m_responce == "Success")
                 {
-                    LocalArchive archive = new LocalArchive(this);
+                    LocalArchive archive = new LocalArchive(this, "AnsweredQuestions.txt");
                     archive.SetUserData(database.GetUserObject.GetObjectString());
 
                     var intent = new Intent(this, typeof(HomeScreenActivity));
@@ -62,10 +62,10 @@ namespace EFRFrontEndTest2
             };
 
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
-            createAccount.Click += StartAccountActivity;
+            createAccount.Click += StartCreateAccountActivity;
         }
 
-        private void StartAccountActivity(object sender, EventArgs e)
+        private void StartCreateAccountActivity(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CreateAccountScreenActivity));
             StartActivity(intent);
@@ -84,5 +84,3 @@ private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
 {
     SetContentView(Resource.Layout.CreateAccountScreen);
 }*/
-
-//"{\"action\": \"LOGIN\", \"code\": 200, \"response\": \"Success\", \"session_id\": \"855ce8c1-8577-4a84-9199-9b8efaebe8b3\", \"type\": \"GET\", \"user_object\": {\"game_data\": {\"completed_blocks\": [], \"difficulty\": \"0\", \"subject_id\": \"1\", \"subject_name\": \"\"}, \"timestamp\": \"\", \"user_data\": {\"charity_name\": \"\", \"first_name\": \"\", \"last_name\": \"\", \"username\": \"abc\"}}}"

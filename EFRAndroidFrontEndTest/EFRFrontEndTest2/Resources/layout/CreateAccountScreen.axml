@@ -53,16 +53,22 @@
                 p1:layout_rowWeight="1"
                 p1:clickable="true"
                 p1:nextFocusForward="@+id/UsernameBox"
-                p1:inputType="textEmailAddress" />
+                p1:inputType="textEmailAddress"
+                p1:maxLength="25" />
             <TextView
-                p1:id="@+id/textView2"
+                p1:id="@+id/MaxCharErrorBox"
                 p1:layout_column="0"
-                p1:layout_columnSpan="12"
+                p1:layout_columnSpan="14"
                 p1:layout_columnWeight="1"
                 p1:layout_row="0"
                 p1:layout_rowSpan="4"
                 p1:layout_rowWeight="3"
-                p1:clickable="false" />
+                p1:clickable="false"
+                p1:text="Each field may have a maximum of 25 characters"
+                p1:visibility="invisible"
+                p1:gravity="center"
+                p1:background="#8000"
+                p1:textColor="#ff0000" />
             <TextView
                 p1:id="@+id/textView3"
                 p1:layout_column="0"
@@ -96,7 +102,8 @@
                 p1:layout_rowWeight="1"
                 p1:clickable="true"
                 p1:nextFocusForward="@+id/PasswordBoxOne"
-                p1:inputType="text" />
+                p1:inputType="text"
+                p1:maxLength="25" />
             <TextView
                 p1:text="Username:"
                 p1:id="@+id/textView4"
@@ -154,7 +161,8 @@
                 p1:layout_row="10"
                 p1:layout_rowSpan="2"
                 p1:layout_rowWeight="1"
-                p1:nextFocusForward="@+id/PasswordBoxTwo" />
+                p1:nextFocusForward="@+id/PasswordBoxTwo"
+                p1:maxLength="25" />
             <TextView
                 p1:id="@+id/textView7"
                 p1:clickable="false"
@@ -200,7 +208,8 @@
                 p1:layout_row="13"
                 p1:layout_rowSpan="2"
                 p1:layout_rowWeight="1"
-                p1:imeOptions="actionDone" />
+                p1:imeOptions="actionDone"
+                p1:maxLength="25" />
             <TextView
                 p1:id="@+id/FinalErrorBox"
                 p1:clickable="false"
@@ -221,8 +230,8 @@
                 p1:layout_column="12"
                 p1:layout_columnSpan="2"
                 p1:layout_columnWeight="1"
-                p1:layout_row="0"
-                p1:layout_rowSpan="21"
+                p1:layout_row="4"
+                p1:layout_rowSpan="17"
                 p1:layout_rowWeight="1" />
             <TextView
                 p1:id="@+id/textView11"

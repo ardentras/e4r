@@ -33,6 +33,7 @@ namespace EFRFrontEndTest2
             Button cancelButton = FindViewById<Button>(Resource.Id.CancelButton);
 
             //Used for notifying user when a field entry is not permitted
+            TextView maxCharErrorBox = FindViewById<TextView>(Resource.Id.MaxCharErrorBox);
             TextView emailErrorBox = FindViewById<TextView>(Resource.Id.EmailErrorBox);
             TextView usernameErrorBox = FindViewById<TextView>(Resource.Id.UsernameErrorBox);
             TextView passwordErrorBox = FindViewById<TextView>(Resource.Id.PasswordErrorBox);
@@ -42,6 +43,36 @@ namespace EFRFrontEndTest2
             //Also acts as a bool to check if data/format is correct
             ViewStates visible = ViewStates.Visible;
             ViewStates invisible = ViewStates.Invisible;
+
+//TODO: Remake the UI do the screen doesnt freak out when there are too many large characters on it.
+            emailBox.TextChanged += (sender, e) =>
+            {
+                if (emailBox.Text.Length == 25)
+                    maxCharErrorBox.Visibility = visible;
+                else
+                    maxCharErrorBox.Visibility = invisible;
+            };
+            usernameBox.TextChanged += (sender, e) =>
+            {
+                if (usernameBox.Text.Length == 25)
+                    maxCharErrorBox.Visibility = visible;
+                else
+                    maxCharErrorBox.Visibility = invisible;
+            };
+            passwordBoxOne.TextChanged += (sender, e) =>
+            {
+                if (passwordBoxOne.Text.Length == 25)
+                    maxCharErrorBox.Visibility = visible;
+                else
+                    maxCharErrorBox.Visibility = invisible;
+            };
+            passwordBoxTwo.TextChanged += (sender, e) =>
+            {
+                if (passwordBoxTwo.Text.Length == 25)
+                    maxCharErrorBox.Visibility = visible;
+                else
+                    maxCharErrorBox.Visibility = invisible;
+            };
 
             emailBox.FocusChange += (sender, e) =>
             {
