@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+using Acr.UserDialogs;
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -30,6 +31,7 @@ namespace EFRFrontEndTest2
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
+            TextView forgotPassword = FindViewById<TextView>(Resource.Id.ForgotPasswordButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
 
 
@@ -61,6 +63,7 @@ namespace EFRFrontEndTest2
                 }
             };
 
+            forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
             createAccount.Click += StartCreateAccountActivity;
         }
@@ -69,6 +72,41 @@ namespace EFRFrontEndTest2
         {
             var intent = new Intent(this, typeof(CreateAccountScreenActivity));
             StartActivity(intent);
+        }
+
+        void ShowForgotPasswordScreen()
+        {
+            //Inflate layout
+            View view = LayoutInflater.Inflate(Resource.Layout.ForgotPasswordAlertDialogScreen, null);
+            AlertDialog builder = new AlertDialog.Builder(this).Create();
+            builder.SetView(view);
+            builder.SetCanceledOnTouchOutside(false);
+            EditText textUsername = view.FindViewById<EditText>(Resource.Id.textUsername);
+            Button buttonSubmit = view.FindViewById<Button>(Resource.Id.buttonSubmit);
+            Button buttonCancel = view.FindViewById<Button>(Resource.Id.buttonCancel);
+            buttonCancel.Click += delegate {
+                builder.Dismiss();
+            };
+            buttonSubmit.Click += delegate
+            {
+                if (textUsername.Text.Length > 0)
+                {
+                    SendAccountRecoveryEmail(textUsername.Text);
+                    builder.Dismiss();
+                    Toast.MakeText(this, "Email sent!", ToastLength.Long).Show();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Please enter your username", ToastLength.Short).Show();
+                }
+            };
+            builder.Show();
+        }
+
+//TODO: Implement once Shaun has created a password recovery API call
+        private void SendAccountRecoveryEmail(string username)
+        {
+
         }
     }
 }
