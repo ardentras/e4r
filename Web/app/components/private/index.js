@@ -17,7 +17,11 @@ class Private extends React.Component {
     componentWillMount() {
         if (this.props.questions.length <= 0) {
 			this.props.getQuestions(this.props.user);
-		}
+        }
+    }
+    hideModal() {
+        const modal = document.getElementsByClassName(Styles.modal)[0];
+        modal.style.transform = "translateY(-1000px)";
     }
     logout() {
         this.props.handlerDeAuth(this.props.user);
@@ -25,6 +29,14 @@ class Private extends React.Component {
     render() {
         return (
             <div className={Styles.private}>
+                <div className={Styles.modal}>
+                    <div className={Styles.levelup}>
+                        <i className={["fa", "fa-trophy", Styles.trophy].join(" ")}/>
+                        <span className={Styles.modalheader}>Congratulation</span>
+                        <p className={Styles.modalcontent}>You made it to the next level!</p>
+                        <button onClick={this.hideModal} className={Styles.modalbtn}>OK</button>
+                    </div>
+                </div>
                 <div className={Styles.contents}>
                     <Dashboard func={{logout: this.logout}}/>
                     {Routes.map((elem, index)=>(

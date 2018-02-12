@@ -11,6 +11,7 @@ import Description from "./components/description";
 import Charity from "./components/charities";
 import LatestNews from "./components/latestnews";
 import Footer from "./components/footer";
+import Loading from "../../loading";
 
 import Styles from "./style.css";
 

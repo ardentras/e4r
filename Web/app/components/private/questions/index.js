@@ -4,6 +4,8 @@ import { Line } from "rc-progress";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock } from "../../../redux/actions/questions";
+import modalStyle from "../style.css";
+
 
 const Choice = props => (
     <div>
@@ -33,6 +35,11 @@ class Question extends React.Component {
             }
         }
     }
+    showModal() {
+        console.log("Showing Modal!", modalStyle.modal);
+        const modal = document.getElementsByClassName(modalStyle.modal)[0];
+        modal.style.transform = "translateY(0px)";
+    }
     next() {
         const choices = document.getElementsByClassName(Styles.choice);
         for(let i = 0; i < choices.length; ++i) {
@@ -43,6 +50,7 @@ class Question extends React.Component {
             this.props.nextQuestion();
         } 
         else {
+            this.showModal();
             this.props.getNextBlock(this.props.questions[0].QuestionBlockID, this.props.user);
         }
     }

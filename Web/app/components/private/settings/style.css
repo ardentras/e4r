@@ -1,5 +1,5 @@
 @media (max-width: 740px) {
    .settings {
-       min-height: 400px;
+       width: 100%;
    }
 }

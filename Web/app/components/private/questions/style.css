@@ -139,12 +139,11 @@
         display: none;
     }
     .questioncontents {
-        padding-bottom: 56px;
-        min-height: 400px;
     }
     .selection{
         margin: 0;
         padding: 0 20px;
+        height: 100%;
     }
     .choicelabel {
         padding: 3% 10px;

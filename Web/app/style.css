@@ -12,6 +12,14 @@ li {
     list-style-type: none;
 }
 
+input, button, textarea {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    -moz-appearance: none;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 html, body {
     color: #141b22;
     position: relative;

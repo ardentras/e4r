@@ -102,8 +102,8 @@ export function handlerDeAuth(userobject) {
 			dispatch(Error());
 			iCookie.reset();
 			if (result.data.code === httpCodes.Ok) {
-				dispatch(Reset());
 				window.location.reload();
+				dispatch(Reset());
 			}
 			else {
 				dispatch(Error("DEAUTH_FAIL"));

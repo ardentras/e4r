@@ -16,21 +16,18 @@ import Navagations from "./navagations"; // eslint-disable-line no-unused-vars
 import Routes from "./routes";
 import PrivateRoute from "./routes/private";
 import Private from "../private";
+import Spinner from "../loading";
 import Styles from "./style.css";
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-	async componentWillMount() {
-		// if (!this.props.states.IS_AUTH) {
-		// 	this.props.handlerPersist();
-		// }
-	}
 	render() {
 		return (
 			<BrowserRouter>
 				<div className={Styles.container}>
+					<Spinner/>
 					<div>
 						<Navagations IS_AUTH={this.props.states.IS_AUTH} uid={this.props.uid}/>
 					</div>

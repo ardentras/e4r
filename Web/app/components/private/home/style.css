@@ -9,8 +9,11 @@
     display: flex;
     width: 100%;
     flex-flow: column;
-    background: white;
-    padding: 30px 0;
+    background: #F4F6F9;
+    padding: 5px 0;
+    height: 100%;
+    justify-content: center;
+    position: relative;
 }
 
 .recentactivity h1{
@@ -19,24 +22,9 @@
 
 .activities {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-}
-
-.rowheaders {
-    margin-top: 30px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-}
-
-.discussions {
-    display: flex;
     flex-flow: column;
-    box-shadow: 0 1px 1px 1px rgb(228, 228, 228);
-    padding: 30px 50px 30px 5px;
-    border-radius: 8px;
-    position: relative;
+    justify-content: center;
+    height: 100%;
 }
 
 .msg {
@@ -50,19 +38,13 @@
     color: rgb(255, 230, 0);
 }
 
-.feeds {
+.heartcontainer {
     display: flex;
-    flex-flow: column;
-}
-
-.feed {
-    box-shadow: 0 1px 1px 1px rgb(182, 181, 181);
-    border-radius:10px;
-    padding: 10px 20px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: center;    
+    background: white;
+    width: 100%;
+    height: 30%;
 }
 
 .trophy {
@@ -73,19 +55,7 @@
     color: rgb(255, 102, 102);
 }
 
-.records {
-    background: #749FF2;
-    width: 100%;
-    padding: 20px 0;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    text-align: center;
-    color: white;
-    font-size: 1vmax;
-}
-
 .recordcontent {
-    padding: 10% 0;
     font-size: 2vmax;
 }
 
@@ -93,15 +63,70 @@
     padding: 0 20px;
 }
 
+#heart {
+    width: 200px;
+    height: 200px;
+}
+
+.userdata {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.uid {
+    font-size: 4vmax;
+}
+
+.uidcontainer {
+    font-size: 3vmax;
+}
+
 .activity {
-    border-radius: 10px;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 100%;
     height: 100%;
-    border: 1px solid #749FF2;
+    margin-bottom: 5px;
+    background: white;
+}
+
+.totals {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-around;
+    border: 0;
+}
+
+.totals hr {
+    display: block;
+    height: 100%;
+    width: 2px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.questionscontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 100%;
+}
+
+.donationcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    width: 100%;
 }
 
 @media (max-width: 740px) {
@@ -114,37 +139,38 @@
     }
     .home {
         padding: 0;
+        position: relative;
         background: #F4F6F9;
-        padding-bottom: 56px;
-        min-height: 400px;
     }
     .userdata {
+        flex-flow: row nowrap;
         background: white;
-        margin: 5px 0;
         padding: 20px;
         width: 100%;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-around;
+        margin-bottom: 0;
     }
     .activities {
         flex-flow: column;
+        height: 100%;
     }
     .activity {
         border: none;
         border-radius: 0;
         background: white;
         margin-bottom: 5px;
-        padding: 20px 0;
+        padding: 10px 0;
         width: 100%;
     }
     .recordcontent {
         padding: 0;
         font-size: 3vmax;
+        display: flex;
+        justify-content: center;
     }
     .recentactivity {
         background: #F4F6F9;
         padding: 0 10px;
+        height: 100%;
     }
     .uidcontainer {
         display: flex;
@@ -152,8 +178,11 @@
         justify-content: center;
         align-items: center;
     }
+    .heartcontainer {
+        height: 30%;
+    }
     .uid {
-        font-size: 3vmax;
+        font-size: 4vmax;
         font-weight: 500;
     }
     .welcome {
@@ -169,5 +198,10 @@
         font-size: 2vmax;
         opacity: 0.6;
         padding: 10px 0;
+    }
+    .totals {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
     }
 }
