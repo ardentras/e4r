@@ -27,23 +27,33 @@ namespace EFRFrontEndTest2
                 LinearLayout layoutBase = FindViewById<LinearLayout>(Resource.Id.bubble_layout);
                 ImageView img = new ImageView(this);
                 Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
+                //create new bubble image
                 img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
                 img.Visibility = ViewStates.Visible;
                 img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+                //place the bubble on screen randomizing it's x pos
                 layoutBase.AddView(img,100,100);
                 Random rnd = new Random();
                 img.SetX(rnd.Next(0, 1000));
+                // create an animator to move the bubble
                 ValueAnimator animator = ValueAnimator.OfInt(0, -1100);
                 animator.SetDuration(1500);
                 animator.Start();
+                /* 
+                 * function to move bubble
+                 * called each frame the animation occurs
+                 * and moved the bubble upward and in a sine wave
+                 */
                 animator.Update += (object sender2, ValueAnimator.AnimatorUpdateEventArgs f) =>
                 {
-                    
+                    //animation value
                     int newValue = (int)f.Animation.AnimatedValue;
                     // Apply this new value to the object being animated.
                     img.TranslationY = newValue;
+                    //move the bubble in a sine wave pattern
                     if(newValue >= -900)
                     img.TranslationX += 10*(float)Math.Sin(newValue/100);
+                    //if near the top slide the bubble into the big bubble at the top
                     else
                     {
                         if (img.TranslationX > 500)
@@ -51,6 +61,7 @@ namespace EFRFrontEndTest2
                         else
                             img.TranslationX += 3;
                     }
+                    //remove the bubble and increment the counter
                     if (1 == f.Animation.AnimatedFraction)
                     {
                         layoutBase.RemoveView(img);
