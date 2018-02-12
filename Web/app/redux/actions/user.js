@@ -16,6 +16,13 @@ export function getQuestions(userObject) {
     };
 }
 
+export function setSessionToken(token) {
+    return {
+        type: Types.SET_SESSION_TOKEN,
+        value: token
+    }
+}
+
 export function setUserObject(object) {
     return {
         type: Types.SET_USER_OBJECT,

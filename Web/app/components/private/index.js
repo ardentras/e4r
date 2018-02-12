@@ -16,7 +16,7 @@ class Private extends React.Component {
     }
     componentWillMount() {
         if (this.props.questions.length <= 0) {
-			this.props.getQuestions(this.props.user);
+            this.props.getQuestions(this.props.user);
         }
     }
     hideModal() {
@@ -27,7 +27,6 @@ class Private extends React.Component {
         this.props.handlerDeAuth(this.props.user);
     }
     render() {
-        console.log(this.props.user);
         return (
             <div className={Styles.private}>
                 <div className={Styles.modal}>

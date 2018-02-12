@@ -90,9 +90,9 @@ const efrApi = (()=>{
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _gamePath.get(this);
             return Axios.put(apiRoute, {user});
         }
-        renewSession(user) {
+        renewSession() {
             // const session = iCookie.get("session");
-            // const objToSent = {user: {session: session, userobject: user}};
+            // const objToSent = {user: {session: session}};
             // const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
 			// return Axios.put(apiRoute, objToSent);
         }
