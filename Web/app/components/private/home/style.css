@@ -180,6 +180,7 @@
     }
     .heartcontainer {
         height: 30%;
+        padding: 10px 0;
     }
     .uid {
         font-size: 4vmax;
@@ -203,5 +204,12 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-around;
+    }
+}
+
+@media (max-height: 375px) {
+    #heart {
+        width: 75px;
+        height: 75px;
     }
 }

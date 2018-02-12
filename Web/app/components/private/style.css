@@ -1,6 +1,7 @@
 .private {
     position: relative;
-    height: calc((100%) - 140px);
+    height: calc(100% - 140px);
+    max-height: calc(100% - 140px);
     background: #f1f1f1;
 }
 
@@ -31,7 +32,7 @@
 .modalbtn {
     outline: none;
     border: none;
-    background: #97FF66;
+    background: #42B3CB;
     width: 100%;
     font-size: 1vmax;
     color: white;
@@ -71,11 +72,25 @@
 @media (max-width: 740px) {
     .private {
         display: flex;
-        position: fixed;
         width: 100%;
         padding-bottom: 60px;
     }
+    .modalbtn {
+        font-size: 2vmax;
+    }
     .contents {
         width: 100%;
+    }
+}
+
+@media (min-width: 550px) {
+    .private {
+        height: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .private{
+        position: fixed;
     }
 }

@@ -108,3 +108,9 @@
         padding-top: 10px;
     }
 }
+
+@media (max-height: 420px) {
+    .header {
+        align-items: flex-start;
+    }
+}

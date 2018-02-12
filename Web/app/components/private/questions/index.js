@@ -36,7 +36,6 @@ class Question extends React.Component {
         }
     }
     showModal() {
-        console.log("Showing Modal!", modalStyle.modal);
         const modal = document.getElementsByClassName(modalStyle.modal)[0];
         modal.style.transform = "translateY(0px)";
     }
@@ -56,6 +55,11 @@ class Question extends React.Component {
     }
     render() {
         const percent = (parseFloat(((this.props.index) / this.props.questions.length)) * 100).toString();
+        if (this.props.questions.length <= 0) {
+            return (
+                <div className={Styles.alldone}>No Questions!</div>
+            );
+        }
         return (
             <div className={Styles.question}>
                 <div className={Styles.header}>
@@ -87,9 +91,9 @@ class Question extends React.Component {
                                 <Choice index="2" letter="B" value={this.props.questions[this.props.index].QuestionTwo} check={this.checkAnswer}/>
                                 <Choice index="3" letter="C" value={this.props.questions[this.props.index].QuestionThree} check={this.checkAnswer}/>
                                 <Choice index="4" letter="D" value={this.props.questions[this.props.index].QuestionFour} check={this.checkAnswer}/>
-                                {this.props.answer === "correct" && <div onClick={this.next} className={Styles.nextbtn}>Next</div> }
                             </div>
                         </div>
+                        {this.props.answer === "correct" && <div onClick={this.next} className={Styles.nextbtn}>Next</div> }
                     </div>
                 </div>
             </div>

@@ -48,7 +48,7 @@ export function getNextBlock(qid, userobject) {
 export function updateCompletedBlock(user) {
     return async (dispatch)=>{
         try {
-            const result = await efrApi.renewSession(user);
+            //const result = await efrApi.renewSession(user);
         }
         catch(err) {
             console.log(err);

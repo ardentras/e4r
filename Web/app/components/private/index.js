@@ -27,6 +27,7 @@ class Private extends React.Component {
         this.props.handlerDeAuth(this.props.user);
     }
     render() {
+        console.log(this.props.user);
         return (
             <div className={Styles.private}>
                 <div className={Styles.modal}>
