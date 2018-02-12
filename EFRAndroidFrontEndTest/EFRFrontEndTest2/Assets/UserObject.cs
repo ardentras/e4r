@@ -22,6 +22,8 @@ namespace EFRFrontEndTest2.Assets
         public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
         public string Charity { get { return m_Charity; } set { m_Charity = value; } }
         public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
+        public int MoneyEarned { get { return m_MoneyEarned; } set { m_MoneyEarned = value; } }
+        public int QuestionsAnswered { get { return m_QuestionsAnswered; } set { m_QuestionsAnswered = value; } }
         public string LastName { get { return m_LastName; } set { m_LastName = value; } }
         public string Username { get { return m_Username; } set { m_Username = value; } }       //These should only be changed when loading a user object (I used this implementation for readability and consistancy)
         public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }    //These should only be changed when loading a user object
@@ -35,6 +37,8 @@ namespace EFRFrontEndTest2.Assets
         private string m_FirstName;
         private string m_LastName;
         private string m_Username;
+        private int m_MoneyEarned;
+        private int m_QuestionsAnswered;
 
         public string GetObjectString()
         {
@@ -46,7 +50,9 @@ namespace EFRFrontEndTest2.Assets
             objectString += m_Charity + ",";
             objectString += m_FirstName + ",";
             objectString += m_LastName + ",";
-            objectString += m_Username;
+            objectString += m_Username + ",";
+            objectString += m_MoneyEarned + ",";
+            objectString += m_QuestionsAnswered + ",";
             //TODO: If someone has time, replace with a more effecient process
 
             return objectString;
@@ -68,6 +74,9 @@ namespace EFRFrontEndTest2.Assets
                 m_FirstName = list[5];
                 m_LastName = list[6];
                 m_Username = list[7];
+                m_MoneyEarned = Convert.ToInt32(list[8]);
+                m_QuestionsAnswered = Convert.ToInt32(list[9]);
+
                 done = true;
             }
 

@@ -45,73 +45,85 @@ namespace EFRFrontEndTest2
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int BackArrowIcon = 2130837504;
+			public const int achievementsBackground = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int background = 2130837505;
+			public const int BackArrowIcon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int background2 = 2130837506;
+			public const int background = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int BackgroundGradient = 2130837507;
+			public const int background2 = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int BigBubble = 2130837508;
+			public const int BackgroundGradient = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int BiologyIcon = 2130837509;
+			public const int BigBubble = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int Bubble = 2130837510;
+			public const int BiologyIcon = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int ChemistryIcon = 2130837511;
+			public const int Bubble = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int ForwardArrowIcon = 2130837512;
+			public const int ChemistryIcon = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int GreenBackgroundGradient = 2130837513;
+			public const int ForwardArrowIcon = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int GreenButtonIcon = 2130837514;
+			public const int GreenBackgroundGradient = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int GreenButtonSelectedIcon = 2130837515;
+			public const int GreenButtonIcon = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int GreyButton = 2130837516;
+			public const int GreenButtonSelectedIcon = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int HistoryIcon = 2130837517;
+			public const int GreyButton = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int HRBlock = 2130837518;
+			public const int heartIcon = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int LightGreyCircle = 2130837519;
+			public const int HistoryIcon = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int MathIcon = 2130837520;
+			public const int HRBlock = 2130837520;
 			
 			// aapt resource value: 0x7f020011
-			public const int OptionsIcon = 2130837521;
+			public const int LightGreyCircle = 2130837521;
 			
 			// aapt resource value: 0x7f020012
-			public const int PhysicsIcon = 2130837522;
+			public const int MathIcon = 2130837522;
 			
 			// aapt resource value: 0x7f020013
-			public const int redcross2 = 2130837523;
+			public const int OptionsIcon = 2130837523;
 			
 			// aapt resource value: 0x7f020014
-			public const int RedCrossIcon = 2130837524;
+			public const int PhysicsIcon = 2130837524;
 			
 			// aapt resource value: 0x7f020015
-			public const int ShuffleIcon = 2130837525;
+			public const int redcross2 = 2130837525;
 			
 			// aapt resource value: 0x7f020016
-			public const int silverarrow = 2130837526;
+			public const int RedCrossIcon = 2130837526;
+			
+			// aapt resource value: 0x7f020017
+			public const int ShuffleIcon = 2130837527;
+			
+			// aapt resource value: 0x7f020018
+			public const int silverarrow = 2130837528;
+			
+			// aapt resource value: 0x7f020019
+			public const int starIcon = 2130837529;
+			
+			// aapt resource value: 0x7f02001a
+			public const int trophy = 2130837530;
 			
 			static Drawable()
 			{
@@ -356,19 +368,22 @@ namespace EFRFrontEndTest2
 			public const int HomeScreen = 2130968581;
 			
 			// aapt resource value: 0x7f040006
-			public const int Main = 2130968582;
+			public const int layout1 = 2130968582;
 			
 			// aapt resource value: 0x7f040007
-			public const int QuestionsPage = 2130968583;
+			public const int Main = 2130968583;
 			
 			// aapt resource value: 0x7f040008
-			public const int SelectSubjectScreen = 2130968584;
+			public const int QuestionsPage = 2130968584;
 			
 			// aapt resource value: 0x7f040009
-			public const int settingsPage = 2130968585;
+			public const int SelectSubjectScreen = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int WinPage = 2130968586;
+			public const int settingsPage = 2130968586;
+			
+			// aapt resource value: 0x7f04000b
+			public const int WinPage = 2130968587;
 			
 			static Layout()
 			{
