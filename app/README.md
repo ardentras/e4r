@@ -44,6 +44,9 @@ Debugging API Calls:
         "subject_name": "Math",
         "subject_id": "1",
         "difficulty": "0",
+        "totalQuestions": 0,
+        "totalDonated": 0.0,
+        "blocksRemaining": 0,
         "completed_blocks": [1, 3, 4]
     },
     "timestamp":"2018-01-24T02:06:58+00:00"

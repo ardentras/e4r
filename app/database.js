@@ -287,7 +287,6 @@ class TDatabase {
                 var dbTimestamp = user_object.timestamp;
 
                 if (cliTimestamp < dbTimestamp) {
-                    var uo = user_object;
                     client.json({response: "Success", type: "PUT", code: 409, action: "LOGOUT", reason: "Out of date user object cannot be saved. User logged out"});
                 } else {
                     var date = new Date();
@@ -324,7 +323,7 @@ class TDatabase {
                             						.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
 
                 if (res.rowsAffected > 0) {
-                    client.json({response: "Failed", type: "GET",code: 100, reason: "User already exists"});
+                    client.json({response: "Failed", type: "POST",code: 100, reason: "User already exists"});
                 } else {
                     //TODO Update this with a call to the salt table
                     let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
@@ -333,6 +332,9 @@ class TDatabase {
                     let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
                     newUserObject.user_data.username = data.username;
                     newUserObject.user_data.email = data.email;
+                    var date = new Date();
+                    data.userobject.timestamp = date.toISOString();
+
                     var uostring = JSON.stringify(newUserObject);
                     uostring = uostring.replace("\\", "");
 
@@ -352,7 +354,7 @@ class TDatabase {
                 client.json({response: "Failed", type: "POST", code: 500, reason: "User signup error", data: err});
             }
         } else {
-            client.json({response: "Rejected", Code: 500, reason: "Invalid Email"});
+            client.json({response: "Rejected", type: "POST", code: 500, reason: "Invalid Email"});
         }
     }
 
