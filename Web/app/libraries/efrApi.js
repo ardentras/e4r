@@ -80,18 +80,21 @@ const efrApi = (()=>{
         signup(user) {
             return iAuth.Register(user, _signupPath.get(this));
         }
-        logout() {
-            return iAuth.Deauthenticate(iAuth.getUserFromCookie(), _logoutPath.get(this));
+        logout(userobject) {
+            return iAuth.Deauthenticate({
+			session: iCookie.get("session"),
+			userobject: userobject
+			}, _logoutPath.get(this));
         }
         getQuestions(user) {
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _gamePath.get(this);
             return Axios.put(apiRoute, {user});
         }
         renewSession(user) {
-            const session = iCookie.get("session");
-            const objToSent = {user: {session: session, userobject: user}};
-            const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
-			return Axios.put(apiRoute, objToSent);
+            // const session = iCookie.get("session");
+            // const objToSent = {user: {session: session, userobject: user}};
+            // const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
+			// return Axios.put(apiRoute, objToSent);
         }
 	}
 	return efrApi;

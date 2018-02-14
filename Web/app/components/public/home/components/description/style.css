@@ -17,13 +17,23 @@
 } */
 
 .parallex {
+    -webkit-background-attachment: fixed;
+    -webkit-background-position: center;
+    -webkit-background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-attachment: fixed;
+    -moz-background-position: center;
+    -moz-background-repeat: no-repeat;
+    -moz-background-size: cover;
     background-attachment: fixed;
-    background-position: 50%;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
     height: 100%;
     width: 100%;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
     transition: all 1s ease;
 }
 
@@ -36,7 +46,7 @@
     width: 100%;
     height: 100%;
     font-size: 4vmax;
-    z-index: 9998;
+    z-index: 100;
 }
 
 .pdescription {
@@ -80,4 +90,28 @@
 
 .psactive {
     color: #007BFE;
+}
+
+@media (max-width: 500px) {
+    .parallex {
+        background: none;
+    }
+    .parallex::after {
+        position: fixed;
+        content: " ";
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        -webkit-background-size: cover;
+        -webkit-background-position: 50%;
+        -webkit-background-image: url("/static/background.jpg");
+        -moz-background-size: cover;
+        -moz-background-position: 50%;
+        -moz-background-image: url("/static/background.jpg");
+        background-size: cover;
+        background-position: 50%;
+        background-image: url("/static/background.jpg");
+    }
 }

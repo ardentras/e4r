@@ -68,12 +68,12 @@
     cursor: pointer;
 }
 
-@media (max-width: 414px) {
+@media (max-width: 740px) {
     .headers {
         text-align: center;
     }
     .signup span, .inputs {
-        font-size: 2vmax;
+        font-size: 16px;
     }
     .signup *{
         margin: 5px 0;

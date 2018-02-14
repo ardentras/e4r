@@ -11,6 +11,7 @@ import Description from "./components/description";
 import Charity from "./components/charities";
 import LatestNews from "./components/latestnews";
 import Footer from "./components/footer";
+import Loading from "../../loading";
 
 import Styles from "./style.css";
 
@@ -21,7 +22,6 @@ export default class Home extends React.Component { // eslint-disable-line no-un
 	render() {
 		return (
 			<div>
-				<div className={Styles.clearfix}/>
 				<Description/>
 				<Charity/>
 				<LatestNews/>

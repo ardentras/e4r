@@ -20,26 +20,29 @@ class Navagation extends React.Component {
 	}
 	render() {
 		return (
-			<div className={Styles.navagation}>
-				<Testbanner/>
-				<div className={Styles.header}>
-					<div className={Styles.brand}>
-						<img src="/static/logo/logo.png" alt="X" id={Styles.logo}/>
-						<span>Education for Revitalization</span>
-					</div>
-					<div className={Styles.navagations}>
-						{Routes.map((elem,index)=>(
-							elem.label === "Login" && this.props.IS_AUTH ?
-							<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + this.props.uid}</NavLink> :
-							<NavLink 
-							key={index} 
-							exact={elem.exact} 
-							to={elem.path} 
-							className={Styles.navselector} 
-							activeClassName={Styles.activelink}>{elem.label}</NavLink>
-						))}
+			<div>
+				<div className={Styles.navagation}>
+					<Testbanner/>
+					<div className={Styles.header}>
+						<div className={Styles.brand}>
+							<img src="/static/logo/logo.png" alt="X" id={Styles.logo}/>
+							<span>Education for Revitalization</span>
+						</div>
+						<div className={Styles.navagations}>
+							{Routes.map((elem,index)=>(
+								elem.label === "Login" && this.props.IS_AUTH ?
+								<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + this.props.uid}</NavLink> :
+								<NavLink 
+								key={index} 
+								exact={elem.exact} 
+								to={elem.path} 
+								className={Styles.navselector} 
+								activeClassName={Styles.activelink}>{elem.label}</NavLink>
+							))}
+						</div>
 					</div>
 				</div>
+				<div className={Styles.clearfix}/>
 			</div>
 		);
 	}

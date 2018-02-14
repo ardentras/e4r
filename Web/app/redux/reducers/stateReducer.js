@@ -26,7 +26,7 @@ const initialState = {
 	AUTH_SUCCESSFUL: false,
 	DEAUTH_SUCCESSFUL: false,
 	SIGNUP_SUCCESSFUL: false,
-	redirectToReferrer: false,
+	redirectToRefer: false,
 	error: undefined
 };
 
@@ -64,7 +64,7 @@ const stateReducer = (state=initialState, action) => {
 		});
 	case REFER:
 		return Object.assign({}, state, {
-			redirectToReferrer: action.value
+			redirectToRefer: action.value
 		});
 	case RESET:
 		return Object.assign({}, initialState);

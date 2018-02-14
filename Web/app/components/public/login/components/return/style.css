@@ -65,7 +65,7 @@
     cursor: pointer;
 }
 
-@media (max-width: 414px) {
+@media (max-width: 740px) {
     .returning *{
         margin: 5px 0;
     }
@@ -82,6 +82,6 @@
         text-align: center;
     }
     .returning span, .inputs {
-        font-size: 2vmax;
+        font-size: 16px;
     }
 }

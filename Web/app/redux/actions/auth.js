@@ -95,15 +95,15 @@ export function handlerAuth(user=undefined) {
 	};
 }
 
-export function handlerDeAuth() {
+export function handlerDeAuth(userobject) {
 	return async (dispatch)=>{
 		try {
-			const result = await efrApi.logout();
+			const result = await efrApi.logout(userobject);
 			dispatch(Error());
 			iCookie.reset();
 			if (result.data.code === httpCodes.Ok) {
-				dispatch(Reset());
 				window.location.reload();
+				dispatch(Reset());
 			}
 			else {
 				dispatch(Error("DEAUTH_FAIL"));
