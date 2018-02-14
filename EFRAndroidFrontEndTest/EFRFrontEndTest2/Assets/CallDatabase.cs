@@ -23,6 +23,19 @@ namespace EFRFrontEndTest2.Assets
             m_userObject = new UserObject();
         }
 
+    //    public async Task<Responce> FetchQuestionsblock()
+        //{
+       //     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/q/request_block"));
+        //    request.ContentType = "application/json";
+        //    request.Method = "GET";
+       //     using (WebResponse response = await request.GetResponseAsync())
+        //    { }
+
+
+
+
+       //     }
+
         public async Task<Responce> FetchLogin(string username, string password)
         {
             // Create an HTTP web request using the URL:

@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 using System;
 using System.IO;
 using System.Json;
@@ -15,18 +16,35 @@ namespace EFRFrontEndTest2
     [Activity(Label = "QuestionspageActivity")]
     public class QuestionspageActivity : Activity
     {
+
+       
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            CallDatabase database = new CallDatabase(this);
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
+            ImageButton BackArrowImageButt = FindViewById<ImageButton>(Resource.Id.BackArrowImageButt);
+            TextView BigGreyCircle = FindViewById<TextView>(Resource.Id.BigGreyCircle);
+            TextView GreyRectButton1 = FindViewById<TextView>(Resource.Id.GreyRectButton1);
+            TextView GreyRectButton2 = FindViewById<TextView>(Resource.Id.GreyRectButton2);
+            TextView GreyRectButton3 = FindViewById<TextView>(Resource.Id.GreyRectButton3);
+            TextView GreyRectButton4 = FindViewById<TextView>(Resource.Id.GreyRectButton4);
 
-            imageButton6.Click += (sender, e) =>
+
+
+
+
+            BackArrowImageButt.Click += (sender, e) =>
             {
                 Finish();
             };
+            GreyRectButton1.Text = "win";
+            GreyRectButton2.Text = "win";
+            GreyRectButton3.Text = "win";
+            GreyRectButton4.Text = "win";
+
         }
     }
 }
