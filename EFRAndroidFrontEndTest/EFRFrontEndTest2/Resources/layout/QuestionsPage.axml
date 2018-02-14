@@ -9,17 +9,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/BigGreyCircle"
+        android:id="@+id/imageButton1"
         android:maxHeight="50dp"
         android:textSize="32sp"
         android:gravity="center"
         android:textColor="#f000"
         android:background="@drawable/LightGreyCircle"
-        android:text="Poof" />
+        android:text="7 + 12" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/GreyRectButton1"
+        android:id="@+id/imageButton2"
         android:background="@drawable/GreyButton"
         android:maxHeight="20dp"
         android:gravity="center"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/GreyRectButton2"
+        android:id="@+id/imageButton3"
         android:maxHeight="20dp"
         android:background="@drawable/GreyButton"
         android:gravity="center"
@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/GreyRectButton3"
+        android:id="@+id/imageButton4"
         android:maxHeight="20dp"
         android:background="@drawable/GreyButton"
         android:gravity="center"
@@ -49,7 +49,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/GreyRectButton4"
+        android:id="@+id/imageButton5"
         android:maxHeight="20dp"
         android:background="@drawable/GreyButton"
         android:gravity="center"
@@ -59,7 +59,7 @@
     <ImageButton
         android:layout_height="80dp"
         android:layout_width="match_parent"
-        android:id="@+id/BackArrowImageButt"
+        android:id="@+id/imageButton6"
         android:background="@drawable/silverarrow"
-        android:layout_marginRight="362.0dp" />
+        android:layout_marginRight="0.0dp" />
 </LinearLayout>
