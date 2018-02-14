@@ -21,22 +21,22 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton BigGrayButton = FindViewById<ImageButton>(Resource.Id.BigGrayButton);
-            ImageButton Answer1 = FindViewById<ImageButton>(Resource.Id.Answer1);
-            ImageButton Answer2 = FindViewById<ImageButton>(Resource.Id.Answer2);
-            ImageButton Answer3 = FindViewById<ImageButton>(Resource.Id.Answer3);
-            ImageButton Answer4 = FindViewById<ImageButton>(Resource.Id.Answer4);
-            ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
+           // ImageButton BigGrayButton = FindViewById<ImageButton>(Resource.Id.BigGrayButton);
+           // ImageButton Answer1 = FindViewById<ImageButton>(Resource.Id.Answer1);
+           // ImageButton Answer2 = FindViewById<ImageButton>(Resource.Id.Answer2);
+          //  ImageButton Answer3 = FindViewById<ImageButton>(Resource.Id.Answer3);
+            //ImageButton Answer4 = FindViewById<ImageButton>(Resource.Id.Answer4);
+          //  ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
 
-            BackArrow.Click += (sender, e) =>
+          /*  BackArrow.Click += (sender, e) =>
             {
                 Finish();
             };
 
-            BigGrayButton.Click += (sender, d) =>
-            {
+           // BigGrayButton.Click += (sender, d) =>
+           // {
               
-            };
+            //};
 
             Answer1.Click += (sender, f) =>
             {
@@ -73,9 +73,9 @@ namespace EFRFrontEndTest2
                     Answer3.Update Text = { " " };
                     StartActivity(intent);
                 }*/
-            };
-            Answer4.Click += (sender, c) =>
-            {
+        //    };
+          //  Answer4.Click += (sender, c) =>
+          //  {
                /* if (Answer4 == CorrectAnswer)
                 {
 
@@ -83,7 +83,7 @@ namespace EFRFrontEndTest2
                     Answer4.Update Text = {" "};
                     StartActivity(intent);
                 }*/
-            };
-        }
+          //  };*/
+       }
     }
 }
