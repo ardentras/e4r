@@ -15,7 +15,7 @@
         android:textColor="@android:color/white"
         android:shadowColor="#00000000"
         android:background="@android:color/black"
-        android:typeface="times new roman"
+        android:typeface="normal"
         android:textSize="@android:dimen/app_icon_size" />
     <LinearLayout
         android:orientation="horizontal"
