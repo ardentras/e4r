@@ -232,7 +232,7 @@ namespace EFRFrontEndTest2
 			public const int imageButton5 = 2131099703;
 			
 			// aapt resource value: 0x7f060038
-			public const int imageButton6 = 2131099704;
+			public const int Answer1 = 2131099704;
 			
 			// aapt resource value: 0x7f060008
 			public const int imageView1 = 2131099656;
@@ -344,7 +344,13 @@ namespace EFRFrontEndTest2
 			private Id()
 			{
 			}
-		}
+
+            public static int BigGrayButton { get; internal set; }
+            public static int Answer2 { get; internal set; }
+            public static int Answer3 { get; internal set; }
+            public static int Answer4 { get; internal set; }
+            public static int BackArrow { get; internal set; }
+        }
 		
 		public partial class Layout
 		{
