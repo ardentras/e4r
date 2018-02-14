@@ -131,18 +131,34 @@ namespace EFRFrontEndTest2.Assets
         }
         private void CreateUserObject(JsonValue json)
         {
+            UserObject userObj = SingleUserObject.getObject();
             JsonValue user = json["user_object"];
             JsonValue game = user["game_data"];
-//TODO: Fix once implemented
-           // m_userObject.CompletedBlocks = game["completed_blocks"];
+            JsonArray completeBlocks = (JsonArray)user["game_data"];
+            //TODO: Fix once implemented
+            // m_userObject.CompletedBlocks = game["completed_blocks"];
             m_userObject.Difficulty = game["difficulty"];
+            userObj.Difficulty = game["difficulty"];
             m_userObject.SubjectID = game["subject_id"];
+            userObj.SubjectID = game["subject_id"];
+            m_userObject.MoneyEarned = game["totalDonated"];
+            userObj.MoneyEarned = game["totalDonated"];
+            m_userObject.QuestionsAnswered = game["totalQuestions"];
+            userObj.QuestionsAnswered = game["totalQuestions"];
             m_userObject.Timestamp = user["timestamp"];
+            userObj.Timestamp = user["timestamp"];
             user = user["user_data"];
             m_userObject.Charity = user["charity_name"];
+            userObj.Charity = user["charity_name"];
             m_userObject.FirstName = user["first_name"];
+            userObj.FirstName = user["first_name"];
             m_userObject.LastName = user["last_name"];
+            userObj.LastName = user["last_name"];
             m_userObject.Username = user["username"];
+            userObj.Username = user["username"];
+
+
+
         }
 
         public UserObject GetUserObject { get { return m_userObject; } }
