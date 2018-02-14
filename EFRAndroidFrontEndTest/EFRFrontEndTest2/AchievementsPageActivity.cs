@@ -20,7 +20,8 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             RequestWindowFeature(WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.AchievementsPage);
-            // Create your application here
+            
+
         }
     }
 }
