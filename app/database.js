@@ -318,7 +318,7 @@ class TDatabase {
                     newUserObject.user_data.email = data.email;
 
                     var date = new Date();
-                    data.userobject.timestamp = date.toISOString();
+                    newUserObject.timestamp = date.toISOString();
 
                     var uostring = JSON.stringify(newUserObject);
                     uostring = uostring.replace("\\", "");
