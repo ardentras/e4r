@@ -40,15 +40,14 @@ class Login extends React.Component {
 		this.props.handlerRegister({email: event.target.email.value, username: event.target.uid.value, password: event.target.pw.value});
 	}
 	render() {
-		const { redirectToReferrer } = this.props.states;
-		if (redirectToReferrer) {
+		const { redirectToRefer } = this.props.states;
+		if (redirectToRefer) {
 			return (
 				<Redirect to="/dashboard"/>
 			);
 		}
 		return (
 			<div>
-				<div className={Styles.clearfix}/>
 				<div className={Styles.formcontainer}>
 					<div className={Styles.forms}>	
 						<Visit func={{signup: this.signup}}/>
@@ -67,6 +66,6 @@ Login.propTypes = {
 };
 
 export default connect(
-	(state) => ({states: state.state}),
+	(state) => ({states: state.state, user: state.user}),
 	(dispatch) => bindActionCreators({handlerAuth,handlerRegister,ifSignUp,setSignUpSuccessful}, dispatch)
 )(Login);

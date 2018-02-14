@@ -44,6 +44,9 @@ Debugging API Calls:
         "subject_name": "Math",
         "subject_id": "1",
         "difficulty": "0",
+        "totalQuestions": 0,
+        "totalDonated": 0.0,
+        "blocksRemaining": 0,
         "completed_blocks": [1, 3, 4]
     },
     "timestamp":"2018-01-24T02:06:58+00:00"
@@ -288,21 +291,28 @@ OR
 ```
 #### REQUEST_BLOCK RESPONSE:
 ```
-[
-    {
-        "QuestionID":{id},
-        "QuestionText":"{text}",
-        "QuestionOne":"{answer1}",
-        "QuestionTwo":"{answer2}",
-        "QuestionThree":"{answer3}",
-        "QuestionFour":"{answer4}",
-        "CorrectAnswer":"{correct_answer}",
-        "StatsOne":"{statsAnswer1}",
-        "StatsTwo":"{statsAnswer2}",
-        "StatsThree":"{statsAnswer3}",
-        "StatsFour":"{statsAnswer4}",
-        "QuestionBlockID":"{block_id}"
-    },
-    {...},
-]
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "RETRIEVE",
+    question_block: [
+        {
+            "QuestionID":{id},
+            "QuestionText":"{text}",
+            "QuestionOne":"{answer1}",
+            "QuestionTwo":"{answer2}",
+            "QuestionThree":"{answer3}",
+            "QuestionFour":"{answer4}",
+            "CorrectAnswer":"{correct_answer}",
+            "StatsOne":"{statsAnswer1}",
+            "StatsTwo":"{statsAnswer2}",
+            "StatsThree":"{statsAnswer3}",
+            "StatsFour":"{statsAnswer4}",
+            "QuestionBlockID":"{block_id}"
+        },
+        {...},
+    ],
+    user_object: {user_object}
+}
 ```

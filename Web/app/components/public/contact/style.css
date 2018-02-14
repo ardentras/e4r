@@ -1,106 +1,96 @@
-.clearfix::after {
-    content: " ";
-    display: table;
-    clear: both;
-    display: block;
-    height: 140px;
-}
-
-.ccontents {
+.contacts {
     display: flex;
-    justify-content: center;
-    padding: 2% 0;
+    flex-flow: column;
+    padding: 2% 20%;
+    color: #141b22;
+    opacity: 0.7;
+    line-height: 40px;
 }
 
-.cmain {
+.header {
+    font-size: 4vmax;
+    margin-bottom: 30px;
+}
+
+.company {
+    margin-bottom: 10px;
+}
+
+.location {
+    margin-top: 10px;
+}
+
+.email {
+    margin-top: 10px;
+    display: flex;
+    flex-flow: column;
+}
+
+.email input, .email textarea{
+    outline: none;
+    border: 1px solid #dddddd;
+    font-size: 1vmax;
+    padding: 10px 10px;
+}
+
+.sendbtn {
+    background: white;
+    width: 61%;
+    min-width: 320px;
+    margin-top: 10px;
+}
+
+.sendbtn:hover {
+    cursor: pointer;
+}
+
+.sendbtn:active {
+    background: #007BFE;
+    color: white;
+}
+
+.infos {
     display: flex;
     flex-flow: row nowrap;
-    font-size: 2vmax;
-    background: white;
-    color: #141b22;
-    font-weight: lighter;
-    border: 1px solid #141b223d;
-    padding: 5% 5%;
+    margin-bottom: 10px;
 }
 
-.info {
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    border-right: 1px solid rgb(163, 163, 163);
+.infos input {
+    width: 30%;
+    min-width: 155px;
+    margin-right: 10px;
 }
 
-.topway {
-    border-bottom: 1px solid rgb(163, 163, 163);
-}
-.bottomway {
-    border-top: 1px solid rgb(163, 163, 163);
+.email textarea {
+    width: 61%;
+    min-width: 320px;
 }
 
-.ways {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    width: 200px;
-    text-align: center;
-    height: 100%;
-    position: relative;
-}
-
-.ways h1 {
-    font-weight: lighter;
-    font-size: 2vmax;
-}
-
-.wayheader::after {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    font-size: 1.5vmax;
-    overflow: hidden;
-    background: #007BFE;
-}
-
-.phone::after {
-    content: "(123)456-7890";
-}
-.email::after {
-    content: "efr@admin.com";
-}
-.location::after {
-    content: "Klamath Falls, OR";
-}
-
-.ways:hover h1::after {
-    display: flex;
-}
-
-.wayinfo {
-    display: none;
-    font-size: 3vmin;
-    position: relative;
-}
-
-.form {
-    display: flex;
-    flex-flow: column;
-    padding: 30px 30px;
-}
-
-.form h1 {
-    font-size: 2vmax;
-    font-weight: lighter;
-}
-
-.form input, .form textarea {
-   border: 1px solid #141b224d;
-   outline: 0;
-   font-size: 1.5vmax;
-   background: white;
-   color: #141b22;
+@media (max-width: 740px) {
+    .contacts {
+        padding: 2% 0;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 30px;
+    }
+    .email p {
+        margin-bottom: 20px;
+    }
+    .email {
+        justify-content: center;
+        align-items: center;
+    }
+    .infos {
+        justify-content: space-between;
+    }
+    .infos input {
+        width: 50%;
+    }
+    .email p {
+        width: 90%;
+    }
+    #name {
+        margin-left: 1%;
+    }
 }

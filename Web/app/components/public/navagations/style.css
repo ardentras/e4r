@@ -4,13 +4,21 @@
  *->Purpose: Declare all styles for the Nav component in Nav.js
  *
 *****************************************************************************/
+.clearfix::after {
+    content: " ";
+    display: table;
+    clear: both;
+    display: block;
+    height: 140px;
+}
+
 .navagation {
     position: fixed;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
     width: 100%;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 .navagation::after {
@@ -68,12 +76,12 @@
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     content: " ";
-    position: relative;
     height: 2px;
     background: #007BFE;
     margin: 0 auto;
     width: 100%;
     display: block;
+    transition: all 0.3s ease-in-out;
     margin-top: 5px;
 }
  
@@ -81,12 +89,28 @@
     color: #007BFE;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 740px) {
+    .navselector::after {
+        display: none;
+        transition: none;
+    }
+    .activelink::after {
+        transition: none;
+        margin: 0;
+        display: inline-block;
+        bottom: 20%;
+    }
     .header {
         padding-bottom: 0;
         padding-top: 10px;
     }
     .navagations {
         padding-top: 10px;
+    }
+}
+
+@media (max-height: 420px) {
+    .header {
+        align-items: flex-start;
     }
 }

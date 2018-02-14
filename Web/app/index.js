@@ -11,7 +11,9 @@ import { Provider } from "react-redux"; // eslint-disable-line no-unused-vars
 import store from "./redux/store";
 import App from "./components/public"; // eslint-disable-line no-unused-vars
 import "./style.css";
+import Spinner from "./components/loading";
 import efrApi from "./libraries/efrApi";
+import SpinnerStyle from "./components/loading/style.css";
 
 efrApi.config({
     host: "35.163.221.182", 
@@ -30,9 +32,19 @@ efrApi.config({
  *           Allowing linking between redux tree with the components.
  *
 *****************************************************************************/
+
 ReactDOM.render(
-	<Provider store={store}>
-		<App/>
-	</Provider>,
-	document.getElementById("app")
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById("app")
 );
+
+function windowLoaded() {
+    const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
+    Loading.style.display = "none";
+};
+
+window.onload = () => {
+    setTimeout(windowLoaded, 300);
+};

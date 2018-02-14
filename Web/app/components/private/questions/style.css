@@ -39,6 +39,14 @@
     justify-content: flex-start;
     align-items: center;
 }
+.alldone {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
 
 .choice {
     display: none;
@@ -63,7 +71,7 @@
 .choices {
     display: flex;
     flex-flow: column;
-    padding: 20px 0;
+    padding: 0 0;
 }
 
 .topic {
@@ -128,7 +136,7 @@
     background: #141b22;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 740px) {
     .header {
         display: none;
     }
@@ -138,15 +146,16 @@
     .progresscontainer {
         display: none;
     }
-    .questioncontents {
-        padding-bottom: 56px;
+    .question {
+        min-height: 350px;
     }
     .selection{
         margin: 0;
         padding: 0 20px;
+        height: 100%;
     }
     .choicelabel {
-        padding: 3% 10px;
+        padding: 1% 10px;
         max-width: none;
         margin: 0;
     }
@@ -154,11 +163,11 @@
         display: flex;
         flex-flow: column;
         align-items: center;
-        justify-content: space-around;
         height: 100%;
     }
     .multiplechoice div {
         width: 100%;
+        margin: 5px 0;
     }
     .topic {
         padding: 0;
@@ -178,12 +187,34 @@
     }
     .choices {
         position: relative;
-        height: 100%;
+        margin-bottom: 5px;
     }
     .nextbtn {
-        padding: 3% 10px;
+        padding: 1% 10px;
         width: 100%;
         max-width: none;
         margin: 0;
+        margin-top: 5px;
+    }
+}
+
+@media (max-height: 375px) {
+    .selection {
+        min-height: 400px;
+    }
+}
+
+@media (max-height: 320px) {
+    .selection {
+        min-height: 370px;
+    }
+}
+
+@media (max-width: 420px) {
+    .choicelabel {
+        padding: 3% 10px;
+    }
+    .nextbtn {
+        padding: 3% 10px;
     }
 }

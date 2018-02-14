@@ -22,6 +22,9 @@ const DEFAULT_USER_OBJECT = {
         "subject_name": "",
         "subject_id": "1",
         "difficulty": "0",
+        "totalQuestions": 0,
+        "totalDonated": 0.0,
+		"blocksRemaining": 0,
         "completed_blocks": []
     },
     "timestamp":""

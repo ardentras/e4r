@@ -1,5 +1,6 @@
 import React from "react";
 import Styles from "./style.css";
+import Spinner from "../../loading";
 
 class Settings extends React.Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Settings extends React.Component {
     }
     render() {
         return (
-            <div className={Styles.leaderboard}>
+            <div className={Styles.settings}>
                 <div>This is Settings.</div>
             </div>
         );

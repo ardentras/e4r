@@ -43,7 +43,7 @@
     position: relative;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 740px) {
     .dashboard {
         position: fixed;
         bottom: 0;
@@ -64,12 +64,12 @@
     .dlinks, .logout {
         margin: 0;
         padding: 0;
+        font-size: 2.5vmax;
     }
     .dlinks:hover {
         background: transparent;
     }
     .logout:hover {
-        background: transparent;
-        color: #007BFE;
+        background: transparent; 
     }
 }

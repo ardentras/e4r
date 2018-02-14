@@ -212,17 +212,8 @@ class TDatabase {
                         var uo = user_object;
                         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE UO", reason: "User object out of date. Retrieving from database.", userobject: uo});
                     } else {
-                        var date = new Date();
-                        data.userobject.timestamp = date.toISOString();
+                        var uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
-                        var uostring = JSON.stringify(data.userobject);
-                        uostring = uostring.replace("\\", "");
-
-                        await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                                .input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                                .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
-
-                        var uo = data.userobject;
                         client.json({response: "Success", type: "PUT", code: 200, action: "SAVE UO", userobject: uo});
                     }
                 } catch (err) {
@@ -287,17 +278,9 @@ class TDatabase {
                 var dbTimestamp = user_object.timestamp;
 
                 if (cliTimestamp < dbTimestamp) {
-                    var uo = user_object;
                     client.json({response: "Success", type: "PUT", code: 409, action: "LOGOUT", reason: "Out of date user object cannot be saved. User logged out"});
                 } else {
-                    var date = new Date();
-                    data.userobject.timestamp = date.toISOString();
-
-                    var uostring = JSON.stringify(data.userobject);
-                    uostring = uostring.replace("\\", "");
-                	this.db.request().input('userobject', mssql.VarChar, uostring)
-                					.input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                					.query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+                    var uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
                     this.db.request().input('token', mssql.VarChar(32), data.session)
                 					.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
@@ -324,7 +307,7 @@ class TDatabase {
                             						.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
 
                 if (res.rowsAffected > 0) {
-                    client.json({response: "Failed", type: "GET",code: 100, reason: "User already exists"});
+                    client.json({response: "Failed", type: "POST",code: 100, reason: "User already exists"});
                 } else {
                     //TODO Update this with a call to the salt table
                     let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
@@ -333,6 +316,10 @@ class TDatabase {
                     let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
                     newUserObject.user_data.username = data.username;
                     newUserObject.user_data.email = data.email;
+
+                    var date = new Date();
+                    data.userobject.timestamp = date.toISOString();
+
                     var uostring = JSON.stringify(newUserObject);
                     uostring = uostring.replace("\\", "");
 
@@ -352,7 +339,7 @@ class TDatabase {
                 client.json({response: "Failed", type: "POST", code: 500, reason: "User signup error", data: err});
             }
         } else {
-            client.json({response: "Rejected", Code: 500, reason: "Invalid Email"});
+            client.json({response: "Rejected", type: "POST", code: 500, reason: "Invalid Email"});
         }
     }
 
@@ -426,7 +413,32 @@ class TDatabase {
         let response = await this.db.request().input('blockid', mssql.Int, chosen_block)
                                                 .query("SELECT * FROM EFRQuest.Questions WHERE QuestionBlockID = @blockid");
 
-        client.json(response.recordset);
+        var uo;
+
+        if (data.userobject.gameData.blocksRemaining != undefined) {
+            data.userobject.gameData.blocksRemaining = missing_blocks.length;
+
+            uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
+        } else {
+            uo = data.userobject;
+        }
+
+        client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, user_object: uo});
+
+    }
+
+    async persistUserObject(uo, userid) {
+        var date = new Date();
+        uo.timestamp = date.toISOString();
+
+        var uostring = JSON.stringify(uo);
+        uostring = uostring.replace("\\", "");
+
+        await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
+                                .input('userid', mssql.Int, userid)
+                                .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+
+        return uo;
     }
 
 	// Displays all current user accounts from the database.

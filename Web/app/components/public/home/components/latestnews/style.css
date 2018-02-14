@@ -2,6 +2,7 @@
     display: flex;
     flex-flow: column;
     padding: 100px 0;
+    background: white;
 }
 
 .latestnews h1 {
@@ -104,5 +105,11 @@
     .news {
         max-width: 200px;
         line-height:40px;
+    }
+}
+
+@media (max-width: 320px) {
+    .origin h4 {
+        display: none;
     }
 }
