@@ -99,8 +99,12 @@ fi
 # Action: Send valid username and password
 # Expected Response: 200, session token
 ############################################
-code=$(curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpass"}}' | jq '.code')
-if [[ ! $code -eq 200 ]]; then
+curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpass"}}' >> response.json
+code=$(cat response.json | jq '.code')
+session_token=$(cat response.json | jq '.session_id')
+if [[ -z $session_token ]]; then
+    echo "- Test log in request with valid account failed. Response did not contain session token"
+else if [[ ! $code -eq 200 ]]; then
     echo "- Test log in request with valid account failed. Expected server code 200, got ${code}"
 else
     echo "+ Test log in request with valid account passed"
