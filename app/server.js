@@ -56,6 +56,9 @@ Router.put('/logout', (req, res) => {
 Router.get('/check_username', (req, res) => {
 	db.checkUsername(res, req.body.user);
 });
+Router.delete('/delete_user', (req, res) => {
+	db.deleteUser(res, req.body.user);
+});
 Router.put('/update_uo', (req, res) => {
 	db.update_uo(res, req.body.user);
 });
