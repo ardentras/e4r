@@ -300,14 +300,17 @@ class TDatabase {
 	async deleteUser(client, data) {
 		let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+
         if (res.rowsAffected == 0) {
         	client.json({response: "Failed", type: "DELETE", code: 500, action: "DELETE_USER", reason: "Session invalid, user logged out."});
         } else {
             try {
-                await this.db.request().input('userid', mssql.VarChar(32), res.recordsets[0][0].UserID)
+                await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
             					      .query("DELETE EFRAcc.Sessions WHERE UserID = @userid");
-                await this.db.request().input('userid', mssql.VarChar(32), res.recordsets[0][0].UserID)
+                await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
                 		              .query("DELETE EFRAcc.Users WHERE UserID = @userid");
+
+                client.json({response: "Success", type: "DELETE", code: 200, action: "DELETE_USER"})
             } catch (err) {
                 console.log(err);
                 client.json({response: "Unknown Error occurred. Please try again.", type: "DELETE", code: 500});
