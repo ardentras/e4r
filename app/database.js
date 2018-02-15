@@ -282,13 +282,35 @@ class TDatabase {
                 } else {
                     var uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
-                    this.db.request().input('token', mssql.VarChar(32), data.session)
+                    await this.db.request().input('token', mssql.VarChar(32), data.session)
                 					.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
                 	client.json({response: "Success", type: "PUT", code: 200, action: "LOGOUT", reason: "User successfully logged out."});
                 }
             } catch (err) {
                 console.log(err);
                 client.json({response: "Unknown Error occurred. Please try again.", type: "PUT", code: 500});
+            }
+        }
+	}
+
+    // Attempts to log the user out. If successful, user object will be saved,
+	// and current session token will expire.
+	//
+	// curl -XDELETE localhost:3002/api/delete_user -H 'Content-type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d"}}'
+	async deleteUser(client, data) {
+		let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+        if (res.rowsAffected == 0) {
+        	client.json({response: "Failed", type: "DELETE", code: 500, action: "DELETE_USER", reason: "Session invalid, user logged out."});
+        } else {
+            try {
+                await this.db.request().input('userid', mssql.VarChar(32), res.recordsets[0][0].UserID)
+            					      .query("DELETE EFRAcc.Sessions WHERE UserID = @userid");
+                await this.db.request().input('userid', mssql.VarChar(32), res.recordsets[0][0].UserID)
+                		              .query("DELETE EFRAcc.Users WHERE UserID = @userid");
+            } catch (err) {
+                console.log(err);
+                client.json({response: "Unknown Error occurred. Please try again.", type: "DELETE", code: 500});
             }
         }
 	}
