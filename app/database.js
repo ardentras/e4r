@@ -80,7 +80,7 @@ class TDatabase {
 
     // Verifies the user objects are in sync and corrects errors if they exist.
     async verifyQuestionBlocks(client, data) {
-        let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+        let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected == 0) {
@@ -144,13 +144,13 @@ class TDatabase {
 	// Example:
 	// curl -XPUT localhost:3002/api/renew -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a"}}'
 	async renewSessionToken(client, data) {
-		let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected == 0) {
 			client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token was not found."});
 		} else {
-			this.db.request().input('token', mssql.VarChar(32), data.session)
+			this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
 							.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
 
 			if (Date.parse(res.recordsets[0][0].ExpirationTime) < Date.now()) {
@@ -171,13 +171,13 @@ class TDatabase {
 	// Sets a new session ID for a given user.
 	async setSessionID(userID) {
 		let sessionid = uuidv4();
-		let res = await this.db.request().input('token', mssql.VarChar(32), sessionid)
+		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), sessionid)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected != 0) {
 			sessionid = setSessionID(userID);
 		} else {
-			this.db.request().input('sessionid', mssql.VarChar(32), sessionid)
+			this.db.request().input('sessionid', mssql.VarChar(User.SESSION_TOKEN_LENGTH), sessionid)
 							.input('exptime', mssql.DateTime2, new Date(Date.now()).toISOString())
 							.input('userid', mssql.Int, userID)
 							.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)");
@@ -193,7 +193,7 @@ class TDatabase {
 	// Example:
 	// curl -XPUT localhost:3002/api/update_uo -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}}'
 	async update_uo(client, data) {
-		let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected == 0) {
@@ -266,7 +266,7 @@ class TDatabase {
 	//
 	// curl -XPUT localhost:3002/api/logout -H 'Content-type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d", "userobject":{}}}'
 	async attemptLogout(client, data) {
-		let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
         if (res.rowsAffected == 0) {
         	client.json({response: "Failed", type: "PUT", code: 500, reason: "Session invalid. User object could not be saved"});
@@ -282,7 +282,7 @@ class TDatabase {
                 } else {
                     var uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
-                    await this.db.request().input('token', mssql.VarChar(32), data.session)
+                    await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                 					.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
                 	client.json({response: "Success", type: "PUT", code: 200, action: "LOGOUT", reason: "User successfully logged out."});
                 }
@@ -298,11 +298,11 @@ class TDatabase {
 	//
 	// curl -XDELETE localhost:3002/api/delete_user -H 'Content-type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d"}}'
 	async deleteUser(client, data) {
-		let res = await this.db.request().input('token', mssql.VarChar(32), data.session)
+		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected == 0) {
-        	client.json({response: "Failed", type: "DELETE", code: 500, action: "DELETE_USER", reason: "Session invalid, user logged out."});
+        	client.json({response: "Failed", type: "DELETE", code: 401, action: "DELETE_USER", reason: "Session invalid, user logged out."});
         } else {
             try {
                 await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
