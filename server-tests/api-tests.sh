@@ -102,10 +102,7 @@ fi
 curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpass"}}' > response.json
 code=$(cat response.json | jq '.code')
 session_token=$(cat response.json | jq '.session_id')
-<<<<<<< HEAD
 user_object=$(cat response.json | jq '.userobject')
-=======
->>>>>>> 380c576c208c40921bbaee6621b5252d01c7a368
 if [[ -z $session_token ]]; then
     echo "- Test log in request with valid account failed. Response did not contain session token"
 elif [[ ! $code -eq 200 ]]; then
@@ -115,7 +112,6 @@ else
 fi
 
 ############################################
-<<<<<<< HEAD
 # Endpoint: renew
 # Action: Send invalid session token
 # Expected Response: 401
@@ -188,8 +184,6 @@ else
 fi
 
 ############################################
-=======
->>>>>>> 380c576c208c40921bbaee6621b5252d01c7a368
 # Endpoint: delete_user
 # Action: Send invalid session token
 # Expected Response: 401
@@ -218,12 +212,7 @@ else
     fi
 fi
 
-<<<<<<< HEAD
-# Clean up mess
-#rm response.json
-=======
 
 
 # Clean up mess
 rm response.json
->>>>>>> 380c576c208c40921bbaee6621b5252d01c7a368
