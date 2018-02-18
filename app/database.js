@@ -148,18 +148,21 @@ class TDatabase {
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         if (res.rowsAffected == 0) {
-			client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token was not found."});
+			client.json({response: "Failed", type: "PUT", code: 401, action: "RENEW", reason: "User's session token was not found."});
 		} else {
 			this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
 							.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
 
-			if (Date.parse(res.recordsets[0][0].ExpirationTime) < Date.now()) {
-				client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token is invalid."});
+            var datenum = Date.now();
+            datenum = datenum.toPrecision(datenum.toString().length - 3).valueOf();
+
+			if (Date.parse(res.recordsets[0][0].ExpirationTime) < datenum) {
+				client.json({response: "Failed", type: "PUT", code: 401, action: "RENEW", reason: "User's session token is invalid."});
 			} else {
 				let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
 
                 try {
-                    client.json({response: "Success", type: "PUT", code: 200, action: "LOGIN", session_id: sessionid});
+                    client.json({response: "Success", type: "PUT", code: 200, action: "RENEW", session_id: sessionid});
                 } catch (err) {
                     console.log(err);
                     client.json({response: "Unknown Error occurred. Please try again.", type: "GET", code: 500});
@@ -203,6 +206,7 @@ class TDatabase {
 				client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token is invalid."});
 			} else {
                 try {
+                    console.log(data.userobject);
                     let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                     var cliTimestamp = data.userobject.timestamp;
@@ -245,7 +249,7 @@ class TDatabase {
                         let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                         var uo = user_object;
-                        client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
+                        client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, userobject: uo});
                     } catch (err) {
                         console.log(err);
                     }
@@ -448,7 +452,7 @@ class TDatabase {
             uo = data.userobject;
         }
 
-        client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, user_object: uo});
+        client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
 
     }
 
