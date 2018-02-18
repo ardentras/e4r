@@ -206,7 +206,6 @@ class TDatabase {
 				client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token is invalid."});
 			} else {
                 try {
-                    console.log(data.userobject);
                     let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                     var cliTimestamp = data.userobject.timestamp;

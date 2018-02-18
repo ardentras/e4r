@@ -102,7 +102,7 @@ fi
 curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpass"}}' > response.json
 code=$(cat response.json | jq '.code')
 session_token=$(cat response.json | jq '.session_id')
-user_object=$(cat response.json | jq '.userobject')
+user_object=($(cat response.json | jq '.userobject'))
 if [[ -z $session_token ]]; then
     echo "- Test log in request with valid account failed. Response did not contain session token"
 elif [[ ! $code -eq 200 ]]; then
@@ -172,7 +172,7 @@ fi
 # Action: Send user object with valid token and user object
 # Expected Response: 200, user object
 ############################################
-curl -XPUT localhost:3002/api/update_uo -sH 'Content-Type: application/json' -d '{"user":{"session":'$session_token', "userobject":'$user_object'}}' > response.json
+curl -XPUT localhost:3002/api/update_uo -sH 'Content-Type: application/json' -d '{"user":{"session":'$session_token', "userobject":'${user_object[0]}'}}' > response.json
 code=$(cat response.json | jq '.code')
 user_object=$(cat response.json | jq '.userobject')
 if [[ -z $user_object ]]; then
