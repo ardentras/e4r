@@ -138,23 +138,23 @@ namespace EFRFrontEndTest2
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060042
-			public const int Answer1 = 2131099714;
-			
 			// aapt resource value: 0x7f060043
-			public const int Answer2 = 2131099715;
+			public const int Answer1 = 2131099715;
 			
 			// aapt resource value: 0x7f060044
-			public const int Answer3 = 2131099716;
+			public const int Answer2 = 2131099716;
 			
 			// aapt resource value: 0x7f060045
-			public const int Answer4 = 2131099717;
+			public const int Answer3 = 2131099717;
 			
 			// aapt resource value: 0x7f060046
-			public const int BackArrow = 2131099718;
+			public const int Answer4 = 2131099718;
 			
-			// aapt resource value: 0x7f060041
-			public const int BigGrayCircle = 2131099713;
+			// aapt resource value: 0x7f060047
+			public const int BackArrow = 2131099719;
+			
+			// aapt resource value: 0x7f060042
+			public const int BigGrayCircle = 2131099714;
 			
 			// aapt resource value: 0x7f060026
 			public const int CancelButton = 2131099686;
@@ -204,8 +204,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f06000b
 			public const int bigbubble = 2131099659;
 			
-			// aapt resource value: 0x7f060049
-			public const int biologyOption = 2131099721;
+			// aapt resource value: 0x7f06004a
+			public const int biologyOption = 2131099722;
 			
 			// aapt resource value: 0x7f060037
 			public const int bubbleLiveFeedButton = 2131099703;
@@ -222,11 +222,11 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060038
 			public const int charityButton = 2131099704;
 			
-			// aapt resource value: 0x7f060048
-			public const int chemistryOption = 2131099720;
+			// aapt resource value: 0x7f060049
+			public const int chemistryOption = 2131099721;
 			
-			// aapt resource value: 0x7f06004d
-			public const int continueButton = 2131099725;
+			// aapt resource value: 0x7f060041
+			public const int continueButton = 2131099713;
 			
 			// aapt resource value: 0x7f060040
 			public const int createAccountButton = 2131099712;
@@ -240,8 +240,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060008
 			public const int heartIcon = 2131099656;
 			
-			// aapt resource value: 0x7f06004b
-			public const int historyOption = 2131099723;
+			// aapt resource value: 0x7f06004c
+			public const int historyOption = 2131099724;
 			
 			// aapt resource value: 0x7f060029
 			public const int imageButton1 = 2131099689;
@@ -291,8 +291,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060001
 			public const int lvLayout = 2131099649;
 			
-			// aapt resource value: 0x7f06004a
-			public const int mathOption = 2131099722;
+			// aapt resource value: 0x7f06004b
+			public const int mathOption = 2131099723;
 			
 			// aapt resource value: 0x7f060007
 			public const int moneyLayout = 2131099655;
@@ -306,8 +306,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f06003d
 			public const int passwordBox = 2131099709;
 			
-			// aapt resource value: 0x7f060047
-			public const int physicsOption = 2131099719;
+			// aapt resource value: 0x7f060048
+			public const int physicsOption = 2131099720;
 			
 			// aapt resource value: 0x7f060035
 			public const int playButton = 2131099701;
@@ -321,8 +321,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f060036
 			public const int settingsButton = 2131099702;
 			
-			// aapt resource value: 0x7f06004c
-			public const int shuffleOption = 2131099724;
+			// aapt resource value: 0x7f06004d
+			public const int shuffleOption = 2131099725;
 			
 			// aapt resource value: 0x7f06004f
 			public const int sound = 2131099727;
