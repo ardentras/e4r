@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
@@ -20,9 +21,13 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.settingsPage);
             SeekBar sound = FindViewById<SeekBar>(Resource.Id.sound);
-            sound.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
+            Button reset = FindViewById<Button>(Resource.Id.ResetButton);
+            reset.Click += (sender, e) =>
             {
-                
+                UserObject obj = SingleUserObject.getObject();
+                obj.CompletedBlocks = new int[0];
+                obj.MoneyEarned = 0;
+                obj.QuestionsAnswered = 0;
             };
 
         }

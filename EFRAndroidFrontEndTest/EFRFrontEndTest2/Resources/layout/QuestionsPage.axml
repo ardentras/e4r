@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton1"
+        android:id="@+id/BigGrayCircle"
         android:maxHeight="50dp"
         android:textSize="32sp"
         android:gravity="center"
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/imageButton2"
+        android:id="@+id/Answer1"
         android:background="@drawable/GreyButton"
         android:maxHeight="20dp"
         android:gravity="center"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/imageButton3"
+        android:id="@+id/Answer2"
         android:maxHeight="20dp"
         android:background="@drawable/GreyButton"
         android:gravity="center"
@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/imageButton4"
+        android:id="@+id/Answer3"
         android:maxHeight="20dp"
         android:background="@drawable/GreyButton"
         android:gravity="center"
@@ -49,7 +49,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:id="@+id/imageButton5"
+        android:id="@+id/Answer4"
         android:maxHeight="20dp"
         android:background="@drawable/GreyButton"
         android:gravity="center"
@@ -57,9 +57,9 @@
         android:textSize="32sp"
         android:text="16" />
     <ImageButton
-        android:layout_height="80dp"
-        android:layout_width="match_parent"
-        android:id="@+id/imageButton6"
+        android:layout_height="159.0dp"
+        android:layout_width="233.0dp"
+        android:id="@+id/BackArrow"
         android:background="@drawable/silverarrow"
         android:layout_marginRight="0.0dp" />
 </LinearLayout>

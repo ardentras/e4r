@@ -21,29 +21,69 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
+            ImageButton BigGrayButton = FindViewById<ImageButton>(Resource.Id.BigGrayCircle);
+            ImageButton Answer1 = FindViewById<ImageButton>(Resource.Id.Answer1);
+            ImageButton Answer2 = FindViewById<ImageButton>(Resource.Id.Answer2);
+            ImageButton Answer3 = FindViewById<ImageButton>(Resource.Id.Answer3);
+            ImageButton Answer4 = FindViewById<ImageButton>(Resource.Id.Answer4);
+            ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
 
-            imageButton6.Click += (sender, e) =>
+            BackArrow.Click += (sender, e) =>
             {
                 Finish();
+            };
+
+            BigGrayButton.Click += (sender, d) =>
+            {
+              
+            };
+
+            Answer1.Click += (sender, f) =>
+            {
+               // if (Answer1 == CorrectAnswer)
+               // { 
+                 
+              //      var intent = new Intent(this, typeof(QuestionspageActivity));
+               //     Answer1.Update Text = { " " };
+                //    StartActivity(intent);
+               // }
+            };
+
+            Answer2.Click += (sender, a) =>
+            {
+               // if (Answer2 == CorrectAnswer)
+               // {
+
+               //     var intent = new Intent(this, typeof(QuestionspageActivity));
+               //     Answer2.Update Text = { " " };
+               //     StartActivity(intent);
+              //  }
+
+              //  else
+               // {
+
+               // }
+            };
+            Answer3.Click += (sender, b) =>
+            {
+               /* if (Answer3 == CorrectAnswer)
+                {
+
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    Answer3.Update Text = { " " };
+                    StartActivity(intent);
+                }*/
+            };
+            Answer4.Click += (sender, c) =>
+            {
+               /* if (Answer4 == CorrectAnswer)
+                {
+
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    Answer4.Update Text = {" "};
+                    StartActivity(intent);
+                }*/
             };
         }
     }
 }
-
-// NOTE FOR KELCEY
-// This code is how you can pull what subjects the user chose in the subject screen
-
-// int stuff = Intent.GetIntExtra("subjects", 0);
-
-
-// I did the format this way to allow for expandability as well as processor efficiency.
-// Check 'SelectSubjectScreen' for a bit of documentation at the top. But here are some examples.
-
-// 10010 = Physics and Math subjects are selected
-// 11111 = All 5 subjects are selected
-// 01101 = Chemistry, biology, and history subjects are selected
-// 00100 = Only biology was selected
-// 00000 = No subjects were selected
-
-// Shoot me a text if you have any questions! :-)
