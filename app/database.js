@@ -256,11 +256,7 @@ class TDatabase {
                         let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                         var uo = user_object;
-<<<<<<< HEAD
-                        client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, userobject: uo});
-=======
                         client.json({response: "Success", type: "POST", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
->>>>>>> c3510a5c671999bd9ee03ac44077e8bc7b96260c
                     } catch (err) {
                         console.log(err);
                     }
@@ -369,10 +365,15 @@ class TDatabase {
                                             .input('newuo', mssql.VarChar(5000), uostring)
                                             .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
 
-                    var randNum = toInteger(Math.random() * 10000000);
-                    let res2 = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                    var randNum = Math.round((Math.random() * 1000000000) % 2147483647);
+                    console.log(randNum);
+                    let res = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                                        .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                                                        .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email");
+                                                        
+                    let res2 = await this.db.request().input('userid', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].UserID)
                                                         .input('recoveryid', mssql.Int, randNum)
-            				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@randNum, (SELECT UserID FROM EFRAcc.Users WHERE username = @username))");
+            				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
 
                     console.log('SIGNUP SUCCEED Email: ' + data.email);
                     client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP"});

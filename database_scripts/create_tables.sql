@@ -29,7 +29,7 @@ CREATE TABLE EFRAcc.CharityUsers
 );
 
 CREATE TABLE EFRAcc.PasswordRecovery
- (RecoveryID        INT            NOT NULL IDENTITY PRIMARY KEY,
+ (RecoveryID        INT            NOT NULL PRIMARY KEY,
   UserID            INT            FOREIGN KEY REFERENCES
                                    EFRAcc.Users(UserID)
 );
