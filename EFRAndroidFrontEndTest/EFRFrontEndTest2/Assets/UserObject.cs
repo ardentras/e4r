@@ -22,11 +22,12 @@ namespace EFRFrontEndTest2.Assets
         public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
         public string Charity { get { return m_Charity; } set { m_Charity = value; } }
         public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
-        public int MoneyEarned { get { return m_MoneyEarned; } set { m_MoneyEarned = value; } }
+        public double MoneyEarned { get { return m_MoneyEarned; } set { m_MoneyEarned = value; } }
         public int QuestionsAnswered { get { return m_QuestionsAnswered; } set { m_QuestionsAnswered = value; } }
         public string LastName { get { return m_LastName; } set { m_LastName = value; } }
         public string Username { get { return m_Username; } set { m_Username = value; } }       //These should only be changed when loading a user object (I used this implementation for readability and consistancy)
         public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }    //These should only be changed when loading a user object
+        public int[] CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } }
 
         private string m_SessionID;
         //private Array m_CompletedBlocks;
@@ -37,8 +38,9 @@ namespace EFRFrontEndTest2.Assets
         private string m_FirstName;
         private string m_LastName;
         private string m_Username;
-        private int m_MoneyEarned;
+        private double m_MoneyEarned;
         private int m_QuestionsAnswered;
+        private int[] m_CompletedBlocks;
 
         public string GetObjectString()
         {
@@ -56,6 +58,17 @@ namespace EFRFrontEndTest2.Assets
             //TODO: If someone has time, replace with a more effecient process
 
             return objectString;
+        }
+        public int AddCompletedBlock(int value)
+        {
+            CompletedBlocks = new int[m_CompletedBlocks.Length+1];
+            for(int x =0; x < m_CompletedBlocks.Length; x++)
+            {
+                CompletedBlocks[x] = m_CompletedBlocks[x];
+            }
+            CompletedBlocks[m_CompletedBlocks.Length] = value;
+            m_CompletedBlocks = CompletedBlocks;
+            return m_CompletedBlocks.Length;
         }
 
         public bool SetObjectString(string objectString)

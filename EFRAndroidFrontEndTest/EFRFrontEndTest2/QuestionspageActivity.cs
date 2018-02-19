@@ -21,7 +21,7 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton BigGrayButton = FindViewById<ImageButton>(Resource.Id.BigGrayButton);
+            ImageButton BigGrayButton = FindViewById<ImageButton>(Resource.Id.BigGrayCircle);
             ImageButton Answer1 = FindViewById<ImageButton>(Resource.Id.Answer1);
             ImageButton Answer2 = FindViewById<ImageButton>(Resource.Id.Answer2);
             ImageButton Answer3 = FindViewById<ImageButton>(Resource.Id.Answer3);
