@@ -5,6 +5,7 @@ const uuidv4 = require('uuid/v4');
 const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
+const SERVER_HOSTNAME = "http://e4rdb.cz5nhcw7ql0u.us-west-2.rds.amazonaws.com:3200"
 
 class TDatabase {
 	// Creates the connection to the database given the passed parameters.
@@ -27,23 +28,23 @@ class TDatabase {
 	}
 
 	// Sends a confirmation email to the user to confirm the email used to create their account.
-    confirmationEmail (data) {
+    confirmationEmail (data, id) {
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
                 user: adminEmail.username,
-                pass: 'xiaozhu541'
+                pass: adminEmail.password
             }
             });
         let HelperOptions = {
             from: "Education For Revitalization <" + adminEmail.username + ">",
             to: data.email,
             subject: "Account Confirmation",
-            html: "<p>Hello " + data.name + ",</p>" +
+            html: "<p>Hello " + data.username + ",</p>" +
                   "<p style='margin-left: 20px'>Thanks for signing up for Education for Revitalization.</p>" +
                   "<p style='margin-left: 20px'>Please click on the following verify address to activate your account: </p>" +
                   "<p style='margin-left: 20px'>Email: <span style='margin-left: 100px'>" + data.email + "</span></p>" +
-                  "<p style='margin-left: 20px'>Verify: <span style='margin-left: 100px'><a href='https://google.com'>Google</a></span></p>" +
+                  "<p style='margin-left: 20px'>Verify: <span style='margin-left: 100px'><a href='" + SERVER_HOSTNAME + "/api/verify_email/" + id + "'>http://beagoodperson.co/verify_email</a></span></p>" +
                   "<p style='margin-left: 20px'>If you haven't already, install our app for <span style='color: #15c'>Android</span></p>" +
                   "<p style='margin-left: 20px'>If you have any questions, please <span style='color: #15c'>Contact Us</span>.</p>" +
                   "<p>Sincerely,</p>" +
@@ -370,14 +371,14 @@ class TDatabase {
                     let res = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
                                                         .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                                         .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email");
-                                                        
+
                     let res2 = await this.db.request().input('userid', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].UserID)
                                                         .input('recoveryid', mssql.Int, randNum)
             				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
 
                     console.log('SIGNUP SUCCEED Email: ' + data.email);
                     client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP"});
-                    //this.confirmationEmail(data);
+                    this.confirmationEmail(data, randNum);
                 }
             } catch (err) {
                 console.log("SIGNUP Error");
