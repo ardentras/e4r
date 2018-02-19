@@ -234,6 +234,14 @@ class TDatabase {
     				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username");
 
             if (res.rowsAffected > 0) {
+                let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
+        				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+
+                if (res.rowsAffected == 0) {
+                    client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified, login failed"});
+                    return;
+                }
+
                 //TODO Update this with a call to the salt table
                 let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
                 let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
@@ -245,19 +253,19 @@ class TDatabase {
                         let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                         var uo = user_object;
-                        client.json({response: "Success", type: "GET", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
+                        client.json({response: "Success", type: "POST", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
                     } catch (err) {
                         console.log(err);
                     }
                 } else {
-                    client.json({response: "Failed", type: "GET", code: 401, reason: "Invalid Password"});
+                    client.json({response: "Failed", type: "POST", code: 401, reason: "Invalid Password"});
                 }
             } else {
-                client.json({response: "Failed", type: "GET", code: 401, reason: "User not found"});
+                client.json({response: "Failed", type: "POST", code: 401, reason: "User not found"});
             }
         } catch (err) {
             console.log("LOGIN Fail");
-            client.json({response: "Failed", type: "GET" ,code: 500, reason: "Unknown database error", data: err});
+            client.json({response: "Failed", type: "POST" ,code: 500, reason: "Unknown database error", data: err});
         }
     }
 
@@ -328,6 +336,11 @@ class TDatabase {
                                             .input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
                                             .input('newuo', mssql.VarChar(5000), uostring)
                                             .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
+
+                    var randNum = toInteger(Math.random() * 10000000);
+                    let res2 = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                                        .input('recoveryid', mssql.Int, randNum)
+            				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@randNum, (SELECT UserID FROM EFRAcc.Users WHERE username = @username))");
 
                     console.log('SIGNUP SUCCEED Email: ' + data.email);
                     client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP"});
