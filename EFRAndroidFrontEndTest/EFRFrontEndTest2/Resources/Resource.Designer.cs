@@ -419,16 +419,19 @@ namespace EFRFrontEndTest2
 			public const int Main = 2130968583;
 			
 			// aapt resource value: 0x7f040008
-			public const int QuestionsPage = 2130968584;
+			public const int QuestionDifficultypage = 2130968584;
 			
 			// aapt resource value: 0x7f040009
-			public const int SelectSubjectScreen = 2130968585;
+			public const int QuestionsPage = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int settingsPage = 2130968586;
+			public const int SelectSubjectScreen = 2130968586;
 			
 			// aapt resource value: 0x7f04000b
-			public const int WinPage = 2130968587;
+			public const int settingsPage = 2130968587;
+			
+			// aapt resource value: 0x7f04000c
+			public const int WinPage = 2130968588;
 			
 			static Layout()
 			{
