@@ -21,11 +21,11 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton BigGrayButton = FindViewById<ImageButton>(Resource.Id.BigGrayCircle);
-            ImageButton Answer1 = FindViewById<ImageButton>(Resource.Id.Answer1);
-            ImageButton Answer2 = FindViewById<ImageButton>(Resource.Id.Answer2);
-            ImageButton Answer3 = FindViewById<ImageButton>(Resource.Id.Answer3);
-            ImageButton Answer4 = FindViewById<ImageButton>(Resource.Id.Answer4);
+            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
 
             BackArrow.Click += (sender, e) =>
