@@ -59,8 +59,8 @@ namespace EFRFrontEndTest2.Assets
                     JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString()); //For debugging
                     SaveLastResponce(jsonDoc);
-                    if (LastResponce.m_code == 200)
-                        CreateUserObject(jsonDoc);
+                    //if (LastResponce.m_code == 200)
+                     //   CreateUserObject(jsonDoc);
 
                     return LastResponce;
                 }

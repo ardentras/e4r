@@ -91,9 +91,9 @@ namespace EFRFrontEndTest2
 
                     //Parses JSON responce to see if (User not found) returns, if so then username is acceptable
                     if (responce.m_responce == "Failed")
-                        usernameErrorBox.Visibility = visible;
-                    else
                         usernameErrorBox.Visibility = invisible;
+                    else
+                        usernameErrorBox.Visibility = visible;
                     ;
                 }
             };
