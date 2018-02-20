@@ -210,8 +210,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f06001f
 			public const int PasswordErrorBox = 2131099679;
 			
-			// aapt resource value: 0x7f060054
-			public const int ResetButton = 2131099732;
+			// aapt resource value: 0x7f060056
+			public const int ResetButton = 2131099734;
 			
 			// aapt resource value: 0x7f060014
 			public const int UsernameBox = 2131099668;
@@ -326,6 +326,12 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f060052
 			public const int music = 2131099730;
+			
+			// aapt resource value: 0x7f060054
+			public const int note1 = 2131099732;
+			
+			// aapt resource value: 0x7f060055
+			public const int note2 = 2131099733;
 			
 			// aapt resource value: 0x7f06003d
 			public const int passwordBox = 2131099709;

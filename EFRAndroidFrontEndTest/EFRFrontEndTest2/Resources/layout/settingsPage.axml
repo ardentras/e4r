@@ -67,6 +67,7 @@
         android:layout_rowSpan="1"
         android:gravity="center"
         android:layout_rowWeight="1"
+        android:id="@+id/note1"
         android:layout_marginRight="195.5dp" />
     <TextView
         android:gravity="center"
@@ -87,6 +88,7 @@
         android:layout_row="3"
         android:layout_rowSpan="1"
         android:gravity="center"
+        android:id="@+id/note2"
         android:layout_rowWeight="1"
         android:layout_marginRight="193.5dp" />
     <Space
