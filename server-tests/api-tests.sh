@@ -3,7 +3,7 @@
 # Action: Send unique username and email
 # Expected Response: 200
 ############################################
-code=$(curl -XGET localhost:3002/api/check_username -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com"}}' | jq '.code')
+code=$(curl -XPOST localhost:3002/api/check_username -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com"}}' | jq '.code')
 if [[ ! $code -eq 200 ]]; then
     echo "- Test check username with non-existing user failed. Expected server code 200, got ${code}"
 else
@@ -27,7 +27,7 @@ fi
 # Action: Send existing username and email
 # Expected Response: 100
 ############################################
-code=$(curl -XGET localhost:3002/api/check_username -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com"}}' | jq '.code')
+code=$(curl -XPOST localhost:3002/api/check_username -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com"}}' | jq '.code')
 if [[ ! $code -eq 100 ]]; then
     echo "- Test check username with existing user failed. Expected server code 100, got ${code}"
 else

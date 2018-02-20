@@ -57,7 +57,7 @@ Router.put('/logout', (req, res) => {
 	db.attemptLogout(res, req.body.user);
 });
 // Tested
-Router.get('/check_username', (req, res) => {
+Router.post('/check_username', (req, res) => {
 	db.checkUsername(res, req.body.user);
 });
 // Tested
@@ -68,7 +68,7 @@ Router.delete('/delete_user', (req, res) => {
 Router.put('/update_uo', (req, res) => {
 	db.update_uo(res, req.body.user);
 });
-Router.put('/verify_email/:VerifyID(\d+)' (req, res) => {
+Router.get('/verify_email/:VerifyID', (req, res) => {
 	db.verifyEmail(res, req.params);
 });
 Router.put('/q/request_block', (req, res) => {

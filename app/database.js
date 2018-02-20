@@ -159,6 +159,22 @@ class TDatabase {
         }
     }
 
+    // Attempts to create an account with the given username, email
+	//
+	// Example:
+	// curl -XGET localhost:3002/api/verify_email/${VerifyID}
+    async verifyEmail(client, data) {
+        let res = await this.db.request().input('verifyid', mssql.Int, data.VerifyID)
+                                            .query("DELETE FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
+
+        console.log(data.VerifyID);
+        if (res.rowsAffected == 0) {
+            client.json({response: "Failed", type: "GET", code: 100, reason: "That ID was not found."});
+        } else {
+            client.redirect("/login")
+        }
+    }
+
 	// Attempts to log the user in given a certain username and Password
 	//
 	// Example:
@@ -172,7 +188,7 @@ class TDatabase {
                 let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
         				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
 
-                if (res.rowsAffected == 0) {
+                if (res2.rowsAffected > 0) {
                     client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified, login failed"});
                     return;
                 }
