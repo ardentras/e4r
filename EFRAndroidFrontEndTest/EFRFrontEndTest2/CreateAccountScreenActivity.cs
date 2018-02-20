@@ -87,13 +87,13 @@ namespace EFRFrontEndTest2
                 if (usernameBox.Text.Length > 0)
                 {
                     //Pings the server to check if the username already exists
-                    Responce responce = await database.CheckUsername(usernameBox.Text, "1234");
+                    Responce responce = await database.CheckUsername(usernameBox.Text, emailBox.Text);
 
                     //Parses JSON responce to see if (User not found) returns, if so then username is acceptable
-                    if (responce.m_responce == "Succeed")
-                        usernameErrorBox.Visibility = invisible;
-                    else
+                    if (responce.m_responce == "Failed")
                         usernameErrorBox.Visibility = visible;
+                    else
+                        usernameErrorBox.Visibility = invisible;
                     ;
                 }
             };
