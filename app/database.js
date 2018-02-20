@@ -79,65 +79,129 @@ class TDatabase {
         return check;
     }
 
-    // Verifies the user objects are in sync and corrects errors if they exist.
-    async verifyQuestionBlocks(client, data) {
-        let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+    // Attempts to create an account with the given username, email, and password
+	//
+	// Example:
+	// curl -XPOST localhost:3002/api/signup -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com","password":"defaultpass"}}'
+    async createAccount(client, data) {
+        const sanitized = this.sanitizeInput(data.email);
+        console.log("SIGNUP Request");
+        if (sanitized === true) {
+            try {
+                let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                            						.input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                            						.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
 
-        if (res.rowsAffected == 0) {
-	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
-	    } else {
-            let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+                if (res.rowsAffected > 0) {
+                    client.json({response: "Failed", type: "POST",code: 100, reason: "User already exists"});
+                } else {
+                    //TODO Update this with a call to the salt table
+                    let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
+                    let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
 
-            var cliTimestamp = data.userobject.timestamp;
-            var dbTimestamp = user_object.timestamp;
+                    let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
+                    newUserObject.user_data.username = data.username;
+                    newUserObject.user_data.email = data.email;
 
-            if (cliTimestamp < dbTimestamp) {
-                var spliceBlocks = data.userobject.game_data.completed_blocks.concat(user_object.game_data.completed_blocks)
-                spliceBlocks = spliceBlocks.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-                data.userobject.game_data.completed_blocks = spliceBlocks;
+                    var date = new Date();
+                    newUserObject.timestamp = date.toISOString();
 
-                var date = new Date();
-                data.userobject.timestamp = date.toISOString();
+                    var uostring = JSON.stringify(newUserObject);
+                    uostring = uostring.replace("\\", "");
+
+                    await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                            .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                                            .input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
+                                            .input('newuo', mssql.VarChar(5000), uostring)
+                                            .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
+
+                    var randNum = Math.round((Math.random() * 1000000000) % 2147483647);
+                    let res = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                                        .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                                                        .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email");
+
+                    let res2 = await this.db.request().input('userid', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].UserID)
+                                                        .input('recoveryid', mssql.Int, randNum)
+            				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
+
+                    console.log('SIGNUP SUCCEED Email: ' + data.email);
+                    client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP", verifyID: randNum});
+                    this.confirmationEmail(data, randNum);
+                }
+            } catch (err) {
+                console.log("SIGNUP Error");
+                console.log(err);
+                client.json({response: "Failed", type: "POST", code: 500, reason: "User signup error", data: err});
             }
-
-            var uostring = JSON.stringify(data.userobject);
-            uostring = uostring.replace("\\", "");
-
-            await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
-	    }
-
-        return data.userobject;
+        } else {
+            client.json({response: "Rejected", type: "POST", code: 500, reason: "Invalid Email"});
+        }
     }
 
-    // Retrieves the user object and ensures it was properly saved.
-    async getUserObject(userid, data) {
-        let res = await this.db.request().input('userid', mssql.Int, userid)
-                                        .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE UserID = @userid;");
+    // Attempts to create an account with the given username, email
+	//
+	// Example:
+	// curl -XPOST localhost:3002/api/check_username -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com"}}'
+    async checkUsername(client, data) {
+        try {
+            let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                                            .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                            .query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
 
-        if (res.recordsets[0][0].UserObject == "[object Object]" || res.recordsets[0][0].UserObject == "{}") {
-            console.log("ERROR: Invalid User Object was saved.");
-
-
-            let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
-            newUserObject.user_data.username = data.username;
-            newUserObject.user_data.email = data.email;
-
-            var uostring = JSON.stringify(newUserObject);
-            uostring = uostring.replace("\\", "");
-
-            await this.db.request().input('userobject', mssql.VarChar, uostring)
-                                    .input('userid', mssql.Int, userid)
-                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
-
-            console.log("updated uo");
-
-            return newUserObject;
+            if (res.rowsAffected > 0) {
+                client.json({response: "Failed", type: "GET", code: 100, reason: "User already exists"});
+            } else {
+                client.json({response: "Success", type: "GET", code: 200, reason: "User not found"});
+            }
+        } catch (err) {
+            console.log("Database Error");
+            client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
         }
+    }
 
-        return JSON.parse(res.recordsets[0][0].UserObject);
+	// Attempts to log the user in given a certain username and Password
+	//
+	// Example:
+	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","password":"defaultpass"}}'
+    async attemptLogin (client, data) {
+        try {
+            let res = await this.db.request().input('username', mssql.NVarChar(User.EMAIL_LENGTH), data.username)
+    				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username");
+
+            if (res.rowsAffected > 0) {
+                let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
+        				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+
+                if (res.rowsAffected == 0) {
+                    client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified, login failed"});
+                    return;
+                }
+
+                //TODO Update this with a call to the salt table
+                let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
+                let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
+
+                if (res.recordsets[0][0].PasswordHash === hashedPassword) {
+                    let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
+
+                    try {
+                        let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+
+                        var uo = user_object;
+                        client.json({response: "Success", type: "POST", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
+                    } catch (err) {
+                        console.log(err);
+                    }
+                } else {
+                    client.json({response: "Failed", type: "POST", code: 401, reason: "Invalid Password"});
+                }
+            } else {
+                client.json({response: "Failed", type: "POST", code: 401, reason: "User not found"});
+            }
+        } catch (err) {
+            console.log("LOGIN Fail");
+            client.json({response: "Failed", type: "POST" ,code: 500, reason: "Unknown database error", data: err});
+        }
     }
 
 	// Attempts to verify a user's existing token and renews it if valid, else logs the user out.
@@ -228,49 +292,46 @@ class TDatabase {
 		}
 	}
 
-	// Attempts to log the user in given a certain username and Password
-	//
-	// Example:
-	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","password":"defaultpass"}}'
-    async attemptLogin (client, data) {
-        try {
-            let res = await this.db.request().input('username', mssql.NVarChar(User.EMAIL_LENGTH), data.username)
-    				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username");
+    // Retrieves the user object and ensures it was properly saved.
+    async getUserObject(userid, data) {
+        let res = await this.db.request().input('userid', mssql.Int, userid)
+                                        .query("SELECT CAST(UserObject AS VARCHAR(5000)) AS UserObject FROM EFRAcc.Users WHERE UserID = @userid;");
 
-            if (res.rowsAffected > 0) {
-                let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
-        				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+        if (res.recordsets[0][0].UserObject == "[object Object]" || res.recordsets[0][0].UserObject == "{}") {
+            console.log("ERROR: Invalid User Object was saved.");
 
-                if (res.rowsAffected == 0) {
-                    client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified, login failed"});
-                    return;
-                }
 
-                //TODO Update this with a call to the salt table
-                let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
-                let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
+            let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
+            newUserObject.user_data.username = data.username;
+            newUserObject.user_data.email = data.email;
 
-                if (res.recordsets[0][0].PasswordHash === hashedPassword) {
-                    let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
+            var uostring = JSON.stringify(newUserObject);
+            uostring = uostring.replace("\\", "");
 
-                    try {
-                        let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+            await this.db.request().input('userobject', mssql.VarChar, uostring)
+                                    .input('userid', mssql.Int, userid)
+                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
 
-                        var uo = user_object;
-                        client.json({response: "Success", type: "POST", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
-                    } catch (err) {
-                        console.log(err);
-                    }
-                } else {
-                    client.json({response: "Failed", type: "POST", code: 401, reason: "Invalid Password"});
-                }
-            } else {
-                client.json({response: "Failed", type: "POST", code: 401, reason: "User not found"});
-            }
-        } catch (err) {
-            console.log("LOGIN Fail");
-            client.json({response: "Failed", type: "POST" ,code: 500, reason: "Unknown database error", data: err});
+            console.log("updated uo");
+
+            return newUserObject;
         }
+
+        return JSON.parse(res.recordsets[0][0].UserObject);
+    }
+
+    async persistUserObject(uo, userid) {
+        var date = new Date();
+        uo.timestamp = date.toISOString();
+
+        var uostring = JSON.stringify(uo);
+        uostring = uostring.replace("\\", "");
+
+        await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
+                                .input('userid', mssql.Int, userid)
+                                .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+
+        return uo;
     }
 
 	// Attempts to log the user out. If successful, user object will be saved,
@@ -329,87 +390,6 @@ class TDatabase {
             }
         }
 	}
-
-	// Attempts to create an account with the given username, email, and password
-	//
-	// Example:
-	// curl -XPOST localhost:3002/api/signup -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com","password":"defaultpass"}}'
-    async createAccount(client, data) {
-        const sanitized = this.sanitizeInput(data.email);
-        console.log("SIGNUP Request");
-        if (sanitized === true) {
-            try {
-                let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
-                            						.input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                            						.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
-
-                if (res.rowsAffected > 0) {
-                    client.json({response: "Failed", type: "POST",code: 100, reason: "User already exists"});
-                } else {
-                    //TODO Update this with a call to the salt table
-                    let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
-                    let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
-
-                    let newUserObject = Object.assign({}, DEFAULT_USER_OBJECT);
-                    newUserObject.user_data.username = data.username;
-                    newUserObject.user_data.email = data.email;
-
-                    var date = new Date();
-                    newUserObject.timestamp = date.toISOString();
-
-                    var uostring = JSON.stringify(newUserObject);
-                    uostring = uostring.replace("\\", "");
-
-                    await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                                            .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
-                                            .input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
-                                            .input('newuo', mssql.VarChar(5000), uostring)
-                                            .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
-
-                    var randNum = Math.round((Math.random() * 1000000000) % 2147483647);
-                    console.log(randNum);
-                    let res = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                                                        .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
-                                                        .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email");
-
-                    let res2 = await this.db.request().input('userid', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].UserID)
-                                                        .input('recoveryid', mssql.Int, randNum)
-            				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
-
-                    console.log('SIGNUP SUCCEED Email: ' + data.email);
-                    client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP"});
-                    this.confirmationEmail(data, randNum);
-                }
-            } catch (err) {
-                console.log("SIGNUP Error");
-                console.log(err);
-                client.json({response: "Failed", type: "POST", code: 500, reason: "User signup error", data: err});
-            }
-        } else {
-            client.json({response: "Rejected", type: "POST", code: 500, reason: "Invalid Email"});
-        }
-    }
-
-    // Attempts to create an account with the given username, email
-	//
-	// Example:
-	// curl -XPOST localhost:3002/api/check_username -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","email":"shaunrasmusen@gmail.com"}}'
-    async checkUsername(client, data) {
-        try {
-            let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
-                                            .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                                            .query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
-
-            if (res.rowsAffected > 0) {
-                client.json({response: "Failed", type: "GET", code: 100, reason: "User already exists"});
-            } else {
-                client.json({response: "Success", type: "GET", code: 200, reason: "User not found"});
-            }
-        } catch (err) {
-            console.log("Database Error");
-            client.json({response: "Failed", type: "GET" ,code: 500, reason: "Search User error"});
-        }
-    }
 
     // Returns a new block of questions from the database
     //
@@ -471,21 +451,39 @@ class TDatabase {
         }
 
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
-
     }
 
-    async persistUserObject(uo, userid) {
-        var date = new Date();
-        uo.timestamp = date.toISOString();
+    // Verifies the user objects are in sync and corrects errors if they exist.
+    async verifyQuestionBlocks(client, data) {
+        let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
-        var uostring = JSON.stringify(uo);
-        uostring = uostring.replace("\\", "");
+        if (res.rowsAffected == 0) {
+	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
+	    } else {
+            let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
-        await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                .input('userid', mssql.Int, userid)
-                                .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+            var cliTimestamp = data.userobject.timestamp;
+            var dbTimestamp = user_object.timestamp;
 
-        return uo;
+            if (cliTimestamp < dbTimestamp) {
+                var spliceBlocks = data.userobject.game_data.completed_blocks.concat(user_object.game_data.completed_blocks)
+                spliceBlocks = spliceBlocks.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+                data.userobject.game_data.completed_blocks = spliceBlocks;
+
+                var date = new Date();
+                data.userobject.timestamp = date.toISOString();
+            }
+
+            var uostring = JSON.stringify(data.userobject);
+            uostring = uostring.replace("\\", "");
+
+            await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
+                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+	    }
+
+        return data.userobject;
     }
 
 	// Displays all current user accounts from the database.

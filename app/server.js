@@ -68,6 +68,9 @@ Router.delete('/delete_user', (req, res) => {
 Router.put('/update_uo', (req, res) => {
 	db.update_uo(res, req.body.user);
 });
+Router.put('/verify_email/:VerifyID(\d+)' (req, res) => {
+	db.verifyEmail(res, req.params);
+});
 Router.put('/q/request_block', (req, res) => {
 	db.requestQuestionBlock(res, req.body.user, req.body.game);
 });
