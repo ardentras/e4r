@@ -29,13 +29,13 @@ CREATE TABLE EFRAcc.CharityUsers
 );
 
 CREATE TABLE EFRAcc.PasswordRecovery
- (RecoveryID        INT            NOT NULL IDENTITY PRIMARY KEY,
+ (RecoveryID        INT            NOT NULL PRIMARY KEY,
   UserID            INT            FOREIGN KEY REFERENCES
                                    EFRAcc.Users(UserID)
 );
 
 CREATE TABLE EFRAcc.Sessions
- (SessionID         VARCHAR(32)    NOT NULL PRIMARY KEY,
+ (SessionID         VARCHAR(36)    NOT NULL PRIMARY KEY,
   ExpirationTime    DATETIME       NOT NULL,
   UserID            INT            FOREIGN KEY REFERENCES
                                    EFRAcc.Users(UserID)
