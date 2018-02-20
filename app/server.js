@@ -41,23 +41,35 @@ app.use((req, res, next) => {
 Router.all('/', (req, res)=>{
 	res.send('Welcome to the API');
 });
+// Tested
 Router.post('/signup', (req, res) => {
     db.createAccount(res, req.body.user);
 });
+// Tested
 Router.post('/login', (req, res) => {
 	db.attemptLogin(res, req.body.user);
 });
+// Tested
 Router.put('/renew', (req, res) => {
 	db.renewSessionToken(res, req.body.user);
 });
 Router.put('/logout', (req, res) => {
 	db.attemptLogout(res, req.body.user);
 });
-Router.get('/check_username', (req, res) => {
+// Tested
+Router.post('/check_username', (req, res) => {
 	db.checkUsername(res, req.body.user);
 });
+// Tested
+Router.delete('/delete_user', (req, res) => {
+	db.deleteUser(res, req.body.user);
+});
+// Writing tests
 Router.put('/update_uo', (req, res) => {
 	db.update_uo(res, req.body.user);
+});
+Router.get('/verify_email/:VerifyID', (req, res) => {
+	db.verifyEmail(res, req.params);
 });
 Router.put('/q/request_block', (req, res) => {
 	db.requestQuestionBlock(res, req.body.user, req.body.game);
