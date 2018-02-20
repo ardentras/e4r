@@ -244,16 +244,16 @@ namespace EFRFrontEndTest2
 			public const int historyOption = 2131099724;
 			
 			// aapt resource value: 0x7f060029
-			public const int imageButton1 = 2131099689;
+			public const int EasyButton = 2131099689;
 			
 			// aapt resource value: 0x7f06002a
-			public const int imageButton2 = 2131099690;
+			public const int NormalButton = 2131099690;
 			
 			// aapt resource value: 0x7f06002b
-			public const int imageButton3 = 2131099691;
+			public const int HardButton = 2131099691;
 			
 			// aapt resource value: 0x7f06002c
-			public const int imageButton4 = 2131099692;
+			public const int HardestButton = 2131099692;
 			
 			// aapt resource value: 0x7f060012
 			public const int imageView1 = 2131099666;

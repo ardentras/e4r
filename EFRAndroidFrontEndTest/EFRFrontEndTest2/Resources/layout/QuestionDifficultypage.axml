@@ -17,7 +17,7 @@
         android:layout_width="50dp"
         android:padding="10dp"
         android:scaleType="fitXY"
-        android:id="@+id/imageButton1"
+        android:id="@+id/EasyButton"
         android:background="@drawable/lightgreycircle" />
     <ImageButton
         android:layout_column="1"
@@ -30,7 +30,7 @@
         android:layout_width="50dp"
         android:background="@drawable/lightgreycircle"
         android:scaleType="fitXY"
-        android:id="@+id/imageButton2" />
+        android:id="@+id/NormalButton" />
     <ImageButton
         android:layout_column="0"
         android:layout_columnSpan="1"
@@ -42,7 +42,7 @@
         android:layout_width="50dp"
         android:background="@drawable/lightgreycircle"
         android:scaleType="fitXY"
-        android:id="@+id/imageButton3" />
+        android:id="@+id/HardButton" />
     <ImageButton
         android:layout_column="1"
         android:layout_columnSpan="1"
@@ -54,7 +54,7 @@
         android:layout_width="50dp"
         android:background="@drawable/lightgreycircle"
         android:scaleType="fitXY"
-        android:id="@+id/imageButton4" />
+        android:id="@+id/HardestButton" />
     <ImageButton
         android:id="@+id/backButton"
         android:layout_column="0"
