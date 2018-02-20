@@ -55,7 +55,7 @@ namespace EFRFrontEndTest2.Assets
             objectString += m_Username + ",";
             objectString += m_MoneyEarned + ",";
             objectString += m_QuestionsAnswered + ",";
-            //TODO: If someone has time, replace with a more effecient process
+//TODO: If someone has time, replace with a more effecient process
 
             return objectString;
         }
