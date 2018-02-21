@@ -150,6 +150,9 @@ namespace EFRFrontEndTest2
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060057
+			public const int AchievementsButton = 2131099735;
+			
 			// aapt resource value: 0x7f060047
 			public const int Answer1 = 2131099719;
 			

@@ -23,14 +23,15 @@ namespace EFRFrontEndTest2
             SeekBar sound = FindViewById<SeekBar>(Resource.Id.sound);
             SeekBar music = FindViewById<SeekBar>(Resource.Id.music);
             Button reset = FindViewById<Button>(Resource.Id.ResetButton);
+            Button achievements = FindViewById<Button>(Resource.Id.AchievementsButton);
             Switch note1 = FindViewById<Switch>(Resource.Id.note1);
             Switch note2 = FindViewById<Switch>(Resource.Id.note2);
 
             var localData = Application.Context.GetSharedPreferences("MyContacts", FileCreationMode.Private);
             var edit = localData.Edit();
 
-            sound.Progress = localData.GetInt("sound",0);
-            music.Progress = localData.GetInt("music", 0);
+            sound.Progress = localData.GetInt("sound",100);
+            music.Progress = localData.GetInt("music", 100);
             note1.Checked = localData.GetBoolean("notifications", false);
             note2.Checked = localData.GetBoolean("bubbleNotifications", false);
             reset.Click += (sender, e) =>
@@ -42,27 +43,31 @@ namespace EFRFrontEndTest2
                 Android.Widget.Toast.MakeText(this,"data deleted",ToastLength.Short).Show();
 
             };
-            sound.ProgressChanged += (ender, e) =>
+            sound.ProgressChanged += (sender, e) =>
             {
                 edit.PutInt("sound", sound.Progress);
                 edit.Commit();
             };
-            music.ProgressChanged += (ender, e) =>
+            music.ProgressChanged += (sender, e) =>
             {
                 edit.PutInt("music", music.Progress);
                 edit.Commit();
             };
-            note1.Click += (ender, e) =>
+            note1.Click += (sender, e) =>
             {
                 edit.PutBoolean("notifications", note1.Checked);
                 edit.Commit();
             };
-            note2.Click += (ender, e) =>
+            note2.Click += (sender, e) =>
             {
                 edit.PutBoolean("bubbleNotifications", note2.Checked);
                 edit.Commit();
             };
-
+            achievements.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(AchievementsPageActivity));
+                StartActivity(intent);
+            };
         }
     };
 }
