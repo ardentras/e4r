@@ -18,7 +18,6 @@
         android:padding="10dp"
         android:scaleType="fitXY"
         android:id="@+id/EasyButton"
-        android:src="@drawable/stargreen"
         android:background="@drawable/stargreen" />
     <ImageButton
         android:layout_column="1"
