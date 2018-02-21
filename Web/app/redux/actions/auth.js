@@ -67,6 +67,7 @@ export function handlerAuth(user=undefined) {
 			iCookie.reset();
 			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
+				console.log(result.data);
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
 				dispatch(setUID(user.username));
@@ -75,6 +76,7 @@ export function handlerAuth(user=undefined) {
 				const cookie2 = "uid=" + user.username + ";" + expire + ";path=/";
 				iCookie.set(cookie);
 				iCookie.set(cookie2);
+				iCookie.add("solved", result.data.user_object.game_data.totalQuestions);
 				dispatch(Refer());
 			}
 			else {

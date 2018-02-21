@@ -3,8 +3,9 @@ import Styles from "./style.css";
 import { Line } from "rc-progress";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock } from "../../../redux/actions/questions";
+import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock, handleSolvedQuestions } from "../../../redux/actions/questions";
 import modalStyle from "../style.css";
+import iCookie from "../../../libraries/iCookie";
 
 
 const Choice = props => (
@@ -37,6 +38,8 @@ class Question extends React.Component {
                     choices[i].disabled = true;
                 }
                 this.props.correctAnswer();
+                iCookie.add("solved", (parseInt(iCookie.get("solved")) + 1));
+                this.props.handleSolvedQuestions(iCookie.get("solved"), this.props.user);
             }
             else {
                 this.props.incorrectAnswer();
@@ -111,5 +114,5 @@ class Question extends React.Component {
 
 export default connect(
 	(state) => ({user: state.user, states: state.state, questions: state.questions.questions, index: state.questions.index, answer: state.questions.selectedAnswer}),
-	(dispatch) => bindActionCreators({incorrectAnswer,correctAnswer,nextQuestion, getNextBlock }, dispatch)
+	(dispatch) => bindActionCreators({incorrectAnswer,correctAnswer,nextQuestion, getNextBlock, handleSolvedQuestions }, dispatch)
 )(Question);

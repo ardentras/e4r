@@ -63,12 +63,13 @@ button:hover {
 .userinfos {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .infos {
     display: flex;
     flex-flow: column;
+    margin-left: 30px;
 }
 
 .info {
@@ -89,6 +90,15 @@ button:hover {
     color: inherit;
 }
 
+@media (min-width: 900px) {
+    .info, .info input {
+        font-size: 2em;
+    }
+    .infobtns {
+        padding: 30px 0;
+    }
+}
+
 .info input {
     border: 0;
     outline: none;
@@ -98,5 +108,20 @@ button:hover {
 @media (max-width: 740px) {
    .savebtn, .restartbtn, .resetbtn {
         font-size: 3vmax;
+    }
+    .infos {
+        margin-left: 0;
+    }
+    .userinfos {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .info {
+        font-size: 3vmax;
+    }
+    .info input {
+        font-size: 4vmax;
     }
 }
