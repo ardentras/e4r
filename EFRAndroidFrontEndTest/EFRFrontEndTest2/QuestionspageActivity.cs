@@ -28,6 +28,7 @@ namespace EFRFrontEndTest2
             TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
 
+
             BackArrow.Click += (sender, e) =>
             {
                 Finish();

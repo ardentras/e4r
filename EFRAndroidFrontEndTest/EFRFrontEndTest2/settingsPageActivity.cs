@@ -26,10 +26,10 @@ namespace EFRFrontEndTest2
             Button achievements = FindViewById<Button>(Resource.Id.AchievementsButton);
             Switch note1 = FindViewById<Switch>(Resource.Id.note1);
             Switch note2 = FindViewById<Switch>(Resource.Id.note2);
-
+            //object to store local data
             var localData = Application.Context.GetSharedPreferences("MyContacts", FileCreationMode.Private);
             var edit = localData.Edit();
-
+            //how to pull data
             sound.Progress = localData.GetInt("sound",100);
             music.Progress = localData.GetInt("music", 100);
             note1.Checked = localData.GetBoolean("notifications", false);
@@ -45,6 +45,7 @@ namespace EFRFrontEndTest2
             };
             sound.ProgressChanged += (sender, e) =>
             {
+                //how to save data
                 edit.PutInt("sound", sound.Progress);
                 edit.Commit();
             };

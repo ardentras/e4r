@@ -57,7 +57,7 @@
         android:textSize="32sp"
         android:text="16" />
     <LinearLayout
-        android:orientation="Horizontal"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minWidth="25px"
