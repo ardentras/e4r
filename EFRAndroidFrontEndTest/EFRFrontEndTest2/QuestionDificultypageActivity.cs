@@ -27,6 +27,7 @@ namespace EFRFrontEndTest2
             ImageButton NormalButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
             ImageButton HardButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
             ImageButton HardestButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
+            ImageButton BackButton = FindViewById<ImageButton>(Resource.Id.backButton);
 
             continueButton.Click += (sender, e) =>
             {
@@ -59,7 +60,12 @@ namespace EFRFrontEndTest2
                 UserObject var = SingleUserObject.getObject();
                 var.Difficulty = "4";
             };
-            
+            BackButton.Click += (sender, e) =>
+            {
+                Finish();
+            };
+
+
         }
 
     }

@@ -26,7 +26,9 @@ class Home extends React.Component {
                     <div className={Styles.activities}>
                         <div className={[Styles.activity, Styles.greet].join(" ")}>
                             <span className={Styles.welcome}>Welcome, </span>
-                            <span className={Styles.uid}>{this.props.user.user_data.username}</span>
+                            <span className={Styles.uid}>{this.props.user.user_data.first_name ? this.props.user.user_data.first_name : 
+                                this.props.user.user_data.last_name ? this.props.user.user_data.last_name :
+                                this.props.user.user_data.username}</span>
                         </div>
                         <div className={Styles.activity}>
                             <span className={Styles.records}>Current Level</span>
@@ -35,12 +37,12 @@ class Home extends React.Component {
                         <div className={[Styles.activity, Styles.totals].join(" ")}>
                             <div className={Styles.questionscontainer}>
                                 <span className={Styles.records}>Questions Solved</span>
-                                <div className={Styles.recordcontent}><i className={["fa", "fa-trophy", Styles.trophy].join(" ")}/><span className={Styles.number}>1</span></div>
+                                <div className={Styles.recordcontent}><i className={["fa", "fa-trophy", Styles.trophy].join(" ")}/><span className={Styles.number}>{this.props.user.game_data.totalQuestions}</span></div>
                             </div>
                             <hr/>
                             <div className={Styles.donationcontainer}>
                                 <span className={Styles.records}>Total Donations</span>
-                                <div className={Styles.recordcontent}><i className={["fa", "fa-heart", Styles.heart].join(" ")}/><span className={Styles.number}>$1.00</span></div>
+                                <div className={Styles.recordcontent}><i className={["fa", "fa-heart", Styles.heart].join(" ")}/><span className={Styles.number}>${this.props.user.game_data.totalDonated}</span></div>
                             </div>
                         </div>
                     </div>
@@ -59,5 +61,5 @@ class Home extends React.Component {
     }
 }
 export default connect(
-	(state) => ({user: state.user, questions: state.questions.questions, index: state.questions.index})
+	(state) => ({user: state.user, questions: state.questions.questions, index: state.questions.index, uid: state.auth.uid})
 )(Home);

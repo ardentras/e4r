@@ -1,5 +1,127 @@
+.settings {
+    background: white;
+    width: 100%;
+    position: relative;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.settings input {
+    outline: none;
+    background: none;
+    border: 1px solid rgb(221, 221, 221);
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.infobtns {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.savebtn, .restartbtn, .resetbtn {
+    outline: none;
+    font-size: 2vmax;
+    border: 0;
+}
+
+.savebtn {
+    padding: 10px 0;
+    background: none;
+    border: 1px solid #1E90FF;
+    color: #1E90FF;
+}
+
+.resetbtn {
+    color: white;
+    padding: 10px 0;
+    background: #1E90FF;
+}
+
+.savebtn, .resetbtn {
+    width: 25%;
+}
+
+.btns {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.restartbtn {
+    padding: 20px 0;
+    background: #1E90FF;
+    color: white;
+    width: 100%;
+}
+
+.userinfos {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+.infos {
+    display: flex;
+    flex-flow: column;
+    margin-left: 30px;
+}
+
+.info {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 10px;
+}
+
+#fname {
+    color: inherit;
+}
+
+#lname {
+    color: inherit;
+}
+
+#charity {
+    color: inherit;
+}
+
+@media (min-width: 900px) {
+    .info, .info input {
+        font-size: 2em;
+    }
+    .infobtns {
+        padding: 30px 0;
+    }
+}
+
+.info input {
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #1E90FF;
+}
+
 @media (max-width: 740px) {
-   .settings {
-       width: 100%;
-   }
+   .savebtn, .restartbtn, .resetbtn {
+        font-size: 3vmax;
+    }
+    .infos {
+        margin-left: 0;
+    }
+    .userinfos {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .info {
+        font-size: 3vmax;
+    }
+    .info input {
+        font-size: 4vmax;
+    }
 }

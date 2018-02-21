@@ -30,7 +30,7 @@
 .sbtn {
     border: 0;
     outline: 0;
-    background: #749FF2;
+    background: #1E90FF;
     color: white;
     width: 100%;
     padding: 10px 0;
@@ -68,6 +68,9 @@
 @media (max-width: 740px) {
     .returning *{
         margin: 5px 0;
+    }
+    .returning {
+        padding: 0 10%;
     }
     .signupbtn {
         display: block;

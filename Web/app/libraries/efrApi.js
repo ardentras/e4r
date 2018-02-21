@@ -20,7 +20,7 @@ const efrApi = (()=>{
     let _loginPath = new WeakMap();
     let _signupPath = new WeakMap();
     let _logoutPath = new WeakMap();
-
+    let _updatePath = new WeakMap();
 	class efrApi {
 		constructor() {
             _host.set(this, "localhost");
@@ -31,6 +31,7 @@ const efrApi = (()=>{
             _loginPath.set(this, undefined);
             _signupPath.set(this, undefined);
             _logoutPath.set(this, undefined);
+            _updatePath.set(this, undefined);
             iAuth.config({
                 host: _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this),
                 timeout: 10000
@@ -38,7 +39,7 @@ const efrApi = (()=>{
 		}
         config({host="localhost", port=8080, protocol="http", gamePath=undefined, 
                 renewPath=undefined, loginPath=undefined, timeout=1000, headers=undefined,
-                signupPath=undefined, logoutPath=undefined}) {
+                signupPath=undefined, logoutPath=undefined, updatePath=undefined}) {
             _host.set(this, host);
             _port.set(this, port);
             _protocol.set(this, protocol);
@@ -47,6 +48,7 @@ const efrApi = (()=>{
             _loginPath.set(this, loginPath);
             _signupPath.set(this, signupPath);
             _logoutPath.set(this, logoutPath);
+            _updatePath.set(this, updatePath);
             iAuth.config({
                 host: _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this),
                 timeout: timeout,
@@ -90,9 +92,13 @@ const efrApi = (()=>{
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _gamePath.get(this);
             return Axios.put(apiRoute, {user});
         }
-        renewSession(user) {
+        updateUser(user) {
+            const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _updatePath.get(this);
+            return Axios.put(apiRoute, {user});
+        }
+        renewSession() {
             // const session = iCookie.get("session");
-            // const objToSent = {user: {session: session, userobject: user}};
+            // const objToSent = {user: {session: session}};
             // const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
 			// return Axios.put(apiRoute, objToSent);
         }

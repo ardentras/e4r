@@ -28,7 +28,29 @@ const userReducer = (state=initialState, action) => {
 				...state.game_data,
 				completed_blocks: state.game_data.completed_blocks.concat(action.value)
 			}
-		})
+		});
+	case Types.RESET_COMPLETE:
+		return Object.assign({}, state, {
+			game_data: {
+				...state.game_data,
+				completed_blocks: [],
+				difficulty: "0"
+			}
+		});
+	case Types.SET_F_NAME:
+		return Object.assign({}, state, {
+			user_data: {
+				...state.user_data,
+				first_name: action.value
+			}
+		});
+	case Types.SET_L_NAME:
+		return Object.assign({}, state, {
+			user_data: {
+				...state.user_data,
+				last_name: action.value
+			}
+		});
 	default:
 		return Object.assign({}, state);
 	}

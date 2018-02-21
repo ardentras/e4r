@@ -2,7 +2,6 @@ import "babel-polyfill";
 
 import { 
 	SET_USER_INFO,
-	SET_SESSION_TOKEN,
 	AUTHENTICATING, 
 	DEAUTHENTICATING,
 	PERSIST,
@@ -26,13 +25,6 @@ export function setUID(name) {
 	}
 }
 
-export function setSessionToken(token) {
-	return {
-		type: SET_SESSION_TOKEN,
-		session: token,
-	};
-}
-
 export function Authenticate(state) {
 	return {
 		type: AUTHENTICATING,
@@ -46,24 +38,25 @@ export function DeAuthenticate() {
 	};
 }
 
-// export function handlerPersist() {
-// 	return async (dispatch)=>{
-// 		try {
-// 			const result = await iAuth.ifPersist();
-// 			if (result.data.code === httpCodes.Ok) {
-// 				dispatch(setAuthenticateSuccess(true));
-// 				dispatch(setUID(result.data.uid ? result.data.uid : iCookie.get("uid")));
-// 				const expire = "expires=" + iCookie.time();
-// 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
-// 				iCookie.set(cookie);
-// 				dispatch(Refer());
-// 			}
-// 		}
-// 		catch(error) {
-// 			dispatch(Error("PERSIST_ERROR"));
-// 		}
-// 	}
-// }
+export function handlerPersist() {
+	return async (dispatch)=>{
+		try {
+			const result = await efrApi.renewSession();
+			if (result.data.code === httpCodes.Ok) {
+				dispatch(setAuthenticateSuccess(true));
+				dispatch(setSessionToken(result.data.session_id));
+				dispatch(setUID(result.data.uid ? result.data.uid : iCookie.get("uid")));
+				const expire = "expires=" + iCookie.time();
+				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
+				iCookie.set(cookie);
+				dispatch(Refer());
+			}
+		}
+		catch(error) {
+			dispatch(Error("PERSIST_ERROR"));
+		}
+	}
+}
 
 export function handlerAuth(user=undefined) {
 	return async (dispatch)=>{
@@ -74,6 +67,7 @@ export function handlerAuth(user=undefined) {
 			iCookie.reset();
 			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
+				console.log(result.data);
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
 				dispatch(setUID(user.username));
@@ -82,6 +76,7 @@ export function handlerAuth(user=undefined) {
 				const cookie2 = "uid=" + user.username + ";" + expire + ";path=/";
 				iCookie.set(cookie);
 				iCookie.set(cookie2);
+				iCookie.add("solved", result.data.user_object.game_data.totalQuestions);
 				dispatch(Refer());
 			}
 			else {
