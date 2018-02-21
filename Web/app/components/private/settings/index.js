@@ -20,22 +20,26 @@ class Settings extends React.Component {
             <div className={Styles.settings}>
                 <div className={Styles.userinfos}>
                     <div className={[Styles.infos, Styles.labels].join(" ")}>
-                        <span>First Name:</span>
-                        <span>Last Name: </span>
-                        <span>Charity:</span>
-                        <span>Token:</span>
+                        <div className={Styles.info}>
+                            <span>First name: </span>
+                            <input type="text" name="fname" defaultValue={this.props.user.user_data.first_name}/>
+                        </div>
+                        <div className={Styles.info}>
+                            <span>Last name: </span>
+                            <input type="text" name="lname" defaultValue={this.props.user.user_data.last_name}/>
+                        </div>
+                        <div className={Styles.info}>
+                            <span>Charity:</span>
+                            <span>{this.props.user.user_data.charity_name ? this.props.user.user_data.charity_name : "None"}</span>
+                        </div>
                     </div>
-                    <div className={[Styles.infos, Styles.inputs].join(" ")}>
-                        <input type="text" name="fname" defaultValue={this.props.user.user_data.first_name}/>
-                        <input type="text" name="lname" defaultValue={this.props.user.user_data.last_name}/>
-                        <span>{this.props.user.user_data.charity_name ? this.props.user.user_data.charity_name : "None"}</span>
-                        <span>{this.props.user.token}</span>
+                    <div className={Styles.btns}>
+                        <div className={Styles.infobtns}>
+                            <button className={Styles.savebtn}>Save</button>
+                            <button className={Styles.resetbtn}>Reset</button>
+                        </div>
+                        <button className={Styles.restartbtn} onClick={this.restart}>Restart</button>
                     </div>
-                    <button className={Styles.restartbtn} onClick={this.restart}>Restart</button>
-                </div>
-                <div className={Styles.infobtns}>
-                    <button className={Styles.savebtn}>Save</button>
-                    <button className={Styles.resetbtn}>Reset</button>
                 </div>
             </div>
         );
