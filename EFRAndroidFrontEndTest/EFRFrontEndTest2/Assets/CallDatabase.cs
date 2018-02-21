@@ -39,68 +39,38 @@ namespace EFRFrontEndTest2.Assets
             m_userObject = new UserObject();
         }
 
-        public async Task<Responce> FetchLogin(string username, string password)
-        {
-            // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/login"));
-            request.ContentType = "application/json";
-            request.Method = "POST";
-            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            //byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
-            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
-
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString()); //For debugging
-                    SaveLastResponce(jsonDoc);
-                    if (LastResponce.m_code == 200)
-                        CreateUserObject(jsonDoc);
-
-                    return LastResponce;
-                }
-            }
-        }
-
-        public async Task<Responce> CheckUsername(string username, string password)
-        {
-            // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/login"));
-            request.ContentType = "application/json";
-            request.Method = "POST";
-            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            //byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"shaunrasmusen\",\"password\":\"defaultpass\"} }");
-            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
-
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-                    SaveLastResponce(jsonDoc);
-
-                    // Return the JSON document:
-                    return LastResponce;
-                }
-            }
-        }
-
         public async Task<Responce> CreateAccount(string username, string email, string password)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://35.163.221.182:3002/api/signup"));
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
+            return await APICall("POST", "http://35.163.221.182:3002/api/signup", bytestream);
+        }
+
+        public async Task<Responce> FetchLogin(string username, string password)
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            return await APICall("POST", "http://35.163.221.182:3002/api/login", bytestream, true);
+        }
+
+        public async Task<Responce> RenewSession(string sessionID)
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + sessionID + "}\"} }");
+            return await APICall("PUT", "http://35.163.221.182:3002/api/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
+        }
+
+// TODO: Update to username/email request when API is fixed
+        public async Task<Responce> CheckUsername(string username, string password)
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
+            return await APICall("POST", "http://35.163.221.182:3002/api/login", bytestream);
+        }
+
+
+        public async Task<Responce> APICall(string method, string Uri, byte [] bytestream, bool need_UO = false)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(Uri));
             request.ContentType = "application/json";
-            request.Method = "POST";
-            byte[] JsonString = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
-            request.GetRequestStream().Write(JsonString, 0, JsonString.Length);
+            request.Method = method;
+            request.GetRequestStream().Write(bytestream, 0, bytestream.Length);
             // Send the request to the server and wait for the response:
             using (WebResponse response = await request.GetResponseAsync())
             {
@@ -112,6 +82,8 @@ namespace EFRFrontEndTest2.Assets
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
                     SaveLastResponce(jsonDoc);
 
+                    //if (LastResponce.m_code == 200 && need_UO == true)
+                    //   CreateUserObject(jsonDoc);
                     // Return the JSON document:
                     return LastResponce;
                 }
@@ -131,18 +103,34 @@ namespace EFRFrontEndTest2.Assets
         }
         private void CreateUserObject(JsonValue json)
         {
+            UserObject userObj = SingleUserObject.getObject();
             JsonValue user = json["user_object"];
             JsonValue game = user["game_data"];
-//TODO: Fix once implemented
-           // m_userObject.CompletedBlocks = game["completed_blocks"];
+            JsonArray completeBlocks = (JsonArray)user["game_data"];
+// TODO: Fix once implemented
+            // m_userObject.CompletedBlocks = game["completed_blocks"];
             m_userObject.Difficulty = game["difficulty"];
+            userObj.Difficulty = game["difficulty"];
             m_userObject.SubjectID = game["subject_id"];
+            userObj.SubjectID = game["subject_id"];
+            m_userObject.MoneyEarned = game["totalDonated"];
+            userObj.MoneyEarned = game["totalDonated"];
+            m_userObject.QuestionsAnswered = game["totalQuestions"];
+            userObj.QuestionsAnswered = game["totalQuestions"];
             m_userObject.Timestamp = user["timestamp"];
+            userObj.Timestamp = user["timestamp"];
             user = user["user_data"];
             m_userObject.Charity = user["charity_name"];
+            userObj.Charity = user["charity_name"];
             m_userObject.FirstName = user["first_name"];
+            userObj.FirstName = user["first_name"];
             m_userObject.LastName = user["last_name"];
+            userObj.LastName = user["last_name"];
             m_userObject.Username = user["username"];
+            userObj.Username = user["username"];
+
+
+
         }
 
         public UserObject GetUserObject { get { return m_userObject; } }

@@ -67,6 +67,7 @@
         android:layout_rowSpan="1"
         android:gravity="center"
         android:layout_rowWeight="1"
+        android:id="@+id/note1"
         android:layout_marginRight="195.5dp" />
     <TextView
         android:gravity="center"
@@ -87,21 +88,32 @@
         android:layout_row="3"
         android:layout_rowSpan="1"
         android:gravity="center"
+        android:id="@+id/note2"
         android:layout_rowWeight="1"
         android:layout_marginRight="193.5dp" />
     <Space
         android:layout_column="0"
         android:layout_columnSpan="2"
         android:layout_columnWeight="1"
-        android:layout_row="4"
+        android:layout_row="5"
         android:layout_rowSpan="1"
         android:layout_rowWeight="4" />
     <Button
         android:layout_column="0"
         android:layout_columnSpan="2"
         android:layout_columnWeight="1"
-        android:layout_row="5"
+        android:layout_row="6"
         android:layout_rowSpan="1"
         android:layout_rowWeight="2"
+        android:id="@+id/ResetButton"
         android:text="Reset All Records" />
+    <Button
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_columnWeight="1"
+        android:layout_row="4"
+        android:layout_rowSpan="1"
+        android:layout_rowWeight="1"
+        android:id="@+id/AchievementsButton"
+        android:text="View Achievements" />
 </GridLayout>

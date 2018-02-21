@@ -88,18 +88,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AchievementsPageActivity.cs" />
-    <Compile Include="Activity1.cs" />
     <Compile Include="Assets\CallDatabase.cs" />
     <Compile Include="Assets\LocalArchive.cs" />
+    <Compile Include="Assets\SingleUserObject.cs" />
     <Compile Include="Assets\UserObject.cs" />
     <Compile Include="BubbleLiveFeedActivity.cs" />
     <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="HomeScreenActivity.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="QuestionDificultypageActivity.cs" />
     <Compile Include="QuestionspageActivity.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="SelectSubjectScreenActivity.cs" />
     <Compile Include="settingsPageActivity.cs" />
     <Compile Include="WinPageActivity.cs" />
@@ -142,6 +143,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AchievementsPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\QuestionDifficultypage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -246,6 +250,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\trophyIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\StarGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Normalstar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\RedStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PurpleStar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

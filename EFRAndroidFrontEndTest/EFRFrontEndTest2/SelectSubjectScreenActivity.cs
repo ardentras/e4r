@@ -46,7 +46,7 @@ namespace EFRFrontEndTest2
 
             continueButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                var intent = new Intent(this, typeof(QuestionDificultypageActivity));
                 intent.PutExtra("subjects", binaryChoice);
                 StartActivity(intent);
             };

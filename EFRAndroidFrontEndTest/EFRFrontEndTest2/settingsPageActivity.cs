@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
@@ -20,11 +21,53 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.settingsPage);
             SeekBar sound = FindViewById<SeekBar>(Resource.Id.sound);
-            sound.ProgressChanged += (object sender, SeekBar.ProgressChangedEventArgs e) =>
-            {
-                
-            };
+            SeekBar music = FindViewById<SeekBar>(Resource.Id.music);
+            Button reset = FindViewById<Button>(Resource.Id.ResetButton);
+            Button achievements = FindViewById<Button>(Resource.Id.AchievementsButton);
+            Switch note1 = FindViewById<Switch>(Resource.Id.note1);
+            Switch note2 = FindViewById<Switch>(Resource.Id.note2);
 
+            var localData = Application.Context.GetSharedPreferences("MyContacts", FileCreationMode.Private);
+            var edit = localData.Edit();
+
+            sound.Progress = localData.GetInt("sound",100);
+            music.Progress = localData.GetInt("music", 100);
+            note1.Checked = localData.GetBoolean("notifications", false);
+            note2.Checked = localData.GetBoolean("bubbleNotifications", false);
+            reset.Click += (sender, e) =>
+            {
+                UserObject obj = SingleUserObject.getObject();
+                obj.CompletedBlocks = new int[0];
+                obj.MoneyEarned = 0;
+                obj.QuestionsAnswered = 0;
+                Android.Widget.Toast.MakeText(this,"data deleted",ToastLength.Short).Show();
+
+            };
+            sound.ProgressChanged += (sender, e) =>
+            {
+                edit.PutInt("sound", sound.Progress);
+                edit.Commit();
+            };
+            music.ProgressChanged += (sender, e) =>
+            {
+                edit.PutInt("music", music.Progress);
+                edit.Commit();
+            };
+            note1.Click += (sender, e) =>
+            {
+                edit.PutBoolean("notifications", note1.Checked);
+                edit.Commit();
+            };
+            note2.Click += (sender, e) =>
+            {
+                edit.PutBoolean("bubbleNotifications", note2.Checked);
+                edit.Commit();
+            };
+            achievements.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(AchievementsPageActivity));
+                StartActivity(intent);
+            };
         }
     };
 }

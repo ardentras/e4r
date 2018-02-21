@@ -15,13 +15,16 @@ SERVER PUBLIC HTTP PORT: 3002
 SERVER PUBLIC HTTPS/SSL PORT: 3003
 
 API Calls:
-          API Welcome -> hostname:port/api -> ALL
-          Log In -> hostname:port/api/login -> POST
-          Log Out -> hostname:port/api/logout -> PUT
-          Sign Up -> hostname:port/api/signup -> POST
-          Renew Session -> hostname:port/api/renew -> PUT
-          Check Username -> hostname:port/api/check_username -> GET
-          Request Question Block -> hostname:port/api/q/request_block -> GET
+          API Welcome           -> hostname:port/api                -> ALL
+          Sign Up               -> hostname:port/api/signup         -> POST
+          Check Username        -> hostname:port/api/check_username -> POST
+          Log In                -> hostname:port/api/login          -> POST
+          Verify Email          -> hostname:port/api/verify_email/${VerifyID} -> GET
+          Renew Session         -> hostname:port/api/renew          -> PUT
+          Update User Object    -> hostname:port/api/update_uo      -> PUT
+          Log Out               -> hostname:port/api/logout         -> PUT
+          Delete User           -> hostname:port/api/delete_user    -> DELETE
+          Request Question Block-> hostname:port/api/q/request_block-> PUT
 
 Debugging API Calls:
           Display Users Information -> hostname:port/test/display -> GET
@@ -71,12 +74,13 @@ On successful signup:
   "type": "POST",
   "code": 201,
   "action": "SIGNUP"
+  "verifyID": ${verifyID}
 }
 
 On user already exists:
 {
   "response": "Failed",
-  "type": "GET",
+  "type": "POST",
   "code": 100,
   "reason": "User already exists",
 }
@@ -95,7 +99,7 @@ On user already exists:
 On successful login:
 {
   "response": "Success",
-  "type": "GET",
+  "type": "POST",
   "code": 200,
   "action": "LOGIN",
   "session_id": "{session_token}",
@@ -105,7 +109,7 @@ On successful login:
 On invalid username/email:
 {
   "response": "Failed",
-  "type": "GET",
+  "type": "POST",
   "code": 401,
   "reason": "User not found",
   "result": null
@@ -114,10 +118,35 @@ On invalid username/email:
 On invalid password:
 {
     "response": "Failed",
-    "type": "GET",
+    "type": "POST",
     "code": 401,
     "reason": "Invalid Password"
 }
+
+On unverified email:
+{
+    "response": "Failed",
+    "type": "POST",
+    "code": 428,
+    "reason": "Email not verified, login failed"
+}
+```
+#### VERIFY EMAIL REQUEST:
+```
+http://${url}/api/verify_email/${verifyID}
+```
+#### VERIFY EMAIL RESPONSE:
+```
+On invalid verify ID:
+{
+    response: "Failed",
+    type: "GET",
+    code: 100,
+    reason: "That ID was not found."
+}
+
+On valid verify ID:
+    HTTP 302: Redirects to /login
 ```
 #### SESSION RENEW REQUEST:
 ```
@@ -238,7 +267,7 @@ On User Object out of date:
 On user not found:
 {
   "response": "Succeed",
-  "type": "GET",
+  "type": "POST",
   "code": 200,
   "reason": "User not found"
 }
@@ -246,9 +275,36 @@ On user not found:
 On user already exists:
 {
   "response": "Failed",
-  "type": "GET",
+  "type": "POST",
   "code": 100,
   "reason": "User already exists",
+}
+```
+#### DELETE_USER REQUEST:
+```
+{
+    "user": {
+        "session":"${session_token}"
+    }
+}
+```
+#### DELETE_USER RESPONSE:
+```
+On invalid session token:
+{
+    response: "Failed",
+    type: "DELETE",
+    code: 401,
+    action: "DELETE_USER",
+    reason: "Session invalid, user logged out."
+}
+
+On valid session token:
+{
+    response: "Success",
+    type: "DELETE",
+    code: 200,
+    action: "DELETE_USER"
 }
 ```
 ## Game Requests:
@@ -291,21 +347,28 @@ OR
 ```
 #### REQUEST_BLOCK RESPONSE:
 ```
-[
-    {
-        "QuestionID":{id},
-        "QuestionText":"{text}",
-        "QuestionOne":"{answer1}",
-        "QuestionTwo":"{answer2}",
-        "QuestionThree":"{answer3}",
-        "QuestionFour":"{answer4}",
-        "CorrectAnswer":"{correct_answer}",
-        "StatsOne":"{statsAnswer1}",
-        "StatsTwo":"{statsAnswer2}",
-        "StatsThree":"{statsAnswer3}",
-        "StatsFour":"{statsAnswer4}",
-        "QuestionBlockID":"{block_id}"
-    },
-    {...},
-]
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "RETRIEVE",
+    question_block: [
+        {
+            "QuestionID":{id},
+            "QuestionText":"{text}",
+            "QuestionOne":"{answer1}",
+            "QuestionTwo":"{answer2}",
+            "QuestionThree":"{answer3}",
+            "QuestionFour":"{answer4}",
+            "CorrectAnswer":"{correct_answer}",
+            "StatsOne":"{statsAnswer1}",
+            "StatsTwo":"{statsAnswer2}",
+            "StatsThree":"{statsAnswer3}",
+            "StatsFour":"{statsAnswer4}",
+            "QuestionBlockID":"{block_id}"
+        },
+        {...},
+    ],
+    user_object: {user_object}
+}
 ```
