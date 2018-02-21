@@ -20,6 +20,14 @@ class Question extends React.Component {
         this.checkAnswer = this.checkAnswer.bind(this);
         this.next = this.next.bind(this);
     }
+    componentDidMount() {
+        if(this.props.answer === "correct") {
+            const choices = document.getElementsByClassName(Styles.choice);
+            for(let i = 0; i < choices.length; ++i) {
+                choices[i].disabled = true;
+            }
+        }
+    }
     checkAnswer(event) {
         if (!this.props.answer || this.props.answer === "incorrect") {
             const selected = document.getElementById(event.target.id);

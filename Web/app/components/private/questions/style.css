@@ -209,12 +209,3 @@
         min-height: 370px;
     }
 }
-
-@media (max-width: 420px) {
-    .choicelabel {
-        padding: 3% 10px;
-    }
-    .nextbtn {
-        padding: 3% 10px;
-    }
-}

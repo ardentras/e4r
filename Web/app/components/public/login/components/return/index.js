@@ -8,7 +8,7 @@ const Return = props =>(
         {props.error === "AUTH_FAIL" && <span className={Styles.warning}>Incorrect username/password</span> }
         {props.error === "AUTH_TIMEOUT" && <span className={Styles.warning}>Timeout, please try again...</span> }
         {props.error === "AUTH_ERROR" && <span className={Styles.error}>Cannot connect to server</span> }
-        {props.SIGN_SUC && <span className={Styles.auth}>Thank you for joining us!</span>}
+        {props.SIGN_SUC && <span className={Styles.auth}>Please verify your email...</span>}
         {props.AUTHING && <span className={Styles.auth}>Authenicating...</span> }
         <span>username:</span>
         <input className={Styles.inputs} type="text" name="uid" placeholder="username/email" required/>

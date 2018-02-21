@@ -37,12 +37,12 @@ class Home extends React.Component {
                         <div className={[Styles.activity, Styles.totals].join(" ")}>
                             <div className={Styles.questionscontainer}>
                                 <span className={Styles.records}>Questions Solved</span>
-                                <div className={Styles.recordcontent}><i className={["fa", "fa-trophy", Styles.trophy].join(" ")}/><span className={Styles.number}>1</span></div>
+                                <div className={Styles.recordcontent}><i className={["fa", "fa-trophy", Styles.trophy].join(" ")}/><span className={Styles.number}>{this.props.user.game_data.totalQuestions}</span></div>
                             </div>
                             <hr/>
                             <div className={Styles.donationcontainer}>
                                 <span className={Styles.records}>Total Donations</span>
-                                <div className={Styles.recordcontent}><i className={["fa", "fa-heart", Styles.heart].join(" ")}/><span className={Styles.number}>$1.00</span></div>
+                                <div className={Styles.recordcontent}><i className={["fa", "fa-heart", Styles.heart].join(" ")}/><span className={Styles.number}>${this.props.user.game_data.totalDonated}</span></div>
                             </div>
                         </div>
                     </div>

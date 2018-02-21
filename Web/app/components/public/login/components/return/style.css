@@ -69,6 +69,9 @@
     .returning *{
         margin: 5px 0;
     }
+    .returning {
+        padding: 0 10%;
+    }
     .signupbtn {
         display: block;
         font-size: 2vmax;
