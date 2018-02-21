@@ -1,6 +1,7 @@
 import "babel-polyfill";
 import * as Types from "../types";
-import { setComplete, getQuestions } from "./user";
+import { setComplete, getQuestions, setUserObject } from "./user";
+import iCookie from "../../libraries/iCookie";
 import efrApi from "../../libraries/efrApi";
 
 export function setQuestions(value) {
@@ -16,11 +17,45 @@ export function nextIndex() {
     }
 }
 
-export function handleCompleteReset(userobject) {
-    return (dispatch)=>{
-        dispatch(resetCompleted());
-        dispatch(resetQuestions());
-        dispatch(getQuestions(userobject));
+export function handleSolvedQuestions(count, object) {
+    return async dispatch => {
+        const user = {
+            session: iCookie.get("session"),
+            userobject: Object.assign({}, object, {
+                game_data: {
+                    ...object.game_data,
+                    totalQuestions: count,
+                }
+            })
+        };
+        const result = await efrApi.updateUser(user);
+        if (result.data.response === "Success") {
+            dispatch(setUserObject(result.data.userobject));
+        }
+    }
+}
+
+export function handleCompleteReset(object) {
+    return async dispatch => {
+        const user = {
+            session: iCookie.get("session"),
+            userobject: Object.assign({}, object, {
+                game_data: {
+                    ...object.game_data,
+                    completed_blocks: [],
+                    difficulty: "0",
+                    totalDonated: 0,
+                    totalQuestions: 0
+                }
+            })
+        }
+        const result = await efrApi.updateUser(user);
+        if (result.data.response === "Success") {
+            dispatch(setUserObject(result.data.userobject));
+            dispatch(resetIndex());
+            dispatch(resetAnswer());
+            dispatch(getQuestions(result.data.userobject));
+        }
     };
 }
 

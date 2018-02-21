@@ -29,5 +29,7 @@
     .forms {
         width: 100%;
         border: none;
+        margin: 0;
+        padding: 0 10%;
     }
 }

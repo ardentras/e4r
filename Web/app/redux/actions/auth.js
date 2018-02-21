@@ -2,7 +2,6 @@ import "babel-polyfill";
 
 import { 
 	SET_USER_INFO,
-	SET_SESSION_TOKEN,
 	AUTHENTICATING, 
 	DEAUTHENTICATING,
 	PERSIST,
@@ -14,7 +13,7 @@ import {
 	setSignUpSuccessful,
 	Reset,
 	ifSignUp} from "./state";
-import { setUserObject, setSessionToken } from "./user";
+import { setUserObject } from "./user";
 import httpCodes from "../httpCodes";
 import efrApi from "../../libraries/efrApi";
 import iCookie from "../../libraries/iCookie";
@@ -68,15 +67,16 @@ export function handlerAuth(user=undefined) {
 			iCookie.reset();
 			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
+				console.log(result.data);
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
-				dispatch(setSessionToken(result.data.session_id));
 				dispatch(setUID(user.username));
 				const expire = "expires=" + iCookie.time();
 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
 				const cookie2 = "uid=" + user.username + ";" + expire + ";path=/";
 				iCookie.set(cookie);
 				iCookie.set(cookie2);
+				iCookie.add("solved", result.data.user_object.game_data.totalQuestions);
 				dispatch(Refer());
 			}
 			else {

@@ -17,6 +17,11 @@ const iCookie = (()=>{
 		set(cookie) {
 			document.cookie = cookie;
 		}
+		add(name, value) {
+			const expire = "expires=" + this.time();
+			const cookie = name + "=" + value + ";" + expire + ";path=/";
+			this.set(cookie);
+		}
 		get(key) {
 			let match = document.cookie.match(new RegExp(key + "=([^;]+)"));
 			return match ? match[1] : undefined;

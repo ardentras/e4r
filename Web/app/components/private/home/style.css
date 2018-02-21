@@ -64,8 +64,8 @@
 }
 
 #heart {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .userdata {
@@ -205,11 +205,19 @@
         flex-flow: row nowrap;
         justify-content: space-around;
     }
+    
 }
 
-@media (max-height: 375px) {
+@media (max-width: 320px) {
     #heart {
-        width: 75px;
-        height: 75px;
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-height: 480px) {
+    #heart {
+        width: 60px;
+        height: 60px;
     }
 }

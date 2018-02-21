@@ -83,14 +83,24 @@
     }
     .infos {
         justify-content: space-between;
+        flex-flow: column;
     }
     .infos input {
         width: 50%;
+        margin: 0;
     }
     .email p {
         width: 90%;
     }
     #name {
-        margin-left: 1%;
+        margin-bottom: 5px;
+    }
+    .email textarea {
+        min-width: 155px;
+        width: 80%;
+    }
+    .sendbtn {
+        width: 80%;
+        min-width: 155px;
     }
 }

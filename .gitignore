@@ -369,3 +369,7 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 \.DS_Store
+
+
+#testing files
+test.sql

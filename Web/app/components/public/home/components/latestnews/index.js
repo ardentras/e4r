@@ -56,6 +56,10 @@ const LatestNews = props => (
 				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
 				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
 				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
+				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
+				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
+				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
+				<News img={Temp.NEWS_IMG} description={Temp.NEWS_DESCRIPTION}/>
 			</div>
 			<i className="fa fa-arrow-circle-right" aria-hidden="true" onClick={scroll.bind(null, false)}></i>
 		</div>
