@@ -193,7 +193,7 @@ namespace EFRFrontEndTest2
 			public const int ForgotPasswordButton = 2131099710;
 			
 			// aapt resource value: 0x7f06004c
-			public const int FowardArrow = 2131099724;
+			public const int ForwardArrow = 2131099724;
 			
 			// aapt resource value: 0x7f060043
 			public const int HardButton = 2131099715;

@@ -14,7 +14,7 @@ import {
 	setSignUpSuccessful,
 	Reset,
 	ifSignUp} from "./state";
-import { setUserObject } from "./user";
+import { setUserObject, setSessionToken } from "./user";
 import httpCodes from "../httpCodes";
 import efrApi from "../../libraries/efrApi";
 import iCookie from "../../libraries/iCookie";
@@ -24,13 +24,6 @@ export function setUID(name) {
 		type: SET_UID,
 		value: name
 	}
-}
-
-export function setSessionToken(token) {
-	return {
-		type: SET_SESSION_TOKEN,
-		session: token,
-	};
 }
 
 export function Authenticate(state) {
@@ -46,24 +39,25 @@ export function DeAuthenticate() {
 	};
 }
 
-// export function handlerPersist() {
-// 	return async (dispatch)=>{
-// 		try {
-// 			const result = await iAuth.ifPersist();
-// 			if (result.data.code === httpCodes.Ok) {
-// 				dispatch(setAuthenticateSuccess(true));
-// 				dispatch(setUID(result.data.uid ? result.data.uid : iCookie.get("uid")));
-// 				const expire = "expires=" + iCookie.time();
-// 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
-// 				iCookie.set(cookie);
-// 				dispatch(Refer());
-// 			}
-// 		}
-// 		catch(error) {
-// 			dispatch(Error("PERSIST_ERROR"));
-// 		}
-// 	}
-// }
+export function handlerPersist() {
+	return async (dispatch)=>{
+		try {
+			const result = await efrApi.renewSession();
+			if (result.data.code === httpCodes.Ok) {
+				dispatch(setAuthenticateSuccess(true));
+				dispatch(setSessionToken(result.data.session_id));
+				dispatch(setUID(result.data.uid ? result.data.uid : iCookie.get("uid")));
+				const expire = "expires=" + iCookie.time();
+				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
+				iCookie.set(cookie);
+				dispatch(Refer());
+			}
+		}
+		catch(error) {
+			dispatch(Error("PERSIST_ERROR"));
+		}
+	}
+}
 
 export function handlerAuth(user=undefined) {
 	return async (dispatch)=>{
@@ -76,6 +70,7 @@ export function handlerAuth(user=undefined) {
 			if (result.data.code === httpCodes.Ok) {
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
+				dispatch(setSessionToken(result.data.session_id));
 				dispatch(setUID(user.username));
 				const expire = "expires=" + iCookie.time();
 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";

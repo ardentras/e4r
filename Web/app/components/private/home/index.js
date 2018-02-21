@@ -26,7 +26,9 @@ class Home extends React.Component {
                     <div className={Styles.activities}>
                         <div className={[Styles.activity, Styles.greet].join(" ")}>
                             <span className={Styles.welcome}>Welcome, </span>
-                            <span className={Styles.uid}>{this.props.user.user_data.username}</span>
+                            <span className={Styles.uid}>{this.props.user.user_data.first_name ? this.props.user.user_data.first_name : 
+                                this.props.user.user_data.last_name ? this.props.user.user_data.last_name :
+                                this.props.uid}</span>
                         </div>
                         <div className={Styles.activity}>
                             <span className={Styles.records}>Current Level</span>
@@ -59,5 +61,5 @@ class Home extends React.Component {
     }
 }
 export default connect(
-	(state) => ({user: state.user, questions: state.questions.questions, index: state.questions.index})
+	(state) => ({user: state.user, questions: state.questions.questions, index: state.questions.index, uid: state.auth.uid})
 )(Home);

@@ -16,6 +16,20 @@ export function nextIndex() {
     }
 }
 
+export function handleCompleteReset(userobject) {
+    return (dispatch)=>{
+        dispatch(resetCompleted());
+        dispatch(resetQuestions());
+        dispatch(getQuestions(userobject));
+    };
+}
+
+export function resetCompleted() {
+    return {
+        type: Types.RESET_COMPLETE
+    }
+}
+
 export function resetSelectedAnswer() {
     return {
         type: Types.RESET_SELECTEDANSWER

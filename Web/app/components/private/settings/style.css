@@ -1,5 +1,74 @@
+.settings {
+    background: white;
+    width: 100%;
+    position: relative;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.settings input {
+    outline: none;
+    background: none;
+    border: 1px solid rgb(221, 221, 221);
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.infobtns {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.savebtn {
+    background: rgb(146, 255, 146);
+}
+
+.resetbtn {
+    background: rgb(255, 232, 103);
+}
+
+.savebtn, .restartbtn, .resetbtn {
+    padding: 20px 0;
+    outline: none;
+    color: white;
+    font-size: 2vmax;
+    border: 0;
+}
+
+.savebtn, .resetbtn {
+    width: 25%;
+}
+
+.restartbtn {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #42B3CB;
+    color: white;
+}
+
+.userinfos {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.infos {
+    display: flex;
+    flex-flow: column;
+}
+
+.infos * {
+    padding: 5px 0;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 740px) {
-   .settings {
-       width: 100%;
-   }
+   .savebtn, .restartbtn, .resetbtn {
+        font-size: 3vmax;
+    }
 }
