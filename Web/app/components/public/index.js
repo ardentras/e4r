@@ -17,11 +17,17 @@ import Routes from "./routes";
 import PrivateRoute from "./routes/private";
 import Private from "../private";
 import Spinner from "../loading";
+import efrAPI from "../../libraries/efrApi";
 import Styles from "./style.css";
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+	componentWillMount() {
+		if (!this.props.states.IS_AUTH) {
+			this.props.handlerPersist();
+		}
 	}
 	render() {
 		return (
