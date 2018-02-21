@@ -37,6 +37,20 @@ const userReducer = (state=initialState, action) => {
 				difficulty: "0"
 			}
 		});
+	case Types.SET_F_NAME:
+		return Object.assign({}, state, {
+			user_data: {
+				...state.user_data,
+				first_name: action.value
+			}
+		});
+	case Types.SET_L_NAME:
+		return Object.assign({}, state, {
+			user_data: {
+				...state.user_data,
+				last_name: action.value
+			}
+		});
 	default:
 		return Object.assign({}, state);
 	}

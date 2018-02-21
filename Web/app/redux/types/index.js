@@ -30,3 +30,5 @@ export const RESET_SELECTEDANSWER = "RESET_SELECTEDANSWER";
 export const SET_COMPLETED = "SET_COMPLETED";
 export const RESET_ANSWER = "RESET_ANSWER";
 export const RESET_COMPLETE = "RESET_COMPLETE";
+export const SET_F_NAME = "SET_F_NAME";
+export const SET_L_NAME = "SET_L_NAME";

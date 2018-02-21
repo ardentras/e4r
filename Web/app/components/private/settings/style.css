@@ -77,6 +77,18 @@ button:hover {
     margin-bottom: 10px;
 }
 
+#fname {
+    color: inherit;
+}
+
+#lname {
+    color: inherit;
+}
+
+#charity {
+    color: inherit;
+}
+
 .info input {
     border: 0;
     outline: none;

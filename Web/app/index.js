@@ -23,7 +23,8 @@ efrApi.config({
     renewPath: "/api/renew",
     loginPath: "/api/login",
     signupPath: "/api/signup",
-    logoutPath: "/api/logout"
+    logoutPath: "/api/logout",
+    updatePath: "/api/update_uo"
 });
 /****************************************************************************
  * 
