@@ -96,6 +96,7 @@
     <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="HomeScreenActivity.cs" />
+    <Compile Include="LevelupActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="QuestionDificultypageActivity.cs" />
     <Compile Include="QuestionspageActivity.cs" />
@@ -149,6 +150,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DeleteDataPopup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LevelUp.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
