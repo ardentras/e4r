@@ -36,11 +36,28 @@ namespace EFRFrontEndTest2
             note2.Checked = localData.GetBoolean("bubbleNotifications", false);
             reset.Click += (sender, e) =>
             {
-                UserObject obj = SingleUserObject.getObject();
-                obj.CompletedBlocks = new int[0];
-                obj.MoneyEarned = 0;
-                obj.QuestionsAnswered = 0;
-                Android.Widget.Toast.MakeText(this,"data deleted",ToastLength.Short).Show();
+                //Inflate layout
+                View view = LayoutInflater.Inflate(Resource.Layout.DeleteDataPopup, null);
+                AlertDialog builder = new AlertDialog.Builder(this).Create();
+                builder.SetView(view);
+                builder.SetCanceledOnTouchOutside(true);
+                EditText textUsername = view.FindViewById<EditText>(Resource.Id.textUsername);
+                Button buttonDelete = view.FindViewById<Button>(Resource.Id.DeleteButton);
+                Button buttonCancel = view.FindViewById<Button>(Resource.Id.CancelButton);
+                buttonCancel.Click += delegate 
+                {
+                    builder.Dismiss();
+                };
+                buttonDelete.Click += delegate
+                {
+                    UserObject obj = SingleUserObject.getObject();
+                    obj.CompletedBlocks = new int[0];
+                    obj.MoneyEarned = 0;
+                    obj.QuestionsAnswered = 0;
+                    Android.Widget.Toast.MakeText(this, "data deleted", ToastLength.Short).Show();
+                    builder.Dismiss();
+                };
+                builder.Show();
 
             };
             sound.ProgressChanged += (sender, e) =>
