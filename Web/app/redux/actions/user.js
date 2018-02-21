@@ -8,19 +8,12 @@ export function getQuestions(userObject) {
     return async (dispatch)=>{
         try {
             const result = await efrApi.getQuestions({session: iCookie.get("session"), userobject: userObject});
-            dispatch(setQuestions(result.data));
+            dispatch(setQuestions(result.data.question_block));
         }
         catch(err) {
             console.log("err",err);
         }
     };
-}
-
-export function setSessionToken(token) {
-    return {
-        type: Types.SET_SESSION_TOKEN,
-        value: token
-    }
 }
 
 export function setUserObject(object) {

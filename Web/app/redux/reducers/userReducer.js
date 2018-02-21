@@ -15,14 +15,12 @@ import * as Types from "../types";
 const initialState = {
 	user_data: undefined,
 	game_data: undefined,
-	token: undefined,
 	timestamp: undefined
 };
 
 const userReducer = (state=initialState, action) => {
 	switch(action.type) {
 	case Types.SET_USER_OBJECT:
-		console.log(action.value);
 		return Object.assign({}, state, action.value);
 	case Types.SET_COMPLETED:
 		return Object.assign({}, state, {
@@ -30,11 +28,7 @@ const userReducer = (state=initialState, action) => {
 				...state.game_data,
 				completed_blocks: state.game_data.completed_blocks.concat(action.value)
 			}
-		})
-	case Types.SET_SESSION_TOKEN:
-		return Object.assign({}, state, {
-			token: action.value
-		})
+		});
 	case Types.RESET_COMPLETE:
 		return Object.assign({}, state, {
 			game_data: {

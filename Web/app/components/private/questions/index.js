@@ -54,6 +54,7 @@ class Question extends React.Component {
         }
     }
     render() {
+        console.log(this.props.questions);
         const percent = (parseFloat(((this.props.index) / this.props.questions.length)) * 100).toString();
         if (this.props.questions.length <= 0) {
             return (

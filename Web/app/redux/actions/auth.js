@@ -70,7 +70,6 @@ export function handlerAuth(user=undefined) {
 			if (result.data.code === httpCodes.Ok) {
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
-				dispatch(setSessionToken(result.data.session_id));
 				dispatch(setUID(user.username));
 				const expire = "expires=" + iCookie.time();
 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
