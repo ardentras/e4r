@@ -3,12 +3,14 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 using System;
 using System.IO;
 using System.Json;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
@@ -21,29 +23,83 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
 
-            ImageButton imageButton6 = FindViewById<ImageButton>(Resource.Id.imageButton6);
+            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+            ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
+            ImageButton ForwardArrow = FindViewById<ImageButton>(Resource.Id.ForwardArrow);
 
-            imageButton6.Click += (sender, e) =>
+            //calls the block of questions
+            CallDatabase database = new CallDatabase(this);
+            database.RetreaveQuestionBlock();
+
+            int QuestionNum = 0;
+
+            JsonValue block = database.responce.m_responce;
+             
+            BackArrow.Click += (sender, e) =>
             {
                 Finish();
+            };
+
+            ForwardArrow.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+            };
+
+            BigGrayButton.Click += (sender, d) =>
+            {
+              
+            };
+
+            Answer1.Click += (sender, f) =>
+            {
+             //  if (Answer1 == CorrectAnswer)
+             //  { 
+                 
+  
+               //   Answer1.Update Text = { " " };
+                 // StartActivity(intent);
+              //  }
+            };
+
+            Answer2.Click += (sender, a) =>
+            {
+               // if (Answer2 == CorrectAnswer)
+               // {
+
+               //     var intent = new Intent(this, typeof(QuestionspageActivity));
+               //     Answer2.Update Text = { " " };
+               //     StartActivity(intent);
+              //  }
+
+              //  else
+               // {
+
+               // }
+            };
+            Answer3.Click += (sender, b) =>
+            {
+               /* if (Answer3 == CorrectAnswer)
+                {
+
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    Answer3.Update Text = { " " };
+                    StartActivity(intent);
+                }*/
+            };
+            Answer4.Click += (sender, c) =>
+            {
+               /* if (Answer4 == CorrectAnswer)
+                {
+
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    Answer4.Update Text = {" "};
+                    StartActivity(intent);
+                }*/
             };
         }
     }
 }
-
-// NOTE FOR KELCEY
-// This code is how you can pull what subjects the user chose in the subject screen
-
-// int stuff = Intent.GetIntExtra("subjects", 0);
-
-
-// I did the format this way to allow for expandability as well as processor efficiency.
-// Check 'SelectSubjectScreen' for a bit of documentation at the top. But here are some examples.
-
-// 10010 = Physics and Math subjects are selected
-// 11111 = All 5 subjects are selected
-// 01101 = Chemistry, biology, and history subjects are selected
-// 00100 = Only biology was selected
-// 00000 = No subjects were selected
-
-// Shoot me a text if you have any questions! :-)

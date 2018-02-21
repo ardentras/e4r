@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
@@ -20,7 +21,17 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             RequestWindowFeature(WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.AchievementsPage);
-            // Create your application here
+
+            TextView lv = FindViewById<TextView>(Resource.Id.level);
+            TextView questions = FindViewById<TextView>(Resource.Id.questionsAnswered);
+            TextView money = FindViewById<TextView>(Resource.Id.moneyRaised);
+            UserObject obj = SingleUserObject.getObject();
+
+            questions.Text = Convert.ToString(obj.QuestionsAnswered);
+            money.Text = Convert.ToString(obj.MoneyEarned);
+            lv.Text = Convert.ToString((int)(Math.Sqrt(obj.QuestionsAnswered/10) + obj.MoneyEarned / 50));
+            if (lv.Text == "0")
+                lv.Text = "1";
         }
     }
 }

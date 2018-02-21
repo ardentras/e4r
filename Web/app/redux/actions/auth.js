@@ -2,7 +2,6 @@ import "babel-polyfill";
 
 import { 
 	SET_USER_INFO,
-	SET_SESSION_TOKEN,
 	AUTHENTICATING, 
 	DEAUTHENTICATING,
 	PERSIST,
@@ -14,7 +13,7 @@ import {
 	setSignUpSuccessful,
 	Reset,
 	ifSignUp} from "./state";
-import { setUserObject, setSessionToken } from "./user";
+import { setUserObject } from "./user";
 import httpCodes from "../httpCodes";
 import efrApi from "../../libraries/efrApi";
 import iCookie from "../../libraries/iCookie";

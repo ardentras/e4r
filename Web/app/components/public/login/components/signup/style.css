@@ -78,8 +78,11 @@
     .signup *{
         margin: 5px 0;
     }
+    .signup {
+        padding: 0 10%;
+    }
     .sbtn {
         font-size: 2vmax;
-        margin: 20px 0;
+        margin: 10px 0;
     }
 }
