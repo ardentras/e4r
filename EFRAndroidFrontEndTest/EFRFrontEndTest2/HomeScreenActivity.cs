@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO: Rename to "UserDashboardActivity"
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "HomeScreenActivity")]

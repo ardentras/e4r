@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using EFRFrontEndTest2.Assets;
 
+
+//TODO: Update name to "LoginScreenActivity"
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
