@@ -259,16 +259,16 @@
     <AndroidResource Include="Resources\drawable\trophyIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\StarGreen.png" />
+    <AndroidResource Include="Resources\drawable\Easygreen.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Normalstar.png" />
+    <AndroidResource Include="Resources\drawable\Normalyellow.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\RedStar.png" />
+    <AndroidResource Include="Resources\drawable\PurpleExpert.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PurpleStar.png" />
+    <AndroidResource Include="Resources\drawable\RedHard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

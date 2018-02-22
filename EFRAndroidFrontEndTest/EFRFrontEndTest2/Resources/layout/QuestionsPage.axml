@@ -14,8 +14,7 @@
         android:textSize="32sp"
         android:gravity="center"
         android:textColor="#f000"
-        android:background="@drawable/LightGreyCircle"
-       />
+        android:background="@drawable/LightGreyCircle" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -24,8 +23,7 @@
         android:maxHeight="20dp"
         android:gravity="center"
         android:textColor="#f000"
-        android:textSize="32sp"
-        />
+        android:textSize="32sp" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -34,8 +32,7 @@
         android:background="@drawable/GreyButton"
         android:gravity="center"
         android:textColor="#f000"
-        android:textSize="32sp"
-      />
+        android:textSize="32sp" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -44,8 +41,7 @@
         android:background="@drawable/GreyButton"
         android:gravity="center"
         android:textColor="#f000"
-        android:textSize="32sp"
-      />
+        android:textSize="32sp" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -54,8 +50,7 @@
         android:background="@drawable/GreyButton"
         android:gravity="center"
         android:textColor="#f000"
-        android:textSize="32sp"
-         />
+        android:textSize="32sp" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
