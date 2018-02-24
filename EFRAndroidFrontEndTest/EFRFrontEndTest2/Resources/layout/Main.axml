@@ -19,7 +19,7 @@
         p1:layout_height="match_parent"
         p1:id="@+id/frameLayout1">
         <ImageView
-            p1:src="@drawable/background"
+            p1:src="@drawable/LoginBackground"
             p1:layout_width="match_parent"
             p1:layout_height="match_parent"
             p1:id="@+id/imageView1"
@@ -59,7 +59,8 @@
                     p1:id="@+id/usernameBox"
                     p1:gravity="center"
                     p1:inputType="text"
-                    p1:imeOptions="actionNext" />
+                    p1:imeOptions="actionNext"
+                    p1:backgroundTint="#ff00ffff" />
                 <TextView
                     p1:text="Password: "
                     p1:clickable="false"
@@ -75,7 +76,8 @@
                     p1:id="@+id/passwordBox"
                     p1:gravity="center"
                     p1:inputType="textPassword"
-                    p1:imeOptions="actionDone" />
+                    p1:imeOptions="actionDone"
+                    p1:backgroundTint="#ff00ffff" />
                 <TextView
                     p1:text="Forgot Password?"
                     p1:clickable="false"
@@ -102,14 +104,16 @@
                     p1:background="#ffffffff"
                     p1:textColor="#ff081929"
                     p1:alpha="0.5"
-                    p1:textStyle="bold" />
+                    p1:textStyle="bold"
+                    p1:clickable="true" />
                 <TextView
                     p1:id="@+id/Buffer"
-                    p1:layout_height="25dp" />
+                    p1:layout_height="25dp"
+                    p1:layout_width="wrap_content" />
                 <Button
                     p1:text="Guest"
                     p1:layout_width="100dp"
-                    p1:layout_height="100px"
+                    p1:layout_height="wrap_content"
                     p1:id="@+id/guestLoginButton"
                     p1:textColor="#ff081929"
                     p1:gravity="center"

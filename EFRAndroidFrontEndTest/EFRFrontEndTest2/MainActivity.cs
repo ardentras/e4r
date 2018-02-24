@@ -66,7 +66,7 @@ namespace EFRFrontEndTest2
                 }
             };
 
-            guestLogin.Click += async (sender, e) =>
+            guestLogin.Click += (sender, e) =>
             {
 
             };

@@ -78,7 +78,7 @@ namespace EFRFrontEndTest2.Assets
             if (list.Length == 9)
             {
                 try { m_SubjectID = Int32.Parse(list[3]); } //Ensures a corrupt string will not corrupt the object
-                catch (Exception e) { return false; }
+                catch (Exception) { return false; }
                 m_SessionID = list[0];
                // m_CompletedBlocks = list[1];
                 m_Difficulty = list[1];
