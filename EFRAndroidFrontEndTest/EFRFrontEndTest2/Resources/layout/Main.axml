@@ -85,14 +85,6 @@
                     p1:id="@+id/ForgotPasswordButton"
                     p1:textColor="#ffffffff"
                     p1:gravity="center" />
-                <Button
-                    p1:text="LOG IN"
-                    p1:layout_width="wrap_content"
-                    p1:layout_height="wrap_content"
-                    p1:id="@+id/loginButton"
-                    p1:gravity="center"
-                    p1:background="#ffffffff"
-                    p1:textColor="#ff081929" />
                 <TextView
                     p1:text="Join Us"
                     p1:layout_width="match_parent"
@@ -101,6 +93,30 @@
                     p1:textColor="#ffffffff"
                     p1:gravity="center"
                     p1:clickable="true" />
+                <Button
+                    p1:text="Log In"
+                    p1:layout_width="100dp"
+                    p1:layout_height="wrap_content"
+                    p1:id="@+id/loginButton"
+                    p1:gravity="center"
+                    p1:background="#ffffffff"
+                    p1:textColor="#ff081929"
+                    p1:alpha="0.5"
+                    p1:textStyle="bold" />
+                <TextView
+                    p1:id="@+id/Buffer"
+                    p1:layout_height="25dp" />
+                <Button
+                    p1:text="Guest"
+                    p1:layout_width="100dp"
+                    p1:layout_height="100px"
+                    p1:id="@+id/guestLoginButton"
+                    p1:textColor="#ff081929"
+                    p1:gravity="center"
+                    p1:clickable="true"
+                    p1:textStyle="bold"
+                    p1:alpha="0.5"
+                    p1:background="#ffffff" />
             </LinearLayout>
         </GridLayout>
     </FrameLayout>

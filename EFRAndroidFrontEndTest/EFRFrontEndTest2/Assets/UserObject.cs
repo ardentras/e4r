@@ -29,18 +29,18 @@ namespace EFRFrontEndTest2.Assets
         public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }    //These should only be changed when loading a user object
         public int[] CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } }
 
-        private string m_SessionID;
+        private string m_SessionID = "guest";
         //private Array m_CompletedBlocks;
-        private string m_Difficulty;
-        private int m_SubjectID;
-        private string m_Timestamp;
-        private string m_Charity;
-        private string m_FirstName;
-        private string m_LastName;
-        private string m_Username;
-        private double m_MoneyEarned;
-        private int m_QuestionsAnswered;
-        private int[] m_CompletedBlocks;
+        private string m_Difficulty = "easy";
+        private int m_SubjectID = 0;
+        private string m_Timestamp = "default";
+        private string m_Charity = "Red Cross";
+        private string m_FirstName = "Anon";
+        private string m_LastName = "Guest";
+        private string m_Username = "Slenderman";
+        private double m_MoneyEarned = 0.0;
+        private int m_QuestionsAnswered = 0;
+        private int[] m_CompletedBlocks = new int[1];
 
         public string GetObjectString()
         {

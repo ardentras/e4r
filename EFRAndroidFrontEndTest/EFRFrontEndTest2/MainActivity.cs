@@ -33,6 +33,7 @@ namespace EFRFrontEndTest2
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
+            Button guestLogin = FindViewById<Button>(Resource.Id.guestLoginButton);
             TextView forgotPassword = FindViewById<TextView>(Resource.Id.ForgotPasswordButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
 
@@ -63,6 +64,11 @@ namespace EFRFrontEndTest2
                     });
                     alert.Show();
                 }
+            };
+
+            guestLogin.Click += async (sender, e) =>
+            {
+
             };
 
             forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
