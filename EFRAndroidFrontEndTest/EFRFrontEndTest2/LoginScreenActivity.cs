@@ -13,12 +13,10 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using EFRFrontEndTest2.Assets;
 
-
-//TODO: Update name to "LoginScreenActivity"
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
-    public class MainActivity : Activity
+    public class LoginScreenActivity : Activity
     {
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
@@ -49,7 +47,7 @@ namespace EFRFrontEndTest2
                     LocalArchive archive = new LocalArchive(this, "AnsweredQuestions.txt");
                     archive.SetUserData(database.GetUserObject.GetObjectString());
 
-                    var intent = new Intent(this, typeof(HomeScreenActivity));
+                    var intent = new Intent(this, typeof(UserDashboardActivity));
                     StartActivity(intent);
                 }
                 else
@@ -68,6 +66,17 @@ namespace EFRFrontEndTest2
 
             guestLogin.Click += (sender, e) =>
             {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                AlertDialog alert = dialog.Create();
+                alert.SetTitle("Guest account active");
+                alert.SetMessage("Your progress will not be saved");
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    var intent = new Intent(this, typeof(UserDashboardActivity));
+                    StartActivity(intent);
+                });
+                alert.Show();
+
 
             };
 

@@ -10,11 +10,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Rename to "UserDashboardActivity"
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "HomeScreenActivity")]
-    public class HomeScreenActivity : Activity
+    public class UserDashboardActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

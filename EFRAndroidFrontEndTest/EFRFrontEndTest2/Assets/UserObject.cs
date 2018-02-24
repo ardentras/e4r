@@ -15,8 +15,7 @@ namespace EFRFrontEndTest2.Assets
     public class UserObject
     {
         public UserObject() { }
-
-        //public Array CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } } //TODO: Make array once server functionality is implemented
+        
         public string Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
         public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
         public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
@@ -30,7 +29,6 @@ namespace EFRFrontEndTest2.Assets
         public int[] CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } }
 
         private string m_SessionID = "guest";
-        //private Array m_CompletedBlocks;
         private string m_Difficulty = "easy";
         private int m_SubjectID = 0;
         private string m_Timestamp = "default";
@@ -42,6 +40,7 @@ namespace EFRFrontEndTest2.Assets
         private int m_QuestionsAnswered = 0;
         private int[] m_CompletedBlocks = new int[1];
 
+//TODO: Find out if we really need these two functions
         public string GetObjectString()
         {
             string objectString = m_SessionID + ",";
@@ -55,22 +54,9 @@ namespace EFRFrontEndTest2.Assets
             objectString += m_Username + ",";
             objectString += m_MoneyEarned + ",";
             objectString += m_QuestionsAnswered + ",";
-//TODO: If someone has time, replace with a more effecient process
 
             return objectString;
         }
-        public int AddCompletedBlock(int value)
-        {
-            CompletedBlocks = new int[m_CompletedBlocks.Length+1];
-            for(int x =0; x < m_CompletedBlocks.Length; x++)
-            {
-                CompletedBlocks[x] = m_CompletedBlocks[x];
-            }
-            CompletedBlocks[m_CompletedBlocks.Length] = value;
-            m_CompletedBlocks = CompletedBlocks;
-            return m_CompletedBlocks.Length;
-        }
-
         public bool SetObjectString(string objectString)
         {
             bool done = false;
@@ -80,7 +66,7 @@ namespace EFRFrontEndTest2.Assets
                 try { m_SubjectID = Int32.Parse(list[3]); } //Ensures a corrupt string will not corrupt the object
                 catch (Exception) { return false; }
                 m_SessionID = list[0];
-               // m_CompletedBlocks = list[1];
+                // m_CompletedBlocks = list[1];
                 m_Difficulty = list[1];
                 m_Timestamp = list[3];
                 m_Charity = list[4];
@@ -94,6 +80,19 @@ namespace EFRFrontEndTest2.Assets
             }
 
             return done; //True if object is updated successfully
+        }
+
+
+        public int AddCompletedBlock(int value)
+        {
+            CompletedBlocks = new int[m_CompletedBlocks.Length+1];
+            for(int x =0; x < m_CompletedBlocks.Length; x++)
+            {
+                CompletedBlocks[x] = m_CompletedBlocks[x];
+            }
+            CompletedBlocks[m_CompletedBlocks.Length] = value;
+            m_CompletedBlocks = CompletedBlocks;
+            return m_CompletedBlocks.Length;
         }
     }
 }

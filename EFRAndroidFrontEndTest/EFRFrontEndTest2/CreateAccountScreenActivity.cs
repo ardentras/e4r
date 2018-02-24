@@ -33,46 +33,23 @@ namespace EFRFrontEndTest2
             Button cancelButton = FindViewById<Button>(Resource.Id.CancelButton);
 
             //Used for notifying user when a field entry is not permitted
-            TextView maxCharErrorBox = FindViewById<TextView>(Resource.Id.MaxCharErrorBox);
             TextView emailErrorBox = FindViewById<TextView>(Resource.Id.EmailErrorBox);
             TextView usernameErrorBox = FindViewById<TextView>(Resource.Id.UsernameErrorBox);
             TextView passwordErrorBox = FindViewById<TextView>(Resource.Id.PasswordErrorBox);
             TextView finalErrorBox = FindViewById<TextView>(Resource.Id.FinalErrorBox);
 
+
+            //Ensures the boxes do not expand from their original size when too many characters are entered
+            //Keeps this dynamic for screens with different aspect ratios
+            emailBox.SetMaxWidth(emailBox.Width);
+            usernameBox.SetMaxWidth(usernameBox.Width);
+            passwordBoxOne.SetMaxWidth(passwordBoxOne.Width);
+            passwordBoxTwo.SetMaxWidth(passwordBoxTwo.Width);
+
             //For readability so the enum doesnt need to be accessed every time
             //Also acts as a bool to check if data/format is correct
             ViewStates visible = ViewStates.Visible;
             ViewStates invisible = ViewStates.Invisible;
-
-//TODO: Remake the UI do the screen doesnt freak out when there are too many large characters on it.
-            emailBox.TextChanged += (sender, e) =>
-            {
-                if (emailBox.Text.Length == 25)
-                    maxCharErrorBox.Visibility = visible;
-                else
-                    maxCharErrorBox.Visibility = invisible;
-            };
-            usernameBox.TextChanged += (sender, e) =>
-            {
-                if (usernameBox.Text.Length == 25)
-                    maxCharErrorBox.Visibility = visible;
-                else
-                    maxCharErrorBox.Visibility = invisible;
-            };
-            passwordBoxOne.TextChanged += (sender, e) =>
-            {
-                if (passwordBoxOne.Text.Length == 25)
-                    maxCharErrorBox.Visibility = visible;
-                else
-                    maxCharErrorBox.Visibility = invisible;
-            };
-            passwordBoxTwo.TextChanged += (sender, e) =>
-            {
-                if (passwordBoxTwo.Text.Length == 25)
-                    maxCharErrorBox.Visibility = visible;
-                else
-                    maxCharErrorBox.Visibility = invisible;
-            };
 
             emailBox.FocusChange += (sender, e) =>
             {
@@ -144,8 +121,7 @@ namespace EFRFrontEndTest2
                         });
                         alert.Show();
                     }
-//TODO: Check for all errors
-                    else
+                    else //This should never be called if it does, tell Jacob
                     {
                         Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         AlertDialog alert = dialog.Create();

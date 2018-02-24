@@ -1,0 +1,14 @@
+﻿Check if email is taken (to create user)
+
+Check if password is taken (to create user)
+
+Upon creating an account, send a verification email
+
+Send forgot password email
+
+Either update the UO to contain the information or have a call to check if
+account email is verified and the account isnt currently requesting a password reset
+
+API Call for current charity in need or recommended charities
+
+Update UO in DB so it holds favorited charities as well

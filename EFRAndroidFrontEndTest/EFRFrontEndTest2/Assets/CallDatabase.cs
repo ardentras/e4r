@@ -14,7 +14,6 @@ using Android.Views;
 using Android.Widget;
 
 
-//TODO: Make this implement a singleton pattern
 namespace EFRFrontEndTest2.Assets 
 {
     public struct Responce
@@ -63,7 +62,7 @@ namespace EFRFrontEndTest2.Assets
             return await APICall("PUT", "http://35.163.221.182:3002/api/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
         }
 
-// TODO: Update to username/email request when API is fixed
+// TODO: Update to username/email request when API allows for individual checking
         public async Task<Responce> CheckUsername(string username, string password)
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
