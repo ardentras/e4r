@@ -14,6 +14,9 @@
 <br>
 A non-profit web and android application that allow users to solve a range of subjects to earn revenue from ads and donate to a selected charity of choice.
 
+
+<ul><li><a href="https://github.com/ardentras/e4r/tree/master/app">API descriptions</a></li></ul>
+
 ##### Compatible Browsers
 ```
 1. Safari
