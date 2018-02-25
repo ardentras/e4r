@@ -45,7 +45,7 @@ namespace EFRFrontEndTest2
                 if (responce.m_responce == "Success")
                 {
                     LocalArchive archive = new LocalArchive(this, "AnsweredQuestions.txt");
-                    database.GetUserObject.Save();
+                    database.GetUserObject.Save(this);
 
                     var intent = new Intent(this, typeof(UserDashboardActivity));
                     StartActivity(intent);

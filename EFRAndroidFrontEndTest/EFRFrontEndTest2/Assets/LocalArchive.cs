@@ -22,7 +22,8 @@ namespace EFRFrontEndTest2.Assets
             m_filename = filename;
         }
 
-        public void SetUserData(string data)
+        //Should only be called by UserObject
+        public void SaveUserData(string data)
         {
             using (var fos = m_activity.OpenFileOutput(m_filename, FileCreationMode.Private))
             {
@@ -32,7 +33,8 @@ namespace EFRFrontEndTest2.Assets
             }
         }
 
-        public string GetUserData()
+        //Should only be called by UserObject
+        public string LoadUserData()
         {
             StringBuilder builder = new StringBuilder();
             using (var input = m_activity.OpenFileInput(m_filename))

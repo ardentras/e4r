@@ -87,14 +87,51 @@ namespace EFRFrontEndTest2.Assets
             return done; //True if object is updated successfully
         }
 
-        public void Save()
+        //Requires an activity to pass to LocalArchive as UserObject is an asset and not an activity
+        // so LocalArchive would be unable to link the protected file to the app.
+        public void Save(Activity activity)
         {
+            LocalArchive archive = new LocalArchive(activity);
+            string data = "";
 
+            data += m_SessionID + ",";
+            data += m_Timestamp + ",";
+            data += m_BlocksRemaining.ToString() + ",";
+            //data += m_CompletedBlocks + ",";
+            data += m_Difficulty + ",";
+            data += m_SubjectID.ToString() + ",";
+            data += m_SubjectName + ",";
+            data += m_TotalDonated.ToString() + ",";
+            data += m_TotalQuestions.ToString() + ",";
+            data += m_CharityName + ",";
+            data += m_Email + ",";
+            data += m_FirstName + ",";
+            data += m_LastName + ",";
+            data += m_Username;
+
+            archive.SaveUserData(data);
         }
 
-        public void Load()
+        //Requires an activity to pass to LocalArchive as UserObject is an asset and not an activity
+        // so LocalArchive would be unable to link the protected file to the app.
+        public void Load(Activity activity)
         {
-
+            LocalArchive archive = new LocalArchive(activity);
+            string[] data = archive.LoadUserData().Split(',');
+            m_SessionID = data[0];
+            m_Timestamp = data[1];
+            m_BlocksRemaining = Convert.ToInt32(data[2]);
+            //m_CompletedBlocks = data[3];
+            m_Difficulty = data[3];
+            m_SubjectID = Convert.ToInt32(data[4]);
+            m_SubjectName = data[5];
+            m_TotalDonated = Convert.ToInt32(data[6]);
+            m_TotalQuestions = Convert.ToInt32(data[7]);
+            m_CharityName = data[8];
+            m_Email = data[9];
+            m_FirstName = data[10];
+            m_LastName = data[11];
+            m_Username = data[12];
         }
 
         public int AddCompletedBlock(int value)
