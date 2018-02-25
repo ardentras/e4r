@@ -25,7 +25,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.LoginPageScreen);
             CallDatabase database = new CallDatabase(this);
 
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
@@ -45,7 +45,7 @@ namespace EFRFrontEndTest2
                 if (responce.m_responce == "Success")
                 {
                     LocalArchive archive = new LocalArchive(this, "AnsweredQuestions.txt");
-                    archive.SetUserData(database.GetUserObject.GetObjectString());
+                    database.GetUserObject.Save();
 
                     var intent = new Intent(this, typeof(UserDashboardActivity));
                     StartActivity(intent);

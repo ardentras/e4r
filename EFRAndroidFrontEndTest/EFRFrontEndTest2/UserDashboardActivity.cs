@@ -19,7 +19,7 @@ namespace EFRFrontEndTest2
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.HomeScreen);
+            SetContentView(Resource.Layout.UserDashboardScreen);
             ImageButton settingsButton = FindViewById<ImageButton>(Resource.Id.settingsButton);
             ImageButton charityButton = FindViewById<ImageButton>(Resource.Id.charityButton);
             Button playButton = FindViewById<Button>(Resource.Id.playButton);
