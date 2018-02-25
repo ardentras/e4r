@@ -19,19 +19,19 @@ current deployed server code of Education for Revitalization.
 
 ## Routes
 
-#### GET Routes
+#### <ul><li>GET Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
 | <a href="#verify-email">Verify Email</a> | /api/verify_email/${VerifyID} | Verify a user's email after signup | NA | Redirect |
 
-#### POST Routes
+#### <ul><li>POST Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
 | <a href="#login">Login</a> | /api/login | Verify user's uid and password | username, password | session_id, user_object |
 | <a href="#signup">Sign Up</a> | /api/signup | Append user to database | username, email, password | verifyID |
 | <a href="#check-username">Check Username</a> | /api/check_username | Check if the username/email exist | username, email | reason |
 
-#### PUT Routes
+#### <ul><li>PUT Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
 | <a href="#renew-session">Renew Session</a> | /api/renew | Renew a user's session token | session | session_id |
@@ -39,7 +39,7 @@ current deployed server code of Education for Revitalization.
 | <a href="#logout">Logout</a> | /api/logout | Update user object and deauthorize user | session, userobject | reason |
 | <a href="#request-questions">Request Question</a> | /api/q/request_block | Retrieve a user's question block | session, userobject | questions |
 
-#### DELETE Routes
+#### <ul><li>DELETE Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
 | <a href="#remove-user">Remove User</a> | /api/delete_user | Remove a user from database | session | reason |
