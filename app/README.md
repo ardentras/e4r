@@ -46,7 +46,7 @@ current deployed server code of Education for Revitalization.
 
 ## Formatting
 
-### Verify Email
+### Verify Email (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -72,7 +72,7 @@ On valid verify ID:
     HTTP 302: Redirects to /login
 ```
 
-### Login
+### Login (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -127,7 +127,7 @@ On unverified email:
 }
 ```
 
-### Signup
+### Signup (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -167,7 +167,7 @@ On user already exists:
 }
 ```
 
-### Check Username
+### Check Username (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -204,7 +204,7 @@ On user already exists:
 }
 ```
 
-### Renew Session
+### Renew Session (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -250,7 +250,7 @@ On non-existant session:
 }
 ```
 
-### Update User Object
+### Update User Object (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -290,7 +290,7 @@ On User Object out of date:
 }
 ```
 
-### Logout
+### Logout (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -337,7 +337,7 @@ On invalid session:
 }
 ```
 
-### Request Questions
+### Request Questions (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
@@ -382,7 +382,7 @@ On invalid session:
 }
 ```
 
-### Remove User
+### Remove User (<a href="#education-for-revitalization---server">Top</a>)
 <ul>
     <li>Request:</li>      
 </ul>
