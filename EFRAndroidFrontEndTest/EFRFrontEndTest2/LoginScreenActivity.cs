@@ -21,12 +21,16 @@ namespace EFRFrontEndTest2
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            LocalArchive m_archive = new LocalArchive(this);
+            CallDatabase m_database = new CallDatabase(this);
+            //m_database.GetUserObject.Load(this);
+           // Task.Run(async () => { await RenewSessionAsync(); });
+
             //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.LoginPageScreen);
-            CallDatabase database = new CallDatabase(this);
 
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
@@ -40,12 +44,11 @@ namespace EFRFrontEndTest2
             login.Click += async (sender, e) =>
             {
                 // Fetch the login information asynchronously, parse the results, then update the screen.
-                Responce responce = await database.FetchLogin(userBox.Text, passBox.Text);
+                Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
 
                 if (responce.m_responce == "Success")
                 {
-                    LocalArchive archive = new LocalArchive(this, "AnsweredQuestions.txt");
-                    database.GetUserObject.Save(this);
+                    m_database.GetUserObject.Save(this);
 
                     var intent = new Intent(this, typeof(UserDashboardActivity));
                     StartActivity(intent);
@@ -83,6 +86,19 @@ namespace EFRFrontEndTest2
             forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
             createAccount.Click += StartCreateAccountActivity;
+        }
+
+        private async Task<bool> RenewSessionAsync()
+        {
+            Responce responce = await m_database.RenewSession();
+            if (responce.m_responce == "Success")
+            {
+                m_database.GetUserObject.Load(this);
+                var intent = new Intent(this, typeof(UserDashboardActivity));
+                StartActivity(intent);
+            }
+
+            return true;
         }
 
         private void StartCreateAccountActivity(object sender, EventArgs e)
@@ -125,6 +141,10 @@ namespace EFRFrontEndTest2
         {
 
         }
+
+
+        LocalArchive m_archive;
+        CallDatabase m_database;
     }
 }
 

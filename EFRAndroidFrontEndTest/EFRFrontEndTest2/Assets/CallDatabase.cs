@@ -57,9 +57,9 @@ namespace EFRFrontEndTest2.Assets
             return await APICall("POST", "http://35.163.221.182:3002/api/login", bytestream, true);
         }
 
-        public async Task<Responce> RenewSession(string sessionID)
+        public async Task<Responce> RenewSession()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + sessionID + "}\"} }");
+            byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");
             return await APICall("PUT", "http://35.163.221.182:3002/api/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
         }
 
@@ -143,6 +143,8 @@ namespace EFRFrontEndTest2.Assets
 }
 
 
+
+// User Object example (depricated)
 /* "{
  *      "action": "LOGIN",
  *      "code": 200,
@@ -169,17 +171,3 @@ namespace EFRFrontEndTest2.Assets
  *      }
  * }"
  */
-
-/*
-list
-{string[9]}
-    [0]: ""
-    [1]: "LOGIN"
-    [2]: "200"
-    [3]: "Success"
-    [4]: "1bffb7a4-4a1d-4695-b9a5-1d7685d1bfbc"
-    [5]: "GET"
-    [6]: "{game_data: {completed_blocks: [], difficulty: 0, subject_id: 1, subject_name: }"
-    [7]: ""
-    [8]: "{charity_name: , first_name: , last_name: , username: abc"
-*/

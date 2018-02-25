@@ -27,7 +27,7 @@ namespace EFRFrontEndTest2.Assets
         {
             using (var fos = m_activity.OpenFileOutput(m_filename, FileCreationMode.Private))
             {
-                //get the byte array
+                //Get the byte array
                 byte[] bytes = Encoding.ASCII.GetBytes(data);
                 fos.Write(bytes, 0, bytes.Length);
             }
@@ -48,6 +48,13 @@ namespace EFRFrontEndTest2.Assets
                 }
             }
             return builder.ToString();
+        }
+
+        //When a session renewal has failed, the user needs to log back in
+        public void ClearUserData()
+        {
+            using (var fos = m_activity.OpenFileOutput(m_filename, FileCreationMode.Private))
+                fos.Write(null, 0, 0);
         }
 
         private Activity m_activity;
