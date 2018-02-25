@@ -12,37 +12,37 @@ current deployed server code of Education for Revitalization.
 ## Current Apis
 | APIs | Link |
 | --- | --- |
-| GET | <a href="/#Hello">View all GET routes</a> |
-| POST | <a href="/#Hello">View all POST routes</a> | 
-| PUT | <a href="/#Hello">View all PUT routes</a> |
-| DELETE | <a href="/#Hello">View all DELETE routes</a> |
+| GET | <a href="#get-routes">View all GET routes</a> |
+| POST | <a href="#post-routes">View all POST routes</a> | 
+| PUT | <a href="#put-routes">View all PUT routes</a> |
+| DELETE | <a href="#delete-routes">View all DELETE routes</a> |
 
 ## Routes
 
 #### GET Routes
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| Verify Email | /api/verify_email/${VerifyID} | Verify a user's email after signup | NA | Redirect |
+| <a href="#verify-email">Verify Email</a> | /api/verify_email/${VerifyID} | Verify a user's email after signup | NA | Redirect |
 
 #### POST Routes
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| Login | /api/login | Verify user's uid and password | username, password | session_id, user_object |
-| Sign Up | /api/signup | Append user to database | username, email, password | verifyID |
-| Check Username | /api/check_username | Check if the username/email exist | username, email | reason |
+| <a href="#login">Login</a> | /api/login | Verify user's uid and password | username, password | session_id, user_object |
+| <a href="#signup">Sign Up</a> | /api/signup | Append user to database | username, email, password | verifyID |
+| <a href="#check-username">Check Username</a> | /api/check_username | Check if the username/email exist | username, email | reason |
 
 #### PUT Routes
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| Renew Session | /api/renew | Renew a user's session token | session | session_id |
-| Update Userobject | /api/update_uo | Update a user's user object | session, userobject | userobject |
-| Logout | /api/logout | Update user object and deauthorize user | session, userobject | reason |
-| Request Question Block | /api/q/request_block | Retrieve a user's question block | session, userobject | questions |
+| <a href="#renew-session">Renew Session</a> | /api/renew | Renew a user's session token | session | session_id |
+| <a href="#update-user-object">Update Userobject</a> | /api/update_uo | Update a user's user object | session, userobject | userobject |
+| <a href="#logout">Logout</a> | /api/logout | Update user object and deauthorize user | session, userobject | reason |
+| <a href="#request-questions">Request Question</a> | /api/q/request_block | Retrieve a user's question block | session, userobject | questions |
 
 #### DELETE Routes
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| Remove User | /api/delete_user | Remove a user from database | session | reason |
+| <a href="#remove-user">Remove User</a> | /api/delete_user | Remove a user from database | session | reason |
 
 ## Formatting
 
