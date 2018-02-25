@@ -1,91 +1,82 @@
-## Getting Started with a RESTful API
+# Education for Revitalization - Server
+current deployed server code of Education for Revitalization.
+
+## Server Infomation
+*note: SSL is not functional due to restriction of aws domain. 
+
+| Protocol | IP | PORT |
+| --- | --- | --- |
+| HTTP | 35.163.221.182 | 3002 |
+| HTTPS | 35.163.221.182 | 3003 |
+
+## Current Apis
+| APIs | Link |
+| --- | --- |
+| GET | <a href="/#Hello">View all GET routes</a> |
+| POST | <a href="/#Hello">View all POST routes</a> | 
+| PUT | <a href="/#Hello">View all PUT routes</a> |
+| DELETE | <a href="/#Hello">View all DELETE routes</a> |
+
+## Routes
+
+#### GET Routes
+| Name | Route | Description | Fields | Response |
+| --- | --- | --- | --- | --- |
+| Verify Email | /api/verify_email/${VerifyID} | Verify a user's email after signup | NA | Redirect |
+
+#### POST Routes
+| Name | Route | Description | Fields | Response |
+| --- | --- | --- | --- | --- |
+| Login | /api/login | Verify user's uid and password | username, password | session_id, user_object |
+| Sign Up | /api/signup | Append user to database | username, email, password | verifyID |
+| Check Username | /api/check_username | Check if the username/email exist | username, email | reason |
+
+#### PUT Routes
+| Name | Route | Description | Fields | Response |
+| --- | --- | --- | --- | --- |
+| Renew Session | /api/renew | Renew a user's session token | session | session_id |
+| Update Userobject | /api/update_uo | Update a user's user object | session, userobject | userobject |
+| Logout | /api/logout | Update user object and deauthorize user | session, userobject | reason |
+| Request Question Block | /api/q/request_block | Retrieve a user's question block | session, userobject | questions |
+
+#### DELETE Routes
+| Name | Route | Description | Fields | Response |
+| --- | --- | --- | --- | --- |
+| Remove User | /api/delete_user | Remove a user from database | session | reason |
+
+## Formatting
+
+### Verify Email
+<ul>
+    <li>Request:</li>      
+</ul>
 
 ```
-GET: Retrieve Information
-POST: Insert Information
-PUT: Update Information
-DELETE: Remove Information
+http://${url}/api/verify_email/${verifyID}
 ```
 
-## Using Education for Revitalization Api
+<ul>
+    <li>Response:</li>      
+</ul>
 
 ```
-SERVER PUBLIC IP: 35.163.221.182
-SERVER PUBLIC HTTP PORT: 3002
-SERVER PUBLIC HTTPS/SSL PORT: 3003
-
-API Calls:
-          API Welcome           -> hostname:port/api                -> ALL
-          Sign Up               -> hostname:port/api/signup         -> POST
-          Check Username        -> hostname:port/api/check_username -> POST
-          Log In                -> hostname:port/api/login          -> POST
-          Verify Email          -> hostname:port/api/verify_email/${VerifyID} -> GET
-          Renew Session         -> hostname:port/api/renew          -> PUT
-          Update User Object    -> hostname:port/api/update_uo      -> PUT
-          Log Out               -> hostname:port/api/logout         -> PUT
-          Delete User           -> hostname:port/api/delete_user    -> DELETE
-          Request Question Block-> hostname:port/api/q/request_block-> PUT
-
-Debugging API Calls:
-          Display Users Information -> hostname:port/test/display -> GET
-
-
-```
-## JSON Formats:
-
-#### User Object Definition:
-```
-"userobject": {
-    "user_data": {
-        "username": "test1",
-        "email": "test@test.com",
-        "first_name": "John",
-        "last_name": "Doe",
-        "charity_names": ["ACME Charity, LLC"]
-    },
-    "game_data": {
-        "subject_name": "Math",
-        "subject_id": "1",
-        "difficulty": "0",
-        "totalQuestions": 0,
-        "totalDonated": 0.0,
-        "blocksRemaining": 0,
-        "completed_blocks": [1, 3, 4]
-    },
-    "timestamp":"2018-01-24T02:06:58+00:00"
-}
-```
-
-#### SIGN UP REQUEST:
-```
+On invalid verify ID:
 {
-    "user": {
-      "username": "test1",
-      "email": "test@test.com",
-      "password": "testpassword"
-    }
-}
-```
-#### SIGN UP RESPONSE:
-```
-On successful signup:
-{
-  "response": "Succeed",
-  "type": "POST",
-  "code": 201,
-  "action": "SIGNUP"
-  "verifyID": ${verifyID}
+    response: "Failed",
+    type: "GET",
+    code: 100,
+    reason: "That ID was not found."
 }
 
-On user already exists:
-{
-  "response": "Failed",
-  "type": "POST",
-  "code": 100,
-  "reason": "User already exists",
-}
+On valid verify ID:
+    HTTP 302: Redirects to /login
 ```
-#### LOG IN REQUEST:
+
+### Login
+<ul>
+    <li>Request:</li>      
+</ul>
+
 ```
 {
     "user": {
@@ -94,7 +85,11 @@ On user already exists:
     }
 }
 ```
-#### LOG IN RESPONSE:
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
 ```
 On successful login:
 {
@@ -131,24 +126,89 @@ On unverified email:
     "reason": "Email not verified, login failed"
 }
 ```
-#### VERIFY EMAIL REQUEST:
+
+### Signup
+<ul>
+    <li>Request:</li>      
+</ul>
+
 ```
-http://${url}/api/verify_email/${verifyID}
-```
-#### VERIFY EMAIL RESPONSE:
-```
-On invalid verify ID:
 {
-    response: "Failed",
-    type: "GET",
-    code: 100,
-    reason: "That ID was not found."
+    "user": {
+      "username": "test1",
+      "email": "test@test.com",
+      "password": "testpassword"
+    }
+}
+```
+
+
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
+```
+On successful signup:
+{
+  "response": "Succeed",
+  "type": "POST",
+  "code": 201,
+  "action": "SIGNUP"
+  "verifyID": ${verifyID}
 }
 
-On valid verify ID:
-    HTTP 302: Redirects to /login
+On user already exists:
+{
+  "response": "Failed",
+  "type": "POST",
+  "code": 100,
+  "reason": "User already exists",
+}
 ```
-#### SESSION RENEW REQUEST:
+
+### Check Username
+<ul>
+    <li>Request:</li>      
+</ul>
+
+```
+{
+    "user": {
+      "username": "test1",
+      "email": "test@test.com",
+    }
+}
+```
+
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
+```
+On user not found:
+{
+  "response": "Succeed",
+  "type": "POST",
+  "code": 200,
+  "reason": "User not found"
+}
+
+On user already exists:
+{
+  "response": "Failed",
+  "type": "POST",
+  "code": 100,
+  "reason": "User already exists",
+}
+```
+
+### Renew Session
+<ul>
+    <li>Request:</li>      
+</ul>
+
 ```
 {
     "user": {
@@ -156,7 +216,11 @@ On valid verify ID:
     }
 }
 ```
-#### SESSION RENEW RESPONSE:
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
 ```
 On successful renewal:
 {
@@ -185,7 +249,12 @@ On non-existant session:
     "reason": "User's session token was not found."
 }
 ```
-#### LOGOUT REQUEST:
+
+### Update User Object
+<ul>
+    <li>Request:</li>      
+</ul>
+
 ```
 {
     "user": {
@@ -194,7 +263,52 @@ On non-existant session:
     }
 }
 ```
-#### LOGOUT RESPONSE:
+
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
+```
+On User Object current:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "SAVE UO",
+    userobject: {user_object}
+}
+
+On User Object out of date:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "RETRIEVE UO",
+    reason: "User object out of date. Retrieving from database.",
+    userobject: {user_object}
+}
+```
+
+### Logout
+<ul>
+    <li>Request:</li>      
+</ul>
+
+```
+{
+    "user": {
+        "session": "{session_token}",
+        "userobject": "{user_object}"
+    }
+}
+```
+
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
 ```
 On successful logout:
 {
@@ -222,93 +336,12 @@ On invalid session:
     "reason": "Session invalid. User object could not be saved"
 }
 ```
-#### UPDATE_UO REQUEST:
-```
-{
-    "user": {
-        "session": "{session_token}",
-        "userobject": "{user_object}"
-    }
-}
-```
-#### UPDATE_UO RESPONSE:
-```
-On User Object current:
-{
-    response: "Success",
-    type: "PUT",
-    code: 200,
-    action: "SAVE UO",
-    userobject: {user_object}
-}
 
-On User Object out of date:
-{
-    response: "Success",
-    type: "PUT",
-    code: 200,
-    action: "RETRIEVE UO",
-    reason: "User object out of date. Retrieving from database.",
-    userobject: {user_object}
-}
-```
-## Misc Requests:
-#### CHECK_USERNAME REQUEST:
-```
-{
-    "user": {
-      "username": "test1",
-      "email": "test@test.com",
-    }
-}
-```
-#### CHECK_USERNAME RESPONSE:
-```
-On user not found:
-{
-  "response": "Succeed",
-  "type": "POST",
-  "code": 200,
-  "reason": "User not found"
-}
+### Request Questions
+<ul>
+    <li>Request:</li>      
+</ul>
 
-On user already exists:
-{
-  "response": "Failed",
-  "type": "POST",
-  "code": 100,
-  "reason": "User already exists",
-}
-```
-#### DELETE_USER REQUEST:
-```
-{
-    "user": {
-        "session":"${session_token}"
-    }
-}
-```
-#### DELETE_USER RESPONSE:
-```
-On invalid session token:
-{
-    response: "Failed",
-    type: "DELETE",
-    code: 401,
-    action: "DELETE_USER",
-    reason: "Session invalid, user logged out."
-}
-
-On valid session token:
-{
-    response: "Success",
-    type: "DELETE",
-    code: 200,
-    action: "DELETE_USER"
-}
-```
-## Game Requests:
-#### REQUEST_BLOCK REQUEST:
 ```
 {
     "user": {
@@ -316,36 +349,12 @@ On valid session token:
         "userobject": {user_object}
     }
 }
-
-OR
-
-{
-    "user": {
-        "session":"{session_id}",
-        "userobject": {user_object}
-    },
-    "game": {
-        "questions": [
-            {
-                "QuestionID":{id},
-                "QuestionText":"{text}",
-                "QuestionOne":"{answer1}",
-                "QuestionTwo":"{answer2}",
-                "QuestionThree":"{answer3}",
-                "QuestionFour":"{answer4}",
-                "CorrectAnswer":"{correct_answer}",
-                "StatsOne":"{statsAnswer1}",
-                "StatsTwo":"{statsAnswer2}",
-                "StatsThree":"{statsAnswer3}",
-                "StatsFour":"{statsAnswer4}",
-                "QuestionBlockID":"{block_id}"
-            },
-            {...},
-        ]
-    }
-}
 ```
-#### REQUEST_BLOCK RESPONSE:
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
 ```
 {
     response: "Success",
@@ -370,5 +379,41 @@ OR
         {...},
     ],
     user_object: {user_object}
+}
+```
+
+### Remove User
+<ul>
+    <li>Request:</li>      
+</ul>
+
+```
+{
+    "user": {
+        "session":"${session_token}"
+    }
+}
+```
+
+<ul>
+    <li>Response:</li>      
+</ul>
+
+```
+On invalid session token:
+{
+    response: "Failed",
+    type: "DELETE",
+    code: 401,
+    action: "DELETE_USER",
+    reason: "Session invalid, user logged out."
+}
+
+On valid session token:
+{
+    response: "Success",
+    type: "DELETE",
+    code: 200,
+    action: "DELETE_USER"
 }
 ```
