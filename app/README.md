@@ -22,27 +22,27 @@ current deployed server code of Education for Revitalization.
 #### <ul><li>GET Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| <a href="#verify-email">Verify Email</a> | /api/verify_email/${VerifyID} | Verify a user's email after signup | NA | Redirect |
+| <a href="#verify-email-top">Verify Email</a> | /api/verify_email/${VerifyID} | Verify a user's email after signup | NA | Redirect |
 
 #### <ul><li>POST Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| <a href="#login">Login</a> | /api/login | Verify user's uid and password | username, password | session_id, user_object |
-| <a href="#signup">Sign Up</a> | /api/signup | Append user to database | username, email, password | verifyID |
-| <a href="#check-username">Check Username</a> | /api/check_username | Check if the username/email exist | username, email | reason |
+| <a href="#login-top">Login</a> | /api/login | Verify user's uid and password | username, password | session_id, user_object |
+| <a href="#signup-top">Sign Up</a> | /api/signup | Append user to database | username, email, password | verifyID |
+| <a href="#check-username-top">Check Username</a> | /api/check_username | Check if the username/email exist | username, email | reason |
 
 #### <ul><li>PUT Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| <a href="#renew-session">Renew Session</a> | /api/renew | Renew a user's session token | session | session_id |
-| <a href="#update-user-object">Update Userobject</a> | /api/update_uo | Update a user's user object | session, userobject | userobject |
-| <a href="#logout">Logout</a> | /api/logout | Update user object and deauthorize user | session, userobject | reason |
-| <a href="#request-questions">Request Question</a> | /api/q/request_block | Retrieve a user's question block | session, userobject | questions |
+| <a href="#renew-session-top">Renew Session</a> | /api/renew | Renew a user's session token | session | session_id |
+| <a href="#update-user-object-top">Update Userobject</a> | /api/update_uo | Update a user's user object | session, userobject | userobject |
+| <a href="#logout-top">Logout</a> | /api/logout | Update user object and deauthorize user | session, userobject | reason |
+| <a href="#request-questions-top">Request Question</a> | /api/q/request_block | Retrieve a user's question block | session, userobject | questions |
 
 #### <ul><li>DELETE Routes</li></ul>
 | Name | Route | Description | Fields | Response |
 | --- | --- | --- | --- | --- |
-| <a href="#remove-user">Remove User</a> | /api/delete_user | Remove a user from database | session | reason |
+| <a href="#remove-user-top">Remove User</a> | /api/delete_user | Remove a user from database | session | reason |
 
 ## Formatting
 
