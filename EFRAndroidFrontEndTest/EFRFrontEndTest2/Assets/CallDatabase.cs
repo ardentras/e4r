@@ -19,16 +19,19 @@ namespace EFRFrontEndTest2.Assets
 {
     public struct Responce
     {
-        public Responce(string responce, int code, string reason)
+        public Responce(string responce, int code, string reason, JsonValue json)
         {
             m_responce = responce;
             m_reason = reason;
             m_code = code;
+            m_json = json;//quick parse where every time I do a call it quickly parses data
+            
         }
 
         public string m_responce;
         public string m_reason;
         public int m_code;
+        public JsonValue m_json;
     }
 
     class CallDatabase
@@ -105,7 +108,7 @@ namespace EFRFrontEndTest2.Assets
             try { reason = json["reason"]; } // Reason isnt linked to error code so must be checked every time.
             catch (Exception) { }
 
-            LastResponce = new Responce(response, code, reason);
+            LastResponce = new Responce(response, code, reason,json);
         }
         private void CreateUserObject(JsonValue json)
         {
