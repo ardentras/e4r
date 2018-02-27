@@ -30,7 +30,7 @@ namespace EFRFrontEndTest2
             TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
             TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
-            ImageButton ForwardArrow = FindViewById<ImageButton>(Resource.Id.ForwardArrow);
+            ImageButton Continue= FindViewById<ImageButton>(Resource.Id.Continue);
 
             //calls the block of questions
             CallDatabase database = new CallDatabase(this);
@@ -38,14 +38,23 @@ namespace EFRFrontEndTest2
 
             int QuestionNum = 0;
 
-            JsonValue block = database.responce.m_responce;
-             
+            
+
+            JsonValue block = database.responce.m_json;
+
+
+            if (database.responce.m_responce == "success")
+            {
+                SuccessFunct( database);
+            }
+
+
             BackArrow.Click += (sender, e) =>
             {
                 Finish();
             };
 
-            ForwardArrow.Click += (sender, e) =>
+            Continue.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(QuestionspageActivity));
             };
@@ -102,5 +111,12 @@ namespace EFRFrontEndTest2
                 }*/
             };
         }
+       private void SuccessFunct( CallDatabase database)
+        {
+            
+        }
     }
 }
+//jsonValue block[] = object[question_block];
+
+    // int id = block[0]["questionID"];
