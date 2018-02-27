@@ -45,7 +45,6 @@ namespace EFRFrontEndTest2
             backButton.Click += (sender, e) =>
             {
                 uo.SubjectID = currentSubjectID;
-//TODO: Find out how to set the user object with the Singleton Pattern from Jimmy
                 Finish();
             };
 
@@ -53,7 +52,6 @@ namespace EFRFrontEndTest2
             {
                 var intent = new Intent(this, typeof(QuestionDificultypageActivity));
                 uo.SubjectID = currentSubjectID;
-//TODO: Find out how to set the user object with the Singleton Pattern from Jimmy
                 StartActivity(intent);
             };
             physicsOption.Click += (sender, e) =>
@@ -136,7 +134,7 @@ namespace EFRFrontEndTest2
         }
     }
 }
-
+//test
 
 //Multi-subject functionality, replace if stretch goal is achieved.
 /*

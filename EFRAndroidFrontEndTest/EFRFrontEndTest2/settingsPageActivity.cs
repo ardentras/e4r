@@ -52,8 +52,8 @@ namespace EFRFrontEndTest2
                 {
                     UserObject obj = SingleUserObject.getObject();
                     obj.CompletedBlocks = new int[0];
-                    obj.MoneyEarned = 0;
-                    obj.QuestionsAnswered = 0;
+                    obj.TotalDonated = 0;
+                    obj.TotalQuestions = 0;
                     Android.Widget.Toast.MakeText(this, "data deleted", ToastLength.Short).Show();
                     builder.Dismiss();
                 };

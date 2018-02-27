@@ -131,9 +131,9 @@
     <Compile Include="BubbleLiveFeedActivity.cs" />
     <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
-    <Compile Include="HomeScreenActivity.cs" />
+    <Compile Include="UserDashboardActivity.cs" />
     <Compile Include="LevelupActivity.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="LoginScreenActivity.cs" />
     <Compile Include="QuestionDificultypageActivity.cs" />
     <Compile Include="QuestionspageActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,8 +151,7 @@
     <AndroidResource Include="Resources\layout\CreateAccountScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\background.jpeg" />
-    <AndroidResource Include="Resources\layout\HomeScreen.axml">
+    <AndroidResource Include="Resources\layout\UserDashboardScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\settingsPage.axml">
@@ -193,7 +192,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml">
+    <AndroidResource Include="Resources\layout\LoginPageScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -218,9 +217,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\CreateAccountScreenPrototype.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\background2.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\OptionsIcon.png" />
@@ -305,6 +301,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\RedHard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CreateAccountBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\LoginBackground.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Needed API Calls.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />

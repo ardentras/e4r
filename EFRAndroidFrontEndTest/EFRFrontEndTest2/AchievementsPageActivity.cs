@@ -27,9 +27,9 @@ namespace EFRFrontEndTest2
             TextView money = FindViewById<TextView>(Resource.Id.moneyRaised);
             UserObject obj = SingleUserObject.getObject();
 
-            questions.Text = Convert.ToString(obj.QuestionsAnswered);
-            money.Text = Convert.ToString(obj.MoneyEarned);
-            lv.Text = Convert.ToString((int)(Math.Sqrt(obj.QuestionsAnswered/10) + obj.MoneyEarned / 50));
+            questions.Text = Convert.ToString(obj.TotalQuestions);
+            money.Text = Convert.ToString(obj.TotalDonated);
+            lv.Text = Convert.ToString((int)(Math.Sqrt(obj.TotalQuestions/10) + obj.TotalDonated / 50));
             if (lv.Text == "0")
                 lv.Text = "1";
         }

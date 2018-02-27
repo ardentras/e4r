@@ -14,51 +14,92 @@ namespace EFRFrontEndTest2.Assets
 {
     public class UserObject
     {
-        public UserObject() { }
+        public UserObject() { m_CompletedBlocks[0] = 0; }
 
-        //public Array CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } } //TODO: Make array once server functionality is implemented
+        public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }
+        public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
+        public int BlocksRemaining { get { return m_BlocksRemaining; } set { m_BlocksRemaining = value; } }
+        public int[] CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } }
         public string Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
         public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
-        public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
-        public string Charity { get { return m_Charity; } set { m_Charity = value; } }
+        public string SubjectName { get { return m_SubjectName; } set { m_SubjectName = value; } }
+        public double TotalDonated { get { return m_TotalDonated; } set { m_TotalDonated = value; } }
+        public int TotalQuestions { get { return m_TotalQuestions; } set { m_TotalQuestions = value; } }
+        public string CharityName { get { return m_CharityName; } set { m_CharityName = value; } }
+        public string Email { get { return m_Email; } set { m_Email = value; } }
         public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
-        public double MoneyEarned { get { return m_MoneyEarned; } set { m_MoneyEarned = value; } }
-        public int QuestionsAnswered { get { return m_QuestionsAnswered; } set { m_QuestionsAnswered = value; } }
         public string LastName { get { return m_LastName; } set { m_LastName = value; } }
-        public string Username { get { return m_Username; } set { m_Username = value; } }       //These should only be changed when loading a user object (I used this implementation for readability and consistancy)
-        public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }    //These should only be changed when loading a user object
-        public int[] CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } }
+        public string Username { get { return m_Username; } set { m_Username = value; } }
 
-        private string m_SessionID;
-        //private Array m_CompletedBlocks;
-        private string m_Difficulty;
-        private int m_SubjectID;
-        private string m_Timestamp;
-        private string m_Charity;
-        private string m_FirstName;
-        private string m_LastName;
-        private string m_Username;
-        private double m_MoneyEarned;
-        private int m_QuestionsAnswered;
-        private int[] m_CompletedBlocks;
-
+        private string m_SessionID       = "guest";
+        private string m_Timestamp       = "default";
+        private int    m_BlocksRemaining = 0;
+        private int[]  m_CompletedBlocks = new int[1];
+        private string m_Difficulty      = "easy";
+        private int    m_SubjectID       = 0;
+        private string m_SubjectName     = "Math";
+        private double m_TotalDonated    = 0.0;
+        private int    m_TotalQuestions  = 0;
+        private string m_CharityName     = "Red Cross";
+        private string m_Email           = "guest@default.com";
+        private string m_FirstName       = "Anon";
+        private string m_LastName        = "Guest";
+        private string m_Username        = "Slenderman";
+        
         public string GetObjectString()
         {
-            string objectString = m_SessionID + ",";
-            //objectString += m_CompletedBlocks + ",";
-            objectString += m_Difficulty + ",";
-            objectString += m_SubjectID.ToString() + ",";
-            objectString += m_Timestamp + ",";
-            objectString += m_Charity + ",";
-            objectString += m_FirstName + ",";
-            objectString += m_LastName + ",";
-            objectString += m_Username + ",";
-            objectString += m_MoneyEarned + ",";
-            objectString += m_QuestionsAnswered + ",";
-//TODO: If someone has time, replace with a more effecient process
+            string data = "";
 
-            return objectString;
+            data += m_SessionID + ",";
+            data += m_Timestamp + ",";
+            data += m_BlocksRemaining.ToString() + ",";
+            //data += m_CompletedBlocks + ",";
+            data += m_Difficulty + ",";
+            data += m_SubjectID.ToString() + ",";
+            data += m_SubjectName + ",";
+            data += m_TotalDonated.ToString() + ",";
+            data += m_TotalQuestions.ToString() + ",";
+            data += m_CharityName + ",";
+            data += m_Email + ",";
+            data += m_FirstName + ",";
+            data += m_LastName + ",";
+            data += m_Username;
+
+            return data;
         }
+
+        //Requires an activity to pass to LocalArchive as UserObject is an asset and not an activity
+        // so LocalArchive would be unable to link the protected file to the app.
+        public void Save(Activity activity)
+        {
+            LocalArchive archive = new LocalArchive(activity);
+            string data = GetObjectString();
+
+            archive.SaveUserData(data);
+        }
+
+        //Requires an activity to pass to LocalArchive as UserObject is an asset and not an activity
+        // so LocalArchive would be unable to link the protected file to the app.
+        public void Load(Activity activity)
+        {
+            LocalArchive archive = new LocalArchive(activity);
+            string[] data = archive.LoadUserData().Split(',');
+            m_SessionID = data[0];
+            m_Timestamp = data[1];
+            m_BlocksRemaining = Convert.ToInt32(data[2]);
+            //m_CompletedBlocks = data[3];
+            m_Difficulty = data[3];
+            m_SubjectID = Convert.ToInt32(data[4]);
+            m_SubjectName = data[5];
+            m_TotalDonated = Convert.ToInt32(data[6]);
+            m_TotalQuestions = Convert.ToInt32(data[7]);
+            m_CharityName = data[8];
+            m_Email = data[9];
+            m_FirstName = data[10];
+            m_LastName = data[11];
+            m_Username = data[12];
+        }
+
         public int AddCompletedBlock(int value)
         {
             CompletedBlocks = new int[m_CompletedBlocks.Length+1];
@@ -69,31 +110,6 @@ namespace EFRFrontEndTest2.Assets
             CompletedBlocks[m_CompletedBlocks.Length] = value;
             m_CompletedBlocks = CompletedBlocks;
             return m_CompletedBlocks.Length;
-        }
-
-        public bool SetObjectString(string objectString)
-        {
-            bool done = false;
-            string[] list = objectString.Split(',');
-            if (list.Length == 9)
-            {
-                try { m_SubjectID = Int32.Parse(list[3]); } //Ensures a corrupt string will not corrupt the object
-                catch (Exception e) { return false; }
-                m_SessionID = list[0];
-               // m_CompletedBlocks = list[1];
-                m_Difficulty = list[1];
-                m_Timestamp = list[3];
-                m_Charity = list[4];
-                m_FirstName = list[5];
-                m_LastName = list[6];
-                m_Username = list[7];
-                m_MoneyEarned = Convert.ToInt32(list[8]);
-                m_QuestionsAnswered = Convert.ToInt32(list[9]);
-
-                done = true;
-            }
-
-            return done; //True if object is updated successfully
         }
     }
 }

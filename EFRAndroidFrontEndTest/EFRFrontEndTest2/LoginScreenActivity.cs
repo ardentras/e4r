@@ -13,26 +13,29 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using EFRFrontEndTest2.Assets;
 
-
-//TODO: Update name to "LoginScreenActivity"
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
-    public class MainActivity : Activity
+    public class LoginScreenActivity : Activity
     {
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            LocalArchive m_archive = new LocalArchive(this);
+            CallDatabase m_database = new CallDatabase(this);
+            //m_database.GetUserObject.Load(this);
+           // Task.Run(async () => { await RenewSessionAsync(); });
+
             //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
-            CallDatabase database = new CallDatabase(this);
+            SetContentView(Resource.Layout.LoginPageScreen);
 
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
+            Button guestLogin = FindViewById<Button>(Resource.Id.guestLoginButton);
             TextView forgotPassword = FindViewById<TextView>(Resource.Id.ForgotPasswordButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
 
@@ -41,14 +44,13 @@ namespace EFRFrontEndTest2
             login.Click += async (sender, e) =>
             {
                 // Fetch the login information asynchronously, parse the results, then update the screen.
-                Responce responce = await database.FetchLogin(userBox.Text, passBox.Text);
+                Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
 
                 if (responce.m_responce == "Success")
                 {
-                    LocalArchive archive = new LocalArchive(this, "AnsweredQuestions.txt");
-                    archive.SetUserData(database.GetUserObject.GetObjectString());
+                    m_database.GetUserObject.Save(this);
 
-                    var intent = new Intent(this, typeof(HomeScreenActivity));
+                    var intent = new Intent(this, typeof(UserDashboardActivity));
                     StartActivity(intent);
                 }
                 else
@@ -65,9 +67,38 @@ namespace EFRFrontEndTest2
                 }
             };
 
+            guestLogin.Click += (sender, e) =>
+            {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                AlertDialog alert = dialog.Create();
+                alert.SetTitle("Guest account active");
+                alert.SetMessage("Your progress will not be saved");
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    var intent = new Intent(this, typeof(UserDashboardActivity));
+                    StartActivity(intent);
+                });
+                alert.Show();
+
+
+            };
+
             forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
             createAccount.Click += StartCreateAccountActivity;
+        }
+
+        private async Task<bool> RenewSessionAsync()
+        {
+            Responce responce = await m_database.RenewSession();
+            if (responce.m_responce == "Success")
+            {
+                m_database.GetUserObject.Load(this);
+                var intent = new Intent(this, typeof(UserDashboardActivity));
+                StartActivity(intent);
+            }
+
+            return true;
         }
 
         private void StartCreateAccountActivity(object sender, EventArgs e)
@@ -110,6 +141,10 @@ namespace EFRFrontEndTest2
         {
 
         }
+
+
+        LocalArchive m_archive;
+        CallDatabase m_database;
     }
 }
 

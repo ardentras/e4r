@@ -10,17 +10,16 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Rename to "UserDashboardActivity"
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "HomeScreenActivity")]
-    public class HomeScreenActivity : Activity
+    public class UserDashboardActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.HomeScreen);
+            SetContentView(Resource.Layout.UserDashboardScreen);
             ImageButton settingsButton = FindViewById<ImageButton>(Resource.Id.settingsButton);
             ImageButton charityButton = FindViewById<ImageButton>(Resource.Id.charityButton);
             Button playButton = FindViewById<Button>(Resource.Id.playButton);

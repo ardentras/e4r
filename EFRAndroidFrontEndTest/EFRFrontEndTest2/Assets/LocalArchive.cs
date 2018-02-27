@@ -22,17 +22,19 @@ namespace EFRFrontEndTest2.Assets
             m_filename = filename;
         }
 
-        public void SetUserData(string data)
+        //Should only be called by UserObject
+        public void SaveUserData(string data)
         {
             using (var fos = m_activity.OpenFileOutput(m_filename, FileCreationMode.Private))
             {
-                //get the byte array
+                //Get the byte array
                 byte[] bytes = Encoding.ASCII.GetBytes(data);
                 fos.Write(bytes, 0, bytes.Length);
             }
         }
 
-        public string GetUserData()
+        //Should only be called by UserObject
+        public string LoadUserData()
         {
             StringBuilder builder = new StringBuilder();
             using (var input = m_activity.OpenFileInput(m_filename))
@@ -46,6 +48,13 @@ namespace EFRFrontEndTest2.Assets
                 }
             }
             return builder.ToString();
+        }
+
+        //When a session renewal has failed, the user needs to log back in
+        public void ClearUserData()
+        {
+            using (var fos = m_activity.OpenFileOutput(m_filename, FileCreationMode.Private))
+                fos.Write(null, 0, 0);
         }
 
         private Activity m_activity;
