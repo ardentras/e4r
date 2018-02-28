@@ -47,13 +47,6 @@ namespace EFRFrontEndTest2
                 SuccessFunct(database);
             }
 
-            if (responce.m_responce == "Success")
-            {
-                m_database.GetUserObject.Save(this);
-
-                var intent = new Intent(this, typeof(UserDashboardActivity));
-                StartActivity(intent);
-            }
 
             BackArrow.Click += (sender, e) =>
             {

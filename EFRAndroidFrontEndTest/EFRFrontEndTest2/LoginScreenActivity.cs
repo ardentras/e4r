@@ -38,48 +38,61 @@ namespace EFRFrontEndTest2
             Button guestLogin = FindViewById<Button>(Resource.Id.guestLoginButton);
             TextView forgotPassword = FindViewById<TextView>(Resource.Id.ForgotPasswordButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
-
+            bool clicked = false;
 
             //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
             {
-                // Fetch the login information asynchronously, parse the results, then update the screen.
-                Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
-
-                if (responce.m_responce == "Success")
+                if (!clicked)
                 {
-                    m_database.GetUserObject.Save(this);
+                    clicked = true;
+                    // Fetch the login information asynchronously, parse the results, then update the screen.
+                    Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
 
-                    var intent = new Intent(this, typeof(UserDashboardActivity));
-                    StartActivity(intent);
-                }
-                else
-                {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    AlertDialog alert = dialog.Create();
-                    alert.SetTitle("You couldn't log in");
-                    alert.SetMessage("Invalid Credentials");
-                    alert.SetButton("OK", (c, ev) =>
+                    if (responce.m_responce == "Success")
                     {
-                        passBox.Text = "";
-                    });
-                    alert.Show();
+                        m_database.GetUserObject.Save(this);
+                        var intent = new Intent(this, typeof(UserDashboardActivity));
+                        StartActivity(intent);
+                    }
+                    else
+                    {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        AlertDialog alert = dialog.Create();
+                        alert.SetTitle("You couldn't log in");
+                        alert.SetMessage("Invalid Credentials");
+                        alert.SetButton("OK", (c, ev) =>
+                        {
+                            passBox.Text = "";
+                        });
+                        alert.Show();
+                    }
+                    clicked = false;
                 }
             };
 
             guestLogin.Click += (sender, e) =>
             {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                AlertDialog alert = dialog.Create();
-                alert.SetTitle("Guest account active");
-                alert.SetMessage("Your progress will not be saved");
-                alert.SetButton("OK", (c, ev) =>
+                if (!clicked)
                 {
-                    var intent = new Intent(this, typeof(UserDashboardActivity));
-                    StartActivity(intent);
-                });
-                alert.Show();
-
+                    clicked = true;
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("Guest account active");
+                    alert.SetMessage("Your progress will not be saved");
+                    alert.SetButton("OK", (c, ev) =>
+                    {
+                        var intent = new Intent(this, typeof(UserDashboardActivity));
+                        StartActivity(intent);
+                    });
+                    alert.Show();
+                    alert.DismissEvent += (sndr, eF) =>
+                    {
+                        var intent = new Intent(this, typeof(UserDashboardActivity));
+                        StartActivity(intent);
+                    };
+                    clicked = false;
+                }
 
             };
 

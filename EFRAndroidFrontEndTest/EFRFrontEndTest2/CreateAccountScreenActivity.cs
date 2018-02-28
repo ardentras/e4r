@@ -126,7 +126,7 @@ namespace EFRFrontEndTest2
                         Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         AlertDialog alert = dialog.Create();
                         alert.SetTitle("");
-                        alert.SetMessage("Unknown error");
+                        alert.SetMessage("username or email unavalable");
                         alert.SetButton("OK", (c, ev) =>
                         {
                         });

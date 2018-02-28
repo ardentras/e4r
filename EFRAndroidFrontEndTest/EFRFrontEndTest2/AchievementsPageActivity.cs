@@ -29,9 +29,7 @@ namespace EFRFrontEndTest2
 
             questions.Text = Convert.ToString(obj.TotalQuestions);
             money.Text = Convert.ToString(obj.TotalDonated);
-            lv.Text = Convert.ToString((int)(Math.Sqrt(obj.TotalQuestions/10) + obj.TotalDonated / 50));
-            if (lv.Text == "0")
-                lv.Text = "1";
+            lv.Text = Convert.ToString((int)(Math.Sqrt(obj.TotalQuestions/10) + obj.TotalDonated / 50+1));
         }
     }
 }
