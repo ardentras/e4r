@@ -74,6 +74,11 @@ CREATE TABLE EFRQuest.QuestionsDB
                                    EFRQuest.Subjects
 );
 
+CREATE TABLE EFRQuest.QuestionHelp
+ (HelpID            INT            NOT NULL IDENTITY PRIMARY KEY,
+  HelpInfo          NVARCHAR(500)  NOT NULL
+);
+
 CREATE TABLE EFRQuest.Questions
  (QuestionID        INT            NOT NULL IDENTITY PRIMARY KEY,
   QuestionText      NVARCHAR(250)  NOT NULL,
@@ -87,12 +92,7 @@ CREATE TABLE EFRQuest.Questions
   StatsThree        INT            NOT NULL DEFAULT 0,
   StatsFour         INT            NOT NULL DEFAULT 0,
   QuestionBlockID   INT            FOREIGN KEY REFERENCES
-                                   EFRQuest.QuestionsDB(QuestionBlockID)
-);
-
-CREATE TABLE EFRQuest.QuestionHelp
- (HelpID            INT            NOT NULL IDENTITY PRIMARY KEY,
-  HelpInfo          NVARCHAR(500)  NOT NULL,
-  QuestionID        INT            FOREIGN KEY REFERENCES
-                                   EFRQuest.Questions(QuestionID)
+                                   EFRQuest.QuestionsDB(QuestionBlockID),
+  HelpID            INT            NULL FOREIGN KEY REFERENCES
+                                   EFRQuest.QuestionHelp(HelpID)
 );

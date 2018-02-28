@@ -502,6 +502,21 @@ class TDatabase {
         return data.userobject;
     }
 
+    // Attempts to log the user out. If successful, user object will be saved,
+	// and current session token will expire.
+	//
+	// curl -XPUT localhost:3002/api/q/request_help -H 'Content-type: application/json' -d '{"question_id":0}'
+    async requestHelp(client, data) {
+        let res = await this.db.request().input('question_id', mssql.Int, data.question_id)
+                                            .query("SELECT HelpInfo FROM EFRQuest.QuestionHelp WHERE HelpID = (SELECT HelpID FROM EFRQuest.Questions WHERE QuestionID = @question_id)");
+
+        if (res.rowsAffected == 0) {
+            client.json({response: "Failed", type: "PUT", code: 100, action: "REQUEST_HELP", reason: "This question does not contain a help topic."});
+        } else {
+            client.json({response: "Success", type: "PUT", code:200, action: "REQUEST_HELP", data: res.recordset[0].HelpInfo});
+        }
+    }
+
 	// Displays all current user accounts from the database.
 	// TODO Remove in production.
 	//

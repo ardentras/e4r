@@ -74,6 +74,9 @@ Router.get('/verify_email/:VerifyID', (req, res) => {
 Router.put('/q/request_block', (req, res) => {
 	db.requestQuestionBlock(res, req.body.user, req.body.game);
 });
+Router.put('/q/request_help', (req, res) => {
+	db.requestHelp(res, req.body);
+});
 Router.get('/test/display', (req, res) => {
     db.displayUsers(res);
 });
