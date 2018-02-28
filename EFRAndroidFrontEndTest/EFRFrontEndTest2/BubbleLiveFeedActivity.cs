@@ -24,19 +24,22 @@ namespace EFRFrontEndTest2
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
             bubble.Click += (sender, e) =>
             {
-                LinearLayout layoutBase = FindViewById<LinearLayout>(Resource.Id.bubble_layout);
+                AbsoluteLayout layoutBase = FindViewById<AbsoluteLayout>(Resource.Id.bubble_layout);
                 ImageView img = new ImageView(this);
                 Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
                 //create new bubble image
                 img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
                 img.Visibility = ViewStates.Visible;
                 img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+                var metrics = Resources.DisplayMetrics;
                 //place the bubble on screen randomizing it's x pos
                 layoutBase.AddView(img,100,100);
                 Random rnd = new Random();
-                img.SetX(rnd.Next(0, 1000));
+                img.SetX(rnd.Next(0, metrics.WidthPixels));
+                img.SetY(metrics.HeightPixels);
                 // create an animator to move the bubble
-                ValueAnimator animator = ValueAnimator.OfInt(0, -1100);
+
+                ValueAnimator animator = ValueAnimator.OfInt(metrics.HeightPixels, metrics.HeightPixels/11);
                 animator.SetDuration(1500);
                 animator.Start();
                 /* 
@@ -51,7 +54,7 @@ namespace EFRFrontEndTest2
                     // Apply this new value to the object being animated.
                     img.TranslationY = newValue;
                     //move the bubble in a sine wave pattern
-                    if(newValue >= -900)
+                    if(newValue >= metrics.HeightPixels / 9)
                     img.TranslationX += 10*(float)Math.Sin(newValue/100);
                     //if near the top slide the bubble into the big bubble at the top
                     else
