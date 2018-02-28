@@ -372,6 +372,9 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0030
 			public const int CancelButton = 2131427376;
 			
+			// aapt resource value: 0x7f0b006b
+			public const int Continue = 2131427435;
+			
 			// aapt resource value: 0x7f0b002e
 			public const int CreateButton = 2131427374;
 			
@@ -392,9 +395,6 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f0b0047
 			public const int ForgotPasswordButton = 2131427399;
-			
-			// aapt resource value: 0x7f0b006b
-			public const int ForwardArrow = 2131427435;
 			
 			// aapt resource value: 0x7f0b0062
 			public const int HardButton = 2131427426;
