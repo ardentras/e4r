@@ -30,24 +30,30 @@ namespace EFRFrontEndTest2
             TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
             TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
-            ImageButton Continue= FindViewById<ImageButton>(Resource.Id.Continue);
-
+            ImageButton Continue = FindViewById<ImageButton>(Resource.Id.Continue);
+            // find correct and compare it to variable
+            //add 1 to the correct answer tally
+            //boolean the question is answered 
             //calls the block of questions
             CallDatabase database = new CallDatabase(this);
             database.RetreaveQuestionBlock();
 
             int QuestionNum = 0;
 
-            
-
             JsonValue block = database.responce.m_json;
-
 
             if (database.responce.m_responce == "success")
             {
-                SuccessFunct( database);
+                SuccessFunct(database);
             }
 
+            if (responce.m_responce == "Success")
+            {
+                m_database.GetUserObject.Save(this);
+
+                var intent = new Intent(this, typeof(UserDashboardActivity));
+                StartActivity(intent);
+            }
 
             BackArrow.Click += (sender, e) =>
             {
@@ -61,62 +67,75 @@ namespace EFRFrontEndTest2
 
             BigGrayButton.Click += (sender, d) =>
             {
-              
+
             };
 
             Answer1.Click += (sender, f) =>
             {
-             //  if (Answer1 == CorrectAnswer)
-             //  { 
-                 
-  
-               //   Answer1.Update Text = { " " };
-                 // StartActivity(intent);
-              //  }
+                //  if (Answer1 == CorrectAnswer)
+                //  { 
+
+
+                //   Answer1.Update Text = { " " };
+                // StartActivity(intent);
+                //  }
             };
 
             Answer2.Click += (sender, a) =>
             {
-               // if (Answer2 == CorrectAnswer)
-               // {
+                // if (Answer2 == CorrectAnswer)
+                // {
 
-               //     var intent = new Intent(this, typeof(QuestionspageActivity));
-               //     Answer2.Update Text = { " " };
-               //     StartActivity(intent);
-              //  }
+                //     var intent = new Intent(this, typeof(QuestionspageActivity));
+                //     Answer2.Update Text = { " " };
+                //     StartActivity(intent);
+                //  }
 
-              //  else
-               // {
+                //  else
+                // {
 
-               // }
+                // }
             };
             Answer3.Click += (sender, b) =>
             {
-               /* if (Answer3 == CorrectAnswer)
-                {
+                /* if (Answer3 == CorrectAnswer)
+                 {
 
-                    var intent = new Intent(this, typeof(QuestionspageActivity));
-                    Answer3.Update Text = { " " };
-                    StartActivity(intent);
-                }*/
+                     var intent = new Intent(this, typeof(QuestionspageActivity));
+                     Answer3.Update Text = { " " };
+                     StartActivity(intent);
+                 }*/
             };
             Answer4.Click += (sender, c) =>
             {
-               /* if (Answer4 == CorrectAnswer)
-                {
+                /* if (Answer4 == CorrectAnswer)
+                 {
 
-                    var intent = new Intent(this, typeof(QuestionspageActivity));
-                    Answer4.Update Text = {" "};
-                    StartActivity(intent);
-                }*/
+                     var intent = new Intent(this, typeof(QuestionspageActivity));
+                     Answer4.Update Text = {" "};
+                     StartActivity(intent);
+                 }*/
             };
         }
+
+      //  private async <Task> LoaderQuestionBlock ()
+        //    {
+        //array of strings to store the answer
+        // pull till empty 
+        // reload questions block
+          //  }
        private void SuccessFunct( CallDatabase database)
         {
             
         }
+        private void SetQuestions()
+        {
+            //Pass the five strings 
+            //Or pass a list of strings
+            //
+        }
     }
 }
-//jsonValue block[] = object[question_block];
+
 
     // int id = block[0]["questionID"];
