@@ -15,7 +15,9 @@ fi
 # Action: Send valid unique username and email
 # Expected Response: 201
 ############################################
-code=$(curl -XPOST localhost:3002/api/signup -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com","password":"defaultpass"}}' | jq '.code')
+curl -XPOST localhost:3002/api/signup -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com","password":"defaultpass"}}' > response.json
+code=$(cat response.json | jq '.code')
+verifyid=($(cat response.json | jq '.verifyID'))
 if [[ ! $code -eq 201 ]]; then
     echo "- Test sign up request with non-existing user failed. Expected server code 201, got ${code}"
 else
@@ -80,6 +82,42 @@ if [[ ! $code -eq 401 ]]; then
     echo "- Test log in request with invalid username failed. Expected server code 401, got ${code}"
 else
     echo "+ Test log in request with invalid username passed"
+fi
+
+############################################
+# Endpoint: login
+# Action: Send valid user w/ unverified email
+# Expected Response: 428
+############################################
+code=$(curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpasssssss"}}' | jq '.code')
+if [[ ! $code -eq 428 ]]; then
+    echo "- Test log in request with unverified email failed. Expected server code 428, got ${code}"
+else
+    echo "+ Test log in request with unverified email passed"
+fi
+
+############################################
+# Endpoint: verify_email
+# Action: Send invalid verifyID
+# Expected Response: 100
+############################################
+code=$(curl -s -XGET localhost:3002/api/verify_email/000000000 | jq '.code')
+if [[ ! $code -eq 100 ]]; then
+    echo "- Test verify email request with invalid id failed. Expected server code 100, got ${code}"
+else
+    echo "+ Test verify email request with invalid id passed"
+fi
+
+############################################
+# Endpoint: verify_email
+# Action: Send invalid verifyID
+# Expected Response: 100
+############################################
+code=$(curl -s -o /dev/null -w "%{http_code}" localhost:3002/api/verify_email/${verifyid[0]})
+if [[ ! $code -eq 302 ]]; then
+    echo "- Test verify email request with valid id failed. Expected server code 302, got ${code}"
+else
+    echo "+ Test verify email request with valid id passed"
 fi
 
 ############################################
@@ -202,13 +240,13 @@ fi
 ############################################
 code=$(curl -XDELETE localhost:3002/api/delete_user -sH 'Content-Type: application/json' -d '{"user":{"session":'$session_token'}}' | jq '.code')
 if [[ ! $code -eq 200 ]]; then
-    echo "- Test delete user request with invalid session token failed. Expected server code 200, got ${code}"
+    echo "- Test delete user request with valid session token failed. Expected server code 200, got ${code}"
 else
     code=$(curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpass"}}' | jq '.code')
     if [[ ! $code -eq 401 ]]; then
-        echo "- Test delete user request with invalid session token failed. Expected server code 401, got ${code}"
+        echo "- Test delete user request with valid session token failed. Expected server code 401, got ${code}"
     else
-        echo "+ Test delete user request with invalid session token passed"
+        echo "+ Test delete user request with valid session token passed"
     fi
 fi
 

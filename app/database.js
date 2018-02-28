@@ -5,7 +5,7 @@ const uuidv4 = require('uuid/v4');
 const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
-const SERVER_HOSTNAME = "http://e4rdb.cz5nhcw7ql0u.us-west-2.rds.amazonaws.com:3200"
+const SERVER_HOSTNAME = "http://35.163.221.182:3002"
 
 class TDatabase {
 	// Creates the connection to the database given the passed parameters.
@@ -171,7 +171,7 @@ class TDatabase {
         if (res.rowsAffected == 0) {
             client.json({response: "Failed", type: "GET", code: 100, reason: "That ID was not found."});
         } else {
-            client.redirect("/login")
+            client.redirect("http://ec2-52-40-134-152.us-west-2.compute.amazonaws.com/login")
         }
     }
 
@@ -296,7 +296,7 @@ class TDatabase {
                         var uo = user_object;
                         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE UO", reason: "User object out of date. Retrieving from database.", userobject: uo});
                     } else {
-                        var uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
+                        var uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
                         client.json({response: "Success", type: "PUT", code: 200, action: "SAVE UO", userobject: uo});
                     }
@@ -369,7 +369,7 @@ class TDatabase {
                 if (cliTimestamp < dbTimestamp) {
                     client.json({response: "Success", type: "PUT", code: 409, action: "LOGOUT", reason: "Out of date user object cannot be saved. User logged out"});
                 } else {
-                    var uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
+                    var uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
                     await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                 					.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
@@ -439,8 +439,8 @@ class TDatabase {
         }
 
         let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
-                                                .input('subject_id', mssql.Int, data.userobject.game_data.subject_id)
-                                                .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID");
+                                            .input('subject_id', mssql.Int, data.userobject.game_data.subject_id)
+                                            .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID");
 
         var questionBlocks = res.recordset;
         var totalBlocks = questionBlocks.length;
@@ -458,10 +458,10 @@ class TDatabase {
 
         var uo;
 
-        if (data.userobject.gameData.blocksRemaining != undefined) {
-            data.userobject.gameData.blocksRemaining = missing_blocks.length;
+        if (data.userobject.game_data.blocksRemaining != undefined) {
+            data.userobject.game_data.blocksRemaining = missing_blocks.length;
 
-            uo = await persistUserObject(data.userobject, res.recordsets[0][0].UserID);
+            uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
         } else {
             uo = data.userobject;
         }
