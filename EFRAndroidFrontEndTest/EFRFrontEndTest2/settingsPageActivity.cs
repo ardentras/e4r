@@ -36,7 +36,6 @@ namespace EFRFrontEndTest2
             note2.Checked = localData.GetBoolean("bubbleNotifications", false);
             reset.Click += (sender, e) =>
             {
-                //Inflate layout
                 View view = LayoutInflater.Inflate(Resource.Layout.DeleteDataPopup, null);
                 AlertDialog builder = new AlertDialog.Builder(this).Create();
                 builder.SetView(view);
