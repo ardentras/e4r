@@ -61,65 +61,84 @@ namespace EFRFrontEndTest2
             BigGrayButton.Click += (sender, d) =>
             {
 
+                CallDatabase.block.Question[];
             };
 
             Answer1.Click += (sender, f) =>
             {
-                //  if (Answer1 == CorrectAnswer)
-                //  { 
+                var intent = new Intent(this, typeof(QuestionspageActivity));
 
-
-                //   Answer1.Update Text = { " " };
-                // StartActivity(intent);
-                //  }
+                if (block.Answer1[] == block.CorrectAnswer[])
+                  {
+                   block.Answer1[].UpdateText = {"Correct!"};
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                }
+                  else
+                {
+                    block.Answer1[].updatetext = { "Wrong Answer continue"};
+                }
             };
 
             Answer2.Click += (sender, a) =>
             {
-                // if (Answer2 == CorrectAnswer)
-                // {
-
-                //     var intent = new Intent(this, typeof(QuestionspageActivity));
-                //     Answer2.Update Text = { " " };
-                //     StartActivity(intent);
-                //  }
-
-                //  else
-                // {
-
-                // }
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (block.Answer2[] == block.CorrectAnswer[])
+                {
+                    block.Answer2[].UpdateText = { "Correct!"};
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                    StartActivity(intent);
+                }
             };
             Answer3.Click += (sender, b) =>
             {
-                /* if (Answer3 == CorrectAnswer)
-                 {
 
-                     var intent = new Intent(this, typeof(QuestionspageActivity));
-                     Answer3.Update Text = { " " };
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (Qblock.Answer3[] == Qblock.CorrectAnswer[])
+                {
+                    Qblock.Answer2[].UpdateText = { "Correct!"};
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    Qblock.Answer3[].Updatetext = { "Wrong Answer continue"};
                      StartActivity(intent);
-                 }*/
+                }
+               
             };
             Answer4.Click += (sender, c) =>
             {
-                /* if (Answer4 == CorrectAnswer)
-                 {
 
-                     var intent = new Intent(this, typeof(QuestionspageActivity));
-                     Answer4.Update Text = {" "};
-                     StartActivity(intent);
-                 }*/
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (Qblock.Answer4[] == block.CorrectAnswer[])
+                {
+                    Qblock.Answer4[].UpdateText = { "Correct!"};
+                    var intent = new Intent(this, typeof(QuestionspageActivity));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                    StartActivity(intent);
+                }
             };
         }
 
-      //  private async <Task> LoaderQuestionBlock ()
-        //    {
-        //array of strings to store the answer
-        // pull till empty 
-        // reload questions block
-          //  }
+        private void LoaderQuestionBlock ()
+         {
+            String[] Qblock= { "\0" };  
+           //  array of strings to store the answer
+       //  pull till empty 
+         //reload questions block
+         }
        private void SuccessFunct( CallDatabase database)
         {
-            
+            var Qblock = database.responce.m_json;
         }
         private void SetQuestions()
         {
