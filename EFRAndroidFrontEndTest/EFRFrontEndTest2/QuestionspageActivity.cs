@@ -60,7 +60,8 @@ namespace EFRFrontEndTest2
 
             BigGrayButton.Click += (sender, d) =>
             {
-                block.Question[];
+
+                CallDatabase.block.Question[];
             };
 
             Answer1.Click += (sender, f) =>
@@ -89,7 +90,7 @@ namespace EFRFrontEndTest2
                 }
                 else
                 {
-                    block.Answer2[].Updatetext = { "Wrong Answer continue"};
+                    Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
                     StartActivity(intent);
                 }
             };
@@ -97,15 +98,15 @@ namespace EFRFrontEndTest2
             {
 
                 var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (block.Answer3[] == block.CorrectAnswer[])
+                if (Qblock.Answer3[] == Qblock.CorrectAnswer[])
                 {
-                    block.Answer2[].UpdateText = { "Correct!"};
+                    Qblock.Answer2[].UpdateText = { "Correct!"};
                     var intent = new Intent(this, typeof(QuestionspageActivity));
                     StartActivity(intent);
                 }
                 else
                 {
-                    block.Answer3[].Updatetext = { "Wrong Answer continue"};
+                    Qblock.Answer3[].Updatetext = { "Wrong Answer continue"};
                      StartActivity(intent);
                 }
                
@@ -114,15 +115,15 @@ namespace EFRFrontEndTest2
             {
 
                 var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (block.Answer4[] == block.CorrectAnswer[])
+                if (Qblock.Answer4[] == block.CorrectAnswer[])
                 {
-                    block.Answer4[].UpdateText = { "Correct!"};
+                    Qblock.Answer4[].UpdateText = { "Correct!"};
                     var intent = new Intent(this, typeof(QuestionspageActivity));
                     StartActivity(intent);
                 }
                 else
                 {
-                    block.Answer2[].Updatetext = { "Wrong Answer continue"};
+                    Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
                     StartActivity(intent);
                 }
             };
@@ -137,7 +138,7 @@ namespace EFRFrontEndTest2
          }
        private void SuccessFunct( CallDatabase database)
         {
-            
+            var Qblock = database.responce.m_json;
         }
         private void SetQuestions()
         {
