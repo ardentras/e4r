@@ -38,6 +38,7 @@ namespace EFRFrontEndTest2
             Button guestLogin = FindViewById<Button>(Resource.Id.guestLoginButton);
             TextView forgotPassword = FindViewById<TextView>(Resource.Id.ForgotPasswordButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
+            //Used as a switch to keep multiple async calls to a new activity
             bool clicked = false;
 
             //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
@@ -149,12 +150,11 @@ namespace EFRFrontEndTest2
             builder.Show();
         }
 
-//TODO: Implement once Shaun has created a password recovery API call
+        //TODO: Implement once Shaun has created a password recovery API call
         private void SendAccountRecoveryEmail(string username)
         {
 
         }
-
 
         LocalArchive m_archive;
         CallDatabase m_database;
