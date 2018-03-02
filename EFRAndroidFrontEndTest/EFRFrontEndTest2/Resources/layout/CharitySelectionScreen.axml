@@ -3,33 +3,82 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linearLayout1"
-    android:background="@drawable/BackgroundGradient">
+    android:id="@+id/linearLayout1">
     <LinearLayout
         android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2"
-        android:background="@android:color/black">
-        <ImageButton
+        android:background="#3D4A51"
+        android:id="@+id/linearLayout2">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:id="@+id/backButton"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3">
+            <ImageButton
+                android:src="@drawable/back_arrow"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:padding="30px"
+                android:onClick="back_arrow"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:id="@+id/back_arrow" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_weight="1"
-            android:src="@drawable/BackArrowIcon"
-            android:scaleType="fitXY"
-            android:background="@android:color/black" />
-        <TextView
-            android:text="Favorite Charities"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:id="@+id/textView1"
-            android:layout_weight="9"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout4"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <TextView
+                android:text="Charities"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:layout_height="match_parent"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+        <ImageButton
+            android:src="@drawable/filter"
+            android:layout_width="100px"
+            android:padding="20px"
+            android:background="@android:color/transparent"
+            android:layout_height="100px"
+            android:scaleType="fitCenter"
+            android:id="@+id/imageButton2" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_weight="1"
+        android:background="#ffaa3434"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollview1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/charities_list" />
+    </ScrollView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#3D4A51"
+        android:padding="30px"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout5">
+        <TextView
+            android:text="Save"
             android:gravity="center"
-            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
             android:textColor="#FFFFFF"
-            android:textScaleX="1.75" />
+            android:layout_height="match_parent"
+            android:id="@+id/textView1" />
     </LinearLayout>
 </LinearLayout>

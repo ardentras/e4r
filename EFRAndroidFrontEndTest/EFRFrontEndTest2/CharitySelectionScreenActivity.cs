@@ -17,15 +17,20 @@ namespace EFRFrontEndTest2
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CharitySelectionScreen);
 
-            ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
+            ImageButton backButton = FindViewById<ImageButton>(Resource.Id.back_arrow);
+            LinearLayout charities_list = FindViewById<LinearLayout>(Resource.Id.charities_list);
 
-            backButton.Click += (sender, e) =>
-            {
-                Finish();
+            TextView newt = new TextView(this){Text="Test"};
+
+            charities_list.AddView(newt);
+
+            backButton.Click += delegate {
+                base.OnBackPressed();
             };
         }
     }
