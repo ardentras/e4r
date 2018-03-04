@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linearLayout1">
+    android:background="#efefef"
+    android:id="@+id/charity_selection">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -41,6 +42,13 @@
                 android:textColor="#FFFFFF"
                 android:layout_height="match_parent"
                 android:id="@+id/textView2" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout5" />
         </LinearLayout>
         <ImageButton
             android:src="@drawable/filter"
@@ -51,19 +59,62 @@
             android:scaleType="fitCenter"
             android:id="@+id/imageButton2" />
     </LinearLayout>
-    <ScrollView
-        android:layout_weight="1"
-        android:background="#ffaa3434"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollview1">
+        android:id="@+id/charities_list"
+        android:layout_marginBottom="15px"
+        android:layout_marginTop="10px"
+        android:paddingBottom="20px"
+        android:paddingTop="20px"
+        android:background="#FFFFFF">
+        <TextView
+            android:text="Current:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textColor="#3D4A51"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/textView3" />
+        <TextView
+            android:text="None"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:textColor="#3D4A51"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/selected_charitiy_name" />
+        <TextView
+            android:text="info"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#2192FC"
+            android:clickable="true"
+            android:layout_height="match_parent"
+            android:id="@+id/info_btn" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_weight="1"
+        android:background="#f2f3f4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollview1"
+        android:minWidth="25px"
+        android:minHeight="25px">
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/charities_list" />
+            android:layout_height="match_parent"
+            android:id="@+id/charity_list" />
     </ScrollView>
     <LinearLayout
         android:orientation="horizontal"
@@ -71,7 +122,8 @@
         android:background="#3D4A51"
         android:padding="30px"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout5">
+        android:id="@+id/save_btn"
+        android:clickable="true">
         <TextView
             android:text="Save"
             android:gravity="center"
@@ -79,6 +131,7 @@
             android:layout_width="match_parent"
             android:textColor="#FFFFFF"
             android:layout_height="match_parent"
-            android:id="@+id/textView1" />
+            android:id="@+id/save_btn_ext"
+            android:clickable="true" />
     </LinearLayout>
 </LinearLayout>
