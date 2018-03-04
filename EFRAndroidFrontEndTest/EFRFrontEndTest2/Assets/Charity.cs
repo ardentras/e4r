@@ -17,6 +17,12 @@ namespace EFRFrontEndTest2.Assets
         private string _name;
         private string _description;
         private string _url;
+        public Charity()
+        {
+            _name = "None";
+            _description = "None";
+            _url = "None";
+        }
         public Charity(string name, string description, string url)
         {
             _name = name;

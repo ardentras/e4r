@@ -40,6 +40,10 @@ namespace EFRFrontEndTest2.Assets
                 {
                     item.Checked = false;
                 }
+                else if (item.Checked == false)
+                {
+                    item.Checked = true;
+                }
             }
         }
         private void HandleCharityDescription(object sender, EventArgs e, Charity charity)
@@ -83,7 +87,7 @@ namespace EFRFrontEndTest2.Assets
         private ImageButton CreateCharityImage(int img, Charity charity)
         {
             ImageButton newButton = new ImageButton(ctx);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(150, LinearLayout.LayoutParams.MatchParent, 1f)
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.MatchParent, 1f)
             {
                 LeftMargin = 80,
                 RightMargin = 80
