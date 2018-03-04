@@ -10,6 +10,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
+
+/***************************************************************************************************************************
+ * Author: Kevin Xu - if you change anything, update this!!!
+ * Class: Charity
+ * Description: A class to handle all the charity information logic.
+****************************************************************************************************************************/
+
 namespace EFRFrontEndTest2.Assets
 {
     class Charity
