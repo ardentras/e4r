@@ -47,6 +47,7 @@ namespace EFRFrontEndTest2
             SetQuestions(x);
             int QuestionBlockNum = 1;
 
+            bool QuestionAnswered = false;
 
             if (database.responce.m_responce == "success")
             {
@@ -61,12 +62,15 @@ namespace EFRFrontEndTest2
 
             Continue.Click += (sender, e) =>
             {
+
                 //var intent = new Intent(this, typeof(QuestionspageActivity));
-       
 
-                JsonValue k = block["question_block"][QuestionBlockNum++];
-                SetQuestions(k);
-
+                if (QuestionAnswered)
+                {
+                    JsonValue k = block["question_block"][QuestionBlockNum++];
+                    SetQuestions(k);
+                    QuestionAnswered = false;
+                }
             };
             //commented out so it would build, otherwise it would error.
 
@@ -76,8 +80,8 @@ namespace EFRFrontEndTest2
             //    CallDatabase.block.Question[];
             //};
 
-            //Answer1.Click += (sender, f) =>
-            //{
+            Answer1.Click += (sender, f) =>
+            { QuestionAnswered = true; };
             //    var intent = new Intent(this, typeof(QuestionspageActivity));
 
             //    if (block.Answer1[] == block.CorrectAnswer[])
