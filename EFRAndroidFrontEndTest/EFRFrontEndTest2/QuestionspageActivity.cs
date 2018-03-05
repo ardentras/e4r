@@ -41,7 +41,12 @@ namespace EFRFrontEndTest2
             int QuestionNum = 0;
 
             JsonValue block = database.responce.m_json;
-//JsonValue 
+            JsonValue x = block["question_block"][0];
+            string y = x["QuestionID"];
+
+            SetQuestions(x);
+            int QuestionBlockNum = 1;
+
 
             if (database.responce.m_responce == "success")
             {
@@ -56,78 +61,84 @@ namespace EFRFrontEndTest2
 
             Continue.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
+       
+
+                JsonValue k = block["question_block"][QuestionBlockNum++];
+                SetQuestions(k);
+
             };
+            //commented out so it would build, otherwise it would error.
 
-            BigGrayButton.Click += (sender, d) =>
-            {
+            //BigGrayButton.Click += (sender, d) =>
+            //{
 
-                CallDatabase.block.Question[];
-            };
+            //    CallDatabase.block.Question[];
+            //};
 
-            Answer1.Click += (sender, f) =>
-            {
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+            //Answer1.Click += (sender, f) =>
+            //{
+            //    var intent = new Intent(this, typeof(QuestionspageActivity));
 
-                if (block.Answer1[] == block.CorrectAnswer[])
-                  {
-                   block.Answer1[].UpdateText = {"Correct!"};
-                    var intent = new Intent(this, typeof(QuestionspageActivity));
-                }
-                  else
-                {
-                    block.Answer1[].updatetext = { "Wrong Answer continue"};
-                }
-            };
+            //    if (block.Answer1[] == block.CorrectAnswer[])
+            //      {
+            //       block.Answer1[].UpdateText = {"Correct!"};
+            //        var intent = new Intent(this, typeof(QuestionspageActivity));
+            //    }
+            //      else
+            //    {
+            //        block.Answer1[].updatetext = { "Wrong Answer continue"};
+            //    }
+            //};
 
-            Answer2.Click += (sender, a) =>
-            {
-                var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (block.Answer2[] == block.CorrectAnswer[])
-                {
-                    block.Answer2[].UpdateText = { "Correct!"};
-                    var intent = new Intent(this, typeof(QuestionspageActivity));
-                    StartActivity(intent);
-                }
-                else
-                {
-                    Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-                    StartActivity(intent);
-                }
-            };
-            Answer3.Click += (sender, b) =>
-            {
+            //Answer2.Click += (sender, a) =>
+            //{
+            //    var intent = new Intent(this, typeof(QuestionspageActivity));
+            //    if (block.Answer2[] == block.CorrectAnswer[])
+            //    {
+            //        block.Answer2[].UpdateText = { "Correct!"};
+            //        var intent = new Intent(this, typeof(QuestionspageActivity));
+            //        StartActivity(intent);
+            //    }
+            //    else
+            //    {
+            //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+            //        StartActivity(intent);
+            //    }
+            //};
+            //Answer3.Click += (sender, b) =>
+            //{
 
-                var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (Qblock.Answer3[] == Qblock.CorrectAnswer[])
-                {
-                    Qblock.Answer2[].UpdateText = { "Correct!"};
-                    var intent = new Intent(this, typeof(QuestionspageActivity));
-                    StartActivity(intent);
-                }
-                else
-                {
-                    Qblock.Answer3[].Updatetext = { "Wrong Answer continue"};
-                     StartActivity(intent);
-                }
+            //    var intent = new Intent(this, typeof(QuestionspageActivity));
+            //    if (Qblock.Answer3[] == Qblock.CorrectAnswer[])
+            //    {
+            //        Qblock.Answer2[].UpdateText = { "Correct!"};
+            //        var intent = new Intent(this, typeof(QuestionspageActivity));
+            //        StartActivity(intent);
+            //    }
+            //    else
+            //    {
+            //        Qblock.Answer3[].Updatetext = { "Wrong Answer continue"};
+            //         StartActivity(intent);
+            //    }
                
-            };
-            Answer4.Click += (sender, c) =>
-            {
+            //};
+            //Answer4.Click += (sender, c) =>
+            //{
 
-                var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (Qblock.Answer4[] == block.CorrectAnswer[])
-                {
-                    Qblock.Answer4[].UpdateText = { "Correct!"};
-                    var intent = new Intent(this, typeof(QuestionspageActivity));
-                    StartActivity(intent);
-                }
-                else
-                {
-                    Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-                    StartActivity(intent);
-                }
-            };
+            //    var intent = new Intent(this, typeof(QuestionspageActivity));
+            //    if (Qblock.Answer4[] == block.CorrectAnswer[])
+            //    {
+            //        Qblock.Answer4[].UpdateText = { "Correct!"};
+            //        var intent = new Intent(this, typeof(QuestionspageActivity));
+            //        StartActivity(intent);
+            //    }
+            //    else
+            //    {
+            //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+            //        StartActivity(intent);
+            //    }
+            //};
         }
 
         private void LoaderQuestionBlock ()
@@ -141,11 +152,20 @@ namespace EFRFrontEndTest2
         {
             var Qblock = database.responce.m_json;
         }
-        private void SetQuestions()
+        private void SetQuestions(JsonValue block)
         {
-            //Pass the five strings 
-            //Or pass a list of strings
-            //
+            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+
+            BigGrayButton.Text = block["QuestionText"];
+            Answer1.Text = block["QuestionOne"];
+            Answer2.Text = block["QuestionTwo"];
+            Answer3.Text = block["QuestionThree"];
+            Answer4.Text = block["QuestionFour"];
+
         }
     }
 }
