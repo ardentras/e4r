@@ -126,6 +126,8 @@
   <ItemGroup>
     <Compile Include="AchievementsPageActivity.cs" />
     <Compile Include="Assets\CallDatabase.cs" />
+    <Compile Include="Assets\Charity.cs" />
+    <Compile Include="Assets\CharitySelection.cs" />
     <Compile Include="Assets\LocalArchive.cs" />
     <Compile Include="Assets\SingleUserObject.cs" />
     <Compile Include="Assets\UserObject.cs" />
@@ -311,6 +313,33 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Needed API Calls.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\back_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\unchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\favorited.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\unfavorited.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\charity_united_way.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\charity_direct_relief.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\charity_red_cross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />

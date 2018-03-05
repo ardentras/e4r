@@ -49,5 +49,15 @@ namespace EFRFrontEndTest2
                 StartActivity(intent);
             };
         }
+
+        /***************************************************************************************************************************
+         * Author: Kevin Xu - if you change anything, update this!!!
+         * Function: OnBackPressed
+         * Purpose: Prevent going back to login page.(should not happen!)
+        ****************************************************************************************************************************/
+        public override void OnBackPressed()
+        {
+            return;
+        }
     }
 }
