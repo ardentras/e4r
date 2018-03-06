@@ -67,12 +67,13 @@ namespace EFRFrontEndTest2
 
                 if (QuestionAnswered)
                 {
-                    if ()
-                    {
-                        JsonValue k = block["question_block"][QuestionBlockNum++];
-                        SetQuestions(k);
-                        QuestionAnswered = false;
-                    }
+                    //empty condition, commented out
+                    //if ()
+                    //{
+                    //    JsonValue k = block["question_block"][QuestionBlockNum++];
+                    //    SetQuestions(k);
+                    //    QuestionAnswered = false;
+                    //}
                 }
             };
           
