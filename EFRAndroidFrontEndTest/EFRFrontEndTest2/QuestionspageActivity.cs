@@ -41,13 +41,7 @@ namespace EFRFrontEndTest2
             int QuestionNum = 0;
 
             JsonValue block = database.responce.m_json;
-            JsonValue x = block["question_block"][0];
-            string y = x["QuestionID"];
-
-            SetQuestions(x);
-            int QuestionBlockNum = 1;
-
-            bool QuestionAnswered = false;
+//JsonValue 
 
             if (database.responce.m_responce == "success")
             {
@@ -62,15 +56,7 @@ namespace EFRFrontEndTest2
 
             Continue.Click += (sender, e) =>
             {
-
-                //var intent = new Intent(this, typeof(QuestionspageActivity));
-
-                if (QuestionAnswered)
-                {
-                    JsonValue k = block["question_block"][QuestionBlockNum++];
-                    SetQuestions(k);
-                    QuestionAnswered = false;
-                }
+                var intent = new Intent(this, typeof(QuestionspageActivity));
             };
             //commented out so it would build, otherwise it would error.
 
@@ -80,8 +66,8 @@ namespace EFRFrontEndTest2
             //    CallDatabase.block.Question[];
             //};
 
-            Answer1.Click += (sender, f) =>
-            { QuestionAnswered = true; };
+            //Answer1.Click += (sender, f) =>
+            //{
             //    var intent = new Intent(this, typeof(QuestionspageActivity));
 
             //    if (block.Answer1[] == block.CorrectAnswer[])
@@ -156,20 +142,11 @@ namespace EFRFrontEndTest2
         {
             var Qblock = database.responce.m_json;
         }
-        private void SetQuestions(JsonValue block)
+        private void SetQuestions()
         {
-            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
-            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
-            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
-            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
-            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
-
-            BigGrayButton.Text = block["QuestionText"];
-            Answer1.Text = block["QuestionOne"];
-            Answer2.Text = block["QuestionTwo"];
-            Answer3.Text = block["QuestionThree"];
-            Answer4.Text = block["QuestionFour"];
-
+            //Pass the five strings 
+            //Or pass a list of strings
+            //
         }
     }
 }
