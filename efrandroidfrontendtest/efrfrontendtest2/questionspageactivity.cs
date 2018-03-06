@@ -67,6 +67,7 @@ namespace EFRFrontEndTest2
 
                 if (QuestionAnswered)
                 {
+                    //empty condition, commented out
                     //if ()
                     //{
                     //    JsonValue k = block["question_block"][QuestionBlockNum++];

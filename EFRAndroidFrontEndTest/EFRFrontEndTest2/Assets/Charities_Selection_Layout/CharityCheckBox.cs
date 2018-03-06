@@ -27,10 +27,7 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private void CreateButton(Context ctx)
         {
             CheckBox newBox = new CheckBox(ctx);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(50, 50)
-            {
-                LeftMargin = 20
-            };
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WrapContent, LinearLayout.LayoutParams.WrapContent);
             newBox.SetBackgroundColor(Android.Graphics.Color.Transparent);
             newBox.LayoutParameters = param;
             _button = newBox;
