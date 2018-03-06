@@ -46,6 +46,7 @@ namespace EFRFrontEndTest2
             {
                 if (!clicked)
                 {
+                    
                     clicked = true;
                     // Fetch the login information asynchronously, parse the results, then update the screen.
                     Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
@@ -148,6 +149,16 @@ namespace EFRFrontEndTest2
                 }
             };
             builder.Show();
+        }
+
+        /***************************************************************************************************************************
+         * Author: Kevin Xu - if you change anything, update this!!!
+         * Function: OnBackPressed
+         * Purpose: Prevent exiting the app by clicking the back button.(should not happen!)
+        ****************************************************************************************************************************/
+        public override void OnBackPressed()
+        {
+            return;
         }
 
         //TODO: Implement once Shaun has created a password recovery API call

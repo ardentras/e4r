@@ -23,7 +23,7 @@ namespace EFRFrontEndTest2.Assets
             m_responce = responce;
             m_reason = reason;
             m_code = code;
-            m_json = json;//quick parse where every time I do a call it quickly parses data
+            m_json = json;//holds the object
             
         }
 

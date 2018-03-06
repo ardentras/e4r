@@ -3,33 +3,137 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linearLayout1"
-    android:background="@drawable/BackgroundGradient">
+    android:background="#E6EAEF"
+    android:id="@+id/charity_selection">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:id="@+id/linearLayout2">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3">
+            <ImageButton
+                android:src="@drawable/back_arrow"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:padding="30px"
+                android:onClick="back_arrow"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:id="@+id/back_arrow" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout4"
+            android:layout_marginBottom="2px"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <TextView
+                android:text="Charities"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#081523"
+                android:layout_height="match_parent"
+                android:id="@+id/textView2"
+                android:backgroundTint="#00000000" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout5" />
+        </LinearLayout>
+        <ImageButton
+            android:src="@drawable/filter"
+            android:layout_width="100px"
+            android:padding="20px"
+            android:background="@android:color/transparent"
+            android:layout_height="100px"
+            android:scaleType="fitCenter"
+            android:id="@+id/filter_btn" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2"
-        android:background="@android:color/black">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:id="@+id/backButton"
-            android:layout_weight="1"
-            android:src="@drawable/BackArrowIcon"
-            android:scaleType="fitXY"
-            android:background="@android:color/black" />
+        android:id="@+id/charities_list"
+        android:layout_marginBottom="15px"
+        android:layout_marginTop="10px"
+        android:paddingBottom="20px"
+        android:paddingTop="20px"
+        android:background="#FFFFFF">
         <TextView
-            android:text="Favorite Charities"
+            android:text="Current:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:id="@+id/textView1"
-            android:layout_weight="9"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:textScaleX="1.75" />
+            android:textColor="#081523"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/textView3" />
+        <TextView
+            android:text="None"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:textColor="#081523"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/selected_charitiy_name" />
+        <TextView
+            android:text="info"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#2192FC"
+            android:clickable="true"
+            android:layout_height="match_parent"
+            android:id="@+id/info_btn" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_weight="1"
+        android:background="#E6EAEF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollview1"
+        android:minWidth="25px"
+        android:minHeight="25px">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/charity_list" />
+    </ScrollView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_btn"
+        android:clickable="true">
+        <TextView
+            android:padding="30px"
+            android:text="Save"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:textColor="#081523"
+            android:layout_height="match_parent"
+            android:id="@+id/save_btn_ext"
+            android:clickable="true" />
     </LinearLayout>
 </LinearLayout>
