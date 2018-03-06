@@ -33,38 +33,26 @@ namespace EFRFrontEndTest2
             ImageButton Continue = FindViewById<ImageButton>(Resource.Id.Continue);
             // find correct and compare it to variable
             //add 1 to the correct answer tally
-            //boolean the question is answered
+            //boolean the question is answered 
             //calls the block of questions
             CallDatabase database = new CallDatabase(this);
+            database.RetreaveQuestionBlock();
+
             int QuestionNum = 0;
-            int QuestionBlockNum =0;
+
+            JsonValue block = database.responce.m_json;
+            JsonValue x = block["question_block"][0];
+            string y = x["QuestionID"];
+
+            SetQuestions(x);
+            int QuestionBlockNum = 1;
+
             bool QuestionAnswered = false;
-            JsonValue block = null;
-            async void callNextBlock()
+
+            if (database.responce.m_responce == "success")
             {
-                await database.RetreaveQuestionBlock();
-
-            };
-            async void setup()
-            {
-                await database.RetreaveQuestionBlock();
-                block = database.responce.m_json;
-
-                var x = block["question_block"][0];
-
-                SetQuestions(x);
-                QuestionBlockNum = 1;
-                QuestionAnswered = false;
-
-                if (database.responce.m_responce == "success")
-                {
-                    SuccessFunct(database);
-                }
+                SuccessFunct(database);
             }
-            setup();
-
-            
-            
 
 
             BackArrow.Click += (sender, e) =>
@@ -79,15 +67,13 @@ namespace EFRFrontEndTest2
 
                 if (QuestionAnswered)
                 {
-
-                        JsonValue k = block["question_block"][QuestionBlockNum++];
-                        SetQuestions(k);
-                        QuestionAnswered = false;
-                    if (QuestionNum >= 10)
-                    {
-                        callNextBlock();
-                        QuestionNum = 0;
-                    }
+                    //empty condition, commented out
+                    //if ()
+                    //{
+                    //    JsonValue k = block["question_block"][QuestionBlockNum++];
+                    //    SetQuestions(k);
+                    //    QuestionAnswered = false;
+                    //}
                 }
             };
           
@@ -114,20 +100,26 @@ namespace EFRFrontEndTest2
             //};
 
             Answer2.Click += (sender, a) =>
-            { QuestionAnswered = true; };
-                //    var intent = new Intent(this, typeof(QuestionspageActivity));
-                //    if (block.Answer2[] == block.CorrectAnswer[])
-                //    {
-                //        block.Answer2[].UpdateText = { "Correct!"};
-                //        var intent = new Intent(this, typeof(QuestionspageActivity));
-                //        StartActivity(intent);
-                //    }
-                //    else
-                //    {
-                //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-                //        StartActivity(intent);
-                //    }
-                //};
+            { QuestionAnswered = true; 
+                  var intent = new Intent(this, typeof(QuestionspageActivity));
+              //  if (block["Answer1"] == block.CorrectAnswer[])
+                //{
+               //     block.Answer2[].UpdateText = { "Correct!"};
+                    //        var intent = new Intent(this, typeof(QuestionspageActivity));
+                    //        StartActivity(intent);
+                    //    }
+                    //    else
+                    //    {
+                    //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                    //        StartActivity(intent);
+                    //    }
+                };
+                // block of ten questions
+                // load page puts it in layout
+                // code all four buttons so when pressed 
+                // match queston to answer in text button
+                //set boolean to check if answer was selected
+                //
                 Answer3.Click += (sender, b) =>
                 { QuestionAnswered = true; };
 
@@ -149,22 +141,28 @@ namespace EFRFrontEndTest2
             Answer4.Click += (sender, c) =>
                 { QuestionAnswered = true; };
 
-            //    var intent = new Intent(this, typeof(QuestionspageActivity));
-            //    if (Qblock.Answer4[] == block.CorrectAnswer[])
-            //    {
-            //        Qblock.Answer4[].UpdateText = { "Correct!"};
-            //        var intent = new Intent(this, typeof(QuestionspageActivity));
-            //        StartActivity(intent);
-            //    }
-            //    else
-            //    {
-            //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-            //        StartActivity(intent);
-            //    }
-            //};
+                //    var intent = new Intent(this, typeof(QuestionspageActivity));
+                //    if (Qblock.Answer4[] == block.CorrectAnswer[])
+                //    {
+                //        Qblock.Answer4[].UpdateText = { "Correct!"};
+                //        var intent = new Intent(this, typeof(QuestionspageActivity));
+                //        StartActivity(intent);
+                //    }
+                //    else
+                //    {
+                //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                //        StartActivity(intent);
+                //    }
+                //};
+            }
 
-        }
-
+        private void LoaderQuestionBlock ()
+         {
+            String[] Qblock= { "\0" };  
+           //  array of strings to store the answer
+       //  pull till empty 
+         //reload questions block
+         }
        private void SuccessFunct( CallDatabase database)
         {
             var Qblock = database.responce.m_json;
