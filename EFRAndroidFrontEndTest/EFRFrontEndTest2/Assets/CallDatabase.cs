@@ -43,40 +43,39 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> RetreaveQuestionBlock()
         {
-            UserObject QuestionsBlock = SingleUserObject.getObject();
-            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\":\"{"+ QuestionsBlock.SessionID+ "}\",\"userobject\": { "+QuestionsBlock.GetObjectString()+"}}}");
-            return await APICall("PUT", "http://35.163.221.182:3002/api/q/request_block", bytestream);
+            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\":\"{"+ m_userObject.SessionID+ "}\",\"userobject\": { "+ m_userObject.GetObjectString()+"}}}");
+            return await APICall("PUT", "/q/request_block", bytestream);
         }
 
         public async Task<Responce> CreateAccount(string username, string email, string password)
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
-            return await APICall("POST", "http://35.163.221.182:3002/api/signup", bytestream);
+            return await APICall("POST", "/signup", bytestream);
         }
 
         public async Task<Responce> FetchLogin(string username, string password)
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            return await APICall("POST", "http://35.163.221.182:3002/api/login", bytestream, true);
+            return await APICall("POST", "/login", bytestream, true);
         }
 
         public async Task<Responce> RenewSession()
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");
-            return await APICall("PUT", "http://35.163.221.182:3002/api/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
+            return await APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
         }
 
 // TODO: Update to username/email request when API allows for individual checking
         public async Task<Responce> CheckUsername(string username, string password)
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            return await APICall("POST", "http://35.163.221.182:3002/api/login", bytestream);
+            return await APICall("POST", "/login", bytestream);
         }
 
 
         public async Task<Responce> APICall(string method, string Uri, byte [] bytestream, bool need_UO = false)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(Uri));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + Uri));
             request.ContentType = "application/json";
             request.Method = method;
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length);
