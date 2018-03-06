@@ -3,13 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efefef"
+    android:background="#E6EAEF"
     android:id="@+id/charity_selection">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3D4A51"
+        android:background="#FFFFFF"
         android:id="@+id/linearLayout2">
         <LinearLayout
             android:orientation="vertical"
@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/linearLayout4"
+            android:layout_marginBottom="2px"
             android:minWidth="25px"
             android:minHeight="25px">
             <TextView
@@ -39,9 +40,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:textColor="#FFFFFF"
+                android:textColor="#081523"
                 android:layout_height="match_parent"
-                android:id="@+id/textView2" />
+                android:id="@+id/textView2"
+                android:backgroundTint="#00000000" />
             <LinearLayout
                 android:orientation="vertical"
                 android:minWidth="25px"
@@ -76,7 +78,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:gravity="center"
-            android:textColor="#3D4A51"
+            android:textColor="#081523"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:id="@+id/textView3" />
@@ -84,7 +86,7 @@
             android:text="None"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
-            android:textColor="#3D4A51"
+            android:textColor="#081523"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -102,7 +104,7 @@
     </LinearLayout>
     <ScrollView
         android:layout_weight="1"
-        android:background="#f2f3f4"
+        android:background="#E6EAEF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollview1"
@@ -119,17 +121,17 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:background="#3D4A51"
-        android:padding="30px"
+        android:background="#FFFFFF"
         android:layout_height="wrap_content"
         android:id="@+id/save_btn"
         android:clickable="true">
         <TextView
+            android:padding="30px"
             android:text="Save"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:textColor="#FFFFFF"
+            android:textColor="#081523"
             android:layout_height="match_parent"
             android:id="@+id/save_btn_ext"
             android:clickable="true" />

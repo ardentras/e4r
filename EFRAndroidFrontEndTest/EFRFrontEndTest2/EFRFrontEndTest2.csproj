@@ -126,8 +126,11 @@
   <ItemGroup>
     <Compile Include="AchievementsPageActivity.cs" />
     <Compile Include="Assets\CallDatabase.cs" />
-    <Compile Include="Assets\Charity.cs" />
-    <Compile Include="Assets\CharitySelection.cs" />
+    <Compile Include="Assets\Charities_Selection_Layout\CharityButton.cs" />
+    <Compile Include="Assets\Charities_Selection_Layout\CharityCheckBox.cs" />
+    <Compile Include="Assets\Charities_Selection_Layout\CharityLayout.cs" />
+    <Compile Include="Assets\Charities_Selection_Layout\CharityFavorite.cs" />
+    <Compile Include="Assets\Charities_Selection_Layout\Charity.cs" />
     <Compile Include="Assets\LocalArchive.cs" />
     <Compile Include="Assets\SingleUserObject.cs" />
     <Compile Include="Assets\UserObject.cs" />
@@ -191,6 +194,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\LevelUp.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CharityFilterPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -319,12 +325,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\filter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\unchecked.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\checked.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\favorited.png" />
