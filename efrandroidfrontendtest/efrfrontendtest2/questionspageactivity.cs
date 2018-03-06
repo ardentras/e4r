@@ -41,7 +41,13 @@ namespace EFRFrontEndTest2
             int QuestionNum = 0;
 
             JsonValue block = database.responce.m_json;
-//JsonValue 
+            JsonValue x = block["question_block"][0];
+            string y = x["QuestionID"];
+
+            SetQuestions(x);
+            int QuestionBlockNum = 1;
+
+            bool QuestionAnswered = false;
 
             if (database.responce.m_responce == "success")
             {
@@ -56,18 +62,30 @@ namespace EFRFrontEndTest2
 
             Continue.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
+
+                if (QuestionAnswered)
+                {
+                    //empty condition, commented out
+                    //if ()
+                    //{
+                    //    JsonValue k = block["question_block"][QuestionBlockNum++];
+                    //    SetQuestions(k);
+                    //    QuestionAnswered = false;
+                    //}
+                }
             };
-            //commented out so it would build, otherwise it would error.
+          
 
-            //BigGrayButton.Click += (sender, d) =>
-            //{
+            BigGrayButton.Click += (sender, d) =>
+            {
 
-            //    CallDatabase.block.Question[];
-            //};
+                QuestionAnswered = true;
+            };
 
-            //Answer1.Click += (sender, f) =>
-            //{
+            Answer1.Click += (sender, f) =>
+            { QuestionAnswered = true; };
             //    var intent = new Intent(this, typeof(QuestionspageActivity));
 
             //    if (block.Answer1[] == block.CorrectAnswer[])
@@ -81,23 +99,23 @@ namespace EFRFrontEndTest2
             //    }
             //};
 
-            //Answer2.Click += (sender, a) =>
-            //{
-            //    var intent = new Intent(this, typeof(QuestionspageActivity));
-            //    if (block.Answer2[] == block.CorrectAnswer[])
-            //    {
-            //        block.Answer2[].UpdateText = { "Correct!"};
-            //        var intent = new Intent(this, typeof(QuestionspageActivity));
-            //        StartActivity(intent);
-            //    }
-            //    else
-            //    {
-            //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-            //        StartActivity(intent);
-            //    }
-            //};
-            //Answer3.Click += (sender, b) =>
-            //{
+            Answer2.Click += (sender, a) =>
+            { QuestionAnswered = true; };
+                //    var intent = new Intent(this, typeof(QuestionspageActivity));
+                //    if (block.Answer2[] == block.CorrectAnswer[])
+                //    {
+                //        block.Answer2[].UpdateText = { "Correct!"};
+                //        var intent = new Intent(this, typeof(QuestionspageActivity));
+                //        StartActivity(intent);
+                //    }
+                //    else
+                //    {
+                //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                //        StartActivity(intent);
+                //    }
+                //};
+                Answer3.Click += (sender, b) =>
+                { QuestionAnswered = true; };
 
             //    var intent = new Intent(this, typeof(QuestionspageActivity));
             //    if (Qblock.Answer3[] == Qblock.CorrectAnswer[])
@@ -111,25 +129,26 @@ namespace EFRFrontEndTest2
             //        Qblock.Answer3[].Updatetext = { "Wrong Answer continue"};
             //         StartActivity(intent);
             //    }
-               
-            //};
-            //Answer4.Click += (sender, c) =>
-            //{
 
-            //    var intent = new Intent(this, typeof(QuestionspageActivity));
-            //    if (Qblock.Answer4[] == block.CorrectAnswer[])
-            //    {
-            //        Qblock.Answer4[].UpdateText = { "Correct!"};
-            //        var intent = new Intent(this, typeof(QuestionspageActivity));
-            //        StartActivity(intent);
-            //    }
-            //    else
-            //    {
-            //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-            //        StartActivity(intent);
-            //    }
             //};
-        }
+
+            Answer4.Click += (sender, c) =>
+                { QuestionAnswered = true; };
+
+                //    var intent = new Intent(this, typeof(QuestionspageActivity));
+                //    if (Qblock.Answer4[] == block.CorrectAnswer[])
+                //    {
+                //        Qblock.Answer4[].UpdateText = { "Correct!"};
+                //        var intent = new Intent(this, typeof(QuestionspageActivity));
+                //        StartActivity(intent);
+                //    }
+                //    else
+                //    {
+                //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                //        StartActivity(intent);
+                //    }
+                //};
+            }
 
         private void LoaderQuestionBlock ()
          {
@@ -142,11 +161,20 @@ namespace EFRFrontEndTest2
         {
             var Qblock = database.responce.m_json;
         }
-        private void SetQuestions()
+        private void SetQuestions(JsonValue block)
         {
-            //Pass the five strings 
-            //Or pass a list of strings
-            //
+            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+
+            BigGrayButton.Text = block["QuestionText"];
+            Answer1.Text = block["QuestionOne"];
+            Answer2.Text = block["QuestionTwo"];
+            Answer3.Text = block["QuestionThree"];
+            Answer4.Text = block["QuestionFour"];
+
         }
     }
 }

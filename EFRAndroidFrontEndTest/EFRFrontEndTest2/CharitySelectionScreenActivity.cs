@@ -10,7 +10,8 @@ using System.Net;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using EFRFrontEndTest2.Assets;
+using EFRFrontEndTest2.Assets.Charities_Selection_Layout;
+
 
 /***************************************************************************************************************************
  * Author: Kevin Xu - if you change anything, update this!!!
@@ -27,11 +28,13 @@ namespace EFRFrontEndTest2
     public class CharitySelectionScreenActivity : Activity
     {
         //current selected charity
-        private Charity current = new Charity();
+        private CharityLayout _current = null;
+        private CharityLayout _selected = null;
         //current list of available charities
-        private List<Charity> charities = new List<Charity>();
-        //creater to dynamically create the layout for each charity within the scroll view
-        private CharitySelection creater;
+        private List<Charity> _favorites = new List<Charity>();
+        private List<Charity> _charities = new List<Charity>();
+        private string[] colorCodes = new string[] { "#FF7D61", "#5EFDFF", "#5787FF", "#FFD04A" };
+        private int colorCodes_index = 0;
 
         /***************************************************************************************************************************
          * 
@@ -63,9 +66,20 @@ namespace EFRFrontEndTest2
          * Purpose: To initialize the creater with the context of this.
          * 
         ****************************************************************************************************************************/
-        public CharitySelectionScreenActivity()
+        public CharityLayout Current
         {
-            creater = new CharitySelection(this);
+            get { return _current; }
+            set { _current = value; }
+        }
+        public CharityLayout Selected
+        {
+            get { return _selected; }
+            set { _selected = value; }
+        }
+        public List<Charity> Favorites
+        {
+            get { return _favorites; }
+            set { _favorites = value; }
         }
         /***************************************************************************************************************************
          * 
@@ -83,18 +97,23 @@ namespace EFRFrontEndTest2
             SetContentView(Resource.Layout.CharitySelectionScreen);
             //Initialize the views with their click handlers
             initButtonHandlers();
+            
             //get the scrollview for displaying the list of charities.
             LinearLayout charities_list = FindViewById<LinearLayout>(Resource.Id.charity_list);
             //add the charities to the list.  (right now it's using static data, to be dynamic just loop through an array and add it to the list, but make sure the first element is None)
-            charities.Add(None);
-            charities.Add(directrelief);
-            charities.Add(redcross);
-            charities.Add(unitedway);
+            _charities.Add(None);
+            _charities.Add(directrelief);
+            _charities.Add(redcross);
+            _charities.Add(unitedway);
             //Loop through the charity list from index 1, since the first element is None
-            for (int i = 1; i < charities.Count; ++i)
+            for (int i = 1; i < _charities.Count; ++i, ++colorCodes_index)
             {
+                if (colorCodes_index > 4)
+                {
+                    colorCodes_index = 0;
+                }
                 //Create the layout for that charity and add it to the root, which here, is charities_list(scroll view)
-                creater.FillCharities(charities_list, charities[i], i);
+                charities_list.AddView((new CharityLayout(this, this, _charities[i], colorCodes[colorCodes_index])).Container);
             }
 
         }
@@ -151,12 +170,12 @@ namespace EFRFrontEndTest2
             TextView selected_charity = FindViewById<TextView>(Resource.Id.selected_charitiy_name);
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             AlertDialog alert = dialog.Create();
-            if (current != null)
+            if (_selected != null)
             {
-                if (current.Name != charities[creater.Selected].Name)
+                if (_current != _selected)
                 {
-                    selected_charity.Text = charities[creater.Selected].Name;
-                    current = charities[creater.Selected];
+                    _current = _selected;
+                    selected_charity.Text = _current.Charity.Name;
                     alert.SetTitle("Saved");
                     alert.SetMessage("Your selected charity has been updated.");
                 }
@@ -187,19 +206,19 @@ namespace EFRFrontEndTest2
         ****************************************************************************************************************************/
         private void HandleInfoBtn(object sender, EventArgs e)
         {
-            if (current != null && current.Name != "None")
+            if (_current != null && _current.Charity.Name != "None")
             {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 AlertDialog alert = dialog.Create();
-                alert.SetTitle(current.Name);
-                alert.SetMessage(current.Description);
+                alert.SetTitle(_current.Charity.Name);
+                alert.SetMessage(_current.Charity.Description);
                 alert.SetButton("OK", (c, ev) =>
                 {
                     alert.Dismiss();
                 });
                 alert.SetButton2("Learn More", (c, ev) =>
                 {
-                    var uri = Android.Net.Uri.Parse(current.Url);
+                    var uri = Android.Net.Uri.Parse(_current.Charity.Url);
                     var intent = new Intent(Intent.ActionView, uri);
                     this.StartActivity(intent);
                 });

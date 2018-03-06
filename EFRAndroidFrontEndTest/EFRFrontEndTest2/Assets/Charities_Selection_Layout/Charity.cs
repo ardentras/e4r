@@ -17,19 +17,14 @@ using Android.Widget;
  * Description: A class to handle all the charity information logic.
 ****************************************************************************************************************************/
 
-namespace EFRFrontEndTest2.Assets
+namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
 {
-    class Charity
+    public class Charity
     {
-        private string _name;
-        private string _description;
-        private string _url;
-        public Charity()
-        {
-            _name = "None";
-            _description = "None";
-            _url = "None";
-        }
+        private string _name = "None";
+        private string _description = "None";
+        private string _url = "None";
+        public Charity() { }
         public Charity(string name, string description, string url)
         {
             _name = name;
