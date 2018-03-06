@@ -44,7 +44,7 @@ namespace EFRFrontEndTest2.Assets
         public async Task<Responce> RetreaveQuestionBlock()
         {
             UserObject QuestionsBlock = SingleUserObject.getObject();
-            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\":\"{"+ QuestionsBlock.SessionID+ "}\",\"userobject\": { "+QuestionsBlock.GetObjectString()+"}}}");
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"session\": \""+ QuestionsBlock.SessionID+ "\", "+QuestionsBlock.UserObjectForm()+"}}");
             return await APICall("PUT", "http://35.163.221.182:3002/api/q/request_block", bytestream);
         }
 
