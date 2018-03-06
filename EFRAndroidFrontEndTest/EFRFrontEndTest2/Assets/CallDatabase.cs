@@ -43,7 +43,7 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> RetreaveQuestionBlock()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\":\"{"+ m_userObject.SessionID+ "}\",\"userobject\": { "+ m_userObject.GetObjectString()+"}}}");
+            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\":\" "+ m_userObject.SessionID+ "\", "+ m_userObject.UserObjectForm()+" }}");
             return await APICall("PUT", "/q/request_block", bytestream);
         }
 

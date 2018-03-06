@@ -100,20 +100,26 @@ namespace EFRFrontEndTest2
             //};
 
             Answer2.Click += (sender, a) =>
-            { QuestionAnswered = true; };
-                //    var intent = new Intent(this, typeof(QuestionspageActivity));
-                //    if (block.Answer2[] == block.CorrectAnswer[])
-                //    {
-                //        block.Answer2[].UpdateText = { "Correct!"};
-                //        var intent = new Intent(this, typeof(QuestionspageActivity));
-                //        StartActivity(intent);
-                //    }
-                //    else
-                //    {
-                //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-                //        StartActivity(intent);
-                //    }
-                //};
+            { QuestionAnswered = true; 
+                  var intent = new Intent(this, typeof(QuestionspageActivity));
+              //  if (block["Answer1"] == block.CorrectAnswer[])
+                //{
+               //     block.Answer2[].UpdateText = { "Correct!"};
+                    //        var intent = new Intent(this, typeof(QuestionspageActivity));
+                    //        StartActivity(intent);
+                    //    }
+                    //    else
+                    //    {
+                    //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
+                    //        StartActivity(intent);
+                    //    }
+                };
+                // block of ten questions
+                // load page puts it in layout
+                // code all four buttons so when pressed 
+                // match queston to answer in text button
+                //set boolean to check if answer was selected
+                //
                 Answer3.Click += (sender, b) =>
                 { QuestionAnswered = true; };
 
