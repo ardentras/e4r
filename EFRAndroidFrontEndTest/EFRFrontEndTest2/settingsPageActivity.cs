@@ -24,6 +24,7 @@ namespace EFRFrontEndTest2
             SeekBar music = FindViewById<SeekBar>(Resource.Id.music);
             Button reset = FindViewById<Button>(Resource.Id.ResetButton);
             Button achievements = FindViewById<Button>(Resource.Id.AchievementsButton);
+            Button background = FindViewById<Button>(Resource.Id.BackgroundButton);
             Switch note1 = FindViewById<Switch>(Resource.Id.note1);
             Switch note2 = FindViewById<Switch>(Resource.Id.note2);
             //object to store local data
@@ -83,6 +84,11 @@ namespace EFRFrontEndTest2
             achievements.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(AchievementsPageActivity));
+                StartActivity(intent);
+            };
+            background.Click += (sender, e) =>
+            {
+                var intent = new Intent(this, typeof(ColorPickerActivity));
                 StartActivity(intent);
             };
         }
