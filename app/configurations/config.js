@@ -16,7 +16,8 @@ const DEFAULT_USER_OBJECT = {
         "email": "",
         "first_name": "",
         "last_name": "",
-        "charity_name": ""
+        "selected_charity": "",
+		"favorite_charities": [""]
     },
     "game_data": {
         "subject_name": "",

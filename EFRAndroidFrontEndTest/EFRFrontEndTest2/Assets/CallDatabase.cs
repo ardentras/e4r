@@ -73,9 +73,9 @@ namespace EFRFrontEndTest2.Assets
         }
 
 
-        public async Task<Responce> APICall(string method, string Uri, byte [] bytestream, bool need_UO = false)
+        public async Task<Responce> APICall(string method, string uri, byte [] bytestream, bool need_UO = false)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + Uri));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + uri));
             request.ContentType = "application/json";
             request.Method = method;
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length);
@@ -128,7 +128,7 @@ namespace EFRFrontEndTest2.Assets
             m_userObject.TotalQuestions = game["totalQuestions"];
 
             user = user["user_data"];
-            m_userObject.CharityName = user["charity_name"];
+            //m_userObject.CharityName = user["charity_name"];
             m_userObject.Email = user["email"];
             m_userObject.FirstName = user["first_name"];
             m_userObject.LastName = user["last_name"];
