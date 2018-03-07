@@ -51,22 +51,36 @@
         android:gravity="center"
         android:textColor="#f000"
         android:textSize="32sp" />
-    <LinearLayout
-        android:orientation="horizontal"
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minWidth="25px"
-        android:minHeight="25px"
+        android:id="@+id/gridLayout1"
+        android:columnCount="2"
+        android:rowCount="1"
         android:background="@drawable/backgroundgradient">
         <ImageButton
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_column="0"
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_rowSpan="1"
+            android:layout_rowWeight="1"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
             android:id="@+id/BackArrow"
+            android:scaleType="fitXY"
             android:background="@drawable/silverarrow" />
         <ImageButton
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_rowSpan="1"
+            android:layout_rowWeight="1"
+            android:scaleType="fitXY"
             android:id="@+id/Continue"
             android:background="@drawable/silverarrowright" />
-    </LinearLayout>
+    </GridLayout>
 </LinearLayout>
