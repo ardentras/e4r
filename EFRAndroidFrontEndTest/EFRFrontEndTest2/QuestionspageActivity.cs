@@ -93,7 +93,7 @@ namespace EFRFrontEndTest2
             Answer1.Click += (sender, f) =>
             {
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
 
                 if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
                 {
@@ -110,7 +110,7 @@ namespace EFRFrontEndTest2
             Answer2.Click += (sender, a) =>
             {
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
                 if (m_currentquestion["Question2"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer2.Text = "correct";
@@ -131,7 +131,7 @@ namespace EFRFrontEndTest2
             Answer3.Click += (sender, b) =>
             {
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
                 if (m_currentquestion["Question3"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer3.Text = "correct";
@@ -148,7 +148,7 @@ namespace EFRFrontEndTest2
             {
 
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
                 if (m_currentquestion["Question4"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer4.Text = "correct";

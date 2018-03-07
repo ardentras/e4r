@@ -109,11 +109,21 @@
         android:text="Reset All Records" />
     <Button
         android:layout_column="0"
-        android:layout_columnSpan="2"
+        android:layout_columnSpan="1"
         android:layout_columnWeight="1"
         android:layout_row="4"
         android:layout_rowSpan="1"
         android:layout_rowWeight="1"
         android:id="@+id/AchievementsButton"
         android:text="View Achievements" />
+      <Button
+        android:layout_column="1"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:layout_row="4"
+        android:layout_rowSpan="1"
+        android:layout_rowWeight="1"
+        android:id="@+id/BackgroundButton"
+        android:text="Set Background" />
+
 </GridLayout>

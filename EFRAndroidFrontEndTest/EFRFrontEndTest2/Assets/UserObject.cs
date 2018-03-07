@@ -80,7 +80,7 @@ namespace EFRFrontEndTest2.Assets
             data += "},";
             data += "\"game_data\": {";
             data += "\"subject_name\": \""+ m_SubjectName +"\",";
-            data += "\"subject_id\": \""+ Convert.ToString(m_SubjectID) +"\",";
+            data += "\"subject_id\": "+ Convert.ToString(m_SubjectID) +",";
             data += "\"difficulty\": "+ Convert.ToString(m_Difficulty) +",";
             data += "\"totalQuestions\": "+ Convert.ToString(m_TotalQuestions) + ",";
             data += "\"totalDonated\": " + Convert.ToString(m_TotalDonated) +",";

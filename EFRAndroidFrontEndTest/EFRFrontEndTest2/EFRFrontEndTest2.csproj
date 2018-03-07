@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AchievementsPageActivity.cs" />
+    <Compile Include="Assets\AppBackground.cs" />
     <Compile Include="Assets\CallDatabase.cs" />
     <Compile Include="Assets\Charities_Selection_Layout\CharityButton.cs" />
     <Compile Include="Assets\Charities_Selection_Layout\CharityCheckBox.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\UserObject.cs" />
     <Compile Include="BubbleLiveFeedActivity.cs" />
     <Compile Include="CharitySelectionScreenActivity.cs" />
+    <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="UserDashboardActivity.cs" />
     <Compile Include="LevelupActivity.cs" />
@@ -197,6 +199,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CharityFilterPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ColorPicker.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
