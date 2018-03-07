@@ -308,11 +308,11 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f020022
 			public const int notification_icon_background = 2130837538;
 			
-			// aapt resource value: 0x7f020030
-			public const int notification_template_icon_bg = 2130837552;
-			
 			// aapt resource value: 0x7f020031
-			public const int notification_template_icon_low_bg = 2130837553;
+			public const int notification_template_icon_bg = 2130837553;
+			
+			// aapt resource value: 0x7f020032
+			public const int notification_template_icon_low_bg = 2130837554;
 			
 			// aapt resource value: 0x7f020023
 			public const int notification_tile_bg = 2130837539;
@@ -345,13 +345,16 @@ namespace EFRFrontEndTest2
 			public const int silverarrow = 2130837548;
 			
 			// aapt resource value: 0x7f02002d
-			public const int starIcon = 2130837549;
+			public const int silverarrowright = 2130837549;
 			
 			// aapt resource value: 0x7f02002e
-			public const int trophyIcon = 2130837550;
+			public const int starIcon = 2130837550;
 			
 			// aapt resource value: 0x7f02002f
-			public const int unfavorited = 2130837551;
+			public const int trophyIcon = 2130837551;
+			
+			// aapt resource value: 0x7f020030
+			public const int unfavorited = 2130837552;
 			
 			static Drawable()
 			{

@@ -54,21 +54,21 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:minWidth="25px"
         android:minHeight="25px"
         android:background="@drawable/backgroundgradient">
         <ImageButton
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/BackArrow"
             android:background="@drawable/silverarrow"
-            android:gravity="center" />
+            android:layout_gravity="left" />
         <ImageButton
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/Continue"
             android:background="@drawable/silverarrowright"
-            android:gravity="center" />
+            android:layout_gravity="right" />
     </LinearLayout>
 </LinearLayout>
