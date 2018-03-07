@@ -18,3 +18,17 @@ RESEND EMAIL BUTTON
 PASSWORD RECOVERY API CALL
 UPDATE UO TO INCLUDE FAVORITE CHARITIES
 CHECK WHETHER THE CHARITY ID AND NAME WILL ALWAYS BE LINKED OR CHANGE DYNAMICALLY
+
+
+
+Jacob TODO:
+Change icons to correct icon
+Update the guest UO to the newest UO
+Update parsing of UO
+Add optional names settings page
+Implement external storage
+Fix Session ID to load at bootup
+
+Jimmy TODO:
+Implement question block call and parse
+Implement dynamic background

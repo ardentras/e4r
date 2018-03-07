@@ -318,7 +318,7 @@
     <AndroidResource Include="Resources\drawable\LoginBackground.jpeg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Needed API Calls.txt" />
+    <AndroidAsset Include="Assets\Jacob Notes.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />

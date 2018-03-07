@@ -20,7 +20,7 @@ namespace EFRFrontEndTest2.Assets
         public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
         public int BlocksRemaining { get { return m_BlocksRemaining; } set { m_BlocksRemaining = value; } }
         public int[] CompletedBlocks { get { return m_CompletedBlocks; } set { m_CompletedBlocks = value; } }
-        public string Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
+        public int Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
         public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
         public string SubjectName { get { return m_SubjectName; } set { m_SubjectName = value; } }
         public double TotalDonated { get { return m_TotalDonated; } set { m_TotalDonated = value; } }
@@ -35,7 +35,7 @@ namespace EFRFrontEndTest2.Assets
         private string m_Timestamp       = "default";
         private int    m_BlocksRemaining = 0;
         private int[]  m_CompletedBlocks = new int[1];
-        private string m_Difficulty      = "easy";
+        private int    m_Difficulty      = 0;
         private int    m_SubjectID       = 0;
         private string m_SubjectName     = "Math";
         private double m_TotalDonated    = 0.0;
@@ -81,7 +81,7 @@ namespace EFRFrontEndTest2.Assets
             data += "\"game_data\": {";
             data += "\"subject_name\": \""+ m_SubjectName +"\",";
             data += "\"subject_id\": \""+ Convert.ToString(m_SubjectID) +"\",";
-            data += "\"difficulty\": \""+ m_Difficulty +"\",";
+            data += "\"difficulty\": \""+ Convert.ToString(m_Difficulty) +"\",";
             data += "\"totalQuestions\": "+ Convert.ToString(m_TotalQuestions) + ",";
             data += "\"totalDonated\": " + Convert.ToString(m_TotalDonated) +",";
             data += "\"blocksRemaining\": "+ Convert.ToString(m_BlocksRemaining) +",";
@@ -118,7 +118,7 @@ namespace EFRFrontEndTest2.Assets
             m_Timestamp = data[1];
             m_BlocksRemaining = Convert.ToInt32(data[2]);
             //m_CompletedBlocks = data[3];
-            m_Difficulty = data[3];
+            m_Difficulty = Convert.ToInt32(data[3]);
             m_SubjectID = Convert.ToInt32(data[4]);
             m_SubjectName = data[5];
             m_TotalDonated = Convert.ToInt32(data[6]);
