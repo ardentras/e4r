@@ -38,27 +38,27 @@ namespace EFRFrontEndTest2
             EasyButton.Click += (sender, e) =>
             {
                 UserObject var = SingleUserObject.getObject();
-                var.Difficulty = "1";
+                var.Difficulty = 1;
 
             };
 
             NormalButton.Click += (sender, e) =>
             {
                 UserObject var = SingleUserObject.getObject();
-                var.Difficulty = "2";
+                var.Difficulty = 2;
 
             };
 
             HardButton.Click += (sender, e) =>
             {
                 UserObject var = SingleUserObject.getObject();
-                var.Difficulty = "3";
+                var.Difficulty = 3;
             };
 
             HardestButton.Click += (sender, e) =>
             {
                 UserObject var = SingleUserObject.getObject();
-                var.Difficulty = "4";
+                var.Difficulty = 4;
             };
             BackButton.Click += (sender, e) =>
             {
