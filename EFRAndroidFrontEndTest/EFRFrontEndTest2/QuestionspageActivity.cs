@@ -38,11 +38,12 @@ namespace EFRFrontEndTest2
             CallDatabase database = new CallDatabase(this);
             JsonValue block=null;
             JsonValue currentquestion = null;
-            string y = currentquestion["QuestionID"];
+            //string y = currentquestion["QuestionID"];
             async void setup()
             {
                 await database.RetreaveQuestionBlock();
                 block = database.responce.m_json;
+                var test = block["question_block"];
                 currentquestion = block["question_block"][0];
                 SetQuestions(currentquestion);
             }

@@ -25,13 +25,13 @@ namespace EFRFrontEndTest2.Assets
             }
 
         }
-        public static UserObject getObject()
+        public static ref UserObject getObject()
         {
             if(singleObj == null)
             {
                 singleObj = new UserObject();
             }
-            return singleObj;
+            return ref singleObj;
         }
         private static UserObject singleObj;
     }
