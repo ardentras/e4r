@@ -9,6 +9,7 @@ using System.Json;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
@@ -20,13 +21,15 @@ namespace EFRFrontEndTest2
         private TextView feed_btn = null;
         private TextView setting_btn = null;
         private ImageButton logout_btn = null;
+        private UserObject uo = SingleUserObject.getObject();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Dashboard);
             getButtons();
-            initializeClickHandlers();
+            InitializeUserBasicInformation();
+            InitializeClickHandlers();
         }
         private void getButtons()
         {
@@ -36,26 +39,35 @@ namespace EFRFrontEndTest2
             setting_btn = FindViewById<TextView>(Resource.Id.setting_btn);
             logout_btn = FindViewById<ImageButton>(Resource.Id.logout_btn);
         }
-        private void initializeClickHandlers()
+        private void InitializeUserBasicInformation() {
+            TextView user_fname = FindViewById<TextView>(Resource.Id.user_fname);
+            TextView user_initials = FindViewById<TextView>(Resource.Id.user_initials);
+            TextView user_donated = FindViewById<TextView>(Resource.Id.total_donated);
+            TextView user_solved = FindViewById<TextView>(Resource.Id.total_solved);
+            TextView user_level = FindViewById<TextView>(Resource.Id.user_level);
+
+            user_fname.Text = uo.FirstName;
+            user_initials.Text = new StringBuilder().Append(uo.FirstName[0]).Append(".").Append(uo.LastName[0]).ToString();
+            user_donated.Text = new StringBuilder().Append("$").Append(" ").Append(uo.TotalDonated).ToString();
+            user_solved.Text = uo.TotalQuestions.ToString();
+            user_level.Text = uo.Difficulty.ToString();
+        }
+        private void InitializeClickHandlers()
         {
             play_btn.Click += delegate
             {
-                //Intent intent = new Intent(this, typeof(SelectSubjectScreenActivity));
                 StartActivity(typeof(SelectSubjectScreenActivity));
             };
             charity_btn.Click += delegate
             {
-                //Intent intent = new Intent(this, typeof(CharitySelectionScreenActivity));
                 StartActivity(typeof(CharitySelectionScreenActivity));
             };
             feed_btn.Click += delegate
             {
-                //Intent intent = new Intent(this, typeof(BubbleLiveFeedActivity));
                 StartActivity(typeof(BubbleLiveFeedActivity));
             };
             setting_btn.Click += delegate
             {
-                //Intent intent = new Intent(this, typeof(settingsPageActivity));
                 StartActivity(typeof(settingsPageActivity));
             };
             logout_btn.Click += delegate
