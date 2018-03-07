@@ -108,7 +108,7 @@ namespace EFRFrontEndTest2
                  }
                 else
                 {
-                        Answer1.Text = "correct";
+                        Answer1.Text = "incorrect";
                 }
             };
 
