@@ -29,7 +29,7 @@
             android:layout_height="46.0dp"
             android:layout_width="398.0dp"
             android:layout_marginTop="30dp"
-            android:text="all your data will be deleted permanently!"
+            android:text="all your records will be deleted permanently!"
             android:textColor="@android:color/white"
             android:textSize="16dp"
             android:paddingLeft="5dp"

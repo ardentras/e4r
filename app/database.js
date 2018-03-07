@@ -5,7 +5,7 @@ const uuidv4 = require('uuid/v4');
 const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
-const SERVER_HOSTNAME = "http://35.163.221.182:3002"
+const SERVER_HOSTNAME = "http://34.216.143.255:3002"
 
 class TDatabase {
 	// Creates the connection to the database given the passed parameters.
