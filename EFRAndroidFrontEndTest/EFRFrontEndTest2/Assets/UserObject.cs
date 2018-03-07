@@ -67,6 +67,36 @@ namespace EFRFrontEndTest2.Assets
 
             return data;
         }
+        public string UserObjectForm()
+        {
+            string data = "";
+            data += "\"userobject\": {";
+            data += "\"user_data\": {";
+            data += "\"username\": \"" + m_Username + "\",";
+            data += "\"email\": \"" + m_Email + "\",";
+            data += "\"first_name\": \""+ m_FirstName +"\",";
+            data += "\"last_name\": \""+ m_LastName +"\",";
+            data += "\"charity_names\": [\""+ m_CharityName +"\"]";
+            data += "},";
+            data += "\"game_data\": {";
+            data += "\"subject_name\": \""+ m_SubjectName +"\",";
+            data += "\"subject_id\": \""+ Convert.ToString(m_SubjectID) +"\",";
+            data += "\"difficulty\": \""+ m_Difficulty +"\",";
+            data += "\"totalQuestions\": "+ Convert.ToString(m_TotalQuestions) + ",";
+            data += "\"totalDonated\": " + Convert.ToString(m_TotalDonated) +",";
+            data += "\"blocksRemaining\": "+ Convert.ToString(m_BlocksRemaining) +",";
+            data += "\"completed_blocks\": [ ";
+            for(int x =0;x < m_CompletedBlocks.Length;x++)
+            {
+                data += Convert.ToString(m_CompletedBlocks[x]);
+                if (x != m_CompletedBlocks.Length - 1)
+                    data += ", ";
+            }
+            data += "] }, ";
+            data += "\"timestamp\":\""+ m_Timestamp +"\"";
+            data += "}";
+            return data;
+        }
 
         //Requires an activity to pass to LocalArchive as UserObject is an asset and not an activity
         // so LocalArchive would be unable to link the protected file to the app.
