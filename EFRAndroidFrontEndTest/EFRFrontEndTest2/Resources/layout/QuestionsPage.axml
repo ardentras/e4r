@@ -59,16 +59,14 @@
         android:minHeight="25px"
         android:background="@drawable/backgroundgradient">
         <ImageButton
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/BackArrow"
-            android:background="@drawable/silverarrow"
-            android:layout_gravity="left" />
+            android:background="@drawable/silverarrow" />
         <ImageButton
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/Continue"
-            android:background="@drawable/silverarrowright"
-            android:layout_gravity="right" />
+            android:background="@drawable/silverarrowright" />
     </LinearLayout>
 </LinearLayout>
