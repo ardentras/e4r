@@ -28,7 +28,7 @@ Update parsing of UO
 Add optional names settings page
 Implement external storage
 Fix Session ID to load at bootup
-STRETCH GOAL: Implement achievements page to accept 
+STRETCH GOAL: Implement achievements page to hold more achievements
 
 Jimmy TODO:
 Implement question block call and parse
