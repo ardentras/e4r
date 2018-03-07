@@ -35,7 +35,7 @@ namespace EFRFrontEndTest2.Assets
         private string m_Timestamp       = "default";
         private int    m_BlocksRemaining = 0;
         private int[]  m_CompletedBlocks = new int[1];
-        private int    m_Difficulty      = 0;
+        private int m_Difficulty         = 0;
         private int    m_SubjectID       = 0;
         private string m_SubjectName     = "Math";
         private double m_TotalDonated    = 0.0;
@@ -81,7 +81,7 @@ namespace EFRFrontEndTest2.Assets
             data += "\"game_data\": {";
             data += "\"subject_name\": \""+ m_SubjectName +"\",";
             data += "\"subject_id\": \""+ Convert.ToString(m_SubjectID) +"\",";
-            data += "\"difficulty\": \""+ Convert.ToString(m_Difficulty) +"\",";
+            data += "\"difficulty\": "+ Convert.ToString(m_Difficulty) +",";
             data += "\"totalQuestions\": "+ Convert.ToString(m_TotalQuestions) + ",";
             data += "\"totalDonated\": " + Convert.ToString(m_TotalDonated) +",";
             data += "\"blocksRemaining\": "+ Convert.ToString(m_BlocksRemaining) +",";
