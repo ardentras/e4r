@@ -40,23 +40,23 @@ namespace EFRFrontEndTest2
         {
             play_btn.Click += delegate
             {
-                Intent intent = new Intent(this, typeof(SelectSubjectScreenActivity));
-                StartActivity(intent);
+                //Intent intent = new Intent(this, typeof(SelectSubjectScreenActivity));
+                StartActivity(typeof(SelectSubjectScreenActivity));
             };
             charity_btn.Click += delegate
             {
-                Intent intent = new Intent(this, typeof(CharitySelectionScreenActivity));
-                StartActivity(intent);
+                //Intent intent = new Intent(this, typeof(CharitySelectionScreenActivity));
+                StartActivity(typeof(CharitySelectionScreenActivity));
             };
             feed_btn.Click += delegate
             {
-                Intent intent = new Intent(this, typeof(BubbleLiveFeedActivity));
-                StartActivity(intent);
+                //Intent intent = new Intent(this, typeof(BubbleLiveFeedActivity));
+                StartActivity(typeof(BubbleLiveFeedActivity));
             };
             setting_btn.Click += delegate
             {
-                Intent intent = new Intent(this, typeof(settingsPageActivity));
-                StartActivity(intent);
+                //Intent intent = new Intent(this, typeof(settingsPageActivity));
+                StartActivity(typeof(settingsPageActivity));
             };
             logout_btn.Click += delegate
             {
