@@ -18,6 +18,9 @@ namespace EFRFrontEndTest2
     [Activity(Label = "QuestionspageActivity")]
     public class QuestionspageActivity : Activity
     {
+        CallDatabase m_database;
+        JsonValue m_currentquestion;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -35,18 +38,9 @@ namespace EFRFrontEndTest2
             //add 1 to the correct answer tally
             //boolean the question is answered 
             //calls the block of questions
-            CallDatabase database = new CallDatabase(this);
-            JsonValue block = null;
-            JsonValue currentquestion = null;
-            // string y = currentquestion["QuestionID"];
-            async void setup()
-            {
-                await database.RetreaveQuestionBlock();
-                block = database.responce.m_json;
-                currentquestion = block["question_block"][0];
-                SetQuestions(currentquestion);
-            }
-            setup();
+            // string y = m_currentquestion["QuestionID"];
+            m_database = new CallDatabase(this);
+            Task.Run(async () => { await setup(); });
 
             int QuestionNum = 0;
 
@@ -54,9 +48,9 @@ namespace EFRFrontEndTest2
 
             bool QuestionAnswered = false;
 
-            if (database.responce.m_responce == "success")
+            if (m_database.responce.m_responce == "success")
             {
-                SuccessFunct(database);
+                SuccessFunct(m_database);
             }
 
 
@@ -73,8 +67,8 @@ namespace EFRFrontEndTest2
                 if (QuestionAnswered)
                 {
 
-                    JsonValue k = block["question_block"][QuestionBlockNum++];
-                    SetQuestions(k);
+                    //JsonValue k = block["question_block"][QuestionBlockNum++];
+                    //SetQuestions(k);
                     QuestionAnswered = false;
                     if (QuestionBlockNum >= 10)
                     {
@@ -85,8 +79,8 @@ namespace EFRFrontEndTest2
             };
             async void NextBlock()
             {
-                await database.RetreaveQuestionBlock();
-                block = database.responce.m_json;
+                await m_database.RetreaveQuestionBlock();
+                //block = m_database.responce.m_json;
 
             }
 
@@ -101,7 +95,7 @@ namespace EFRFrontEndTest2
                 QuestionAnswered = true;
                 var intent = new Intent(this, typeof(QuestionspageActivity));
 
-                if (currentquestion["Question1"] == currentquestion["CorrectAnswer"])
+                if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer1.Text = "correct";
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
@@ -117,7 +111,7 @@ namespace EFRFrontEndTest2
             {
                 QuestionAnswered = true;
                 var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (currentquestion["Question2"] == currentquestion["CorrectAnswer"])
+                if (m_currentquestion["Question2"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer2.Text = "correct";
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
@@ -138,7 +132,7 @@ namespace EFRFrontEndTest2
             {
                 QuestionAnswered = true;
                 var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (currentquestion["Question3"] == currentquestion["CorrectAnswer"])
+                if (m_currentquestion["Question3"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer3.Text = "correct";
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
@@ -155,7 +149,7 @@ namespace EFRFrontEndTest2
 
                 QuestionAnswered = true;
                 var intent = new Intent(this, typeof(QuestionspageActivity));
-                if (currentquestion["Question4"] == currentquestion["CorrectAnswer"])
+                if (m_currentquestion["Question4"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer4.Text = "correct";
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
@@ -169,36 +163,48 @@ namespace EFRFrontEndTest2
             };
 
         }
-            private void LoaderQuestionBlock()
-            {
-                String[] Qblock = { "\0" };
-                //  array of strings to store the answer
-                //  pull till empty 
-                //reload questions block
-            }
-            private void SuccessFunct(CallDatabase database)
-            {
-                var Qblock = database.responce.m_json;
-            }
-            private void SetQuestions(JsonValue block)
-            {
-                TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
-                TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
-                TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
-                TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
-                TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
 
-                BigGrayButton.Text = block["QuestionText"];
-                Answer1.Text = block["QuestionOne"];
-                Answer2.Text = block["QuestionTwo"];
-                Answer3.Text = block["QuestionThree"];
-                Answer4.Text = block["QuestionFour"];
+        private async Task<bool> setup()
+        {
+            JsonValue block;
+            await m_database.RetreaveQuestionBlock();
+            block = m_database.responce.m_json;
+            var QuestionBlock = block["question_block"];
+            JsonValue Question = QuestionBlock[0];
+            SetQuestions(m_currentquestion);
+            return true;
+        }
 
-            }
+        private void LoaderQuestionBlock()
+        {
+            String[] Qblock = { "\0" };
+            //  array of strings to store the answer
+            //  pull till empty 
+            //reload questions block
+        }
+        private void SuccessFunct(CallDatabase database)
+        {
+            var Qblock = database.responce.m_json;
+        }
+        private void SetQuestions(JsonValue block)
+        {
+            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+
+            BigGrayButton.Text = block["QuestionText"];
+            Answer1.Text = block["QuestionOne"];
+            Answer2.Text = block["QuestionTwo"];
+            Answer3.Text = block["QuestionThree"];
+            Answer4.Text = block["QuestionFour"];
+
         }
     }
+}
 
 
 
 
-    // int id = block[0]["questionID"];
+// int id = block[0]["questionID"];
