@@ -18,6 +18,9 @@ namespace EFRFrontEndTest2
     [Activity(Label = "QuestionspageActivity")]
     public class QuestionspageActivity : Activity
     {
+        CallDatabase m_database;
+        JsonValue m_currentquestion;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -35,23 +38,19 @@ namespace EFRFrontEndTest2
             //add 1 to the correct answer tally
             //boolean the question is answered 
             //calls the block of questions
-            CallDatabase database = new CallDatabase(this);
-            database.RetreaveQuestionBlock();
+            // string y = m_currentquestion["QuestionID"];
+            m_database = new CallDatabase(this);
+            Task.Run(async () => { await setup(); });
 
             int QuestionNum = 0;
 
-            JsonValue block = database.responce.m_json;
-            JsonValue currentquestion= block["question_block"][0];
-            string y = currentquestion["QuestionID"];
-
-            SetQuestions(currentquestion);
             int QuestionBlockNum = 1;
 
             bool QuestionAnswered = false;
 
-            if (database.responce.m_responce == "success")
+            if (m_database.responce.m_responce == "success")
             {
-                SuccessFunct(database);
+                SuccessFunct(m_database);
             }
 
 
@@ -67,16 +66,23 @@ namespace EFRFrontEndTest2
 
                 if (QuestionAnswered)
                 {
-                    //empty condition, commented out
-                  //  if ()
-                  //  {
-                       JsonValue k = block["question_block"][QuestionBlockNum++];
-                        SetQuestions(k);
-                        QuestionAnswered = false;
-                   // }
+
+                    //JsonValue k = block["question_block"][QuestionBlockNum++];
+                    //SetQuestions(k);
+                    QuestionAnswered = false;
+                    if (QuestionBlockNum >= 10)
+                    {
+                        NextBlock();
+                        QuestionBlockNum = 0;
+                    }
                 }
             };
-          
+            async void NextBlock()
+            {
+                await m_database.RetreaveQuestionBlock();
+                //block = m_database.responce.m_json;
+
+            }
 
             BigGrayButton.Click += (sender, d) =>
             {
@@ -85,86 +91,98 @@ namespace EFRFrontEndTest2
             };
 
             Answer1.Click += (sender, f) =>
-            { QuestionAnswered = true; 
+            {
+                QuestionAnswered = true;
                 var intent = new Intent(this, typeof(QuestionspageActivity));
 
-                if (currentquestion["Question1"] == currentquestion["CorrectAnswer"])
-                 {
-                Answer1.Text = "correct";
-             //   var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
+                {
+                    Answer1.Text = "correct";
+                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
 
-                 }
+                }
                 else
                 {
-                        Answer1.Text = "correct";
+                    Answer1.Text = "incorrect";
                 }
             };
 
             Answer2.Click += (sender, a) =>
-            { QuestionAnswered = true; 
-                  var intent = new Intent(this, typeof(QuestionspageActivity));
-              //  if (block["Answer1"] == block.CorrectAnswer[])
-                //{
-               //     block.Answer2[].UpdateText = { "Correct!"};
-                    //        var intent = new Intent(this, typeof(QuestionspageActivity));
-                    //        StartActivity(intent);
-                    //    }
-                    //    else
-                    //    {
-                    //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-                    //        StartActivity(intent);
-                    //    }
-                };
-                // block of ten questions
-                // load page puts it in layout
-                // code all four buttons so when pressed 
-                // match queston to answer in text button
-                //set boolean to check if answer was selected
-                //
-                Answer3.Click += (sender, b) =>
-                { QuestionAnswered = true; };
+            {
+                QuestionAnswered = true;
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (m_currentquestion["Question2"] == m_currentquestion["CorrectAnswer"])
+                {
+                    Answer2.Text = "correct";
+                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
 
-            //    var intent = new Intent(this, typeof(QuestionspageActivity));
-            //    if (Qblock.Answer3[] == Qblock.CorrectAnswer[])
-            //    {
-            //        Qblock.Answer2[].UpdateText = { "Correct!"};
-            //        var intent = new Intent(this, typeof(QuestionspageActivity));
-            //        StartActivity(intent);
-            //    }
-            //    else
-            //    {
-            //        Qblock.Answer3[].Updatetext = { "Wrong Answer continue"};
-            //         StartActivity(intent);
-            //    }
+                }
+                else
+                {
+                    Answer2.Text = "correct";
+                }
+            };
+            // block of ten questions
+            // load page puts it in layout
+            // code all four buttons so when pressed 
+            // match queston to answer in text button
+            //set boolean to check if answer was selected
 
-            //};
+            Answer3.Click += (sender, b) =>
+            {
+                QuestionAnswered = true;
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (m_currentquestion["Question3"] == m_currentquestion["CorrectAnswer"])
+                {
+                    Answer3.Text = "correct";
+                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
+
+                }
+                else
+                {
+                    Answer3.Text = "correct";
+                }
+            };
 
             Answer4.Click += (sender, c) =>
-                { QuestionAnswered = true; };
+            {
 
-                //    var intent = new Intent(this, typeof(QuestionspageActivity));
-                //    if (Qblock.Answer4[] == block.CorrectAnswer[])
-                //    {
-                //        Qblock.Answer4[].UpdateText = { "Correct!"};
-                //        var intent = new Intent(this, typeof(QuestionspageActivity));
-                //        StartActivity(intent);
-                //    }
-                //    else
-                //    {
-                //        Qblock.Answer2[].Updatetext = { "Wrong Answer continue"};
-                //        StartActivity(intent);
-                //    }
-                //};
-            }
+                QuestionAnswered = true;
+                var intent = new Intent(this, typeof(QuestionspageActivity));
+                if (m_currentquestion["Question4"] == m_currentquestion["CorrectAnswer"])
+                {
+                    Answer4.Text = "correct";
+                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
 
-        private void LoaderQuestionBlock ()
-         {
-            String[] Qblock= { "\0" };  
-           //  array of strings to store the answer
-       //  pull till empty 
-         //reload questions block
-         }
-       private void SuccessFunct( CallDatabase database)
+                }
+                else
+                {
+                    Answer4.Text = "correct";
+                }
+
+            };
+
+        }
+
+        private async Task<bool> setup()
+        {
+            JsonValue block;
+            await m_database.RetreaveQuestionBlock();
+            block = m_database.responce.m_json;
+            var QuestionBlock = block["question_block"];
+            JsonValue Question = QuestionBlock[0];
+            SetQuestions(m_currentquestion);
+            return true;
+        }
+
+        private void LoaderQuestionBlock()
+        {
+            String[] Qblock = { "\0" };
+            //  array of strings to store the answer
+            //  pull till empty 
+            //reload questions block
+        }
+        private void SuccessFunct(CallDatabase database)
         {
             var Qblock = database.responce.m_json;
         }
@@ -187,4 +205,6 @@ namespace EFRFrontEndTest2
 }
 
 
-    // int id = block[0]["questionID"];
+
+
+// int id = block[0]["questionID"];
