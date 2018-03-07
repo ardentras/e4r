@@ -72,15 +72,8 @@ namespace EFRFrontEndTest2
             };
             logout_btn.Click += delegate
             {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                AlertDialog alert = dialog.Create();
-                alert.SetTitle("Logout");
-                alert.SetMessage("Coming soon...");
-                alert.SetButton("OK", (c, ev) =>
-                {
-                    alert.Dismiss();
-                });
-                alert.Show();
+                //please add api call to logout and check if success
+                StartActivity(typeof(LoginScreenActivity));
             };
         }
 
