@@ -139,6 +139,7 @@
     <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
+    <Compile Include="DashboardActivity.cs" />
     <Compile Include="UserDashboardActivity.cs" />
     <Compile Include="LevelupActivity.cs" />
     <Compile Include="LoginScreenActivity.cs" />
@@ -204,6 +205,7 @@
     <AndroidResource Include="Resources\layout\ColorPicker.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Dashboard.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\LoginPageScreen.axml">
@@ -351,6 +353,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\E4R app icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Charity_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Feed_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Play_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Settings_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\rounded_Rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logout_img.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />
