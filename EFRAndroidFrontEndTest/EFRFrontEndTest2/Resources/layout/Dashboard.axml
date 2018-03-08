@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/linearLayout1"
+        android:id="@+id/user_info_container"
         android:background="#24104E">
         <LinearLayout
             android:orientation="horizontal"
@@ -63,9 +63,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView1"
                     android:textSize="10dp"
-                    android:textColor="#000000"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp" />
+                    android:textColor="#000000" />
                 <TextView
                     android:text="Kevin"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -112,7 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
-                            android:id="@+id/textView5" />
+                            android:id="@+id/donated_text" />
                         <TextView
                             android:text="$ 1.50"
                             android:textSize="15dp"
@@ -149,7 +147,7 @@
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView7" />
+                            android:id="@+id/solved_text" />
                         <TextView
                             android:text="16"
                             android:textColor="#000000"
@@ -181,7 +179,7 @@
                         android:layout_width="match_parent"
                         android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView3"
+                        android:id="@+id/level_text"
                         android:textSize="10dp"
                         android:textColor="#123456"
                         android:paddingTop="3dp" />
@@ -204,7 +202,7 @@
                 android:layout_marginTop="30px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout12">
+                android:id="@+id/control_btns">
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

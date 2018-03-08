@@ -167,6 +167,7 @@
     <Compile Include="SelectSubjectScreenActivity.cs" />
     <Compile Include="settingsPageActivity.cs" />
     <Compile Include="WinPageActivity.cs" />
+    <Compile Include="Assets\DynamicSize\DynamicSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -388,6 +389,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\logout_img.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\DynamicSize\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />
