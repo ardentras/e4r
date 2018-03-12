@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:background="@android:color/background_dark"
+    p1:id="@+id/gridLayout1">
+    <TextView
+        p1:text="backgrounds"
+        p1:textAppearance="?android:attr/textAppearanceLarge"
+        p1:layout_column="0"
+        p1:layout_columnSpan="2"
+        p1:layout_row="0"
+        p1:id="@+id/textView1" />
+    <Button
+        p1:layout_column="0"
+        p1:layout_row="1"
+        p1:id="@+id/setred"
+        p1:background="@android:color/holo_red_light" />
+    <Button
+        p1:layout_column="1"
+        p1:layout_row="1"
+        p1:id="@+id/setgreen"
+        p1:background="@drawable/greenbackgroundgradient" />
+    <Button
+        p1:layout_column="0"
+        p1:layout_row="2"
+        p1:id="@+id/setblue"
+        p1:background="@drawable/backgroundgradient" />
+    <Button
+        p1:layout_column="1"
+        p1:layout_row="2"
+        p1:id="@+id/setgray"
+        p1:background="@color/notification_material_background_media_default_color" />
+    <Button
+        p1:layout_column="0"
+        p1:layout_row="3"
+        p1:id="@+id/setpurple"
+        p1:background="@android:color/holo_purple" />
+    <Button
+        p1:layout_column="1"
+        p1:layout_row="3"
+        p1:id="@+id/setdarkblue"
+        p1:background="@android:color/holo_blue_dark" />
+    <Button
+        p1:layout_column="0"
+        p1:layout_row="4"
+        p1:id="@+id/setdarkred"
+        p1:background="@android:color/holo_red_dark" />
+    <Button
+        p1:layout_column="1"
+        p1:layout_row="4"
+        p1:id="@+id/setdarkgreen"
+        p1:background="@android:color/holo_green_dark" />
+</GridLayout>
