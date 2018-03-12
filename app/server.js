@@ -81,6 +81,9 @@ Router.put('/update_uo', (req, res) => {
 Router.get('/verify_email/:VerifyID', (req, res) => {
 	db.verifyEmail(res, req.params);
 });
+Router.get('/bubble_feed', (req, res) => {
+	db.bubbleFeed(res);
+});
 Router.put('/q/request_block', (req, res) => {
 	db.requestQuestionBlock(res, req.body.user, req.body.game);
 });
