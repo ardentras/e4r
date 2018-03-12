@@ -19,7 +19,7 @@ API Calls:
           Sign Up               -> hostname:port/api/signup         -> POST
           Check Username        -> hostname:port/api/check_username -> POST
           Resend Verify         -> hostname:port/api/resend_verify  -> PUT
-          Password Reset        -> hostname:port/api/password_reset -> POST
+          Password Reset        -> hostname:port/api/reset_password -> POST
           Password Reset Verify -> hostname:port/api/verify_password_reset -> PUT
           Log In                -> hostname:port/api/login          -> POST
           Verify Email          -> hostname:port/api/verify_email/${VerifyID} -> GET
