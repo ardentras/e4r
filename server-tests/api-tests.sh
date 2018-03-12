@@ -140,8 +140,10 @@ fi
 curl -XPOST localhost:3002/api/login -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345@gmail.com","password":"defaultpass"}}' > response.json
 code=$(cat response.json | jq '.code')
 session_token=$(cat response.json | jq '.session_id')
-user_object=($(cat response.json | jq '.userobject'))
-if [[ -z $session_token ]]; then
+user_object=$(cat response.json | jq '.user_object')
+if [[ -z $user_object ]]; then
+    echo "- Test log in request with valid account failed. Response did not contain user object"
+elif [[ -z $session_token ]]; then
     echo "- Test log in request with valid account failed. Response did not contain session token"
 elif [[ ! $code -eq 200 ]]; then
     echo "- Test log in request with valid account failed. Expected server code 200, got ${code}"
@@ -191,26 +193,10 @@ fi
 
 ############################################
 # Endpoint: update_uo
-# Action: Send user object with valid token and invalid user object
-# Expected Response: 200, user object
-############################################
-curl -XPUT localhost:3002/api/update_uo -sH 'Content-Type: application/json' -d '{"user":{"session":'$session_token', "userobject":{ "user_data": { "username": "abcde12345", "email": "abcde12345@gmail.com", "first_name": "", "last_name": "", "charity_name": "" }, "game_data": { "subject_name": "", "subject_id": "1", "difficulty": "0", "totalQuestions": 0, "totalDonated": 0, "blocksRemaining": 0, "completed_blocks": [] }, "timestamp": "1970-02-16T06:39:30.150Z" }}}' > response.json
-code=$(cat response.json | jq '.code')
-user_object=$(cat response.json | jq '.userobject')
-if [[ -z $user_object ]]; then
-    echo "- Test update user object with valid token and invalid user object failed. Response did not contain user object"
-elif [[ ! $code -eq 200 ]]; then
-    echo "- Test update user object with valid token and invalid user object failed. Expected server code 200, got ${code}"
-else
-    echo "+ Test update user object with valid token and invalid user object passed"
-fi
-
-############################################
-# Endpoint: update_uo
 # Action: Send user object with valid token and user object
 # Expected Response: 200, user object
 ############################################
-curl -XPUT localhost:3002/api/update_uo -sH 'Content-Type: application/json' -d '{"user":{"session":'$session_token', "userobject":'${user_object[0]}'}}' > response.json
+curl -XPUT localhost:3002/api/update_uo -sH 'Content-Type: application/json' -d '{"user":{"session":'$session_token', "userobject":{ "timestamp": "2018-03-07T05:56:15.033Z", "game_data": { "completed_blocks": [], "blocksRemaining": 0, "totalDonated": 0, "totalQuestions": 0, "difficulty": 0, "subject_id": 1, "subject_name": "" }, "user_data": { "favorite_charities": [ "" ], "selected_charity": "", "last_name": "", "first_name": "", "email": "abcde12345@gmail.com", "username": "abcde12345" } }}}' > response.json
 code=$(cat response.json | jq '.code')
 user_object=$(cat response.json | jq '.userobject')
 if [[ -z $user_object ]]; then
@@ -250,6 +236,16 @@ else
     fi
 fi
 
+############################################
+
+# curl -XPOST localhost:3002/api/signup -sH 'Content-Type: application/json' -d '{"user":{"username":"abcde12345","email":"abcde12345@gmail.com","password":"defaultpass"}}' > response.json
+# code=$(cat response.json | jq '.code')
+# verifyid=($(cat response.json | jq '.verifyID'))
+# if [[ ! $code -eq 201 ]]; then
+#     echo "- Test sign up request with non-existing user failed. Expected server code 201, got ${code}"
+# else
+#     echo "+ Test sign up request with non-existing user passed"
+# fi
 
 
 # Clean up mess

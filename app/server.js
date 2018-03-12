@@ -45,6 +45,9 @@ Router.all('/', (req, res)=>{
 Router.post('/signup', (req, res) => {
     db.createAccount(res, req.body.user);
 });
+Router.put('/resend_verify', (req, res) => {
+	db.resendVerify(res, req.body.user);
+});
 // Tested
 Router.post('/login', (req, res) => {
 	db.attemptLogin(res, req.body.user);
@@ -60,6 +63,12 @@ Router.put('/logout', (req, res) => {
 Router.post('/check_username', (req, res) => {
 	db.checkUsername(res, req.body.user);
 });
+Router.post('/reset_password', (req, res) => {
+	db.resetPassword(res, req.body.user);
+});
+Router.put('/verify_password_reset', (req, res) => {
+	db.verifyPasswordReset(res, req.body.user);
+});
 // Tested
 Router.delete('/delete_user', (req, res) => {
 	db.deleteUser(res, req.body.user);
@@ -68,6 +77,7 @@ Router.delete('/delete_user', (req, res) => {
 Router.put('/update_uo', (req, res) => {
 	db.update_uo(res, req.body.user);
 });
+// Tested
 Router.get('/verify_email/:VerifyID', (req, res) => {
 	db.verifyEmail(res, req.params);
 });
