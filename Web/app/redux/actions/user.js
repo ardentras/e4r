@@ -16,6 +16,30 @@ export function getQuestions(userObject) {
     };
 }
 
+export function resetPWRequest(user) {
+    return async (dispatch)=>{
+        try {
+            const result = await efrApi.resetPWRequest({username: user.username, email: user.email});
+            console.log("check", result.data);
+        }
+        catch(err) {
+            console.log("err",err);
+        }
+    }
+}
+
+export function resetPW(user) {
+    return async (dispatch)=>{
+        try {
+            const result = await efrApi.resetPW({verify_id: user.id, password: user.pw});
+            console.log("check", result.data);
+        }
+        catch(err) {
+            console.log("err",err);
+        }
+    }
+}
+
 export function setUserObject(object) {
     return {
         type: Types.SET_USER_OBJECT,

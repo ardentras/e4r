@@ -72,52 +72,20 @@
     }
 }
 @media (max-width: 740px) {
-    .settings {
-        display: flex;
-        flex-flow: column;
-        padding: 0 25px;
-        background: white;
-        width: 100%;
-    }
     .initials {
-        align-self: center;
+        font-size: 30px;
     }
     .fieldhead {
-        margin-bottom: 5px;
+        font-size: 15px;
     }
     .level {
-        align-self: center;
-        margin-bottom: 15px;
-    }
-    .fields {
-        display: flex;
-        flex-flow: column;
-        margin-bottom: 25px;
-    }
-    .fieldinput {
-        outline: none;
-        border: none;
-        border-bottom: 1px solid rgb(192, 192, 192);
-        padding: 5px 0;
-        font-size: 16px;
-    }
-    .pwfield, .gamefield, .infofield {
-        flex-flow: row nowrap;
-    }
-    .pwfield, .gamefield, .infofield {
-        justify-content: space-between;
+        font-size: 10px;
     }
     .pwreset, .restartbtn, .resetbtn {
         color: #1E90FF;
-    }
-    .pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn {
-        cursor: pointer;
+        font-size: 15px;
     }
     .savebtn {
-        background: #1E90FF;
-        color: white;
-        padding: 20px;
-        width: 100%;
-        text-align: center;
+        font-size: 15px;
     }
 }

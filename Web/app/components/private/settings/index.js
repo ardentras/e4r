@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleCompleteReset } from "../../../redux/actions/questions";
-import { handleNames } from "../../../redux/actions/user";
+import { handleNames, resetPWRequest } from "../../../redux/actions/user";
 
 class Settings extends React.Component {
     constructor(props) {
@@ -13,6 +13,7 @@ class Settings extends React.Component {
         this.restart = this.restart.bind(this);
         this.reset = this.reset.bind(this);
         this.save = this.save.bind(this);
+        this.resetPassword = this.resetPassword.bind(this);
     }
     restart() {
         if (confirm("Are you sure?")) {
@@ -27,6 +28,11 @@ class Settings extends React.Component {
             fname.value = this.props.user.user_data.first_name;
             lname.value = this.props.user.user_data.last_name;
             charity.innerHTML = this.props.user.user_data.charity_name ? this.props.user.user_data.charity_name : "None";
+        }
+    }
+    resetPassword() {
+        if (confirm("Are you sure?")) {
+            this.props.resetPWRequest({username: this.props.user.user_data.username, email: this.props.user.user_data.email});
         }
     }
     save() {
@@ -66,7 +72,7 @@ class Settings extends React.Component {
                 </div>
                 <div className={[Styles.pwfield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>PASSWORD</span>
-                    <Link to="/dashboard/password-reset" className={Styles.pwreset}>RESET</Link>
+                    <span onClick={this.resetPassword} className={Styles.pwreset}>RESET</span>
                 </div>
                 <div className={[Styles.infofield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>CHANGES</span>
@@ -84,5 +90,5 @@ class Settings extends React.Component {
 
 export default connect(
 	(state) => ({user: state.user, questions: state.questions.questions}),
-	(dispatch) => bindActionCreators({ handleCompleteReset, handleNames }, dispatch)
+	(dispatch) => bindActionCreators({ handleCompleteReset, handleNames, resetPWRequest }, dispatch)
 )(Settings);

@@ -72,7 +72,7 @@ class Question extends React.Component {
         if (this.props.questions === undefined) {
             return (
                 <div className={Styles.alldone}>
-                    <span>Having Problem Fetching Questions..Please try again</span>
+                    <span>Having Problem Fetching Questions, Please try again</span>
                     <button onClick={this.fetch} className={Styles.retrybtn}>Retry</button>
                 </div>
             );
