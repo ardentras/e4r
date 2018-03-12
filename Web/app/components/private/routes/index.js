@@ -3,6 +3,7 @@ import Home from "../home";
 import Question from "../questions";
 import Leaderboard from "../leaderboard";
 import Settings from "../settings";
+import Password from "../password";
 const iconStyle = {
 	padding: "0 10px",
 	margin: "10px 0"
@@ -33,6 +34,12 @@ const Routes = [
 		label: "Settings",
 		component: Settings,
 		icon: <i className={["fa", "fa-cogs", "icons"].join(" ")} style={iconStyle} aria-hidden="true"/>
+	},
+	{
+		path: "/dashboard/password-reset",
+		label: "Password Reset",
+		component: Password,
+		icon : null
 	}
 ];
 

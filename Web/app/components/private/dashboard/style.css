@@ -42,6 +42,11 @@
     justify-content: space-around;
     position: relative;
 }
+@media (min-width: 741px) {
+    .dashboard {
+        min-height: calc(100vh - 141px);
+    }
+}
 
 @media (max-width: 740px) {
     .dashboard {

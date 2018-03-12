@@ -1,6 +1,7 @@
 import React from "react";
 import Styles from "./style.css";
 import Spinner from "../../loading";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleCompleteReset } from "../../../redux/actions/questions";
@@ -38,31 +39,44 @@ class Settings extends React.Component {
         }
     }
     render() {
+        console.log(this.props.user);
         return (
             <div className={Styles.settings}>
-                <div className={Styles.userinfos}>
-                    <div className={[Styles.infos, Styles.labels].join(" ")}>
-                        <div className={Styles.info}>
-                            <span>First name: </span>
-                            <input id={Styles.fname} type="text" name="fname" defaultValue={this.props.user.user_data.first_name}/>
-                        </div>
-                        <div className={Styles.info}>
-                            <span>Last name: </span>
-                            <input id={Styles.lname} type="text" name="lname" defaultValue={this.props.user.user_data.last_name}/>
-                        </div>
-                        <div className={Styles.info}>
-                            <span>Charity:</span>
-                            <span id={Styles.charity}>{this.props.user.user_data.charity_name ? this.props.user.user_data.charity_name : "None"}</span>
-                        </div>
-                    </div>
-                    <div className={Styles.btns}>
-                        <div className={Styles.infobtns}>
-                            <button className={Styles.savebtn} onClick={this.save}>Save</button>
-                            <button className={Styles.resetbtn} onClick={this.reset}>Reset</button>
-                        </div>
-                        <button className={Styles.restartbtn} onClick={this.restart}>Restart</button>
-                    </div>
+                <div className={Styles.initials}>K.X</div>
+                <div className={Styles.level}>Level 1</div>
+                <div className={[Styles.fnamefield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>FIRST NAME</span>
+                    <input id={Styles.fname} className={Styles.fieldinput} type="text" defaultValue={this.props.user.user_data.first_name}/>
                 </div>
+                <div className={[Styles.lnamefield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>LAST NAME</span>
+                    <input id={Styles.lname} className={Styles.fieldinput} type="text" defaultValue={this.props.user.user_data.last_name}/>
+                </div>
+                <div className={[Styles.emailfieled, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>EMAIL</span>
+                    <span className={Styles.fieldinput}>{this.props.user.user_data.email}</span>
+                </div>
+                <div className={[Styles.charityfield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>CHARITY</span>
+                    <span id={Styles.charity} className={Styles.fieldinput}>{this.props.user.user_data.selected_charity !== "" ? this.props.user.user_data.selected_charity : "None" }</span>
+                </div>
+                <div className={[Styles.tokenfield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>SESSION</span>
+                    <span id={Styles.token} className={Styles.fieldinput}>awdawdawdawdawd-adwdawdawd-awdawdawd23</span>
+                </div>
+                <div className={[Styles.pwfield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>PASSWORD</span>
+                    <Link to="/dashboard/password-reset" className={Styles.pwreset}>RESET</Link>
+                </div>
+                <div className={[Styles.infofield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>CHANGES</span>
+                    <span onClick={this.reset} className={Styles.resetbtn}>DEFAULT</span>
+                </div>
+                <div className={[Styles.gamefield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>GAME</span>
+                    <span onClick={this.restart} className={Styles.restartbtn}>RESTART</span>
+                </div>
+                <span onClick={this.save} className={Styles.savebtn}>SAVE</span>
             </div>
         );
     }

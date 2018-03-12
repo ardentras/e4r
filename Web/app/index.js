@@ -16,7 +16,7 @@ import efrApi from "./libraries/efrApi";
 import SpinnerStyle from "./components/loading/style.css";
 
 efrApi.config({
-    host: "35.163.221.182", 
+    host: "34.216.143.255", 
     port: 3002,
     protocol: "http", 
     gamePath: "/api/q/request_block",

@@ -1,0 +1,40 @@
+.pwreset {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.pwform {
+	display: flex;
+	flex-flow: column;
+}
+
+.pwform span {
+	margin-bottom: 5px;
+}
+
+.pwform input {
+	outline: none;
+	padding: 5px 0;
+	font-size: 20px;
+	border: 1px solid rgb(221, 221, 221);
+	margin-bottom: 10px;
+}
+
+.pwheader {
+	font-weight: lighter;
+	margin-bottom: 20px;
+}
+
+#resetbtn {
+	color: white;
+	border:  none;
+	padding: 20px 0;
+	margin-top: 20px;
+	background: #1E90FF;
+}
+
+#resetbtn:hover {
+	cursor: pointer;
+}

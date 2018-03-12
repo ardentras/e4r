@@ -1,127 +1,123 @@
 .settings {
+    overflow-y: scroll;
+    height: 100%;
+}
+.initials {
+    font-size: 45px;
+}
+.settings {
+    display: flex;
+    flex-flow: column;
+    padding: 0 25px;
     background: white;
     width: 100%;
-    position: relative;
 }
-
-button:hover {
-    cursor: pointer;
+.initials {
+    align-self: center;
 }
-
-.settings input {
-    outline: none;
-    background: none;
-    border: 1px solid rgb(221, 221, 221);
-    font-size: 16px;
-    font-weight: lighter;
+.fieldhead {
+    margin-bottom: 5px;
 }
-
-.infobtns {
-    width: 100%;
-    padding: 10px 0;
+.level {
+    align-self: center;
+    margin-bottom: 15px;
+}
+.fields {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
+    flex-flow: column;
+    margin-bottom: 25px;
 }
-
-.savebtn, .restartbtn, .resetbtn {
+.fieldinput {
     outline: none;
-    font-size: 2vmax;
-    border: 0;
+    border: none;
+    border-bottom: 1px solid rgb(192, 192, 192);
+    padding: 5px 0;
+    font-size: 16px;
 }
-
-.savebtn {
-    padding: 10px 0;
-    background: none;
-    border: 1px solid #1E90FF;
+.pwfield, .gamefield, .infofield {
+    flex-flow: row nowrap;
+}
+.pwfield, .gamefield, .infofield {
+    justify-content: space-between;
+}
+.pwreset, .restartbtn, .resetbtn {
     color: #1E90FF;
 }
-
-.resetbtn {
-    color: white;
-    padding: 10px 0;
-    background: #1E90FF;
+.pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn {
+    cursor: pointer;
 }
-
-.savebtn, .resetbtn {
-    width: 25%;
-}
-
-.btns {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.restartbtn {
-    padding: 20px 0;
+.savebtn {
     background: #1E90FF;
     color: white;
+    padding: 20px;
     width: 100%;
+    text-align: center;
 }
-
-.userinfos {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
+.savebtn {
+    background: #1E90FF;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
 }
-
-.infos {
-    display: flex;
-    flex-flow: column;
-    margin-left: 30px;
+#token, #charity {
+    border: none;
 }
-
-.info {
-    display: flex;
-    flex-flow: column;
-    margin-bottom: 10px;
-}
-
-#fname {
-    color: inherit;
-}
-
-#lname {
-    color: inherit;
-}
-
-#charity {
-    color: inherit;
-}
-
-@media (min-width: 900px) {
-    .info, .info input {
-        font-size: 2em;
-    }
-    .infobtns {
-        padding: 30px 0;
+@media (min-width: 741px) {
+    .savebtn {
+        position: absolute;
+        width: calc(100% - 162px);
+        bottom: 0;
+        right: 0;
     }
 }
-
-.info input {
-    border: 0;
-    outline: none;
-    border-bottom: 1px solid #1E90FF;
-}
-
 @media (max-width: 740px) {
-   .savebtn, .restartbtn, .resetbtn {
-        font-size: 3vmax;
+    .settings {
+        display: flex;
+        flex-flow: column;
+        padding: 0 25px;
+        background: white;
+        width: 100%;
     }
-    .infos {
-        margin-left: 0;
+    .initials {
+        align-self: center;
     }
-    .userinfos {
-        justify-content: center;
+    .fieldhead {
+        margin-bottom: 5px;
     }
-}
-
-@media (max-width: 360px) {
-    .info {
-        font-size: 3vmax;
+    .level {
+        align-self: center;
+        margin-bottom: 15px;
     }
-    .info input {
-        font-size: 4vmax;
+    .fields {
+        display: flex;
+        flex-flow: column;
+        margin-bottom: 25px;
+    }
+    .fieldinput {
+        outline: none;
+        border: none;
+        border-bottom: 1px solid rgb(192, 192, 192);
+        padding: 5px 0;
+        font-size: 16px;
+    }
+    .pwfield, .gamefield, .infofield {
+        flex-flow: row nowrap;
+    }
+    .pwfield, .gamefield, .infofield {
+        justify-content: space-between;
+    }
+    .pwreset, .restartbtn, .resetbtn {
+        color: #1E90FF;
+    }
+    .pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn {
+        cursor: pointer;
+    }
+    .savebtn {
+        background: #1E90FF;
+        color: white;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
     }
 }
