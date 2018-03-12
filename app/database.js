@@ -77,7 +77,7 @@ class TDatabase {
                   "<p style='margin-left: 20px'>You are receiving this email because someone recently requested a password reset for your E4R account.</p>" +
                   "<p style='margin-left: 20px'>Username: <span style='margin-left: 100px'>" + data.username + "</span></p>" +
                   "<p style='margin-left: 20px'>Email: <span style='margin-left: 100px'>" + data.email + "</span></p>" +
-                  "<p style='margin-left: 20px'><a href='" + WEBSITE_HOSTNAME + "/password_reset/" + id + "'>Click Here</a> to reset your password.</p>" +
+                  "<p style='margin-left: 20px'><a href='" + WEBSITE_HOSTNAME + "/password_reset/?id=" + id + "'>Click Here</a> to reset your password.</p>" +
                   "<p style='margin-left: 20px'>If this email was sent in error, please contact E4R support at <a href=\"mailto:e4rsupport@gmail.com\">e4rsupport@gmail.com</a>.</p>" +
                   "<p>Sincerely,</p>" +
                   "<p style='font-size: 90%;'>The E4R Team</p>"
