@@ -26,6 +26,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
+            setBackground();
 
             TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
             TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
@@ -93,7 +94,7 @@ namespace EFRFrontEndTest2
             Answer1.Click += (sender, f) =>
             {
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
 
                 if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
                 {
@@ -110,7 +111,7 @@ namespace EFRFrontEndTest2
             Answer2.Click += (sender, a) =>
             {
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
                 if (m_currentquestion["Question2"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer2.Text = "correct";
@@ -131,7 +132,7 @@ namespace EFRFrontEndTest2
             Answer3.Click += (sender, b) =>
             {
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
                 if (m_currentquestion["Question3"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer3.Text = "correct";
@@ -148,7 +149,7 @@ namespace EFRFrontEndTest2
             {
 
                 QuestionAnswered = true;
-                var intent = new Intent(this, typeof(QuestionspageActivity));
+                //var intent = new Intent(this, typeof(QuestionspageActivity));
                 if (m_currentquestion["Question4"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer4.Text = "correct";
@@ -200,6 +201,14 @@ namespace EFRFrontEndTest2
             Answer3.Text = block["QuestionThree"];
             Answer4.Text = block["QuestionFour"];
 
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = FindViewById<LinearLayout>(Resource.Id.questionlayout);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }
