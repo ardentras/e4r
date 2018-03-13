@@ -54,7 +54,7 @@ Debugging API Calls:
         "subject_id": 1,
         "difficulty": 0,
         "totalQuestions": 0,
-        "totalDonated": 0.0,
+        "totalDonated": 0,
         "blocksRemaining": 0,
         "completed_blocks": [1, 3, 4]
     },
@@ -365,6 +365,26 @@ On User Object out of date:
     userobject: {user_object}
 }
 ```
+#### BUBBLE_FEED RESPONSE:
+```
+If active:
+{
+    response: "Success",
+    type: "GET",
+    code: 200,
+    total: 5000
+    data:   [
+                {
+                    username: ${username},
+                    donated: 150,
+                    timestamp: 158329855237
+                    },
+                {...},
+            ]
+}
+
+If inactive, call will return 404
+```
 ## Misc Requests:
 #### CHECK_USERNAME REQUEST:
 ```
@@ -419,26 +439,6 @@ On valid session token:
     code: 200,
     action: "DELETE_USER"
 }
-```
-#### BUBBLE_FEED RESPONSE:
-```
-If active:
-{
-    response: "Success",
-    type: "GET",
-    code: 200,
-    total: 5000
-    data:   [
-                {
-                    username: ${username},
-                    donated: 150,
-                    timestamp: 158329855237
-                    },
-                {...},
-            ]
-}
-
-If inactive, call will return 404
 ```
 ## Game Requests:
 #### REQUEST_BLOCK REQUEST:
