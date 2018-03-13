@@ -67,7 +67,7 @@ export function handlerAuth(user=undefined) {
 			iCookie.reset();
 			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
-				console.log(result.data);
+				iCookie.setStorage("userobject", result.data.user_object);
 				dispatch(setAuthenticateSuccess(true));
 				dispatch(setUserObject(result.data.user_object));
 				dispatch(setUID(user.username));
@@ -96,6 +96,7 @@ export function handlerDeAuth(userobject) {
 			const result = await efrApi.logout(userobject);
 			dispatch(Error());
 			iCookie.reset();
+			iCookie.removeStorage("userobject");
 			if (result.data.code === httpCodes.Ok) {
 				window.location.reload();
 				dispatch(Reset());

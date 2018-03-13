@@ -1,5 +1,7 @@
 select * from EFRAcc.Sessions WHERE UserID=(SELECT UserID FROM EFRAcc.Users WHERE EmailAddr='kevinjia.xu@gmail.com') ORDER BY ExpirationTime;
 select * from EFRAcc.Users;
+select * from EFRQuest.QuestionHelp;
+select * from EFRQuest.Questions;
 
 
 BEGIN TRANSACTION remove_kevin

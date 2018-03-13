@@ -26,7 +26,8 @@ efrApi.config({
     logoutPath: "/api/logout",
     updatePath: "/api/update_uo",
     resetPWPath: "/api/reset_password",
-    verifyPW: "/api/verify_password_reset"
+    verifyPW: "/api/verify_password_reset",
+    questionHelp: "/api/q/request_help"
 });
 /****************************************************************************
  * 

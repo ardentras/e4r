@@ -3,7 +3,7 @@ import Styles from "./style.css";
 import { Line } from "rc-progress";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock, handleSolvedQuestions } from "../../../redux/actions/questions";
+import { incorrectAnswer, correctAnswer, nextQuestion, getNextBlock, handleSolvedQuestions, displayHelp, hideHelp, getHelp } from "../../../redux/actions/questions";
 import { getQuestions } from "../../../redux/actions/user";
 import modalStyle from "../style.css";
 import iCookie from "../../../libraries/iCookie";
@@ -18,6 +18,7 @@ const Choice = props => (
 class Question extends React.Component {
     constructor(props) {
         super(props);
+        this.displayHelp = this.displayHelp.bind(this);
         this.checkAnswer = this.checkAnswer.bind(this);
         this.next = this.next.bind(this);
         this.fetch = this.fetch.bind(this);
@@ -32,6 +33,17 @@ class Question extends React.Component {
     }
     fetch() {
         this.props.getQuestions(this.props.user);
+    }
+    displayHelp() {
+        if (this.props.showHelp) {
+            this.props.hideHelp();
+        }
+        else {
+            if (!this.props.helpText) {
+                this.props.getHelp(this.props.questions[this.props.index].QuestionID);
+            }
+            this.props.displayHelp();
+        }
     }
     checkAnswer(event) {
         if (!this.props.answer || this.props.answer === "incorrect") {
@@ -117,7 +129,9 @@ class Question extends React.Component {
                                     <Choice index="4" letter="D" value={this.props.questions[this.props.index].QuestionFour} check={this.checkAnswer}/>
                                 </div>
                             </div>
+                            {this.props.answer === "incorrect" && <button onClick={this.displayHelp} className={Styles.helpbtn}>Show Help</button> }
                             {this.props.answer === "correct" && <div onClick={this.next} className={Styles.nextbtn}>Next</div> }
+                            {this.props.answer === "incorrect" && this.props.showHelp === true && <div className={Styles.helptext}>{this.props.helpText}</div> }
                         </div>
                     </div>
                 </div>
@@ -127,6 +141,6 @@ class Question extends React.Component {
 }
 
 export default connect(
-	(state) => ({user: state.user, states: state.state, questions: state.questions.questions, index: state.questions.index, answer: state.questions.selectedAnswer}),
-	(dispatch) => bindActionCreators({incorrectAnswer,correctAnswer,nextQuestion, getNextBlock, handleSolvedQuestions, getQuestions }, dispatch)
+	(state) => ({user: state.user, states: state.state, questions: state.questions.questions, index: state.questions.index, answer: state.questions.selectedAnswer, showHelp: state.questions.showHelp, helpText:state.questions.helpText}),
+	(dispatch) => bindActionCreators({incorrectAnswer,correctAnswer,nextQuestion, getNextBlock, handleSolvedQuestions, getQuestions, displayHelp, hideHelp, getHelp }, dispatch)
 )(Question);

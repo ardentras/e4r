@@ -22,6 +22,15 @@ const iCookie = (()=>{
 			const cookie = name + "=" + value + ";" + expire + ";path=/";
 			this.set(cookie);
 		}
+		setStorage(name, value) {
+			localStorage.setItem(name, JSON.stringify(value));
+		}
+		getStorage(name) {
+			return JSON.parse(localStorage.getItem(name));
+		}
+		removeStorage(name) {
+			localStorage.removeItem(name);
+		}
 		get(key) {
 			let match = document.cookie.match(new RegExp(key + "=([^;]+)"));
 			return match ? match[1] : undefined;
