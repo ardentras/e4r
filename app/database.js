@@ -217,7 +217,7 @@ class TDatabase {
             await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
                                      .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
 
-            client.json({response: "Success", type: "PUT", code: 200, reason: "Verification ID accepted"})
+            client.redirect(WEBSITE_HOSTNAME + "/login");
         }
     }
 

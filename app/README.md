@@ -264,12 +264,7 @@ On invalid verify ID:
 }
 
 On valid verify ID:
-{
-    response: "Success",
-    type: "PUT",
-    code: 200,
-    reason: "Password reset accepted"
-}
+Redirects to /login
 ```
 #### SESSION RENEW REQUEST:
 ```
