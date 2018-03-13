@@ -35,6 +35,42 @@ export function handleSolvedQuestions(count, object) {
     }
 }
 
+export function displayHelp() {
+    return {
+        type: Types.SHOW_HELP
+    }
+}
+
+export function hideHelp() {
+    return {
+        type: Types.HIDE_HELP
+    }
+}
+
+export function setHelpText(text) {
+    return {
+        type: Types.SET_HELP_TEXT,
+        value: text
+    }
+}
+
+export function getHelp(qid) {
+    return async (dispatch)=>{
+        try {
+            const result = await efrApi.getHelp(qid);
+            if (result.data.code) {
+                dispatch(setHelpText(result.data.data));
+            }
+            else {
+                dispatch(setHelpText("Error Fetching Help"));
+            }
+        }
+        catch(err) {
+            console.log("err", err);
+        }
+    }
+}
+
 export function handleCompleteReset(object) {
     return async dispatch => {
         const user = {

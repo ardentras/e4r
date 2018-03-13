@@ -16,7 +16,9 @@ import * as Types from "../types";
 const initialState = {
 	questions: [],
 	index: 0,
-	selectedAnswer: undefined
+	selectedAnswer: undefined,
+	showHelp: false,
+	helpText: undefined
 };
 
 const authReducer = (state=initialState, action) => {
@@ -27,7 +29,8 @@ const authReducer = (state=initialState, action) => {
 		});
 	case Types.NEXT_INDEX:
 		return Object.assign({}, state, {
-			index: state.index + 1
+			index: state.index + 1,
+			showHelp: false
 		});
 	case Types.RESET_INDEX:
 		return Object.assign({}, state, {
@@ -38,6 +41,10 @@ const authReducer = (state=initialState, action) => {
 	case Types.CORRECT_ANSWER:
 		return Object.assign({}, state, {
 			selectedAnswer: "correct"
+		});
+	case Types.SET_HELP_TEXT:
+		return Object.assign({}, state, {
+			helpText: action.value
 		});
 	case Types.INCORRECT_ANSWER:
 		return Object.assign({}, state, {
@@ -50,6 +57,14 @@ const authReducer = (state=initialState, action) => {
 	case Types.RESET_SELECTEDANSWER:
 		return Object.assign({}, state, {
 			selectedAnswer: undefined
+		});
+	case Types.SHOW_HELP:
+		return Object.assign({}, state, {
+			showHelp: true
+		});
+	case Types.HIDE_HELP:
+		return Object.assign({}, state, {
+			showHelp: false
 		});
 	default:
 		return Object.assign({}, state);

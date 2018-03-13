@@ -35,7 +35,7 @@ class App extends React.Component {
 				<div className={Styles.container}>
 					<Spinner/>
 					<div>
-						<Navagations IS_AUTH={this.props.states.IS_AUTH} uid={this.props.uid}/>
+						<Navagations IS_AUTH={this.props.states.IS_AUTH} uid={this.props.uid} user={this.props.user}/>
 					</div>
 					{Routes.map((elem, index)=>(
 						<Route key={index} exact={elem.exact} path={elem.path} component={elem.component}/>
@@ -48,6 +48,6 @@ class App extends React.Component {
 }
 
 export default connect(
-	(state) => ({states: state.state, uid: state.auth.uid}),
+	(state) => ({states: state.state, user: state.user, uid: state.auth.uid}),
 	(dispatch) => bindActionCreators({handlerPersist}, dispatch)
 )(App);

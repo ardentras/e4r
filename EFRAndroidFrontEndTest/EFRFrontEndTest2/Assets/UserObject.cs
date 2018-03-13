@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Json;
 using System.Linq;
 using System.Text;
 
@@ -14,8 +15,7 @@ namespace EFRFrontEndTest2.Assets
 {
     public class UserObject
     {
-        public UserObject() { m_CompletedBlocks[0] = 0; }
-
+        public JsonValue Json { get { return m_json; } set { m_json = value; } }
         public string SessionID { get { return m_SessionID; } set { m_SessionID = value; } }
         public string Timestamp { get { return m_Timestamp; } set { m_Timestamp = value; } }
         public int BlocksRemaining { get { return m_BlocksRemaining; } set { m_BlocksRemaining = value; } }
@@ -31,10 +31,11 @@ namespace EFRFrontEndTest2.Assets
         public string LastName { get { return m_LastName; } set { m_LastName = value; } }
         public string Username { get { return m_Username; } set { m_Username = value; } }
 
+        private JsonValue m_json;
         private string m_SessionID       = "guest";
         private string m_Timestamp       = "default";
         private int    m_BlocksRemaining = 0;
-        private int[]  m_CompletedBlocks = new int[1];
+        private int[]  m_CompletedBlocks = new int[0];
         private int m_Difficulty         = 0;
         private int    m_SubjectID       = 0;
         private string m_SubjectName     = "Math";
@@ -45,7 +46,8 @@ namespace EFRFrontEndTest2.Assets
         private string m_FirstName       = "Anon";
         private string m_LastName        = "Guest";
         private string m_Username        = "Slenderman";
-        
+        private string[] m_FavoriteCharities = new string[0];
+
         public string GetObjectString()
         {
             string data = "";
@@ -76,7 +78,15 @@ namespace EFRFrontEndTest2.Assets
             data += "\"email\": \"" + m_Email + "\",";
             data += "\"first_name\": \""+ m_FirstName +"\",";
             data += "\"last_name\": \""+ m_LastName +"\",";
-            data += "\"charity_names\": [\""+ m_CharityName +"\"]";
+            data += "\"selected_charity\": \""+ m_CharityName +"\", ";
+            data += "\"favorite_charities: [\"";
+            for (int x = 0; x < m_FavoriteCharities.Length; x++)
+            {
+                data += m_FavoriteCharities[x];
+                if (x != m_CompletedBlocks.Length - 1)
+                    data += "\" \"";
+            }
+            data += "\"] ";
             data += "},";
             data += "\"game_data\": {";
             data += "\"subject_name\": \""+ m_SubjectName +"\",";
@@ -85,12 +95,12 @@ namespace EFRFrontEndTest2.Assets
             data += "\"totalQuestions\": "+ Convert.ToString(m_TotalQuestions) + ",";
             data += "\"totalDonated\": " + Convert.ToString(m_TotalDonated) +",";
             data += "\"blocksRemaining\": "+ Convert.ToString(m_BlocksRemaining) +",";
-            data += "\"completed_blocks\": [ ";
+            data += "\"completed_blocks\": [";
             for(int x =0;x < m_CompletedBlocks.Length;x++)
             {
                 data += Convert.ToString(m_CompletedBlocks[x]);
                 if (x != m_CompletedBlocks.Length - 1)
-                    data += ", ";
+                    data += " ";
             }
             data += "] }, ";
             data += "\"timestamp\":\""+ m_Timestamp +"\"";

@@ -28,7 +28,7 @@ class Login extends React.Component {
 	}
 	login(event) {
 		event.preventDefault();
-		this.props.handlerAuth({username: event.target.uid.value, password: event.target.pw.value});
+		this.props.handlerAuth({username: event.target.username.value, password: event.target.password.value});
 	}
 	signup(event) {
 		event.preventDefault();
@@ -37,7 +37,7 @@ class Login extends React.Component {
 	}
 	register(event) {
 		event.preventDefault();
-		this.props.handlerRegister({email: event.target.email.value, username: event.target.uid.value, password: event.target.pw.value});
+		this.props.handlerRegister({email: event.target.email.value, username: event.target.username.value, password: event.target.password.value});
 	}
 	render() {
 		const { redirectToRefer } = this.props.states;

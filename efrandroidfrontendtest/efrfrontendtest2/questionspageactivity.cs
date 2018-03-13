@@ -20,12 +20,12 @@ namespace EFRFrontEndTest2
     {
         CallDatabase m_database;
         JsonValue m_currentquestion;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
+            setBackground();
 
             TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
             TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
@@ -98,7 +98,7 @@ namespace EFRFrontEndTest2
                 if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer1.Text = "correct";
-                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
+                       var intent = new Intent(this, typeof(QuestionspageActivity));
 
                 }
                 else
@@ -200,6 +200,14 @@ namespace EFRFrontEndTest2
             Answer3.Text = block["QuestionThree"];
             Answer4.Text = block["QuestionFour"];
 
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = FindViewById<LinearLayout>(Resource.Id.questionlayout);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

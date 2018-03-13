@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { handlerDeAuth } from "../../../redux/actions/auth";
 import { handleCompleteReset } from "../../../redux/actions/questions";
 import { handleNames, resetPWRequest } from "../../../redux/actions/user";
+import iCookie from "../../../libraries/iCookie";
 
 class Settings extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Settings extends React.Component {
         const fname = document.getElementById(Styles.fname);
         const lname = document.getElementById(Styles.lname);
         const charity = document.getElementById(Styles.charity);
-        if(fname && lname) {
+        if(fname && lname && charity) {
             fname.value = this.props.user.user_data.first_name;
             lname.value = this.props.user.user_data.last_name;
             charity.innerHTML = this.props.user.user_data.charity_name ? this.props.user.user_data.charity_name : "None";
@@ -47,11 +48,14 @@ class Settings extends React.Component {
         }
     }
     render() {
-        console.log(this.props.user);
+        let initials = this.props.user.user_data.username;
+        if (this.props.user.user_data.first_name && this.props.user.user_data.first_name !== "" && this.props.user.user_data.last_name && this.props.user.user_data.last_name !== "") {
+            initials = this.props.user.user_data.first_name[0] + "." + this.props.user.user_data.last_name[0];
+        }
         return (
             <div className={Styles.settings}>
-                <div className={Styles.initials}>K.X</div>
-                <div className={Styles.level}>Level 1</div>
+                <div className={Styles.initials}>{initials}</div>
+                <div className={Styles.level}>{"Level " + (parseInt(this.props.user.game_data.difficulty) + 1)}</div>
                 <div className={[Styles.fnamefield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>FIRST NAME</span>
                     <input id={Styles.fname} className={Styles.fieldinput} type="text" defaultValue={this.props.user.user_data.first_name}/>
@@ -70,7 +74,7 @@ class Settings extends React.Component {
                 </div>
                 <div className={[Styles.tokenfield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>SESSION</span>
-                    <span id={Styles.token} className={Styles.fieldinput}>awdawdawdawdawd-adwdawdawd-awdawdawd23</span>
+                    <span id={Styles.token} className={Styles.fieldinput}>{iCookie.get("session")}</span>
                 </div>
                 <div className={[Styles.pwfield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>PASSWORD</span>
