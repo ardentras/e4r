@@ -27,6 +27,7 @@ API Calls:
           Update User Object    -> hostname:port/api/update_uo      -> PUT
           Log Out               -> hostname:port/api/logout         -> PUT
           Delete User           -> hostname:port/api/delete_user    -> DELETE
+          Bubble Live Feed      -> hostname:port/api/bubble_feed    -> GET
           Request Question Block-> hostname:port/api/q/request_block-> PUT
           Request Question Help -> hostname:port/api/q/request_help -> PUT
 
@@ -242,7 +243,7 @@ On valid username and email:
 ```
 {
     "user": {
-        "verify_id": {verifyID},
+        "verifyid": {verifyID},
         "password": "defaultpass"
     }
 }
@@ -419,13 +420,34 @@ On valid session token:
     action: "DELETE_USER"
 }
 ```
+#### BUBBLE_FEED RESPONSE:
+```
+If active:
+{
+    response: "Success",
+    type: "GET",
+    code: 200,
+    total: 5000
+    data:   [
+                {
+                    username: ${username},
+                    donated: 150,
+                    timestamp: 158329855237
+                    },
+                {...},
+            ]
+}
+
+If inactive, call will return 404
+```
 ## Game Requests:
 #### REQUEST_BLOCK REQUEST:
 ```
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object}
+        "userobject": {user_object},
+        "donated": "150"
     }
 }
 
@@ -434,7 +456,8 @@ OR
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object}
+        "userobject": {user_object},
+        "donated": "150"
     },
     "game": {
         "questions": [
