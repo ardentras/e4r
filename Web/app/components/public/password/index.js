@@ -28,7 +28,7 @@ class Password extends React.Component {
 		if (!this.VerifyID) {
 			return (
 				<div className={Styles.pwreset}>
-					<span>Invalid Verification ID!</span>
+					<span>Verification ID Not Found!</span>
 				</div>
 			);
 		}
@@ -36,6 +36,7 @@ class Password extends React.Component {
 			<div className={Styles.pwreset}>
 				<form className={Styles.pwform} action="javascript:void(0);" onSubmit={this.reset}>
 					<h1 className={Styles.pwheader}>Password Reset</h1>
+					{this.props.error === "INVALID_ID" && <span className={Styles.invalid}>Invalid Verification ID</span> }
 					<span>New Password</span>
 					<input name="npw" type="password" required/>
 					<span>Confirm New Password</span>
@@ -48,6 +49,6 @@ class Password extends React.Component {
 }
 
 export default connect(
-	(state) => ({user: state.user}),
+	(state) => ({user: state.user, error: state.state.error}),
 	(dispatch) => bindActionCreators({resetPW}, dispatch)
 )(Password);

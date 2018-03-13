@@ -2,6 +2,7 @@ import "babel-polyfill";
 import * as Types from "../types";
 import efrApi from "../../libraries/efrApi";
 import { setQuestions } from "./questions";
+import { Error } from "./state";
 import iCookie from "../../libraries/iCookie";
 
 export function getQuestions(userObject) {
@@ -31,8 +32,15 @@ export function resetPWRequest(user) {
 export function resetPW(user) {
     return async (dispatch)=>{
         try {
-            const result = await efrApi.resetPW({verify_id: user.id, password: user.pw});
+            dispatch(Error());
+            const result = await efrApi.resetPW({VerifyID: user.id, password: user.pw});
             console.log("check", result.data);
+            if (result.data.code !== 100) {
+                window.location.href = "http://52.40.134.152/login";
+            }
+            else {
+                dispatch(Error("INVALID_ID"));
+            }
         }
         catch(err) {
             console.log("err",err);

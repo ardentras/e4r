@@ -40,6 +40,13 @@
 	cursor: pointer;
 }
 
+.invalid {
+	background: rgb(255, 151, 54);
+	text-align: center;
+	color: white;
+	padding: 10px 0;
+}
+
 @media (max-width: 740px) {
 	#resetbtn {
 		font-size: 18px;

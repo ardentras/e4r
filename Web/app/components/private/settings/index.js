@@ -4,6 +4,7 @@ import Spinner from "../../loading";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { handlerDeAuth } from "../../../redux/actions/auth";
 import { handleCompleteReset } from "../../../redux/actions/questions";
 import { handleNames, resetPWRequest } from "../../../redux/actions/user";
 
@@ -33,6 +34,7 @@ class Settings extends React.Component {
     resetPassword() {
         if (confirm("Are you sure?")) {
             this.props.resetPWRequest({username: this.props.user.user_data.username, email: this.props.user.user_data.email});
+            this.props.handlerDeAuth(this.props.user);
         }
     }
     save() {
@@ -89,6 +91,6 @@ class Settings extends React.Component {
 }
 
 export default connect(
-	(state) => ({user: state.user, questions: state.questions.questions}),
-	(dispatch) => bindActionCreators({ handleCompleteReset, handleNames, resetPWRequest }, dispatch)
+	(state) => ({user: state.user}),
+	(dispatch) => bindActionCreators({ handleCompleteReset, handleNames, resetPWRequest, handlerDeAuth }, dispatch)
 )(Settings);
