@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 using System;
 using System.IO;
 using System.Json;
@@ -15,11 +16,18 @@ namespace EFRFrontEndTest2
     [Activity(Label = "HomeScreenActivity")]
     public class UserDashboardActivity : Activity
     {
+        protected override void OnResume()
+        {
+            base.OnResume();
+            setBackground();
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.UserDashboardScreen);
+            setBackground();
+
             ImageButton settingsButton = FindViewById<ImageButton>(Resource.Id.settingsButton);
             ImageButton charityButton = FindViewById<ImageButton>(Resource.Id.charityButton);
             Button playButton = FindViewById<Button>(Resource.Id.playButton);
@@ -48,6 +56,7 @@ namespace EFRFrontEndTest2
                 var intent = new Intent(this, typeof(BubbleLiveFeedActivity));
                 StartActivity(intent);
             };
+
         }
 
         /***************************************************************************************************************************
@@ -57,7 +66,16 @@ namespace EFRFrontEndTest2
         ****************************************************************************************************************************/
         public override void OnBackPressed()
         {
-            return;
+            
+        }
+
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                GridLayout background = FindViewById<GridLayout>(Resource.Id.dashboardgrid);
+                background.Background = AppBackground.background; ;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionDifficultypage);
-
+            setBackground();
             ImageButton continueButton = FindViewById<ImageButton>(Resource.Id.continueButton);
             ImageButton EasyButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
             ImageButton NormalButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
@@ -66,6 +66,14 @@ namespace EFRFrontEndTest2
             };
 
 
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                GridLayout background = FindViewById<GridLayout>(Resource.Id.gridLayout1);
+                background.Background = AppBackground.background;
+            }
         }
 
     }
