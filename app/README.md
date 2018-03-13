@@ -19,7 +19,7 @@ API Calls:
           Sign Up               -> hostname:port/api/signup         -> POST
           Check Username        -> hostname:port/api/check_username -> POST
           Resend Verify         -> hostname:port/api/resend_verify  -> PUT
-          Password Reset        -> hostname:port/api/password_reset -> POST
+          Password Reset        -> hostname:port/api/reset_password -> POST
           Password Reset Verify -> hostname:port/api/verify_password_reset -> PUT
           Log In                -> hostname:port/api/login          -> POST
           Verify Email          -> hostname:port/api/verify_email/${VerifyID} -> GET
@@ -27,6 +27,7 @@ API Calls:
           Update User Object    -> hostname:port/api/update_uo      -> PUT
           Log Out               -> hostname:port/api/logout         -> PUT
           Delete User           -> hostname:port/api/delete_user    -> DELETE
+          Bubble Live Feed      -> hostname:port/api/bubble_feed    -> GET
           Request Question Block-> hostname:port/api/q/request_block-> PUT
           Request Question Help -> hostname:port/api/q/request_help -> PUT
 
@@ -53,7 +54,7 @@ Debugging API Calls:
         "subject_id": 1,
         "difficulty": 0,
         "totalQuestions": 0,
-        "totalDonated": 0.0,
+        "totalDonated": 0,
         "blocksRemaining": 0,
         "completed_blocks": [1, 3, 4]
     },
@@ -242,7 +243,7 @@ On valid username and email:
 ```
 {
     "user": {
-        "verify_id": {verifyID},
+        "verifyid": {verifyID},
         "password": "defaultpass"
     }
 }
@@ -364,6 +365,26 @@ On User Object out of date:
     userobject: {user_object}
 }
 ```
+#### BUBBLE_FEED RESPONSE:
+```
+If active:
+{
+    response: "Success",
+    type: "GET",
+    code: 200,
+    total: 5000
+    data:   [
+                {
+                    username: ${username},
+                    donated: 150,
+                    timestamp: 158329855237
+                    },
+                {...},
+            ]
+}
+
+If inactive, call will return 404
+```
 ## Misc Requests:
 #### CHECK_USERNAME REQUEST:
 ```
@@ -425,7 +446,8 @@ On valid session token:
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object}
+        "userobject": {user_object},
+        "donated": "150"
     }
 }
 
@@ -434,7 +456,8 @@ OR
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object}
+        "userobject": {user_object},
+        "donated": "150"
     },
     "game": {
         "questions": [

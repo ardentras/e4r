@@ -30,7 +30,7 @@ class Home extends React.Component {
                                 this.props.user.user_data.last_name ? this.props.user.user_data.last_name :
                                 this.props.user.user_data.username}</span>
                         </div>
-                        <div className={Styles.activity}>
+                        <div className={[Styles.activity, Styles.level].join(" ")}>
                             <span className={Styles.records}>Current Level</span>
                             <div className={Styles.recordcontent}><i className={["fa", "fa-star", Styles.star].join(" ")}/><span className={Styles.number}>{parseInt(this.props.user.game_data.difficulty) + 1}</span></div>
                         </div>

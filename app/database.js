@@ -9,8 +9,13 @@ const SERVER_HOSTNAME = "http://34.216.143.255:3002"
 const WEBSITE_HOSTNAME = "http://52.40.134.152"
 
 class TDatabase {
-	// Creates the connection to the database given the passed parameters.
+    	// Creates the connection to the database given the passed parameters.
     constructor(config) {
+        this.bubbleFeedIsActive = true;
+        this.bubbleCharity = "";
+        this.recentDonations = [];
+        this.totalRaised = 0;
+
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
             if (err) {
@@ -257,7 +262,7 @@ class TDatabase {
     // Attempts to create an account with the given username, email
 	//
 	// Example:
-	// curl -XPUT localhost:3002/api/verify_password_reset -H 'Content-Type: application/json' -d '{"user":{"verify_id":302358324, "password":"defaultpass"}}'
+	// curl -XPUT localhost:3002/api/verify_password_reset -H 'Content-Type: application/json' -d '{"user":{"verifyid":302358324, "password":"defaultpass"}}'
     async verifyPasswordReset(client, data) {
         let res = await this.db.request().input('verifyid', mssql.Int, data.VerifyID)
                                             .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
@@ -512,16 +517,42 @@ class TDatabase {
         }
 	}
 
+    // Returns donations from the past minute if bubble live feed is activated. Otherwise it 404s
+    //
+    // curl -XGET localhost:3002/api/bubble_feed
+    async bubbleFeed(client) {
+        if (this.bubbleFeedIsActive) {
+            var filtertime = Date.now() - (300 * 1000);
+
+            this.recentDonations = this.recentDonations.filter(element => element.timestamp > filtertime);
+
+            client.json({response: "Success", type: "GET", code: 200, total: this.totalRaised, data: this.recentDonations})
+        } else {
+            client.sendStatus(404);
+        }
+    }
+
     // Returns a new block of questions from the database
     //
     // Example:
-    // curl -XPUT localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}, "game": {"questions":
-    //                                                                                      [{"QuestionID":{id},"QuestionText":"{text}","QuestionOne":"{answer1}","QuestionTwo":"{answer2}","QuestionThree":"{answer3}", "QuestionFour":"{answer4}","CorrectAnswer":"{correct_answer}","StatsOne":"{statsAnswer1}","StatsTwo":"{statsAnswer2}","StatsThree":"{statsAnswer3}","StatsFour":"{statsAnswer4}","QuestionBlockID":"{block_id}"},{...}]}}'
+    // curl -XPUT localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}, "donated": "175"},
+    //                                                                                      "game": {"questions": [{"QuestionID":{id},"QuestionText":"{text}","QuestionOne":"{answer1}","QuestionTwo":"{answer2}","QuestionThree":"{answer3}", "QuestionFour":"{answer4}","CorrectAnswer":"{correct_answer}","StatsOne":"{statsAnswer1}","StatsTwo":"{statsAnswer2}","StatsThree":"{statsAnswer3}","StatsFour":"{statsAnswer4}","QuestionBlockID":"{block_id}"},{...}]}}'
     async requestQuestionBlock(client, data, gameData) {
         try {
             data.userobject = await this.verifyQuestionBlocks(client, data);
         } catch (err) {
             client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
+        }
+
+        if (data.donated != undefined) {
+            var donation = parseInt(data.donated, 10);
+
+            if (donation > 0 && data.userobject.user_data.selected_charity == this.bubbleCharity) {
+                var currtime = Date.now();
+
+                this.totalRaised += donation;
+                this.recentDonations.push({username: data.userobject.user_data.username, donated: donation, timestamp: currtime});
+            }
         }
 
         if (gameData != undefined) {
@@ -580,6 +611,7 @@ class TDatabase {
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
         console.log(data);
+        console.log(res);
         if (res.rowsAffected == 0) {
 	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
 	    } else {
@@ -608,8 +640,7 @@ class TDatabase {
         return data.userobject;
     }
 
-    // Attempts to log the user out. If successful, user object will be saved,
-	// and current session token will expire.
+    // Returns a help block if it exists for the requested question.
 	//
 	// curl -XPUT localhost:3002/api/q/request_help -H 'Content-type: application/json' -d '{"question_id":0}'
     async requestHelp(client, data) {

@@ -1,6 +1,7 @@
 import Home from "../home";
 import Contact from "../contact";
 import Login from "../login";
+import Password from "../password";
 
 const Routes = [
 	{
@@ -18,6 +19,11 @@ const Routes = [
 		path: "/login",
 		label: "Login",
 		component: Login 
+	},
+	{
+		path: "/password_reset",
+		label: "Password Reset",
+		component: Password
 	}
 ];
 

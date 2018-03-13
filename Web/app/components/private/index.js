@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import Routes from "./routes";
 import Dashboard from "./dashboard";
 import Styles from "./style.css";
+import DashboardStyles from "./dashboard/style.css";
 
 class Private extends React.Component {
     constructor(props) {
@@ -15,8 +16,28 @@ class Private extends React.Component {
         this.logout = this.logout.bind(this);
     }
     componentWillMount() {
-        if (this.props.questions.length <= 0) {
+        if (!this.props.questions || this.props.questions.length <= 0) {
             this.props.getQuestions(this.props.user);
+        }
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.resize);
+        if (window.innerWidth <= 740) {
+            const dashboardheight = document.getElementsByClassName(DashboardStyles.dashboard)[0].clientHeight;
+            document.getElementsByClassName(Styles.private)[0].style.paddingBottom = dashboardheight + "px";
+        }
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize",this.resize);
+    }
+    resize() {
+        if (window.innerWidth <= 740) {
+            const dashboardheight = document.getElementsByClassName(DashboardStyles.dashboard)[0].clientHeight;
+            document.getElementsByClassName(Styles.private)[0].style.paddingBottom = dashboardheight + "px";
+        }
+        else {
+            const dashboardheight = document.getElementsByClassName(DashboardStyles.dashboard)[0].clientHeight;
+            document.getElementsByClassName(Styles.private)[0].style.paddingBottom = 0;
         }
     }
     hideModal() {
