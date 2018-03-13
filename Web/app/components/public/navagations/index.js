@@ -31,7 +31,7 @@ class Navagation extends React.Component {
 							{Routes.map((elem,index)=> {
 								if (elem.label !== "Password Reset") {
 									return (elem.label === "Login" && this.props.IS_AUTH ?
-									<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + this.props.uid}</NavLink> :
+									<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + ( this.props.user.user_data ? this.props.user.user_data.first_name !== "" ? this.props.user.user_data.first_name : this.props.uid : this.props.uid)}</NavLink> :
 									<NavLink 
 									key={index} 
 									exact={elem.exact} 
