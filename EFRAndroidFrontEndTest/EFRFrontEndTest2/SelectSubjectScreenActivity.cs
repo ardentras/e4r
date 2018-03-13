@@ -30,6 +30,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SelectSubjectScreen);
+            setBackground();
             UserObject uo = SingleUserObject.getObject();
             currentSubjectID = uo.SubjectID;
 
@@ -130,6 +131,14 @@ namespace EFRFrontEndTest2
                             return mathOption;
                     }
                 }
+            }
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                GridLayout background = FindViewById<GridLayout>(Resource.Id.gridLayout1);
+                background.Background = AppBackground.background;
             }
         }
     }

@@ -30,40 +30,53 @@ namespace EFRFrontEndTest2
             Button darkred = FindViewById<Button>(Resource.Id.setdarkred);
             Button darkgreen = FindViewById<Button>(Resource.Id.setdarkgreen);
             Button purple = FindViewById<Button>(Resource.Id.setpurple);
-            
+
 
             blue.Click += (sender, e) =>
             {
                 AppBackground.background = blue.Background;
+                setBackgrounds();
             };
             red.Click += (sender, e) =>
             {
                 AppBackground.background = red.Background;
+                setBackgrounds();
             };
             green.Click += (sender, e) =>
             {
                 AppBackground.background = green.Background;
+                setBackgrounds();
             };
             gray.Click += (sender, e) =>
             {
                 AppBackground.background = gray.Background;
+                setBackgrounds();
             };
             purple.Click += (sender, e) =>
             {
                 AppBackground.background = purple.Background;
+                setBackgrounds();
             };
             darkblue.Click += (sender, e) =>
             {
                 AppBackground.background = darkblue.Background;
+                setBackgrounds();
             };
             darkred.Click += (sender, e) =>
             {
                 AppBackground.background = darkred.Background;
+                setBackgrounds();
             };
             darkgreen.Click += (sender, e) =>
             {
                 AppBackground.background = darkgreen.Background;
+                setBackgrounds();
             };
+        }
+        protected void setBackgrounds()
+        {
+            GridLayout background = FindViewById<GridLayout>(Resource.Id.colorgrid);
+            background.Background = AppBackground.background; ;
         }
 
     }

@@ -26,6 +26,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
+            setBackground();
 
             TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
             TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
@@ -200,6 +201,14 @@ namespace EFRFrontEndTest2
             Answer3.Text = block["QuestionThree"];
             Answer4.Text = block["QuestionFour"];
 
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = FindViewById<LinearLayout>(Resource.Id.questionlayout);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

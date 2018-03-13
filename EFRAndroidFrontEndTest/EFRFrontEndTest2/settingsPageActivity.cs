@@ -15,11 +15,18 @@ namespace EFRFrontEndTest2
     [Activity(Label = "settingsPageActivity")]
     public class settingsPageActivity : Activity
     {
+        protected override void OnResume()
+        {
+            base.OnResume();
+            setBackground();
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.settingsPage);
+            setBackground();
+
             SeekBar sound = FindViewById<SeekBar>(Resource.Id.sound);
             SeekBar music = FindViewById<SeekBar>(Resource.Id.music);
             Button reset = FindViewById<Button>(Resource.Id.ResetButton);
@@ -90,7 +97,16 @@ namespace EFRFrontEndTest2
             {
                 var intent = new Intent(this, typeof(ColorPickerActivity));
                 StartActivity(intent);
+
             };
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                GridLayout background = FindViewById<GridLayout>(Resource.Id.settingsgrid);
+                background.Background = AppBackground.background;
+            }
         }
     };
 }

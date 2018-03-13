@@ -369,116 +369,116 @@ namespace EFRFrontEndTest2
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b008c
-			public const int AchievementsButton = 2131427468;
-			
-			// aapt resource value: 0x7f0b007b
-			public const int Answer1 = 2131427451;
-			
-			// aapt resource value: 0x7f0b007c
-			public const int Answer2 = 2131427452;
+			// aapt resource value: 0x7f0b008f
+			public const int AchievementsButton = 2131427471;
 			
 			// aapt resource value: 0x7f0b007d
-			public const int Answer3 = 2131427453;
+			public const int Answer1 = 2131427453;
 			
 			// aapt resource value: 0x7f0b007e
-			public const int Answer4 = 2131427454;
+			public const int Answer2 = 2131427454;
 			
 			// aapt resource value: 0x7f0b007f
-			public const int BackArrow = 2131427455;
-			
-			// aapt resource value: 0x7f0b008d
-			public const int BackgroundButton = 2131427469;
-			
-			// aapt resource value: 0x7f0b007a
-			public const int BigGrayCircle = 2131427450;
-			
-			// aapt resource value: 0x7f0b005e
-			public const int Buffer = 2131427422;
-			
-			// aapt resource value: 0x7f0b0044
-			public const int CancelButton = 2131427396;
+			public const int Answer3 = 2131427455;
 			
 			// aapt resource value: 0x7f0b0080
-			public const int Continue = 2131427456;
+			public const int Answer4 = 2131427456;
 			
-			// aapt resource value: 0x7f0b0042
-			public const int CreateButton = 2131427394;
+			// aapt resource value: 0x7f0b0081
+			public const int BackArrow = 2131427457;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int DeleteButton = 2131427404;
+			// aapt resource value: 0x7f0b0090
+			public const int BackgroundButton = 2131427472;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int EasyButton = 2131427444;
+			// aapt resource value: 0x7f0b007c
+			public const int BigGrayCircle = 2131427452;
 			
-			// aapt resource value: 0x7f0b0032
-			public const int EmailBox = 2131427378;
+			// aapt resource value: 0x7f0b005f
+			public const int Buffer = 2131427423;
 			
-			// aapt resource value: 0x7f0b0035
-			public const int EmailErrorBox = 2131427381;
+			// aapt resource value: 0x7f0b0045
+			public const int CancelButton = 2131427397;
 			
-			// aapt resource value: 0x7f0b003f
-			public const int FinalErrorBox = 2131427391;
+			// aapt resource value: 0x7f0b0082
+			public const int Continue = 2131427458;
 			
-			// aapt resource value: 0x7f0b005b
-			public const int ForgotPasswordButton = 2131427419;
+			// aapt resource value: 0x7f0b0043
+			public const int CreateButton = 2131427395;
 			
-			// aapt resource value: 0x7f0b0076
-			public const int HardButton = 2131427446;
-			
-			// aapt resource value: 0x7f0b0077
-			public const int HardestButton = 2131427447;
+			// aapt resource value: 0x7f0b004d
+			public const int DeleteButton = 2131427405;
 			
 			// aapt resource value: 0x7f0b0075
-			public const int NormalButton = 2131427445;
-			
-			// aapt resource value: 0x7f0b0036
-			public const int PasswordBoxOne = 2131427382;
-			
-			// aapt resource value: 0x7f0b003b
-			public const int PasswordBoxTwo = 2131427387;
-			
-			// aapt resource value: 0x7f0b003d
-			public const int PasswordErrorBox = 2131427389;
-			
-			// aapt resource value: 0x7f0b008b
-			public const int ResetButton = 2131427467;
-			
-			// aapt resource value: 0x7f0b0034
-			public const int TopBox = 2131427380;
+			public const int EasyButton = 2131427445;
 			
 			// aapt resource value: 0x7f0b0033
-			public const int UsernameBox = 2131427379;
+			public const int EmailBox = 2131427379;
 			
-			// aapt resource value: 0x7f0b0039
-			public const int UsernameErrorBox = 2131427385;
+			// aapt resource value: 0x7f0b0036
+			public const int EmailErrorBox = 2131427382;
+			
+			// aapt resource value: 0x7f0b0040
+			public const int FinalErrorBox = 2131427392;
+			
+			// aapt resource value: 0x7f0b005c
+			public const int ForgotPasswordButton = 2131427420;
+			
+			// aapt resource value: 0x7f0b0077
+			public const int HardButton = 2131427447;
+			
+			// aapt resource value: 0x7f0b0078
+			public const int HardestButton = 2131427448;
+			
+			// aapt resource value: 0x7f0b0076
+			public const int NormalButton = 2131427446;
+			
+			// aapt resource value: 0x7f0b0037
+			public const int PasswordBoxOne = 2131427383;
+			
+			// aapt resource value: 0x7f0b003c
+			public const int PasswordBoxTwo = 2131427388;
+			
+			// aapt resource value: 0x7f0b003e
+			public const int PasswordErrorBox = 2131427390;
+			
+			// aapt resource value: 0x7f0b008e
+			public const int ResetButton = 2131427470;
+			
+			// aapt resource value: 0x7f0b0035
+			public const int TopBox = 2131427381;
+			
+			// aapt resource value: 0x7f0b0034
+			public const int UsernameBox = 2131427380;
+			
+			// aapt resource value: 0x7f0b003a
+			public const int UsernameErrorBox = 2131427386;
 			
 			// aapt resource value: 0x7f0b000a
 			public const int achievementsTitle = 2131427338;
 			
-			// aapt resource value: 0x7f0b0063
-			public const int action0 = 2131427427;
-			
-			// aapt resource value: 0x7f0b0060
-			public const int action_container = 2131427424;
-			
-			// aapt resource value: 0x7f0b0067
-			public const int action_divider = 2131427431;
+			// aapt resource value: 0x7f0b0064
+			public const int action0 = 2131427428;
 			
 			// aapt resource value: 0x7f0b0061
-			public const int action_image = 2131427425;
+			public const int action_container = 2131427425;
+			
+			// aapt resource value: 0x7f0b0068
+			public const int action_divider = 2131427432;
 			
 			// aapt resource value: 0x7f0b0062
-			public const int action_text = 2131427426;
+			public const int action_image = 2131427426;
 			
-			// aapt resource value: 0x7f0b0071
-			public const int actions = 2131427441;
+			// aapt resource value: 0x7f0b0063
+			public const int action_text = 2131427427;
+			
+			// aapt resource value: 0x7f0b0072
+			public const int actions = 2131427442;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int async = 2131427333;
 			
-			// aapt resource value: 0x7f0b0078
-			public const int backButton = 2131427448;
+			// aapt resource value: 0x7f0b0079
+			public const int backButton = 2131427449;
 			
 			// aapt resource value: 0x7f0b0019
 			public const int back_arrow = 2131427353;
@@ -486,32 +486,32 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0015
 			public const int bigbubble = 2131427349;
 			
-			// aapt resource value: 0x7f0b0083
-			public const int biologyOption = 2131427459;
+			// aapt resource value: 0x7f0b0085
+			public const int biologyOption = 2131427461;
 			
 			// aapt resource value: 0x7f0b0006
 			public const int blocking = 2131427334;
 			
-			// aapt resource value: 0x7f0b0090
-			public const int bubbleLiveFeedButton = 2131427472;
+			// aapt resource value: 0x7f0b0094
+			public const int bubbleLiveFeedButton = 2131427476;
 			
 			// aapt resource value: 0x7f0b0014
 			public const int bubble_layout = 2131427348;
 			
+			// aapt resource value: 0x7f0b0055
+			public const int buttonCancel = 2131427413;
+			
 			// aapt resource value: 0x7f0b0054
-			public const int buttonCancel = 2131427412;
+			public const int buttonSubmit = 2131427412;
 			
-			// aapt resource value: 0x7f0b0053
-			public const int buttonSubmit = 2131427411;
-			
-			// aapt resource value: 0x7f0b0064
-			public const int cancel_action = 2131427428;
+			// aapt resource value: 0x7f0b0065
+			public const int cancel_action = 2131427429;
 			
 			// aapt resource value: 0x7f0b001e
 			public const int charities_list = 2131427358;
 			
-			// aapt resource value: 0x7f0b0091
-			public const int charityButton = 2131427473;
+			// aapt resource value: 0x7f0b0095
+			public const int charityButton = 2131427477;
 			
 			// aapt resource value: 0x7f0b0023
 			public const int charity_list = 2131427363;
@@ -519,20 +519,26 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0016
 			public const int charity_selection = 2131427350;
 			
-			// aapt resource value: 0x7f0b0082
-			public const int chemistryOption = 2131427458;
+			// aapt resource value: 0x7f0b0084
+			public const int chemistryOption = 2131427460;
 			
-			// aapt resource value: 0x7f0b006c
-			public const int chronometer = 2131427436;
+			// aapt resource value: 0x7f0b006d
+			public const int chronometer = 2131427437;
 			
-			// aapt resource value: 0x7f0b0079
-			public const int continueButton = 2131427449;
+			// aapt resource value: 0x7f0b0026
+			public const int colorgrid = 2131427366;
 			
-			// aapt resource value: 0x7f0b005c
-			public const int createAccountButton = 2131427420;
+			// aapt resource value: 0x7f0b007a
+			public const int continueButton = 2131427450;
 			
-			// aapt resource value: 0x7f0b0073
-			public const int end_padder = 2131427443;
+			// aapt resource value: 0x7f0b005d
+			public const int createAccountButton = 2131427421;
+			
+			// aapt resource value: 0x7f0b0091
+			public const int dashboardgrid = 2131427473;
+			
+			// aapt resource value: 0x7f0b0074
+			public const int end_padder = 2131427444;
 			
 			// aapt resource value: 0x7f0b001d
 			public const int filter_btn = 2131427357;
@@ -540,47 +546,47 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0007
 			public const int forever = 2131427335;
 			
+			// aapt resource value: 0x7f0b0031
+			public const int frameLayout1 = 2131427377;
+			
 			// aapt resource value: 0x7f0b0030
-			public const int frameLayout1 = 2131427376;
+			public const int gridLayout1 = 2131427376;
 			
-			// aapt resource value: 0x7f0b0026
-			public const int gridLayout1 = 2131427366;
-			
-			// aapt resource value: 0x7f0b005f
-			public const int guestLoginButton = 2131427423;
+			// aapt resource value: 0x7f0b0060
+			public const int guestLoginButton = 2131427424;
 			
 			// aapt resource value: 0x7f0b0012
 			public const int heartIcon = 2131427346;
 			
-			// aapt resource value: 0x7f0b0085
-			public const int historyOption = 2131427461;
+			// aapt resource value: 0x7f0b0087
+			public const int historyOption = 2131427463;
 			
-			// aapt resource value: 0x7f0b006e
-			public const int icon = 2131427438;
+			// aapt resource value: 0x7f0b006f
+			public const int icon = 2131427439;
 			
-			// aapt resource value: 0x7f0b0072
-			public const int icon_group = 2131427442;
-			
-			// aapt resource value: 0x7f0b004e
-			public const int imageButton1 = 2131427406;
+			// aapt resource value: 0x7f0b0073
+			public const int icon_group = 2131427443;
 			
 			// aapt resource value: 0x7f0b004f
-			public const int imageButton2 = 2131427407;
+			public const int imageButton1 = 2131427407;
 			
 			// aapt resource value: 0x7f0b0050
-			public const int imageButton3 = 2131427408;
+			public const int imageButton2 = 2131427408;
 			
 			// aapt resource value: 0x7f0b0051
-			public const int imageButton4 = 2131427409;
+			public const int imageButton3 = 2131427409;
 			
-			// aapt resource value: 0x7f0b0031
-			public const int imageView1 = 2131427377;
+			// aapt resource value: 0x7f0b0052
+			public const int imageButton4 = 2131427410;
 			
-			// aapt resource value: 0x7f0b0058
-			public const int imageView2 = 2131427416;
+			// aapt resource value: 0x7f0b0032
+			public const int imageView1 = 2131427378;
 			
-			// aapt resource value: 0x7f0b006d
-			public const int info = 2131427437;
+			// aapt resource value: 0x7f0b0059
+			public const int imageView2 = 2131427417;
+			
+			// aapt resource value: 0x7f0b006e
+			public const int info = 2131427438;
 			
 			// aapt resource value: 0x7f0b0021
 			public const int info_btn = 2131427361;
@@ -588,11 +594,11 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0008
 			public const int italic = 2131427336;
 			
-			// aapt resource value: 0x7f0b0049
-			public const int lableUsername = 2131427401;
+			// aapt resource value: 0x7f0b004a
+			public const int lableUsername = 2131427402;
 			
-			// aapt resource value: 0x7f0b0057
-			public const int layout = 2131427415;
+			// aapt resource value: 0x7f0b0058
+			public const int layout = 2131427416;
 			
 			// aapt resource value: 0x7f0b000d
 			public const int level = 2131427341;
@@ -603,8 +609,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0001
 			public const int line3 = 2131427329;
 			
-			// aapt resource value: 0x7f0b0047
-			public const int linearLayout1 = 2131427399;
+			// aapt resource value: 0x7f0b0048
+			public const int linearLayout1 = 2131427400;
 			
 			// aapt resource value: 0x7f0b0017
 			public const int linearLayout2 = 2131427351;
@@ -618,29 +624,29 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b001c
 			public const int linearLayout5 = 2131427356;
 			
-			// aapt resource value: 0x7f0b004a
-			public const int linearLayoutButtons = 2131427402;
-			
-			// aapt resource value: 0x7f0b004d
-			public const int linearLayoutCancel = 2131427405;
-			
 			// aapt resource value: 0x7f0b004b
-			public const int linearLayoutSubmit = 2131427403;
+			public const int linearLayoutButtons = 2131427403;
 			
-			// aapt resource value: 0x7f0b005d
-			public const int loginButton = 2131427421;
+			// aapt resource value: 0x7f0b004e
+			public const int linearLayoutCancel = 2131427406;
 			
-			// aapt resource value: 0x7f0b0056
-			public const int lvLabel = 2131427414;
+			// aapt resource value: 0x7f0b004c
+			public const int linearLayoutSubmit = 2131427404;
+			
+			// aapt resource value: 0x7f0b005e
+			public const int loginButton = 2131427422;
+			
+			// aapt resource value: 0x7f0b0057
+			public const int lvLabel = 2131427415;
 			
 			// aapt resource value: 0x7f0b000b
 			public const int lvLayout = 2131427339;
 			
-			// aapt resource value: 0x7f0b0084
-			public const int mathOption = 2131427460;
+			// aapt resource value: 0x7f0b0086
+			public const int mathOption = 2131427462;
 			
-			// aapt resource value: 0x7f0b0066
-			public const int media_actions = 2131427430;
+			// aapt resource value: 0x7f0b0067
+			public const int media_actions = 2131427431;
 			
 			// aapt resource value: 0x7f0b0011
 			public const int moneyLayout = 2131427345;
@@ -648,47 +654,50 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0013
 			public const int moneyRaised = 2131427347;
 			
-			// aapt resource value: 0x7f0b0087
-			public const int music = 2131427463;
+			// aapt resource value: 0x7f0b008a
+			public const int music = 2131427466;
 			
 			// aapt resource value: 0x7f0b0009
 			public const int normal = 2131427337;
 			
-			// aapt resource value: 0x7f0b0089
-			public const int note1 = 2131427465;
+			// aapt resource value: 0x7f0b008c
+			public const int note1 = 2131427468;
 			
-			// aapt resource value: 0x7f0b008a
-			public const int note2 = 2131427466;
+			// aapt resource value: 0x7f0b008d
+			public const int note2 = 2131427469;
 			
-			// aapt resource value: 0x7f0b0070
-			public const int notification_background = 2131427440;
+			// aapt resource value: 0x7f0b0071
+			public const int notification_background = 2131427441;
+			
+			// aapt resource value: 0x7f0b006a
+			public const int notification_main_column = 2131427434;
 			
 			// aapt resource value: 0x7f0b0069
-			public const int notification_main_column = 2131427433;
+			public const int notification_main_column_container = 2131427433;
 			
-			// aapt resource value: 0x7f0b0068
-			public const int notification_main_column_container = 2131427432;
+			// aapt resource value: 0x7f0b005b
+			public const int passwordBox = 2131427419;
 			
-			// aapt resource value: 0x7f0b005a
-			public const int passwordBox = 2131427418;
+			// aapt resource value: 0x7f0b0083
+			public const int physicsOption = 2131427459;
 			
-			// aapt resource value: 0x7f0b0081
-			public const int physicsOption = 2131427457;
-			
-			// aapt resource value: 0x7f0b008e
-			public const int playButton = 2131427470;
+			// aapt resource value: 0x7f0b0092
+			public const int playButton = 2131427474;
 			
 			// aapt resource value: 0x7f0b000e
 			public const int questionLayout = 2131427342;
 			
+			// aapt resource value: 0x7f0b007b
+			public const int questionlayout = 2131427451;
+			
 			// aapt resource value: 0x7f0b0010
 			public const int questionsAnswered = 2131427344;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int right_icon = 2131427439;
+			// aapt resource value: 0x7f0b0070
+			public const int right_icon = 2131427440;
 			
-			// aapt resource value: 0x7f0b006a
-			public const int right_side = 2131427434;
+			// aapt resource value: 0x7f0b006b
+			public const int right_side = 2131427435;
 			
 			// aapt resource value: 0x7f0b0024
 			public const int save_btn = 2131427364;
@@ -726,20 +735,23 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0028
 			public const int setred = 2131427368;
 			
-			// aapt resource value: 0x7f0b008f
-			public const int settingsButton = 2131427471;
+			// aapt resource value: 0x7f0b0093
+			public const int settingsButton = 2131427475;
 			
-			// aapt resource value: 0x7f0b0086
-			public const int shuffleOption = 2131427462;
+			// aapt resource value: 0x7f0b0089
+			public const int settingsgrid = 2131427465;
 			
 			// aapt resource value: 0x7f0b0088
-			public const int sound = 2131427464;
+			public const int shuffleOption = 2131427464;
+			
+			// aapt resource value: 0x7f0b008b
+			public const int sound = 2131427467;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int starIcon = 2131427340;
 			
-			// aapt resource value: 0x7f0b0065
-			public const int status_bar_latest_event_content = 2131427429;
+			// aapt resource value: 0x7f0b0066
+			public const int status_bar_latest_event_content = 2131427430;
 			
 			// aapt resource value: 0x7f0b0002
 			public const int text = 2131427330;
@@ -747,26 +759,26 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b0003
 			public const int text2 = 2131427331;
 			
-			// aapt resource value: 0x7f0b0052
-			public const int textUsername = 2131427410;
+			// aapt resource value: 0x7f0b0053
+			public const int textUsername = 2131427411;
 			
 			// aapt resource value: 0x7f0b0027
 			public const int textView1 = 2131427367;
 			
-			// aapt resource value: 0x7f0b0040
-			public const int textView10 = 2131427392;
-			
 			// aapt resource value: 0x7f0b0041
-			public const int textView11 = 2131427393;
+			public const int textView10 = 2131427393;
 			
-			// aapt resource value: 0x7f0b0043
-			public const int textView12 = 2131427395;
+			// aapt resource value: 0x7f0b0042
+			public const int textView11 = 2131427394;
 			
-			// aapt resource value: 0x7f0b0045
-			public const int textView14 = 2131427397;
+			// aapt resource value: 0x7f0b0044
+			public const int textView12 = 2131427396;
 			
 			// aapt resource value: 0x7f0b0046
-			public const int textView15 = 2131427398;
+			public const int textView14 = 2131427398;
+			
+			// aapt resource value: 0x7f0b0047
+			public const int textView15 = 2131427399;
 			
 			// aapt resource value: 0x7f0b001b
 			public const int textView2 = 2131427355;
@@ -774,38 +786,38 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b001f
 			public const int textView3 = 2131427359;
 			
-			// aapt resource value: 0x7f0b0037
-			public const int textView4 = 2131427383;
-			
 			// aapt resource value: 0x7f0b0038
-			public const int textView5 = 2131427384;
+			public const int textView4 = 2131427384;
 			
-			// aapt resource value: 0x7f0b003a
-			public const int textView6 = 2131427386;
+			// aapt resource value: 0x7f0b0039
+			public const int textView5 = 2131427385;
 			
-			// aapt resource value: 0x7f0b003c
-			public const int textView7 = 2131427388;
+			// aapt resource value: 0x7f0b003b
+			public const int textView6 = 2131427387;
 			
-			// aapt resource value: 0x7f0b003e
-			public const int textView8 = 2131427390;
+			// aapt resource value: 0x7f0b003d
+			public const int textView7 = 2131427389;
 			
-			// aapt resource value: 0x7f0b006b
-			public const int time = 2131427435;
+			// aapt resource value: 0x7f0b003f
+			public const int textView8 = 2131427391;
+			
+			// aapt resource value: 0x7f0b006c
+			public const int time = 2131427436;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int title = 2131427332;
 			
-			// aapt resource value: 0x7f0b0048
-			public const int titleForgotPassword = 2131427400;
+			// aapt resource value: 0x7f0b0049
+			public const int titleForgotPassword = 2131427401;
 			
-			// aapt resource value: 0x7f0b0055
-			public const int titleLevelUp = 2131427413;
+			// aapt resource value: 0x7f0b0056
+			public const int titleLevelUp = 2131427414;
 			
 			// aapt resource value: 0x7f0b000f
 			public const int trophyIcon = 2131427343;
 			
-			// aapt resource value: 0x7f0b0059
-			public const int usernameBox = 2131427417;
+			// aapt resource value: 0x7f0b005a
+			public const int usernameBox = 2131427418;
 			
 			static Id()
 			{
