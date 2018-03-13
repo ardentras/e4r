@@ -11,6 +11,12 @@
     padding: 0 30px;
 }
 
+.helptext {
+    max-width: 300px;
+    border: 1px solid rgb(207, 207, 207);
+    padding: 10px 20px;
+}
+
 .selection {
     display: flex;
     flex-flow: column;
@@ -73,7 +79,20 @@
     align-items: center;
 }
 
-.choicelabel:hover, .nextbtn:hover {
+.helpbtn {
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 16px;
+    margin: 10px 0;
+    padding: 5px 20px;
+    background: white;
+    max-width: 200px;
+    display: flex;
+    color: #141b22;
+    justify-content: center;
+    align-items: center;
+}
+
+.choicelabel:hover, .nextbtn:hover, .helpbtn:hover  {
     cursor: pointer;
 }
 
@@ -198,7 +217,7 @@
         position: relative;
         margin-bottom: 5px;
     }
-    .nextbtn {
+    .nextbtn, .helpbtn {
         padding: 1% 10px;
         width: 100%;
         max-width: none;

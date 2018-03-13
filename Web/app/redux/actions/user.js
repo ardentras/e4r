@@ -76,7 +76,8 @@ export function handleNames(fname, lname, object) {
         };
         const result = await efrApi.updateUser(user);
         if (result.data.response === "Success") {
-            dispatch(setUserObject(result.data.userobject));
+            iCookie.setStorage("userobject", result.data.user_object);
+            dispatch(setUserObject(result.data.userobject));         
         }
     }
 }

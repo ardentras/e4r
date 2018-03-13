@@ -32,3 +32,6 @@ export const RESET_ANSWER = "RESET_ANSWER";
 export const RESET_COMPLETE = "RESET_COMPLETE";
 export const SET_F_NAME = "SET_F_NAME";
 export const SET_L_NAME = "SET_L_NAME";
+export const SHOW_HELP = "SHOW_HELP";
+export const HIDE_HELP = "HIDE_HELP";
+export const SET_HELP_TEXT = "SET_HELP_TEXT";
