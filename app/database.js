@@ -212,7 +212,7 @@ class TDatabase {
             await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
                                      .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
 
-            client.redirect("http://ec2-52-40-134-152.us-west-2.compute.amazonaws.com/login")
+            client.json({response: "Success", type: "PUT", code: 200, reason: "Verification ID accepted"})
         }
     }
 
@@ -276,7 +276,7 @@ class TDatabase {
             await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
                                      .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
 
-            client.redirect("http://ec2-52-40-134-152.us-west-2.compute.amazonaws.com/login")
+            client.json({response: "Success", type: "PUT", code: 200, reason: "Password reset accepted"})
         }
     }
 
