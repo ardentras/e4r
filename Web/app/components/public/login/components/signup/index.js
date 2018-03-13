@@ -10,9 +10,9 @@ const Signup = props => (
         <span>email:</span>
         <input type="email" className={Styles.inputs} name="email" placeholder="email" required/>
         <span>username:</span>
-        <input className={Styles.inputs} type="text" name="uid" placeholder="username" required/>
+        <input className={Styles.inputs} type="text" name="username" placeholder="username" required/>
         <span>password:</span>
-        <input className={Styles.inputs}  type="password" name="pw" placeholder="password" required/>
+        <input className={Styles.inputs}  type="password" name="password" placeholder="password" required/>
         <input className={Styles.sbtn}  type="submit" value="Sign Up"/>
         <span onClick={props.func.signup} className={Styles.returnbtn}>already have an account?</span>
     </form>

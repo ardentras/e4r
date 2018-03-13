@@ -11,9 +11,9 @@ const Return = props =>(
         {props.SIGN_SUC && <span className={Styles.auth}>Please verify your email...</span>}
         {props.AUTHING && <span className={Styles.auth}>Authenicating...</span> }
         <span>username:</span>
-        <input className={Styles.inputs} type="text" name="uid" placeholder="username/email" required/>
+        <input className={Styles.inputs} type="text" name="username" placeholder="username/email" required/>
         <span>password:</span>
-        <input className={Styles.inputs}  type="password" name="pw" placeholder="password" required/>
+        <input className={Styles.inputs}  type="password" name="password" placeholder="password" required/>
         <Link to="/contacts">forgot password?</Link>
         <input className={Styles.sbtn}  type="submit" value="Log In"/>
         <span onClick={props.func.signup} className={Styles.signupbtn}>Sign Up</span>
