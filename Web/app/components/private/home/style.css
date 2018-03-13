@@ -87,8 +87,8 @@
 .activity {
     display: flex;
     flex-flow: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     margin-bottom: 5px;
@@ -181,6 +181,7 @@
     .heartcontainer {
         height: 30%;
         padding: 10px 0;
+        max-height: 121px;
     }
     .uid {
         font-size: 4vmax;

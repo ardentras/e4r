@@ -161,7 +161,7 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private void CreateComponent()
         {
             LinearLayout newlayout = new LinearLayout(_ctx);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, 150, 1f);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, 125, 1f);
             newlayout.SetPadding(0, 20, 0, 20);
             newlayout.LayoutParameters = param;
             newlayout.SetGravity(GravityFlags.Center);

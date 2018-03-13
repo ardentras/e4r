@@ -21,6 +21,9 @@ const efrApi = (()=>{
     let _signupPath = new WeakMap();
     let _logoutPath = new WeakMap();
     let _updatePath = new WeakMap();
+    let _resetPWPath = new WeakMap();
+    let _verifyPW = new WeakMap();
+    let _questionHelp = new WeakMap();
 	class efrApi {
 		constructor() {
             _host.set(this, "localhost");
@@ -32,6 +35,9 @@ const efrApi = (()=>{
             _signupPath.set(this, undefined);
             _logoutPath.set(this, undefined);
             _updatePath.set(this, undefined);
+            _resetPWPath.set(this, undefined);
+            _verifyPW.set(this, undefined);
+            _questionHelp.set(this, undefined);
             iAuth.config({
                 host: _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this),
                 timeout: 10000
@@ -39,7 +45,7 @@ const efrApi = (()=>{
 		}
         config({host="localhost", port=8080, protocol="http", gamePath=undefined, 
                 renewPath=undefined, loginPath=undefined, timeout=1000, headers=undefined,
-                signupPath=undefined, logoutPath=undefined, updatePath=undefined}) {
+                signupPath=undefined, logoutPath=undefined, updatePath=undefined, resetPWPath=undefined, verifyPW=undefined, questionHelp=undefined}) {
             _host.set(this, host);
             _port.set(this, port);
             _protocol.set(this, protocol);
@@ -49,6 +55,9 @@ const efrApi = (()=>{
             _signupPath.set(this, signupPath);
             _logoutPath.set(this, logoutPath);
             _updatePath.set(this, updatePath);
+            _resetPWPath.set(this, resetPWPath);
+            _verifyPW.set(this, verifyPW);
+            _questionHelp.set(this, questionHelp);
             iAuth.config({
                 host: _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this),
                 timeout: timeout,
@@ -95,6 +104,18 @@ const efrApi = (()=>{
         updateUser(user) {
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _updatePath.get(this);
             return Axios.put(apiRoute, {user});
+        }
+        resetPWRequest(user) {
+            const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _resetPWPath.get(this);
+            return Axios.post(apiRoute, {user});
+        }
+        resetPW(user) {
+            const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _verifyPW.get(this);
+            return Axios.put(apiRoute, {user});
+        }
+        getHelp(qid) {
+            const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _questionHelp.get(this);
+            return Axios.put(apiRoute, {question_id: qid});
         }
         renewSession() {
             // const session = iCookie.get("session");

@@ -6,10 +6,16 @@ const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
 const SERVER_HOSTNAME = "http://34.216.143.255:3002"
+const WEBSITE_HOSTNAME = "http://52.40.134.152"
 
 class TDatabase {
-	// Creates the connection to the database given the passed parameters.
+    	// Creates the connection to the database given the passed parameters.
     constructor(config) {
+        this.bubbleFeedIsActive = true;
+        this.bubbleCharity = "";
+        this.recentDonations = [];
+        this.totalRaised = 0;
+
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
             if (err) {
@@ -59,6 +65,37 @@ class TDatabase {
         console.log("Confirmation Email Sent: " + data.email);
     }
 
+    // Sends a confirmation email to the user to confirm the email used to create their account.
+    recoveryEmail (data, id) {
+        var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: adminEmail.username,
+                pass: adminEmail.password
+            }
+            });
+        let HelperOptions = {
+            from: "Education For Revitalization <" + adminEmail.username + ">",
+            to: data.email,
+            subject: "Password Reset",
+            html: "<p>Hello " + data.username + ",</p>" +
+                  "<p style='margin-left: 20px'>You are receiving this email because someone recently requested a password reset for your E4R account.</p>" +
+                  "<p style='margin-left: 20px'>Username: <span style='margin-left: 100px'>" + data.username + "</span></p>" +
+                  "<p style='margin-left: 20px'>Email: <span style='margin-left: 100px'>" + data.email + "</span></p>" +
+                  "<p style='margin-left: 20px'><a href='" + WEBSITE_HOSTNAME + "/password_reset/?id=" + id + "'>Click Here</a> to reset your password.</p>" +
+                  "<p style='margin-left: 20px'>If this email was sent in error, please contact E4R support at <a href=\"mailto:e4rsupport@gmail.com\">e4rsupport@gmail.com</a>.</p>" +
+                  "<p>Sincerely,</p>" +
+                  "<p style='font-size: 90%;'>The E4R Team</p>"
+        };
+        transporter.sendMail(HelperOptions, (err, response)=>{
+            if(err) {
+                console.log('Password Reset Email failed: ' + data.email);
+                return false;
+            }
+        });
+        console.log("Password Reset Email Sent: " + data.email);
+    }
+
 	// Verifies an email has no special characters
     hasSpecialChar (data) {
         let check = false;
@@ -77,6 +114,15 @@ class TDatabase {
             check = true;
         }
         return check;
+    }
+
+    async createRecoveryID(id) {
+        var randNum = Math.round((Math.random() * 1000000000) % 2147483647);
+        let res2 = await this.db.request().input('userid', mssql.NVarChar(User.USERNAME_LENGTH), id)
+                                            .input('recoveryid', mssql.Int, randNum)
+                                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
+
+        return randNum;
     }
 
     // Attempts to create an account with the given username, email, and password
@@ -115,14 +161,11 @@ class TDatabase {
                                             .input('newuo', mssql.VarChar(5000), uostring)
                                             .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
 
-                    var randNum = Math.round((Math.random() * 1000000000) % 2147483647);
                     let res = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
                                                         .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                                         .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email");
 
-                    let res2 = await this.db.request().input('userid', mssql.NVarChar(User.USERNAME_LENGTH), res.recordsets[0][0].UserID)
-                                                        .input('recoveryid', mssql.Int, randNum)
-            				                            .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
+                    let randNum = await this.createRecoveryID(res.recordsets[0][0].UserID);
 
                     console.log('SIGNUP SUCCEED Email: ' + data.email);
                     client.json({response: "Succeed", type: "POST", code: 201, action: "SIGNUP", verifyID: randNum});
@@ -165,13 +208,80 @@ class TDatabase {
 	// curl -XGET localhost:3002/api/verify_email/${VerifyID}
     async verifyEmail(client, data) {
         let res = await this.db.request().input('verifyid', mssql.Int, data.VerifyID)
-                                            .query("DELETE FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
+                                            .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
 
         console.log(data.VerifyID);
         if (res.rowsAffected == 0) {
             client.json({response: "Failed", type: "GET", code: 100, reason: "That ID was not found."});
         } else {
-            client.redirect("http://ec2-52-40-134-152.us-west-2.compute.amazonaws.com/login")
+            await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                     .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+
+            client.json({response: "Success", type: "PUT", code: 200, reason: "Verification ID accepted"})
+        }
+    }
+
+    // Resends the verification email for the specified email address
+    //
+    // Example:
+    // curl -XPUT localhost:3002/api/resend_verify -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen", "email":"shaunrasmusen@gmail.com"}}
+    async resendVerify(client, data) {
+        let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                                        .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                        .query("SELECT UserID FROM EFRAcc.Users WHERE EmailAddr = @email AND Username = @username;");
+
+        if (res.rowsAffected == 0) {
+            client.json({response: "Failed", type: "PUT", code: 100, action: "RESEND_VERIFY", reason: "That username/email was not found."});
+        } else {
+            let randNum = await this.createRecoveryID(res.recordsets[0][0].UserID);
+
+            client.json({response: "Succeed", type: "PUT", code: 201, action: "RESEND_VERIFY", verifyID: randNum});
+            this.confirmationEmail(data, randNum);
+        }
+    }
+
+    // Resends the verification email for the specified email address
+    //
+    // Example:
+    // curl -XPOST localhost:3002/api/reset_password -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen", "email":"shaunrasmusen@gmail.com"}}
+    async resetPassword(client, data) {
+        let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
+                                        .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
+                                        .query("SELECT UserID FROM EFRAcc.Users WHERE EmailAddr = @email AND Username = @username;");
+
+        if (res.rowsAffected == 0) {
+            client.json({response: "Failed", type: "PUT", code: 100, action: "RESET_PASSWORD", reason: "That username/email was not found."});
+        } else {
+            let randNum = await this.createRecoveryID(res.recordsets[0][0].UserID);
+
+            client.json({response: "Succeed", type: "PUT", code: 201, action: "RESET_PASSWORD", verifyID: randNum});
+            this.recoveryEmail(data, randNum);
+        }
+    }
+
+    // Attempts to create an account with the given username, email
+	//
+	// Example:
+	// curl -XPUT localhost:3002/api/verify_password_reset -H 'Content-Type: application/json' -d '{"user":{"verifyid":302358324, "password":"defaultpass"}}'
+    async verifyPasswordReset(client, data) {
+        let res = await this.db.request().input('verifyid', mssql.Int, data.VerifyID)
+                                            .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
+
+        console.log(data.VerifyID);
+        if (res.rowsAffected == 0) {
+            client.json({response: "Failed", type: "GET", code: 100, reason: "That ID was not found."});
+        } else {
+            let salt = "qoi43nE5iz0s9e4?309vzE()FdeaB420"
+            let hashedPassword = shajs('sha256').update(data.password + salt).digest('hex');
+
+            await this.db.request().input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
+                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                    .query("UPDATE EFRAcc.Users SET PasswordHash = @password WHERE UserID = @userid");
+
+            await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                     .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+
+            client.json({response: "Success", type: "PUT", code: 200, reason: "Password reset accepted"})
         }
     }
 
@@ -179,7 +289,7 @@ class TDatabase {
 	//
 	// Example:
 	// curl -XPOST localhost:3002/api/login -H 'Content-Type: application/json' -d '{"user":{"username":"shaunrasmusen","password":"defaultpass"}}'
-    async attemptLogin (client, data) {
+    async attemptLogin(client, data) {
         try {
             let res = await this.db.request().input('username', mssql.NVarChar(User.EMAIL_LENGTH), data.username)
     				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username");
@@ -189,7 +299,7 @@ class TDatabase {
         				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
 
                 if (res2.rowsAffected > 0) {
-                    client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified, login failed"});
+                    client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified or password reset. Login failed"});
                     return;
                 }
 
@@ -407,16 +517,42 @@ class TDatabase {
         }
 	}
 
+    // Returns donations from the past minute if bubble live feed is activated. Otherwise it 404s
+    //
+    // curl -XGET localhost:3002/api/bubble_feed
+    async bubbleFeed(client) {
+        if (this.bubbleFeedIsActive) {
+            var filtertime = Date.now() - (300 * 1000);
+
+            this.recentDonations = this.recentDonations.filter(element => element.timestamp > filtertime);
+
+            client.json({response: "Success", type: "GET", code: 200, total: this.totalRaised, data: this.recentDonations})
+        } else {
+            client.sendStatus(404);
+        }
+    }
+
     // Returns a new block of questions from the database
     //
     // Example:
-    // curl -XPUT localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}, "game": {"questions":
-    //                                                                                      [{"QuestionID":{id},"QuestionText":"{text}","QuestionOne":"{answer1}","QuestionTwo":"{answer2}","QuestionThree":"{answer3}", "QuestionFour":"{answer4}","CorrectAnswer":"{correct_answer}","StatsOne":"{statsAnswer1}","StatsTwo":"{statsAnswer2}","StatsThree":"{statsAnswer3}","StatsFour":"{statsAnswer4}","QuestionBlockID":"{block_id}"},{...}]}}'
+    // curl -XPUT localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}, "donated": "175"},
+    //                                                                                      "game": {"questions": [{"QuestionID":{id},"QuestionText":"{text}","QuestionOne":"{answer1}","QuestionTwo":"{answer2}","QuestionThree":"{answer3}", "QuestionFour":"{answer4}","CorrectAnswer":"{correct_answer}","StatsOne":"{statsAnswer1}","StatsTwo":"{statsAnswer2}","StatsThree":"{statsAnswer3}","StatsFour":"{statsAnswer4}","QuestionBlockID":"{block_id}"},{...}]}}'
     async requestQuestionBlock(client, data, gameData) {
         try {
             data.userobject = await this.verifyQuestionBlocks(client, data);
         } catch (err) {
             client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
+        }
+
+        if (data.donated != undefined) {
+            var donation = parseInt(data.donated, 10);
+
+            if (donation > 0 && data.userobject.user_data.selected_charity == this.bubbleCharity) {
+                var currtime = Date.now();
+
+                this.totalRaised += donation;
+                this.recentDonations.push({username: data.userobject.user_data.username, donated: donation, timestamp: currtime});
+            }
         }
 
         if (gameData != undefined) {
@@ -474,6 +610,8 @@ class TDatabase {
         let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
                                             .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
 
+        console.log(data);
+        console.log(res);
         if (res.rowsAffected == 0) {
 	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
 	    } else {
@@ -502,8 +640,7 @@ class TDatabase {
         return data.userobject;
     }
 
-    // Attempts to log the user out. If successful, user object will be saved,
-	// and current session token will expire.
+    // Returns a help block if it exists for the requested question.
 	//
 	// curl -XPUT localhost:3002/api/q/request_help -H 'Content-type: application/json' -d '{"question_id":0}'
     async requestHelp(client, data) {

@@ -54,7 +54,8 @@ namespace EFRFrontEndTest2
                     if (responce.m_responce == "Success")
                     {
                         m_database.GetUserObject.Save(this);
-                        var intent = new Intent(this, typeof(UserDashboardActivity));
+                        //changed into dashboard activity for new userdashboard, only test
+                        var intent = new Intent(this, typeof(DashboardActivity));
                         StartActivity(intent);
                     }
                     else
@@ -84,13 +85,15 @@ namespace EFRFrontEndTest2
                     alert.SetMessage("Your progress will not be saved");
                     alert.SetButton("OK", (c, ev) =>
                     {
-                        var intent = new Intent(this, typeof(UserDashboardActivity));
+                        //changed into dashboard activity for new userdashboard, only test
+                        var intent = new Intent(this, typeof(DashboardActivity));
                         StartActivity(intent);
                     });
                     alert.Show();
                     alert.DismissEvent += (sndr, eF) =>
                     {
-                        var intent = new Intent(this, typeof(UserDashboardActivity));
+                        //changed into dashboard activity for new userdashboard, only test
+                        var intent = new Intent(this, typeof(DashboardActivity));
                         StartActivity(intent);
                     };
                     clicked = false;

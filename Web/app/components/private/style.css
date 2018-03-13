@@ -1,8 +1,8 @@
 .private {
     position: relative;
-    height: calc(100% - 140px);
-    max-height: calc(100% - 140px);
-    background: #f1f1f1;
+    height: 100%;
+    background: #FFFFFF;
+    overflow-y: scroll;
 }
 
 .contents {
@@ -10,7 +10,8 @@
     flex-flow: row nowrap;
     position: relative;
     height: 100%;
-    background: #f1f1f1;
+    background: #FFFFFF;
+    min-height: calc(100vh - 200px);
 }
 
 .levelup {
@@ -73,7 +74,6 @@
     .private {
         display: flex;
         width: 100%;
-        padding-bottom: 58px;
     }
     .modalbtn {
         font-size: 2vmax;
@@ -90,7 +90,6 @@
 }
 
 @media (max-width: 420px) {
-    .private{
-        position: fixed;
-    }
+    /* .private{
+    } */
 }

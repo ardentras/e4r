@@ -18,9 +18,9 @@
             android:id="@+id/linearLayout3">
             <ImageButton
                 android:src="@drawable/back_arrow"
-                android:layout_width="100px"
-                android:layout_height="100px"
-                android:padding="30px"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
                 android:onClick="back_arrow"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/linearLayout4"
-            android:layout_marginBottom="2px"
+            android:layout_marginBottom="1dp"
             android:minWidth="25px"
             android:minHeight="25px">
             <TextView
@@ -131,9 +131,10 @@
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:textColor="#081523"
+            android:textColor="#FFFFFF"
             android:layout_height="match_parent"
             android:id="@+id/save_btn_ext"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="#2192FC" />
     </LinearLayout>
 </LinearLayout>

@@ -18,13 +18,18 @@ API Calls:
           API Welcome           -> hostname:port/api                -> ALL
           Sign Up               -> hostname:port/api/signup         -> POST
           Check Username        -> hostname:port/api/check_username -> POST
+          Resend Verify         -> hostname:port/api/resend_verify  -> PUT
+          Password Reset        -> hostname:port/api/reset_password -> POST
+          Password Reset Verify -> hostname:port/api/verify_password_reset -> PUT
           Log In                -> hostname:port/api/login          -> POST
           Verify Email          -> hostname:port/api/verify_email/${VerifyID} -> GET
           Renew Session         -> hostname:port/api/renew          -> PUT
           Update User Object    -> hostname:port/api/update_uo      -> PUT
           Log Out               -> hostname:port/api/logout         -> PUT
           Delete User           -> hostname:port/api/delete_user    -> DELETE
+          Bubble Live Feed      -> hostname:port/api/bubble_feed    -> GET
           Request Question Block-> hostname:port/api/q/request_block-> PUT
+          Request Question Help -> hostname:port/api/q/request_help -> PUT
 
 Debugging API Calls:
           Display Users Information -> hostname:port/test/display -> GET
@@ -41,19 +46,47 @@ Debugging API Calls:
         "email": "test@test.com",
         "first_name": "John",
         "last_name": "Doe",
-        "charity_names": ["ACME Charity, LLC"]
+        "selected_charity": "",
+        "favorite_charities": [""]
     },
     "game_data": {
         "subject_name": "Math",
         "subject_id": 1,
         "difficulty": 0,
         "totalQuestions": 0,
-        "totalDonated": 0.0,
+        "totalDonated": 0,
         "blocksRemaining": 0,
         "completed_blocks": [1, 3, 4]
     },
     "timestamp":"2018-01-24T02:06:58+00:00"
 }
+curl -XPUT localhost:3002/api/q/request_block
+                -H 'Content-Type: application/json'
+                -d '{
+                        "user": {
+                            "session": "254a031f-522c-4f39-be2c-0e4251973e96",
+                            "userobject": {
+                                "user_data": {
+                                    "username": "abcde12345",
+                                    "email": "abcde12345@gmail.com",
+                                    "first_name": "",
+                                    "last_name": "",
+                                    "selected_charity": "",
+                                    "favorite_charities": [""]
+                                },
+                                "game_data": {
+                                    "subject_name": "",
+                                    "subject_id": 1,
+                                    "difficulty": 0,
+                                    "totalQuestions": 0,
+                                    "totalDonated": 0,
+                                    "blocksRemaining": 0,
+                                    "completed_blocks": []
+                                },
+                                "timestamp": "2018-03-07T04:11:55.847Z"
+                            }
+                        }
+                    }'
 ```
 
 #### SIGN UP REQUEST:
@@ -74,7 +107,7 @@ On successful signup:
   "type": "POST",
   "code": 201,
   "action": "SIGNUP"
-  "verifyID": ${verifyID}
+  "verifyID": {verifyID}
 }
 
 On user already exists:
@@ -146,7 +179,97 @@ On invalid verify ID:
 }
 
 On valid verify ID:
-    HTTP 302: Redirects to /login
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    reason: "Verification ID accepted"
+}
+```
+#### RESEND VERIFY REQUEST:
+```
+{
+    "user" : {
+        "username": {username},
+        "email": {email}
+    }
+}
+```
+#### RESEND VERIFY RESPONSE:
+```
+On invalid username and/or email:
+{
+    response: "Failed",
+    type: "PUT",
+    code: 100,
+    action: "RESEND_VERIFY",
+    reason: "That username/email was not found."
+}
+
+On valid username and email:
+{
+    response: "Succeed",
+    type: "PUT",
+    code: 201,
+    action: "RESEND_VERIFY",
+    verifyID: {verifyID}
+}
+```
+#### PASSWORD RESET REQUEST:
+```
+{
+    "user" : {
+        "username": {username},
+        "email": {email}
+    }
+}
+```
+#### PASSWORD RESET RESPONSE:
+```
+On invalid username and/or email:
+{
+    response: "Failed",
+    type: "PUT",
+    code: 100,
+    action: "RESET_PASSWORD",
+    reason: "That username/email was not found."
+}
+
+On valid username and email:
+{
+    response: "Succeed",
+    type: "PUT",
+    code: 201,
+    action: "RESET_PASSWORD",
+    verifyID: {verifyID}
+}
+```
+#### VERIFY PASSWORD RESET REQUEST:
+```
+{
+    "user": {
+        "verifyid": {verifyID},
+        "password": "defaultpass"
+    }
+}
+```
+#### VERIFY PASSWORD RESET RESPONSE:
+```
+On invalid verify ID:
+{
+    response: "Failed",
+    type: "GET",
+    code: 100,
+    reason: "That ID was not found."
+}
+
+On valid verify ID:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    reason: "Password reset accepted"
+}
 ```
 #### SESSION RENEW REQUEST:
 ```
@@ -252,6 +375,26 @@ On User Object out of date:
     userobject: {user_object}
 }
 ```
+#### BUBBLE_FEED RESPONSE:
+```
+If active:
+{
+    response: "Success",
+    type: "GET",
+    code: 200,
+    total: 5000
+    data:   [
+                {
+                    username: ${username},
+                    donated: 150,
+                    timestamp: 158329855237
+                    },
+                {...},
+            ]
+}
+
+If inactive, call will return 404
+```
 ## Misc Requests:
 #### CHECK_USERNAME REQUEST:
 ```
@@ -313,7 +456,8 @@ On valid session token:
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object}
+        "userobject": {user_object},
+        "donated": "150"
     }
 }
 
@@ -322,7 +466,8 @@ OR
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object}
+        "userobject": {user_object},
+        "donated": "150"
     },
     "game": {
         "questions": [
@@ -370,5 +515,30 @@ OR
         {...},
     ],
     user_object: {user_object}
+}
+```
+#### REQUEST_HELP REQUEST:
+```
+{
+    "question_id": 0
+}
+```
+#### REQUEST_HELP RESPONSE:
+```
+On question contains help:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    action: "REQUEST_HELP",
+    data: "{help_text}"}
+
+One question doesn't have help:
+{
+    response: "Failed",
+    type: "PUT",
+    code: 100,
+    action: "REQUEST_HELP",
+    reason: "This question does not contain a help topic."
 }
 ```
