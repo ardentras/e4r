@@ -179,7 +179,12 @@ On invalid verify ID:
 }
 
 On valid verify ID:
-    HTTP 302: Redirects to /login
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    reason: "Verification ID accepted"
+}
 ```
 #### RESEND VERIFY REQUEST:
 ```
@@ -259,7 +264,12 @@ On invalid verify ID:
 }
 
 On valid verify ID:
-    HTTP 302: Redirects to /login
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    reason: "Password reset accepted"
+}
 ```
 #### SESSION RENEW REQUEST:
 ```
