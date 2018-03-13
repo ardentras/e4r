@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { handlerDeAuth } from "../../../redux/actions/auth";
 import { handleCompleteReset } from "../../../redux/actions/questions";
 import { handleNames, resetPWRequest } from "../../../redux/actions/user";
+import iCookie from "../../../libraries/iCookie";
 
 class Settings extends React.Component {
     constructor(props) {
@@ -69,7 +70,7 @@ class Settings extends React.Component {
                 </div>
                 <div className={[Styles.tokenfield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>SESSION</span>
-                    <span id={Styles.token} className={Styles.fieldinput}>awdawdawdawdawd-adwdawdawd-awdawdawd23</span>
+                    <span id={Styles.token} className={Styles.fieldinput}>{iCookie.get("session")}</span>
                 </div>
                 <div className={[Styles.pwfield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>PASSWORD</span>
