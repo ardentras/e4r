@@ -40,7 +40,6 @@ namespace EFRFrontEndTest2.Assets
             m_activity = activity;
             m_userObject = SingleUserObject.getObject();
         }
-
         public async Task<Responce> RetreaveQuestionBlock()
         {
             string stream = "{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}";
@@ -114,7 +113,7 @@ namespace EFRFrontEndTest2.Assets
         private void CreateUserObject(JsonValue json)
         {
             m_userObject.SessionID = json["session_id"];
-
+            m_userObject.Json = json;
             JsonValue user = json["user_object"];
             m_userObject.Timestamp = user["timestamp"];
 
@@ -122,6 +121,14 @@ namespace EFRFrontEndTest2.Assets
             m_userObject.BlocksRemaining = game["blocksRemaining"];
             //m_userObject.CompletedBlocks =
             //JsonArray stuff = new JsonArray(game["completed_blocks"]);
+            JsonArray array = (JsonArray)game["completed_blocks"];
+            int[] numbers = new int[array.Count];
+
+            // Extract numbers from JSON array.
+            for (int i = 0; i < array.Count; ++i)
+            {
+                //numbers[i] = array.;
+            }
             m_userObject.Difficulty = game["difficulty"];
             m_userObject.SubjectID = game["subject_id"];
             m_userObject.SubjectName = game["subject_name"];
