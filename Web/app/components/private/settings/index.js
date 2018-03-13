@@ -49,8 +49,8 @@ class Settings extends React.Component {
     render() {
         return (
             <div className={Styles.settings}>
-                <div className={Styles.initials}>K.X</div>
-                <div className={Styles.level}>Level 1</div>
+                <div className={Styles.initials}>{this.props.user.user_data.first_name[0] + "." + this.props.user.user_data.last_name[0]}</div>
+                <div className={Styles.level}>{"Level " + (parseInt(this.props.user.game_data.difficulty) + 1)}</div>
                 <div className={[Styles.fnamefield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>FIRST NAME</span>
                     <input id={Styles.fname} className={Styles.fieldinput} type="text" defaultValue={this.props.user.user_data.first_name}/>
