@@ -25,7 +25,7 @@ class Settings extends React.Component {
         const fname = document.getElementById(Styles.fname);
         const lname = document.getElementById(Styles.lname);
         const charity = document.getElementById(Styles.charity);
-        if(fname && lname) {
+        if(fname && lname && charity) {
             fname.value = this.props.user.user_data.first_name;
             lname.value = this.props.user.user_data.last_name;
             charity.innerHTML = this.props.user.user_data.charity_name ? this.props.user.user_data.charity_name : "None";
@@ -47,7 +47,6 @@ class Settings extends React.Component {
         }
     }
     render() {
-        console.log(this.props.user);
         return (
             <div className={Styles.settings}>
                 <div className={Styles.initials}>K.X</div>
