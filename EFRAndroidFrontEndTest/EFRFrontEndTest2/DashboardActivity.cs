@@ -76,8 +76,8 @@ namespace EFRFrontEndTest2
             TextView user_solved = FindViewById<TextView>(Resource.Id.total_solved);
             TextView user_level = FindViewById<TextView>(Resource.Id.user_level);
 
-            user_fname.Text = uo.FirstName;
-            user_initials.Text = new StringBuilder().Append(uo.FirstName[0]).Append(".").Append(uo.LastName[0]).ToString();
+            user_fname.Text = (uo.FirstName.Length > 0 ? uo.FirstName : uo.Username);
+            user_initials.Text = (new StringBuilder().Append((uo.FirstName.Length > 0 ? uo.FirstName[0] : 'N')).Append(".").Append((uo.LastName.Length > 0 ? uo.LastName[0] : 'U')).ToString());
             user_donated.Text = new StringBuilder().Append("$").Append(" ").Append(uo.TotalDonated).ToString();
             user_solved.Text = uo.TotalQuestions.ToString();
             user_level.Text = uo.Difficulty.ToString();
