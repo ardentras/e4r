@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using EFRFrontEndTest2.Assets.Charities_Selection_Layout;
+using EFRFrontEndTest2.Assets;
 
 
 /***************************************************************************************************************************
@@ -97,7 +98,8 @@ namespace EFRFrontEndTest2
             SetContentView(Resource.Layout.CharitySelectionScreen);
             //Initialize the views with their click handlers
             initButtonHandlers();
-            
+            //set background to dynamic choice
+            setBackground();
             //get the scrollview for displaying the list of charities.
             LinearLayout charities_list = FindViewById<LinearLayout>(Resource.Id.charity_list);
             //add the charities to the list.  (right now it's using static data, to be dynamic just loop through an array and add it to the list, but make sure the first element is None)
@@ -247,6 +249,14 @@ namespace EFRFrontEndTest2
         private void HandleBackBtn(object sender, EventArgs e)
         {
             base.OnBackPressed();
+        }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = FindViewById<LinearLayout>(Resource.Id.charity_selection);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
     p1:background="@android:color/background_dark"
-    p1:id="@+id/gridLayout1">
+    p1:id="@+id/colorgrid">
     <TextView
         p1:text="backgrounds"
         p1:textAppearance="?android:attr/textAppearanceLarge"

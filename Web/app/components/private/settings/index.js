@@ -48,9 +48,13 @@ class Settings extends React.Component {
         }
     }
     render() {
+        let initials = this.props.user.user_data.username;
+        if (this.props.user.user_data.first_name && this.props.user.user_data.first_name !== "" && this.props.user.user_data.last_name && this.props.user.user_data.last_name !== "") {
+            initials = this.props.user.user_data.first_name[0] + "." + this.props.user.user_data.last_name[0];
+        }
         return (
             <div className={Styles.settings}>
-                <div className={Styles.initials}>{this.props.user.user_data.first_name[0] + "." + this.props.user.user_data.last_name[0]}</div>
+                <div className={Styles.initials}>{initials}</div>
                 <div className={Styles.level}>{"Level " + (parseInt(this.props.user.game_data.difficulty) + 1)}</div>
                 <div className={[Styles.fnamefield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>FIRST NAME</span>
