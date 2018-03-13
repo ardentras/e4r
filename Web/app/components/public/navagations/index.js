@@ -16,7 +16,6 @@ import Styles from "./style.css";
 class Navagation extends React.Component {
 	constructor(props) {
 		super(props);
-		this.scroll = null;
 	}
 	render() {
 		return (
@@ -29,16 +28,18 @@ class Navagation extends React.Component {
 							<span>Education for Revitalization</span>
 						</div>
 						<div className={Styles.navagations}>
-							{Routes.map((elem,index)=>(
-								elem.label === "Login" && this.props.IS_AUTH ?
-								<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + this.props.uid}</NavLink> :
-								<NavLink 
-								key={index} 
-								exact={elem.exact} 
-								to={elem.path} 
-								className={Styles.navselector} 
-								activeClassName={Styles.activelink}>{elem.label}</NavLink>
-							))}
+							{Routes.map((elem,index)=> {
+								if (elem.label !== "Password Reset") {
+									return (elem.label === "Login" && this.props.IS_AUTH ?
+									<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + this.props.uid}</NavLink> :
+									<NavLink 
+									key={index} 
+									exact={elem.exact} 
+									to={elem.path} 
+									className={Styles.navselector} 
+									activeClassName={Styles.activelink}>{elem.label}</NavLink>)
+								}
+							})}
 						</div>
 					</div>
 				</div>

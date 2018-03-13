@@ -1,0 +1,11 @@
+{
+    "host": "34.216.143.255", 
+    "port": 3002,
+    "protocol": "http", 
+    "gamePath": "/api/q/request_block",
+    "renewPath": "/api/renew",
+    "loginPath": "/api/login",
+    "signupPath": "/api/signup",
+    "logoutPath": "/api/logout",
+    "updatePath": "/api/update_uo"
+}
