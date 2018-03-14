@@ -55,7 +55,7 @@ class Question extends React.Component {
                 }
                 this.props.correctAnswer();
                 iCookie.add("solved", (parseInt(iCookie.get("solved")) + 1));
-                this.props.handleSolvedQuestions(iCookie.get("solved"), this.props.user);
+                this.props.handleSolvedQuestions(parseInt(iCookie.get("solved")), this.props.user);
             }
             else {
                 this.props.incorrectAnswer();

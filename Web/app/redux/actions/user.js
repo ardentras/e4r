@@ -2,14 +2,23 @@ import "babel-polyfill";
 import * as Types from "../types";
 import efrApi from "../../libraries/efrApi";
 import { setQuestions } from "./questions";
+import { handlerDeAuth } from "./auth";
 import { Error } from "./state";
 import iCookie from "../../libraries/iCookie";
 
 export function getQuestions(userObject) {
     return async (dispatch)=>{
         try {
-            const result = await efrApi.getQuestions({session: iCookie.get("session"), userobject: userObject});
-            dispatch(setQuestions(result.data.question_block));
+            if (efrApi.ValidateObject(userObject)) {
+                const result = await efrApi.getQuestions({session: iCookie.get("session"), userobject: userObject});
+                dispatch(setQuestions(result.data.question_block));
+            }
+            else {
+                alert("Trying to retrieve questions with an Invalid User Object!");
+                dispatch(Error("INVALID_USEROBJECT"));
+                dispatch(handlerDeAuth(null));
+            }
+
         }
         catch(err) {
             console.log("err",err);
@@ -34,7 +43,6 @@ export function resetPW(user) {
         try {
             dispatch(Error());
             const result = await efrApi.resetPW({VerifyID: user.id, password: user.pw});
-            console.log("check", result.data);
             if (result.data.code !== 100) {
                 window.location.href = "http://52.40.134.152/login";
             }
@@ -74,10 +82,17 @@ export function handleNames(fname, lname, object) {
                 }
             })
         };
-        const result = await efrApi.updateUser(user);
-        if (result.data.response === "Success") {
-            iCookie.setStorage("userobject", result.data.user_object);
-            dispatch(setUserObject(result.data.userobject));         
+        if (efrApi.ValidateObject(user.userobject)) {
+            const result = await efrApi.updateUser(user);
+            if (result.data.response === "Success") {
+                iCookie.setStorage("userobject", result.data.user_object);
+                dispatch(setUserObject(result.data.userobject));         
+            }
+        }
+        else {
+            alert("Trying to update an Invalid User Object!");
+            dispatch(Error("INVALID_USEROBJECT"));
+                dispatch(handlerDeAuth(null));
         }
     }
 }

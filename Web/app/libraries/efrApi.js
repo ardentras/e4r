@@ -42,7 +42,7 @@ const efrApi = (()=>{
                 host: _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this),
                 timeout: 10000
             });
-		}
+        }
         config({host="localhost", port=8080, protocol="http", gamePath=undefined, 
                 renewPath=undefined, loginPath=undefined, timeout=1000, headers=undefined,
                 signupPath=undefined, logoutPath=undefined, updatePath=undefined, resetPWPath=undefined, verifyPW=undefined, questionHelp=undefined}) {
@@ -63,7 +63,47 @@ const efrApi = (()=>{
                 timeout: timeout,
                 headers: headers
             });
-		}
+        }
+        validateUserData(user_data) {
+            let check = false;
+            if (user_data) {
+                if (user_data.username && typeof user_data.username === "string" &&
+                    user_data.email && typeof user_data.email === "string" &&
+                    user_data.first_name && typeof user_data.first_name === "string" &&
+                    user_data.last_name && typeof user_data.last_name === "string" &&
+                    user_data.selected_charity && typeof user_data.selected_charity === "string" &&
+                    user_data.favorite_charities && Array.isArray(user_data.favorite_charities)) {
+                        check = true;
+                    }
+            }
+            return check;
+        }
+        validateGameData(game_data) {
+            let check = false;
+            if (game_data) {
+                if (game_data.subject_name  !== undefined&& typeof game_data.subject_name === "string" &&
+                    game_data.subject_id !== undefined && typeof game_data.subject_id === "number" &&
+                    game_data.difficulty !== undefined && typeof game_data.difficulty === "number" &&
+                    game_data.totalQuestions !== undefined && typeof game_data.totalQuestions === "number" &&
+                    game_data.totalDonated !== undefined && typeof game_data.totalDonated === "number" &&
+                    game_data.blocksRemaining !== undefined && typeof game_data.blocksRemaining === "number" &&
+                    game_data.completed_blocks !== undefined && Array.isArray(game_data.completed_blocks)) {
+                        check = true;
+                    }
+            }
+            return check;
+        }
+        ValidateObject(user) {
+            let check = false;
+            if (user) {
+                if (user.user_data && this.validateUserData(user.user_data) &&
+                    user.game_data && this.validateGameData(user.game_data) &&
+                    user.timestamp && typeof user.timestamp === "string") {
+                        check = true;
+                    }
+            }
+            return true;
+        }
 		createJSON({username=undefined, email=undefined, first_name=undefined, last_name=undefined, charity_name=undefined,
 			subject_id=undefined, subject_name=undefined, difficulty=undefined, completed_blocks=undefined}) {
 			return Promise.resolve(

@@ -3,6 +3,8 @@ import * as Types from "../types";
 import { setComplete, getQuestions, setUserObject } from "./user";
 import iCookie from "../../libraries/iCookie";
 import efrApi from "../../libraries/efrApi";
+import { handlerDeAuth, DeAuthenticate } from "./auth";
+import { Reset } from "./state";
 
 export function setQuestions(value) {
     return {
@@ -28,9 +30,17 @@ export function handleSolvedQuestions(count, object) {
                 }
             })
         };
-        const result = await efrApi.updateUser(user);
-        if (result.data.response === "Success") {
-            dispatch(setUserObject(result.data.userobject));
+        if (efrApi.ValidateObject(user.userobject)) {
+            const result = await efrApi.updateUser(user);
+            if (result.data.response === "Success") {
+                iCookie.setStorage("userobject", result.data.userobject);
+                dispatch(setUserObject(result.data.userobject));
+            }
+        }
+        else {
+            alert("Trying to update an Invalid User Object!");
+            dispatch(Error("INVALID_USEROBJECT"));
+            dispatch(handlerDeAuth(null));
         }
     }
 }
@@ -79,18 +89,26 @@ export function handleCompleteReset(object) {
                 game_data: {
                     ...object.game_data,
                     completed_blocks: [],
-                    difficulty: "0",
+                    difficulty: 0,
                     totalDonated: 0,
                     totalQuestions: 0
                 }
             })
         }
-        const result = await efrApi.updateUser(user);
-        if (result.data.response === "Success") {
-            dispatch(setUserObject(result.data.userobject));
-            dispatch(resetIndex());
-            dispatch(resetAnswer());
-            dispatch(getQuestions(result.data.userobject));
+        if (efrApi.ValidateObject(user.userobject)) {
+            const result = await efrApi.updateUser(user);
+            if (result.data.response === "Success") {
+                iCookie.setStorage("userobject", result.data.userobject);
+                dispatch(setUserObject(result.data.userobject));
+                dispatch(resetIndex());
+                dispatch(resetAnswer());
+                dispatch(getQuestions(result.data.userobject));
+            }
+        }
+        else {
+            alert("Trying to update an Invalid User Object!");
+            dispatch(Error("INVALID_USEROBJECT"));
+            dispatch(handlerDeAuth(null));
         }
     };
 }
@@ -122,18 +140,49 @@ export function resetIndex() {
 
 export function getNextBlock(qid, userobject) {
     return (dispatch)=>{
-        dispatch(updateCompletedBlock(userobject));
-        dispatch(resetIndex());
-        dispatch(resetAnswer());
-        dispatch(setComplete(qid));
-        dispatch(getQuestions(userobject));
+        if (efrApi.ValidateObject(userobject)) {
+            dispatch(updateCompletedBlock(userobject,qid));
+            dispatch(resetIndex());
+            dispatch(resetAnswer());
+            dispatch(getQuestions(userobject));
+        }
+        else {
+            alert("Trying to update an Invalid User Object!");
+            dispatch(Error("INVALID_USEROBJECT"));
+            dispatch(handlerDeAuth(null));
+        }
     };
 }
 
-export function updateCompletedBlock(user) {
+export function updateCompletedBlock(uo, qid) {
     return async (dispatch)=>{
         try {
-            //const result = await efrApi.renewSession(user);
+            const user = {
+                session: iCookie.get("session"),
+                userobject: Object.assign({}, uo, {
+                    game_data: {
+                        ...uo.game_data,
+                        completed_blocks: uo.game_data.completed_blocks.concat([qid])
+                    }
+                })
+            };
+            if (efrApi.ValidateObject(user)) {
+                const result = await efrApi.updateUser(user);
+                if (result.data.response === "Success") {
+                    iCookie.set("userobject", result.data.userobject);
+                    dispatch(setUserObject(result.data.userobject));
+                }
+                else if (result.data.action === "LOGOUT") {
+                    dispatch(Reset());
+                    iCookie.reset();
+                    iCookie.removeStorage("userobject");
+                    window.location.reload();
+                }
+            }
+            else {
+                alert("Trying to update an Invalid User Object!");
+                dispatch(DeAuthenticate(null));
+            }
         }
         catch(err) {
             console.log(err);

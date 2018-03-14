@@ -48,13 +48,22 @@ export function handlerPersist() {
 				const expire = "expires=" + iCookie.time();
 				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
 				iCookie.set(cookie);
-				const updateObject = await efrApi.updateUser({
-					session: iCookie.get("session"),
-					userobject: iCookie.getStorage("userobject")
-				});
-				dispatch(setAuthenticateSuccess(true));
-				dispatch(setUserObject(updateObject.data.userobject));
-				dispatch(Refer());
+				if (efrApi.ValidateObject(iCookie.getStorage("userobject"))) {
+					const updateObject = await efrApi.updateUser({
+						session: iCookie.get("session"),
+						userobject: iCookie.getStorage("userobject")
+					});
+					iCookie.add("solved", iCookie.getStorage("userobject").game_data.totalQuestions);
+					dispatch(setAuthenticateSuccess(true));
+					dispatch(setUserObject(updateObject.data.userobject));
+					dispatch(Refer());
+				}
+				else {
+					alert("Trying to update an Invalid User Object!");
+					iCookie.reset();
+					iCookie.removeStorage("userobject");
+					dispatch(Reset());
+				}
 			}
 		}
 		catch(error) {
@@ -72,17 +81,24 @@ export function handlerAuth(user=undefined) {
 			iCookie.reset();
 			const result = await efrApi.login(user);
 			if (result.data.code === httpCodes.Ok) {
-				iCookie.setStorage("userobject", result.data.user_object);
-				dispatch(setAuthenticateSuccess(true));
-				dispatch(setUserObject(result.data.user_object));
-				dispatch(setUID(user.username));
-				const expire = "expires=" + iCookie.time();
-				const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
-				const cookie2 = "uid=" + user.username + ";" + expire + ";path=/";
-				iCookie.set(cookie);
-				iCookie.set(cookie2);
-				iCookie.add("solved", result.data.user_object.game_data.totalQuestions);
-				dispatch(Refer());
+				if (efrApi.ValidateObject(result.data.user_object)) {
+					iCookie.setStorage("userobject", result.data.user_object);
+					dispatch(setAuthenticateSuccess(true));
+					dispatch(setUserObject(result.data.user_object));
+					dispatch(setUID(user.username));
+					const expire = "expires=" + iCookie.time();
+					const cookie = "session=" + result.data.session_id + ";" + expire + ";path=/";
+					const cookie2 = "uid=" + user.username + ";" + expire + ";path=/";
+					iCookie.set(cookie);
+					iCookie.set(cookie2);
+					iCookie.add("solved", result.data.user_object.game_data.totalQuestions);
+					dispatch(Refer());
+				}
+				else {
+					alert("Recieved Invalid User Object from Server!");
+					dispatch(Error("INVALID_USEROBJECT"));
+					window.location.reload();
+				}
 			}
 			else {
 				dispatch(Error("AUTH_FAIL"));
@@ -98,13 +114,17 @@ export function handlerAuth(user=undefined) {
 export function handlerDeAuth(userobject) {
 	return async (dispatch)=>{
 		try {
-			const result = await efrApi.logout(userobject);
 			dispatch(Error());
+			if (userobject) {
+				if (efrApi.ValidateObject(userobject)) {
+					const result = await efrApi.logout(userobject);
+					if (result.data.code !== httpCodes.Ok) {
+						dispatch(Error("DEAUTH_FAIL"));
+					}
+				}
+			}
 			iCookie.reset();
 			iCookie.removeStorage("userobject");
-			if (result.data.code !== httpCodes.Ok) {
-				dispatch(Error("DEAUTH_FAIL"));
-			}
 			dispatch(Reset());
 			window.location.reload();
 		}
