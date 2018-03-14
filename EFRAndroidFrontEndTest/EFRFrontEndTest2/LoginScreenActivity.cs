@@ -50,25 +50,45 @@ namespace EFRFrontEndTest2
                     clicked = true;
                     // Fetch the login information asynchronously, parse the results, then update the screen.
                     Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
-
-                    if (responce.m_responce == "Success")
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("You couldn't log in");
+                    alert.SetButton("OK", (c, ev) =>
                     {
-                        m_database.GetUserObject.Save(this);
-                        //changed into dashboard activity for new userdashboard, only test
-                        var intent = new Intent(this, typeof(DashboardActivity));
-                        StartActivity(intent);
-                    }
-                    else
+                        passBox.Text = "";
+                    });
+                    switch (responce.m_code)
                     {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                        AlertDialog alert = dialog.Create();
-                        alert.SetTitle("You couldn't log in");
-                        alert.SetMessage("Invalid Credentials");
-                        alert.SetButton("OK", (c, ev) =>
-                        {
-                            passBox.Text = "";
-                        });
-                        alert.Show();
+                        case 200:
+                            {
+                                m_database.GetUserObject.Save(this);
+                                //changed into dashboard activity for new userdashboard, only test
+                                var intent = new Intent(this, typeof(DashboardActivity));
+                                StartActivity(intent);
+                                break;
+                            }
+                        case 401:
+                            {
+                                alert.SetMessage("This account doesnt exist");
+                                alert.Show();
+                                break;
+                            }
+                        case 402:
+                            {
+                                alert.SetMessage("Invalid Password");
+                                alert.Show();
+                                break;
+                            }
+                        case 428:
+                            {
+                                alert.SetMessage("Check your email to verify your account");
+                                alert.Show();
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
                     }
                     clicked = false;
                 }
