@@ -6,7 +6,7 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:id = "@+id/questionlayout"
-    android:background="@drawable/backgroundgradient">
+    android:background="@drawable/gradientblue">
 
   <TextView
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
         android:id="@+id/gridLayout1"
         android:columnCount="2"
         android:rowCount="1"
-        android:background="@drawable/backgroundgradient">
+        android:background="@drawable/gradientblue">
         <ImageButton
             android:layout_column="0"
             android:layout_columnSpan="1"

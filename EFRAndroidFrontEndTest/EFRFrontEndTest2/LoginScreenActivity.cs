@@ -87,6 +87,8 @@ namespace EFRFrontEndTest2
                             }
                         default:
                             {
+                                alert.SetMessage("Unknown Error");
+                                alert.Show();
                                 break;
                             }
                     }

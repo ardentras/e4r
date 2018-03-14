@@ -15,40 +15,40 @@
         p1:layout_column="0"
         p1:layout_row="1"
         p1:id="@+id/setred"
-        p1:background="@android:color/holo_red_light" />
+        p1:background="@drawable/gradientred" />
     <Button
         p1:layout_column="1"
         p1:layout_row="1"
         p1:id="@+id/setgreen"
-        p1:background="@drawable/greenbackgroundgradient" />
+        p1:background="@drawable/gradientgreen" />
     <Button
         p1:layout_column="0"
         p1:layout_row="2"
         p1:id="@+id/setblue"
-        p1:background="@drawable/backgroundgradient" />
+        p1:background="@drawable/gradientblue" />
     <Button
         p1:layout_column="1"
         p1:layout_row="2"
         p1:id="@+id/setgray"
-        p1:background="@color/notification_material_background_media_default_color" />
+        p1:background="@drawable/gradientgrey" />
     <Button
         p1:layout_column="0"
         p1:layout_row="3"
         p1:id="@+id/setpurple"
-        p1:background="@android:color/holo_purple" />
+        p1:background="@drawable/gradientpurple" />
     <Button
         p1:layout_column="1"
         p1:layout_row="3"
         p1:id="@+id/setdarkblue"
-        p1:background="@android:color/holo_blue_dark" />
+        p1:background="@drawable/gradientdarkblue" />
     <Button
         p1:layout_column="0"
         p1:layout_row="4"
         p1:id="@+id/setdarkred"
-        p1:background="@android:color/holo_red_dark" />
+        p1:background="@drawable/gradientdarkred" />
     <Button
         p1:layout_column="1"
         p1:layout_row="4"
         p1:id="@+id/setdarkgreen"
-        p1:background="@android:color/holo_green_dark" />
+        p1:background="@drawable/gradientdarkgreen" />
 </GridLayout>
