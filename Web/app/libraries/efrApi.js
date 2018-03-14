@@ -118,10 +118,10 @@ const efrApi = (()=>{
             return Axios.put(apiRoute, {question_id: qid});
         }
         renewSession() {
-            // const session = iCookie.get("session");
-            // const objToSent = {user: {session: session}};
-            // const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
-			// return Axios.put(apiRoute, objToSent);
+            const session = iCookie.get("session");
+            const objToSent = {user: {session: session}};
+            const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
+			return Axios.put(apiRoute, objToSent);
         }
 	}
 	return efrApi;
