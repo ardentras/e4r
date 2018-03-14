@@ -14,15 +14,15 @@ API Call for current charity in need or recommended charities
 Update UO in DB so it holds favorited charities as well
 
 
--- Invalid ID upon login. Is it invalid or does it need to check for email?
--- Off by one error on subject selection screen
--- Charity selection screen update UO and load saves
--- Datamine more charities
--- Update background settings to include a gradient
--- Level not dynamic?
--- Change Icons
--- Change app name
--- Recycle bitmaps to free memory
+-- Invalid ID upon login. Is it invalid or does it need to check for email? <-- DONE
+-- Off by one error on subject selection screen                             <--
+-- Charity selection screen update UO and load saves                        <--
+-- Datamine more charities                                                  <--
+-- Update background settings to include a gradient                         <--
+-- Level not dynamic?                                                       <--
+-- Change Icons                                                             <--
+-- Change app name                                                          <--
+-- Recycle bitmaps to free memory                                           <--
 
 
 

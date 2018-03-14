@@ -114,7 +114,7 @@ namespace EFRFrontEndTest2
                         Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         AlertDialog alert = dialog.Create();
                         alert.SetTitle("");
-                        alert.SetMessage("Account Created!");
+                        alert.SetMessage("Account Created!\nPlease check your email to confirm your account.");
                         alert.SetButton("OK", (c, ev) =>
                         {
                             Finish();
