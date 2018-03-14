@@ -20,7 +20,6 @@ namespace EFRFrontEndTest2
     {
         CallDatabase m_database;
         JsonValue m_currentquestion;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -99,7 +98,7 @@ namespace EFRFrontEndTest2
                 if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer1.Text = "correct";
-                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
+                       var intent = new Intent(this, typeof(QuestionspageActivity));
 
                 }
                 else
