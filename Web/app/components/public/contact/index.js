@@ -1,9 +1,13 @@
 import React from "react";
 import Styles from "./style.css";
+import { EventEmitter } from "events";
 
 export default class Contact extends React.Component {
     constructor(props) {
         super(props);
+    }
+    sendEmail(event) {
+        window.open(("mailto:e4rtesting@gmail.com?Subject=Customer Support&body=" + event.target.content.value + "%0D%0A%0D%0A%0D%0AFrom: " + event.target.name.value + "%0D%0A<"+ event.target.email.value + ">"), "_top");
     }
     render() {
         return (
@@ -12,10 +16,10 @@ export default class Contact extends React.Component {
                     <h1 className={Styles.header}>CONTACT US</h1>
                     <h3 className={Styles.company}>Education for Revitalization</h3>
                     <p>phone: (123)456-7890</p>
-                    <p>email: info@efr.com</p>
+                    <p>email: e4rtesting@gmail.com</p>
                     <p className={Styles.location}>Location:</p>
                     <p>Klamath Falls, OR</p>
-                    <form className={Styles.email} action="javascript:void(0);" onSubmit={null}>
+                    <form className={Styles.email} action="javascript:void(0);" onSubmit={this.sendEmail}>
                         <h2>Let's Talk</h2>
                         <p>Fill in the following form to ask or find answers to your questions.</p>
                         <div className={Styles.infos}>

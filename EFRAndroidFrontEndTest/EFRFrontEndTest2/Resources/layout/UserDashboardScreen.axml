@@ -3,7 +3,7 @@
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
     p1:id="@+id/dashboardgrid"
-    p1:background="@drawable/backgroundgradient">
+    p1:background="@drawable/gradientblue">
     <Button
         p1:text="Play"
         p1:id="@+id/playButton"

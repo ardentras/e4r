@@ -5,7 +5,7 @@
     p1:id="@+id/gridLayout1"
     p1:columnCount="2"
     p1:rowCount="4"
-    p1:background="@drawable/BackgroundGradient">
+    p1:background="@drawable/gradientblue">
     <ImageButton
         p1:id="@+id/physicsOption"
         p1:layout_column="0"

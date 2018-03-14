@@ -19,21 +19,30 @@ namespace EFRFrontEndTest2
     public class QuestionspageActivity : Activity
     {
         CallDatabase m_database;
+        JsonValue m_questionBlock;
         JsonValue m_currentquestion;
+        TextView BigGrayButton;
+        TextView Answer1;
+        TextView Answer2;
+        TextView Answer3;
+        TextView Answer4;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.QuestionsPage);
             setBackground();
 
-            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
-            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
-            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
-            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
-            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             ImageButton BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
             ImageButton Continue = FindViewById<ImageButton>(Resource.Id.Continue);
+            BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+            Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+            Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+            Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+            Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+
             // find correct and compare it to variable
             //add 1 to the correct answer tally
             //boolean the question is answered 
@@ -98,7 +107,7 @@ namespace EFRFrontEndTest2
                 if (m_currentquestion["Question1"] == m_currentquestion["CorrectAnswer"])
                 {
                     Answer1.Text = "correct";
-                       var intent = new Intent(this, typeof(QuestionspageActivity));
+                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
 
                 }
                 else
@@ -169,9 +178,9 @@ namespace EFRFrontEndTest2
             JsonValue block;
             await m_database.RetreaveQuestionBlock();
             block = m_database.responce.m_json;
-            var QuestionBlock = block["question_block"];
-            JsonValue Question = QuestionBlock[0];
-            SetQuestions(m_currentquestion);
+            m_questionBlock = block["question_block"];
+            m_currentquestion = m_questionBlock[0];
+            SetQuestion(m_currentquestion);
             return true;
         }
 
@@ -186,20 +195,13 @@ namespace EFRFrontEndTest2
         {
             var Qblock = database.responce.m_json;
         }
-        private void SetQuestions(JsonValue block)
+        private void SetQuestion(JsonValue block)
         {
-            TextView BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
-            TextView Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
-            TextView Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
-            TextView Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
-            TextView Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
-
             BigGrayButton.Text = block["QuestionText"];
             Answer1.Text = block["QuestionOne"];
             Answer2.Text = block["QuestionTwo"];
             Answer3.Text = block["QuestionThree"];
             Answer4.Text = block["QuestionFour"];
-
         }
         protected void setBackground()
         {
