@@ -79,7 +79,7 @@ namespace EFRFrontEndTest2
             {
                 byte[] number = new byte[1];
                 rand.GetBytes(number);
-                selectButton((int)number[0] % 4); // Create a number 0 - 4 and selects the corresponding button
+                selectButton((int)number[0] % 5); // Create a number 0 - 4 and selects the corresponding button
             };
 
             void selectButton(int selected)
@@ -143,78 +143,3 @@ namespace EFRFrontEndTest2
         }
     }
 }
-//test
-
-//Multi-subject functionality, replace if stretch goal is achieved.
-/*
- * 
-
-            ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
-            ImageButton continueButton = FindViewById<ImageButton>(Resource.Id.continueButton);
-            ImageButton physicsOption = FindViewById<ImageButton>(Resource.Id.physicsOption);          // 10000
-            ImageButton chemistryOption = FindViewById<ImageButton>(Resource.Id.chemistryOption);      // 01000
-            ImageButton biologyOption = FindViewById<ImageButton>(Resource.Id.biologyOption);          // 00100
-            ImageButton mathOption = FindViewById<ImageButton>(Resource.Id.mathOption);                // 00010
-            ImageButton historyOption = FindViewById<ImageButton>(Resource.Id.historyOption);          // 00001
-            ImageButton shuffleOption = FindViewById<ImageButton>(Resource.Id.shuffleOption);          // ?????
-
-            backButton.Click += (sender, e) =>
-            {
-                Finish();
-            };
-
-            continueButton.Click += (sender, e) =>
-            {
-                var intent = new Intent(this, typeof(QuestionDificultypageActivity));
-                intent.PutExtra("subjects", binaryChoice);
-                StartActivity(intent);
-            };
-            physicsOption.Click += (sender, e) =>
-            {
-                binaryChoice = binaryChoice ^ PHYSICS;
-                updateButton(physicsOption, PHYSICS);
-            };
-            chemistryOption.Click += (sender, e) =>
-            {
-                binaryChoice = binaryChoice ^ CHEMISTRY;
-                updateButton(chemistryOption, CHEMISTRY);
-            };
-            biologyOption.Click += (sender, e) =>
-            {
-                binaryChoice = binaryChoice ^ BIOLOGY;
-                updateButton(biologyOption, BIOLOGY);
-            };
-            mathOption.Click += (sender, e) =>
-            {
-                binaryChoice = binaryChoice ^ MATH;
-                updateButton(mathOption, MATH);
-            };
-            historyOption.Click += (sender, e) =>
-            {
-                binaryChoice = binaryChoice ^ HISTORY;
-                updateButton(historyOption, HISTORY);
-            };
-            shuffleOption.Click += (sender, e) =>
-            {
-                byte[] number = new byte[1];
-                rand.GetBytes(number);
-                binaryChoice = (int)number[0] % 32; //Creates a number from 0 - 31
-                updateButton(physicsOption, PHYSICS);
-                updateButton(chemistryOption, CHEMISTRY);
-                updateButton(biologyOption, BIOLOGY);
-                updateButton(mathOption, MATH);
-                updateButton(historyOption, HISTORY);
-            };
-        }
-
-        //For readability and saving repeated code
-        void updateButton(ImageButton button, int check)
-        {
-            if ((binaryChoice ^ check) < binaryChoice) //Wasn't selected, but is now. So update to selected icon
-                button.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-            else
-                button.SetBackgroundResource(Resource.Drawable.GreenButtonIcon);
-        }
-    }
-
-    */
