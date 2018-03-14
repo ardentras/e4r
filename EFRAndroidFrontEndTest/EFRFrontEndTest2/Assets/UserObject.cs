@@ -85,7 +85,7 @@ namespace EFRFrontEndTest2.Assets
             for (int x = 0; x < m_FavoriteCharities.Length; x++)
             {
                 data += m_FavoriteCharities[x];
-                if (x != m_CompletedBlocks.Length - 1)
+                if (x < m_CompletedBlocks.Length - 1)
                     data += "\" \"";
             }
             data += "\"] ";
