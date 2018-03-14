@@ -104,7 +104,7 @@ namespace EFRFrontEndTest2
                         JsonArray data = (JsonArray)jsonDoc["data"];
                         for (int x = 0; x < data.Count; x++)
                         {
-                            spawnBubble();
+                            spawnBubble(((JsonValue)data[x])["donated"]);
                             Thread.Sleep(100);
                         }
                     }
@@ -113,7 +113,7 @@ namespace EFRFrontEndTest2
             }
             return true;
         }
-        public void spawnBubble()
+        public void spawnBubble(int spawn)
         {
             AbsoluteLayout layoutBase = FindViewById<AbsoluteLayout>(Resource.Id.bubble_layout);
             ImageView img = new ImageView(this);
@@ -124,7 +124,7 @@ namespace EFRFrontEndTest2
             img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
             var metrics = Resources.DisplayMetrics;
             //place the bubble on screen randomizing it's x pos
-            layoutBase.AddView(img, 100, 100);
+            layoutBase.AddView(img, 100+spawn, 100 + spawn);
             Random rnd = new Random();
             img.SetX(rnd.Next(0, metrics.WidthPixels));
             img.SetY(metrics.HeightPixels);
@@ -158,8 +158,10 @@ namespace EFRFrontEndTest2
                 //remove the bubble and increment the counter
                 if (1 == f.Animation.AnimatedFraction)
                 {
+                    double cashout = img.Width-100;
+                    cashout /= 100;
                     layoutBase.RemoveView(img);
-                    string newval = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
+                    string newval = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout);
                     if (newval.IndexOf('.') - newval.Length == -2)
                         newval += '0';
                     bubbleButton.Text = newval;
