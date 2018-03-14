@@ -30,6 +30,7 @@ namespace EFRFrontEndTest2.Assets
         public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
         public string LastName { get { return m_LastName; } set { m_LastName = value; } }
         public string Username { get { return m_Username; } set { m_Username = value; } }
+        public string[] FavoriteCharities { get { return m_FavoriteCharities; } set { m_FavoriteCharities = value; } }
 
         private JsonValue m_json;
         private string m_SessionID       = "guest";
@@ -47,6 +48,7 @@ namespace EFRFrontEndTest2.Assets
         private string m_LastName        = "Guest";
         private string m_Username        = "Slenderman";
         private string[] m_FavoriteCharities = new string[0];
+
 
         public string GetObjectString()
         {
@@ -79,11 +81,11 @@ namespace EFRFrontEndTest2.Assets
             data += "\"first_name\": \""+ m_FirstName +"\",";
             data += "\"last_name\": \""+ m_LastName +"\",";
             data += "\"selected_charity\": \""+ m_CharityName +"\", ";
-            data += "\"favorite_charities: [\"";
+            data += "\"favorite_charities\": [\"";
             for (int x = 0; x < m_FavoriteCharities.Length; x++)
             {
                 data += m_FavoriteCharities[x];
-                if (x != m_CompletedBlocks.Length - 1)
+                if (x < m_CompletedBlocks.Length - 1)
                     data += "\" \"";
             }
             data += "\"] ";

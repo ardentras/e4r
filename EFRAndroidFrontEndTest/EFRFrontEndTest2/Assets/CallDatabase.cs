@@ -127,8 +127,11 @@ namespace EFRFrontEndTest2.Assets
             // Extract numbers from JSON array.
             for (int i = 0; i < array.Count; ++i)
             {
-                //numbers[i] = array.;
+                numbers[i] = array[i];
             }
+            m_userObject.CompletedBlocks = numbers;
+
+
             m_userObject.Difficulty = game["difficulty"];
             m_userObject.SubjectID = game["subject_id"];
             m_userObject.SubjectName = game["subject_name"];
@@ -136,11 +139,19 @@ namespace EFRFrontEndTest2.Assets
             m_userObject.TotalQuestions = game["totalQuestions"];
 
             user = user["user_data"];
-            //m_userObject.CharityName = user["charity_name"];
+            m_userObject.CharityName = user["selected_charity"];
             m_userObject.Email = user["email"];
             m_userObject.FirstName = user["first_name"];
             m_userObject.LastName = user["last_name"];
             m_userObject.Username = user["username"];
+            JsonArray array2 = (JsonArray)user["favorite_charities"];
+            string[] strings = new string[array2.Count];
+
+            for (int i = 0; i < array2.Count; ++i)
+            {
+                strings[i] = array2[i];
+            }
+            m_userObject.FavoriteCharities = strings;
         }
 
         public UserObject GetUserObject { get { return m_userObject; } }
