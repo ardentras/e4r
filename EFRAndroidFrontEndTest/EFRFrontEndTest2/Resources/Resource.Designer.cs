@@ -2300,26 +2300,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f0200a1
-			public const int avd_hide_password_1 = 2130837665;
-			
-			// aapt resource value: 0x7f0200a2
-			public const int avd_hide_password_2 = 2130837666;
-			
-			// aapt resource value: 0x7f0200a3
-			public const int avd_hide_password_3 = 2130837667;
-			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
-			
-			// aapt resource value: 0x7f0200a4
-			public const int avd_show_password_1 = 2130837668;
-			
-			// aapt resource value: 0x7f0200a5
-			public const int avd_show_password_2 = 2130837669;
-			
-			// aapt resource value: 0x7f0200a6
-			public const int avd_show_password_3 = 2130837670;
 			
 			// aapt resource value: 0x7f020056
 			public const int back_arrow = 2130837590;
