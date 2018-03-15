@@ -8,7 +8,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         android:id="@+id/linearLayout2">
         <LinearLayout
@@ -19,12 +19,12 @@
             <ImageButton
                 android:src="@drawable/back_arrow"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="15dp"
+                android:layout_height="match_parent"
                 android:onClick="back_arrow"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
-                android:id="@+id/back_arrow" />
+                android:id="@+id/back_arrow"
+                android:padding="15dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -56,8 +56,10 @@
             android:src="@drawable/filter"
             android:layout_width="100px"
             android:padding="20px"
+            android:scaleX="3"
+            android:scaleY="3"
             android:background="@android:color/transparent"
-            android:layout_height="100px"
+            android:layout_height="match_parent"
             android:scaleType="fitCenter"
             android:id="@+id/filter_btn" />
     </LinearLayout>

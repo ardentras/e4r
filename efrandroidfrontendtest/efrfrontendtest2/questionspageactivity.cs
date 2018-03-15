@@ -12,10 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using EFRFrontEndTest2.Assets;
-/*
- 
-     DONT TOUCH I GOT IT!!!!!!!!!! 
-     */
+
 
 namespace EFRFrontEndTest2
 {
@@ -69,28 +66,59 @@ namespace EFRFrontEndTest2
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            m_database = new CallDatabase(this);
-            Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
+           int inca = 0;
+            inca++;
+            if (inca == 0)
+            {
+                m_database = new CallDatabase(this);
+                Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
 
-            RequestWindowFeature(WindowFeatures.NoTitle);
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.QuestionsPage);
-            setBackground();
+                RequestWindowFeature(WindowFeatures.NoTitle);
+                base.OnCreate(savedInstanceState);
+                SetContentView(Resource.Layout.QuestionsPage);
+                setBackground();
 
-            BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
-            Continue = FindViewById<ImageButton>(Resource.Id.Continue);
-            BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
-            Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
-            Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
-            Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
-            Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+                BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
+                Continue = FindViewById<ImageButton>(Resource.Id.Continue);
+                BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+                Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+                Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+                Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+                Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
 
-            BigGrayButton.Text = currentquestion.m_QuestionText;
-            Answer1.Text = currentquestion.m_QuestionOne;
-            Answer2.Text = currentquestion.m_QuestionTwo;
-            Answer3.Text = currentquestion.m_QuestionThree;
-            Answer4.Text = currentquestion.m_QuestionFour;
+                BigGrayButton.Text = currentquestion.m_QuestionText;
+                Answer1.Text = currentquestion.m_QuestionOne;
+                Answer2.Text = currentquestion.m_QuestionTwo;
+                Answer3.Text = currentquestion.m_QuestionThree;
+                Answer4.Text = currentquestion.m_QuestionFour;
 
+              
+            }
+
+     
+            else {
+                m_database = new CallDatabase(this);
+                Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
+
+               // RequestWindowFeature(WindowFeatures.NoTitle);
+                base.OnCreate(savedInstanceState);
+                SetContentView(Resource.Layout.QuestionsPage);
+                setBackground();
+
+                BackArrow = FindViewById<ImageButton>(Resource.Id.BackArrow);
+                Continue = FindViewById<ImageButton>(Resource.Id.Continue);
+                BigGrayButton = FindViewById<TextView>(Resource.Id.BigGrayCircle);
+                Answer1 = FindViewById<TextView>(Resource.Id.Answer1);
+                Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
+                Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
+                Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
+
+                BigGrayButton.Text = currentquestion.m_QuestionText;
+                Answer1.Text = currentquestion.m_QuestionOne;
+                Answer2.Text = currentquestion.m_QuestionTwo;
+                Answer3.Text = currentquestion.m_QuestionThree;
+                Answer4.Text = currentquestion.m_QuestionFour;
+            }
             //find correct and compare it to variable
             //add 1 to the correct answer tally
             //boolean the question is answered 
@@ -115,21 +143,8 @@ namespace EFRFrontEndTest2
 
                 if (QuestionAnswered)
                 {
-                    //JsonValue k = block["question_block"][QuestionBlockNum++];
-                    //SetQuestions(k);
-                    QuestionAnswered = false;
-
-                    base.OnCreate(savedInstanceState);
-                    SetContentView(Resource.Layout.QuestionsPage);
-                    setBackground();
-
-                    m_database = new CallDatabase(this);
-
-                    BigGrayButton.Text = currentquestion.m_QuestionText;
-                    Answer1.Text = currentquestion.m_QuestionOne;
-                    Answer2.Text = currentquestion.m_QuestionTwo;
-                    Answer3.Text = currentquestion.m_QuestionThree;
-                    Answer4.Text = currentquestion.m_QuestionFour;
+                    
+                    OnCreate(savedInstanceState);
 
                     if (QuestionBlockNum >= 10)
                     {
@@ -144,6 +159,8 @@ namespace EFRFrontEndTest2
                 //block = m_database.responce.m_json;
             }
 
+            
+
             BigGrayButton.Click += (sender, d) =>
             {
                 QuestionAnswered = true;
@@ -152,12 +169,12 @@ namespace EFRFrontEndTest2
             Answer1.Click += (sender, f) =>
             {
                 QuestionAnswered = true;
-                //var intent = new Intent(this, typeof(QuestionspageActivity));
+          
 
                 if (currentquestion.m_QuestionOne == currentquestion.m_CorrectAnswer)
                 {
                     Answer1.Text = "correct";
-                    //   var intent = new Intent(this, typeof(QuestionspageActivity));
+           
                 }
                 else
                 {
@@ -233,5 +250,7 @@ namespace EFRFrontEndTest2
                 background.Background = AppBackground.background;
             }
         }
+
+      
     }
 }
