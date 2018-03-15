@@ -66,7 +66,7 @@ const efrApi = (()=>{
         }
         validateUserData(user_data) {
             let check = false;
-            if (user_data) {
+            if (typeof user_data === "object") {
                 if (user_data.username && typeof user_data.username === "string" &&
                     user_data.email && typeof user_data.email === "string" &&
                     user_data.first_name && typeof user_data.first_name === "string" &&
@@ -80,7 +80,7 @@ const efrApi = (()=>{
         }
         validateGameData(game_data) {
             let check = false;
-            if (game_data) {
+            if (typeof game_data === "object") {
                 if (game_data.subject_name  !== undefined&& typeof game_data.subject_name === "string" &&
                     game_data.subject_id !== undefined && typeof game_data.subject_id === "number" &&
                     game_data.difficulty !== undefined && typeof game_data.difficulty === "number" &&
