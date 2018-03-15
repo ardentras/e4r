@@ -10,6 +10,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Net;
 using EFRFrontEndTest2.Assets.Charities_Selection_Layout;
+using EFRFrontEndTest2.Assets.DynamicSize;
 
 
 /***************************************************************************************************************************
@@ -31,14 +32,16 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private CharityCheckBox _checkBox = null;
         private CharityFavorite _favoriteBtn = null;
         private CharityButton _logoBtn = null;
+        private DynamicSize.DynamicSize _Dsize = null;
 
         private CharitySelectionScreenActivity _main = null;
 
-        public CharityLayout(CharitySelectionScreenActivity main, Context ctx, Charity charity, string seperator_color)
+        public CharityLayout(CharitySelectionScreenActivity main, Context ctx, Charity charity, string seperator_color, Android.Content.Res.Resources Re)
         {
             _charity = charity;
             _ctx = ctx;
             _main = main;
+            _Dsize = new DynamicSize.DynamicSize(Re);
             CreateContainer();
             CreateSeperator(seperator_color);
             CreateComponent();
@@ -129,7 +132,7 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private void CreateSeperator(string color)
         {
             LinearLayout newlayout = new LinearLayout(_ctx);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(5, LinearLayout.LayoutParams.MatchParent)
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(5, ViewGroup.LayoutParams.MatchParent)
             {
                 LeftMargin = 8,
                 RightMargin = 8
@@ -143,7 +146,7 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private void CreateContainer()
         {
             LinearLayout newlayout = new LinearLayout(_ctx);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.WrapContent)
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent)
             {
                 TopMargin = 0,
                 BottomMargin = 10
@@ -161,7 +164,7 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private void CreateComponent()
         {
             LinearLayout newlayout = new LinearLayout(_ctx);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, 125, 1f);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, _Dsize.PxHeight(0.2), 1f);
             newlayout.SetPadding(0, 20, 0, 20);
             newlayout.LayoutParameters = param;
             newlayout.SetGravity(GravityFlags.Center);

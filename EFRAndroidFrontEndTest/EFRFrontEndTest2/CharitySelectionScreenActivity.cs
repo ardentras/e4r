@@ -103,6 +103,8 @@ namespace EFRFrontEndTest2
             //get the scrollview for displaying the list of charities.
             LinearLayout charities_list = FindViewById<LinearLayout>(Resource.Id.charity_list);
             //add the charities to the list.  (right now it's using static data, to be dynamic just loop through an array and add it to the list, but make sure the first element is None)
+            TextView selected_charity = FindViewById<TextView>(Resource.Id.selected_charitiy_name);
+            selected_charity.Text = SingleUserObject.getObject().CharityName;
             _charities.Add(None);
             _charities.Add(directrelief);
             _charities.Add(redcross);
@@ -115,7 +117,7 @@ namespace EFRFrontEndTest2
                     colorCodes_index = 0;
                 }
                 //Create the layout for that charity and add it to the root, which here, is charities_list(scroll view)
-                charities_list.AddView((new CharityLayout(this, this, _charities[i], colorCodes[colorCodes_index])).Container);
+                charities_list.AddView((new CharityLayout(this, this, _charities[i], colorCodes[colorCodes_index], Resources)).Container);
             }
 
         }
@@ -176,8 +178,11 @@ namespace EFRFrontEndTest2
             {
                 if (_current != _selected)
                 {
+                    //Add in Update userobject call here
+                    //The charity name has already been set, just need to update it in the server.
                     _current = _selected;
                     selected_charity.Text = _current.Charity.Name;
+                    SingleUserObject.getObject().CharityName = _current.Charity.Name;
                     alert.SetTitle("Saved");
                     alert.SetMessage("Your selected charity has been updated.");
                 }
