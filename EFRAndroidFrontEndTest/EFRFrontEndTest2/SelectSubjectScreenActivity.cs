@@ -30,6 +30,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SelectSubjectScreen);
+   
             setBackground();
             UserObject uo = SingleUserObject.getObject();
             currentSubjectID = uo.SubjectID;
