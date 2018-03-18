@@ -109,7 +109,7 @@ class Footer extends React.Component {
 						<div id={Style.helptext} onClick={(event)=>{
 								event.stopPropagation();
 							}}>
-							{this.props.states.error !== error.GET_HELP_TIMEOUT && this.props.HELP ? this.props.HELP.indexOf("http") >= 0 ? <a className={[Style.helplink, Style.help].join(" ")} href={this.props.HELP}>{this.props.HELP}</a> : <span className={Style.help}>{this.props.HELP}</span> : this.props.states.error !== undefined ? <span className={Style.help}>{this.props.states.error}</span> : "Fetching..."}
+							{this.props.states.error !== error.GET_HELP_TIMEOUT && this.props.HELP ? this.props.HELP.indexOf("http") >= 0 ? <a className={[Style.helplink, Style.help].join(" ")} href={this.props.HELP} target="_blank">{this.props.HELP}</a> : <span className={Style.help}>{this.props.HELP}</span> : this.props.states.error !== undefined ? <span className={Style.help}>{this.props.states.error}</span> : "Fetching..."}
 							{this.props.HELP === error.GET_HELP_TIMEOUT && <button onClick={this.getHelp} className={Style.retrybtn}>Retry</button> }
 						</div>
 					</li>)}
