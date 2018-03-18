@@ -104,7 +104,9 @@ class Footer extends React.Component {
 				<ul className={Style.other}>
 					{this.props.states.SHOW_QUESTION && (<li onClick={this.showHelp} id={Style.helpbtn} className={Style.otherselector}>
 						<span>Show Help</span>
-						<div id={Style.helptext}>
+						<div id={Style.helptext} onClick={(event)=>{
+								event.stopPropagation();
+							}}>
 							<span>{this.props.states.error !== error.GET_HELP_TIMEOUT && this.props.HELP ? this.props.HELP : this.props.states.error !== undefined ? this.props.states.error : "Fetching..."}</span>
 							{this.props.HELP === error.GET_HELP_TIMEOUT && <button onClick={this.getHelp} className={Style.retrybtn}>Retry</button> }
 						</div>
