@@ -96,8 +96,10 @@ class Footer extends React.Component {
 	render() {
 		if (this.props.SHOW_HELP) {
 			const helper = document.getElementById(Style.helptext);
-			helper.style.top = -(helper.clientHeight + 30) + "px";
-		}
+			if (helper) {
+				helper.style.top = -(helper.clientHeight + 30) + "px";
+			}
+		}	
 		return (
 			<div className={Style.footer}>
 				<span className={Style.menu} onClick={this.showDash}><i id={Style.menubtn} className="fa fa-bars"></i></span>
@@ -107,7 +109,7 @@ class Footer extends React.Component {
 						<div id={Style.helptext} onClick={(event)=>{
 								event.stopPropagation();
 							}}>
-							<span>{this.props.states.error !== error.GET_HELP_TIMEOUT && this.props.HELP ? this.props.HELP : this.props.states.error !== undefined ? this.props.states.error : "Fetching..."}</span>
+							{this.props.states.error !== error.GET_HELP_TIMEOUT && this.props.HELP ? this.props.HELP.indexOf("http") >= 0 ? <a className={[Style.helplink, Style.help].join(" ")} href={this.props.HELP}>{this.props.HELP}</a> : <span className={Style.help}>{this.props.HELP}</span> : this.props.states.error !== undefined ? <span className={Style.help}>{this.props.states.error}</span> : "Fetching..."}
 							{this.props.HELP === error.GET_HELP_TIMEOUT && <button onClick={this.getHelp} className={Style.retrybtn}>Retry</button> }
 						</div>
 					</li>)}

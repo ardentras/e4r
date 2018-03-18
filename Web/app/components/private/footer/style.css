@@ -12,6 +12,14 @@
 	transition: width 0.4s ease;
 }
 
+.helplink {
+	text-decoration: underline;
+}
+
+.help {
+	word-break: break-all;
+}
+
 .menu {
 	margin-left: 20px;
 }

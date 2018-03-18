@@ -18,6 +18,7 @@ class Question extends React.Component {
 	}
 	componentWillUnmount() {
 		this.props.setShowQuestion(false);
+		this.props.hideHelp();
 	}
 	componentWillMount() {
 		this.props.setShowQuestion(true);
