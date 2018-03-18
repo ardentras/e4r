@@ -12,6 +12,10 @@
     height: 140px;
 }
 
+#navcontainer {
+    font-weight: lighter;
+}
+
 .navagation {
     position: fixed;
     display: flex;

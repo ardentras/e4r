@@ -9,7 +9,7 @@ import { getQuestions } from "../../redux/actions/questions";
 import Routes from "./routes";
 import Dashboard from "./dashboard";
 import Styles from "./style.css";
-import DashboardStyles from "./dashboard/style.css";
+import FooterStyle from "./footer/style.css";
 import NewDash from "./newDash";
 import ChatBox from "./chatBox";
 import Footer from "./footer";
@@ -24,14 +24,15 @@ class Private extends React.Component {
         if (!this.props.questions || this.props.questions.length <= 0) {
             this.props.getQuestions(this.props.user.token, this.props.user.userobject);
         }
+        this.resize();
     }
     resize() {
         if (window.innerWidth <= 740) {
-            const dashboardheight = document.getElementsByClassName(DashboardStyles.dashboard)[0].clientHeight;
-            document.getElementsByClassName(Styles.private)[0].style.paddingBottom = dashboardheight + "px";
+            const Footer = document.getElementsByClassName(FooterStyle.footer)[0].clientHeight;
+            document.getElementsByClassName(Styles.private)[0].style.paddingBottom = Footer + "px";
         }
         else {
-            const dashboardheight = document.getElementsByClassName(DashboardStyles.dashboard)[0].clientHeight;
+            const Footer = document.getElementsByClassName(FooterStyle.footer)[0].clientHeight;
             document.getElementsByClassName(Styles.private)[0].style.paddingBottom = 0;
         }
     }

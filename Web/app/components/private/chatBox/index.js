@@ -1,61 +1,34 @@
 import React from "react";
 import { bindActionCreators } from "redux";
-import { setMessage } from "../../../redux/actions/message";
+import { setMessage, displayMessage } from "../../../redux/actions/message";
 import { connect } from "react-redux";
 import Style from "./style.css";
+import NavStyle from "../../public/navagations/style.css";
 import ContStyle from "../style.css";
+import FooterStyle from "../footer/style.css";
 
 class ChatBox extends React.Component {
 	constructor(props) {
 		super(props);
 		this.sendMessage = this.sendMessage.bind(this);
-		this.displayMessage = this.displayMessage.bind(this);
 	}
 	componentDidMount() {
-		const chatbox = document.getElementsByClassName(Style.chatbox)[0];
-		const content = document.getElementsByClassName(ContStyle.contents)[0];
-		chatbox.style.maxHeight = content.clientHeight + "px";
-	}
-	displayMessage(text, from) {
 		const messages = document.getElementById(Style.messages);
-		const msgcontainer = document.createElement("div");
-		const textcontainer = document.createElement("div");
-		const name = document.createElement("span");
-		const nametext = document.createTextNode(from + ": ");
-		const newText = document.createTextNode(text);
-
-		textcontainer.classList.add(Style.textcontainer);
-		if (from === this.props.user.user_data.username) {
-			msgcontainer.classList.add(Style.selfmsgcontainer);
-		}
-		else if (from === "Server") {
-			msgcontainer.classList.add(Style.servermsgcontainer);
-		}
-		else if (from === "System") {
-			msgcontainer.classList.add(Style.systemmsgcontainer);
-		}
-		else {
-			msgcontainer.classList.add(Style.msgcontainer);
-		}
-		name.classList.add(Style.name);
-
-		name.appendChild(nametext);
-		textcontainer.appendChild(newText);
-
-		msgcontainer.appendChild(name);
-		msgcontainer.appendChild(textcontainer);
-
-		messages.appendChild(msgcontainer);
-		if (messages.scrollHeight > messages.clientHeight) {
-			messages.scrollTop = messages.scrollHeight;
-		}
+		const chatbox = document.getElementsByClassName(Style.chatbox)[0];
+		const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		const navagator = document.getElementById(NavStyle.navcontainer);
+		const inputfields = document.getElementsByClassName(Style.inputfields)[0];
+		const footer = document.getElementsByClassName(FooterStyle.footer)[0];
+		const availableHeight = (viewHeight - navagator.offsetHeight - footer.offsetHeight);
+		messages.style.height = (availableHeight - inputfields.offsetHeight - 1) + "px";
+		messages.style.maxHeight = (availableHeight - inputfields.offsetHeight - 1) + "px";
 	}
 	sendMessage(event) {
 		event.preventDefault();
 		if (event.target.msg.value && event.target.msg.value !== "") {
 			if (this.props.states.SOCKET) {
 				this.props.states.SOCKET.emit("send-message", {name: this.props.user.user_data.username, msg: event.target.msg.value});
-				this.displayMessage(event.target.msg.value, this.props.user.user_data.username);
+				this.props.displayMessage(this.props.user.user_data.username,event.target.msg.value, this.props.user.user_data.username);
 			}
 			else {
 				this.displayMessage("Cannot Connect to Server!", "System");
@@ -82,5 +55,5 @@ class ChatBox extends React.Component {
 
 export default connect(
 	(state) => ({states: state.state, user: state.user.userobject, messages: state.messages}),
-	(dispatch) => bindActionCreators({ setMessage }, dispatch)
+	(dispatch) => bindActionCreators({ setMessage, displayMessage}, dispatch)
 )(ChatBox);

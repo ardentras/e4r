@@ -62,7 +62,7 @@ class Footer extends React.Component {
 			ChatBox.className = ChatStyle.activechatbox;
 			if (!this.props.states.SOCKET) {
 				this.props.setSocket(connection);
-				this.props.initSocketHanlder(connection);
+				this.props.initSocketHanlder(connection, this.props.uo.user_data.username);
 			}
 		}
 		this.props.showChat(!this.props.states.SHOW_CHAT);
@@ -120,6 +120,6 @@ class Footer extends React.Component {
 }
 
 export default connect(
-	(state) => ({states: state.state, SHOW_HELP: state.questions.showHelp, HELP: state.questions.helpText, questions: state.questions, totalUser: state.messages.totalUsers}),
+	(state) => ({states: state.state, SHOW_HELP: state.questions.showHelp, HELP: state.questions.helpText, questions: state.questions, totalUser: state.messages.totalUsers, uo: state.user.userobject}),
 	(dispatch) => bindActionCreators({ showChat, showDash, showHelp, hideHelp, setSocket, initSocketHanlder, getHelp, setTotalUser}, dispatch)
 )(Footer);

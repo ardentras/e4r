@@ -19,7 +19,7 @@ class Navagation extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<div id={Styles.navcontainer}>
 				<div className={Styles.navagation}>
 					<Testbanner/>
 					<div className={Styles.header}>

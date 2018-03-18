@@ -27,10 +27,12 @@
 
 #check {
 	color: #46c28e;
+	padding-right: 10px;
 }
 
 #cross {
 	color: #c24646;
+	padding-right: 10px;
 }
 
 .incorrect {
@@ -130,4 +132,24 @@
 	border: none;
 }
 
-  
+@media (max-width: 740px) {
+	.questiontext {
+		font-size: 18px;
+	}
+	.answer {
+		margin: 5px 0;
+		padding: 2px 0;
+	}
+	#nextbtn {
+		margin: 5px 0;
+		padding: 8px 0;
+	}
+	.correct {
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+	.incorrect {
+		margin-bottom: 10px;
+		padding: 10px;
+	}
+}

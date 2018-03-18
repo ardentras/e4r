@@ -97,3 +97,12 @@
 #helpbtn:hover {
 	cursor: pointer;
 }
+
+@media (max-width: 740px) {
+	.otherselector {
+		margin: 0;
+	}
+	.other {
+		margin-right: 10px;
+	}
+}
