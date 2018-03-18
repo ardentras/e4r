@@ -84,6 +84,10 @@ class Settings extends React.Component {
                     <span className={Styles.fieldhead}>GAME</span>
                     <span onClick={this.restart} className={Styles.restartbtn}>RESTART</span>
                 </div>
+                <div className={[Styles.themefield, Styles.fields].join(" ")}>
+                    <span className={Styles.fieldhead}>Theme</span>
+                    <span onClick={null} className={Styles.themebtn} id={this.props.states.THEME === "Light" ? Styles.dark : Styles.light}>{this.props.states.THEME === "Light" ? "Dark" : "Light"}</span>
+                </div>
                 <span onClick={this.save} className={Styles.savebtn}>SAVE</span>
             </div>
         );

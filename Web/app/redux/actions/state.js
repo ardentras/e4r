@@ -83,6 +83,13 @@ export function resetState() {
 	}
 }
 
+export function setShowSetting(status) {
+	return {
+		type: Types.State.SET_SHOWSETTING,
+		value: status
+	}
+}
+
 export function showChat(status) {
 	return {
 		type: Types.State.SHOW_CHAT,

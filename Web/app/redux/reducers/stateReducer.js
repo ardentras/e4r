@@ -17,8 +17,10 @@ const initialState = {
 	DEAUTH_SUCCESSFUL: false,
 	SIGNUP_SUCCESSFUL: false,
 	PERSIST: false,
+	THEME: "Light",
 	SOCKET: null,
 	SHOW_QUESTION: false,
+	SHOW_SETTING: false,
 	SHOW_DASH: false,
 	SHOW_CHAT: false,
 	redirectToRefer: false,
@@ -81,9 +83,17 @@ const stateReducer = (state=initialState, action) => {
 		return Object.assign({}, state, {
 			SHOW_CHAT: action.value
 		});
+	case Types.State.SET_THEME:
+		return Object.assign({}, state, {
+			THEME: action.value
+		});
 	case Types.State.SHOW_DASH:
 		return Object.assign({}, state, {
 			SHOW_DASH: action.value
+		});
+	case Types.State.SET_SHOWSETTING:
+		return Object.assign({}, state, {
+			SHOW_SETTING: action.value
 		});
 	case Types.State.REFER:
 		return Object.assign({}, state, {

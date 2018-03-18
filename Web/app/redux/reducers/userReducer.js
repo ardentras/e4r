@@ -14,7 +14,8 @@ import Types from "../types";
 *****************************************************************************/
 const initialState = {
 	userobject: undefined,
-	token: undefined
+	token: undefined,
+	charities: ["American Red Cross", "United Way", "Salvation Army", "Direct Relief", "Wounded Warrior Project", "Feeding America", "Task Force for Global Health", "Leukemia and Lymphoma Society"]
 };
 
 const userReducer = (state=initialState, action) => {

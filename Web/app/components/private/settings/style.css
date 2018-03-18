@@ -36,18 +36,31 @@
 #fname, #lname, #charity {
     font-weight: lighter;
 }
-.pwfield, .gamefield, .infofield {
+.pwfield, .gamefield, .infofield, .themefield {
     flex-flow: row nowrap;
 }
-.pwfield, .gamefield, .infofield {
+.pwfield, .gamefield, .infofield, .themefield {
     justify-content: space-between;
 }
-.pwreset, .restartbtn, .resetbtn {
+.pwreset, .restartbtn, .resetbtn, .themebtn {
     color: #1E90FF;
 }
-.pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn {
+.pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn, .themebtn {
     cursor: pointer;
 }
+
+#dark {
+    color: #141b22;
+}
+
+#light {
+    color: white;
+}
+
+.themebtncont {
+    float: left;
+}
+
 .savebtn {
     background: #1E90FF;
     color: white;
