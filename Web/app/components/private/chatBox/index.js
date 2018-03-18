@@ -1,5 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
+import { setMessage } from "../../../redux/actions/message";
 import { connect } from "react-redux";
 import Style from "./style.css";
 import ContStyle from "../style.css";
@@ -65,6 +66,7 @@ class ChatBox extends React.Component {
 	render() {
 		if (this.props.messages.message) {
 			this.displayMessage(this.props.messages.message, this.props.messages.from);
+			this.props.setMessage({name: undefined, msg: undefined});
 		}
 		return (
 			<div className={Style.chatbox}>
@@ -80,5 +82,5 @@ class ChatBox extends React.Component {
 
 export default connect(
 	(state) => ({states: state.state, user: state.user.userobject, messages: state.messages}),
-	(dispatch) => bindActionCreators({ }, dispatch)
+	(dispatch) => bindActionCreators({ setMessage }, dispatch)
 )(ChatBox);

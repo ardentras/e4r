@@ -24,6 +24,7 @@ export function initSocketHanlder(socket) {
 	return async dispatch => {
 		if (socket) {
 			socket.on("new-message", (data)=>{
+				dispatch(setMessage({name: undefined, msg: undefined}));
 				dispatch(setMessage(data));
 			});
 			socket.on("user-connected", (data)=>{
@@ -31,6 +32,7 @@ export function initSocketHanlder(socket) {
 				dispatch(setTotalUser(data));
 			});
 			socket.on("user-disconnected",(data)=>{
+				dispatch(setMessage({name: undefined, msg: undefined}));
 				dispatch(setTotalUser(data));
 			});	
 		}
