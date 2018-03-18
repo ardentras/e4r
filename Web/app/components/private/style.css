@@ -9,8 +9,7 @@
     display: flex;
     flex-flow: row nowrap;
     position: relative;
-    height: 100%;
-    background: #FFFFFF;
+    background: #F4F6F9;
     min-height: calc(100vh - 200px);
 }
 

@@ -45,7 +45,7 @@ const iAuth = (()=>{
 			return _request.get(this).post(path, {user});
 		}
 		Deauthenticate(user, path) {
-			return _request.get(this).put(path, {user});
+			return _request.get(this).put(path, user);
 		}
 		Register(user, path) {
 			return _request.get(this).post(path, {user});

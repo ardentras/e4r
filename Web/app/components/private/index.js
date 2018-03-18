@@ -1,34 +1,29 @@
+
+
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { 
-    handlerDeAuth } from "../../redux/actions/auth";
-import { getQuestions } from "../../redux/actions/user";
 import { connect } from "react-redux";
+import { handleDeAuthentication } from "../../redux/actions/user"; 
+import { getQuestions } from "../../redux/actions/questions";
 import Routes from "./routes";
 import Dashboard from "./dashboard";
 import Styles from "./style.css";
 import DashboardStyles from "./dashboard/style.css";
+import NewDash from "./newDash";
+import ChatBox from "./chatBox";
+import Footer from "./footer";
+import SpinnerStyle from "../loading/style.css";
 
 class Private extends React.Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
     }
-    componentWillMount() {
-        if (!this.props.questions || this.props.questions.length <= 0) {
-            this.props.getQuestions(this.props.user);
-        }
-    }
     componentDidMount() {
-        window.addEventListener("resize", this.resize);
-        if (window.innerWidth <= 740) {
-            const dashboardheight = document.getElementsByClassName(DashboardStyles.dashboard)[0].clientHeight;
-            document.getElementsByClassName(Styles.private)[0].style.paddingBottom = dashboardheight + "px";
+        if (!this.props.questions || this.props.questions.length <= 0) {
+            this.props.getQuestions(this.props.user.token, this.props.user.userobject);
         }
-    }
-    componentWillUnmount() {
-        window.removeEventListener("resize",this.resize);
     }
     resize() {
         if (window.innerWidth <= 740) {
@@ -40,14 +35,18 @@ class Private extends React.Component {
             document.getElementsByClassName(Styles.private)[0].style.paddingBottom = 0;
         }
     }
+    logout() {
+        this.props.handleDeAuthentication(this.props.user.token, this.props.user.userobject);
+    }
     hideModal() {
         const modal = document.getElementsByClassName(Styles.modal)[0];
         modal.style.transform = "translateY(-1000px)";
     }
-    logout() {
-        this.props.handlerDeAuth(this.props.user);
-    }
     render() {
+        const { redirectToRefer } = this.props.states;
+        if (!redirectToRefer) {
+            <Redirect to="/login"/>
+        }
         return (
             <div className={Styles.private}>
                 <div className={Styles.modal}>
@@ -59,17 +58,19 @@ class Private extends React.Component {
                     </div>
                 </div>
                 <div className={Styles.contents}>
-                    <Dashboard func={{logout: this.logout}}/>
+                    <NewDash func={{handleLogOut: this.logout}}/>
                     {Routes.map((elem, index)=>(
                         <Route key={index} exact={elem.exact} path={elem.path} component={elem.component}/>
                     ))}
+                    <ChatBox/>
                 </div>
+                <Footer/>
             </div>
         );
     }
 }
 
 export default connect(
-	(state) => ({user: state.user, states: state.state, questions: state.questions.questions}),
-	(dispatch) => bindActionCreators({ handlerDeAuth, getQuestions }, dispatch)
+	(state) => ({states: state.state, user: state.user, questions: state.questions.questions}),
+	(dispatch) => bindActionCreators({ handleDeAuthentication,getQuestions }, dispatch)
 )(Private);

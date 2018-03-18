@@ -5,17 +5,7 @@
  *
 *****************************************************************************/
 
-import { 
-	AUTHENTICATING,
-	DEAUTHENTICATING,
-	SIGNINGUP,
-	AUTHENTICATE_SUCCESSFUL,
-	DEAUTHENTICATE_SUCCESSFUL,
-	SIGNUP_SUCCESSFUL,
-	SIGN_UP,
-	ERROR,
-	REFER,
-	RESET } from "../types";
+import Types from "../types";
 
 const initialState = {
 	IS_AUTH: false,
@@ -26,48 +16,89 @@ const initialState = {
 	AUTH_SUCCESSFUL: false,
 	DEAUTH_SUCCESSFUL: false,
 	SIGNUP_SUCCESSFUL: false,
+	PERSIST: false,
+	SOCKET: null,
+	SHOW_QUESTION: false,
+	SHOW_DASH: false,
+	SHOW_CHAT: false,
 	redirectToRefer: false,
 	error: undefined
 };
 
 const stateReducer = (state=initialState, action) => {
 	switch(action.type) {
-	case SIGN_UP:
+	case Types.Auth.AUTHENTICATING:
 		return Object.assign({}, state, {
-			IS_SIGNUP: action.value
+			AUTHING: true
 		});
-	case AUTHENTICATING:
+	case Types.Auth.AUTHENTICATE_SUCCESSFUL:
 		return Object.assign({}, state, {
-			AUTHING: action.value
-		}); 
-	case DEAUTHENTICATING:
+			AUTH_SUCCESSFUL: true,
+			IS_AUTH: true
+		});
+	case Types.Auth.DEAUTHENTICATING:
 		return Object.assign({}, state, {
 			DEAUTHING: true
 		});
-	case SIGNINGUP:
+	case Types.Auth.DEAUTHENTICATE_SUCCESSFUL:
 		return Object.assign({}, state, {
-			SIGNINGUP: true
+			DEAUTH_SUCCESSFUL: true
 		});
-	case AUTHENTICATE_SUCCESSFUL:
+	case Types.Auth.RESET:
 		return Object.assign({}, state, {
-			IS_AUTH: action.value
+			DEAUTHING: false,
+			AUTHING: false,
+			AUTH_SUCCESSFUL: false,
+			DEAUTH_SUCCESSFUL: false
 		});
-	case DEAUTHENTICATE_SUCCESSFUL:
-		return Object.assign({}, initialState);
-	case SIGNUP_SUCCESSFUL:
+	case Types.Join.SIGNUP:
 		return Object.assign({}, state, {
-			SIGNUP_SUCCESSFUL: action.value
+			IS_SIGNUP: action.value
 		});
-	case ERROR:
+	case Types.Join.SIGNUP_SUCCESSFUL:
 		return Object.assign({}, state, {
-			error: action.value
+			SIGNUP_SUCCESSFUL: true
 		});
-	case REFER:
+	case Types.Join.SIGNINGUP:
+		return Object.assign({}, state, {
+			SIGNINGUP: action.value
+		});
+	case Types.Join.RESET:
+		return Object.assign({}, state, {
+			IS_SIGNUP: false,
+			SIGNUP_SUCCESSFUL: false,
+			SIGNINGUP: false
+		});
+	case Types.State.SET_SHOWQUESTION: 
+		return Object.assign({}, state, {
+			SHOW_QUESTION: action.value
+		});
+	case Types.State.SET_SOCKET:
+		return Object.assign({}, state, {
+			SOCKET: action.value
+		});
+	case Types.State.SHOW_CHAT:
+		return Object.assign({}, state, {
+			SHOW_CHAT: action.value
+		});
+	case Types.State.SHOW_DASH:
+		return Object.assign({}, state, {
+			SHOW_DASH: action.value
+		});
+	case Types.State.REFER:
 		return Object.assign({}, state, {
 			redirectToRefer: action.value
 		});
-	case RESET:
-		return Object.assign({}, initialState);
+	case Types.State.SET_PERSIST:
+		return Object.assign({}, state, {
+			PERSIST: action.value
+		});
+	case Types.State.ERROR:
+		return Object.assign({}, state, {
+			error: action.value
+		});
+	case Types.State.RESET:
+		return Object.assign({}, state, initialState);
 	default:
 		return Object.assign({}, state);
 	}

@@ -7,10 +7,10 @@
 
 import {createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import authReducer from "./reducers/authReducer";
 import stateReducer from "./reducers/stateReducer";
 import userReducer from "./reducers/userReducer";
 import questionReducer from "./reducers/questionReducer";
+import messageReducer from "./reducers/messageReducer";
 import { combineReducers } from "redux";
 
 /****************************************************************************
@@ -20,10 +20,10 @@ import { combineReducers } from "redux";
  *
 *****************************************************************************/
 const reducer = combineReducers({
-	auth: authReducer,
 	state: stateReducer,
 	user: userReducer,
-	questions: questionReducer
+	questions: questionReducer,
+	messages: messageReducer
 });
 
 /****************************************************************************

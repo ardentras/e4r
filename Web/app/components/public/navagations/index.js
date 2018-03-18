@@ -30,8 +30,8 @@ class Navagation extends React.Component {
 						<div className={Styles.navagations}>
 							{Routes.map((elem,index)=> {
 								if (elem.label !== "Password Reset") {
-									return (elem.label === "Login" && this.props.IS_AUTH ?
-									<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + ( this.props.user.user_data ? this.props.user.user_data.first_name !== "" ? this.props.user.user_data.first_name : this.props.uid : this.props.uid)}</NavLink> :
+									return (elem.label === "Login" && this.props.states.IS_AUTH ?
+									<NavLink key={index} to="/dashboard" className={Styles.navselector} activeClassName={Styles.activelink}>{"Hello, " + ( this.props.user.userobject ? this.props.user.userobject.user_data.first_name !== "" ? this.props.user.userobject.user_data.first_name : this.props.user.userobject.user_data.username : "Unknown")}</NavLink> :
 									<NavLink 
 									key={index} 
 									exact={elem.exact} 
@@ -49,4 +49,9 @@ class Navagation extends React.Component {
 	}
 }
 
-export default Navagation;
+export default connect(
+	(state) => ({user: state.user, states: state.state}),
+	null,
+	null,
+	{pure: false}
+)(Navagation);

@@ -1,80 +1,123 @@
-import { 
-	AUTHENTICATE_SUCCESSFUL,
-	DEAUTHENTICATE_SUCCESSFUL,
-	ERROR, 
-	SIGN_UP,
-	SIGNUP_SUCCESSFUL,
-	REFER,
-	RESET } from "../types";
-    
-/****************************************************************************
- * 
- *->Action Name: AuthenticateSuccess
- *->Action Purpose: To set the successful state in the store.
- *
-*****************************************************************************/
-export function setAuthenticateSuccess(state) {
-	return {
-		type: AUTHENTICATE_SUCCESSFUL,
-		value: state
-	};
-}
+import Types from "../types";
 
-/****************************************************************************
- * 
- *->Action Name: DeAuthenticateSuccess
- *->Action Purpose: To set the success state in the store.
- *
-*****************************************************************************/
-export function setDeAuthenticateSuccess(state) {
+export function authenticating() {
 	return {
-		type: DEAUTHENTICATE_SUCCESSFUL,
-		value: state
-	};
-}
-
-/****************************************************************************
- * 
- *->Action Name: signUp
- *->Action Purpose: To set the signup state in the store.
- *
-*****************************************************************************/
-export function ifSignUp(state) {
-	return {
-		type: SIGN_UP,
-		value: state
-	};
-}
-
-/****************************************************************************
- * 
- *->Action Name: signUpSuccessful
- *->Action Purpose: To set the signup state in the store.
- *
-*****************************************************************************/
-export function setSignUpSuccessful(state) {
-	return {
-		type: SIGNUP_SUCCESSFUL,
-		value: state
-	};
-}
-
-export function Reset() {
-	return {
-		type: RESET
+		type: Types.Auth.AUTHENTICATING
 	}
 }
 
-export function Error(err=undefined) {
+export function authenticated() {
 	return {
-		type: ERROR,
-		value: err
-	};
+		type: Types.Auth.AUTHENTICATE_SUCCESSFUL
+	}
 }
 
-export function Refer(value=true) {
+export function deauthenticating() {
 	return {
-		type: REFER,
-		value: value
-	};
+		type: Types.Auth.DEAUTHENTICATING
+	}
+}
+
+export function deauthenticated() {
+	return {
+		type: Types.Auth.DEAUTHENTICATE_SUCCESSFUL
+	}
+}
+
+export function resetAuth() {
+	return {
+		type: Types.Auth.RESET
+	}
+}
+
+export function SignUp(status) {
+	return {
+		type: Types.Join.SIGNUP,
+		value: status
+	}
+}
+
+export function SignedUp() {
+	return {
+		type: Types.Join.SIGNUP_SUCCESSFUL
+	}
+}
+
+export function SigningUp(status) {
+	return {
+		type: Types.Join.SIGNINGUP,
+		value: status
+	}
+}
+
+export function resetSignUp() {
+	return {
+		type: Types.Join.RESET
+	}
+}
+
+export function redirect(status) {
+	return {
+		type: Types.State.REFER,
+		value: status
+	}
+}
+
+export function setShowQuestion(status) {
+	return {
+		type: Types.State.SET_SHOWQUESTION,
+		value: status
+	}
+}
+
+export function Error(status=undefined) {
+	return {
+		type: Types.State.ERROR,
+		value: status
+	}
+}
+
+export function resetState() {
+	return {
+		type: Types.State.RESET
+	}
+}
+
+export function showChat(status) {
+	return {
+		type: Types.State.SHOW_CHAT,
+		value: status
+	}
+}
+
+export function showDash(status) {
+	return {
+		type: Types.State.SHOW_DASH,
+		value: status
+	}
+}
+
+export function handleRegisterButton(status) {
+	return async dispatch => {
+		try {
+
+		}
+		catch(err) {
+
+		}
+	}
+}
+
+export function setSocket(socket) {
+	return {
+		type: Types.State.SET_SOCKET,
+		value: socket
+	}
+}
+
+export function setPersist(status) {
+	return {
+		type: Types.State.SET_PERSIST,
+		value: status
+	}
 }

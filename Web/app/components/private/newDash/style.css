@@ -1,0 +1,55 @@
+.dashboard {
+	background: white;
+	width: 0;
+	transition: all 0.4s ease;
+	overflow: hidden;
+}
+
+.activedashboard {
+	background: #141b22;
+	width: 250px;
+	transition: all 0.4s ease;
+}
+
+.selectors {
+	display: flex;
+	flex-flow: column nowrap;
+	min-width: 150px;
+}
+
+.selector {
+	color: white;
+
+}
+
+.selector:hover {
+	background: #1E90FF;
+}
+
+.selectors a {
+	padding: 5px 0;
+}
+
+.activeselector {
+	color: #1E90FF;
+	background: #333F4F;
+}
+
+.logout i {
+	padding: 0 12px;
+	margin: 10px 0;
+}
+
+.logout {
+	padding: 5px 0;
+	color: white;
+}
+
+.logout:hover {
+	background: #1E90FF;
+	cursor: pointer;
+}
+
+.linktext {
+	padding-left: 20px;
+}

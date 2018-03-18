@@ -1,6 +1,7 @@
 import React from "react";
 import Styles from "./style.css";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import ProgressBar from "progressbar.js";
 import Proptypes from "prop-types";
 import iCookie from "../../../libraries/iCookie";
@@ -20,6 +21,11 @@ class Home extends React.Component {
         percentage.innerHTML = (index*100) + "%";
     }
     render() {
+        if (!this.props.user) {
+            return (
+                <div>Error loading userobject!</div>
+            )
+        }
         return (
             <div className={Styles.home}>
                 <div className={Styles.recentactivity}>
@@ -61,5 +67,5 @@ class Home extends React.Component {
     }
 }
 export default connect(
-	(state) => ({user: state.user, questions: state.questions.questions, index: state.questions.index, uid: state.auth.uid})
+	(state) => ({user: state.user.userobject, index: state.questions.index})
 )(Home);

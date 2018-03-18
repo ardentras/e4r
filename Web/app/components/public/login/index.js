@@ -12,8 +12,10 @@ import PropTypes from "prop-types";
 import { Redirect, Link } from 'react-router-dom'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { handlerAuth, handlerRegister } from "../../../redux/actions/auth";
-import { ifSignUp, setSignUpSuccessful } from "../../../redux/actions/state";
+
+import { handleAuthentication, handleSignUp } from "../../../redux/actions/user"; 
+import { SignUp } from "../../../redux/actions/state";
+
 import Visit from "./components/visit";
 import Signup from "./components/signup";
 import Return from "./components/return";
@@ -28,16 +30,15 @@ class Login extends React.Component {
 	}
 	login(event) {
 		event.preventDefault();
-		this.props.handlerAuth({username: event.target.username.value, password: event.target.password.value});
+		this.props.handleAuthentication(event.target.username.value, event.target.password.value);
 	}
 	signup(event) {
 		event.preventDefault();
-		this.props.setSignUpSuccessful(false);
-		this.props.ifSignUp(!this.props.states.IS_SIGNUP);
+		this.props.SignUp(!this.props.states.IS_SIGNUP);
 	}
 	register(event) {
 		event.preventDefault();
-		this.props.handlerRegister({email: event.target.email.value, username: event.target.username.value, password: event.target.password.value});
+		this.props.handleSignUp({email: event.target.email.value, username: event.target.username.value, password: event.target.password.value});
 	}
 	render() {
 		const { redirectToRefer } = this.props.states;
@@ -67,5 +68,8 @@ Login.propTypes = {
 
 export default connect(
 	(state) => ({states: state.state, user: state.user}),
-	(dispatch) => bindActionCreators({handlerAuth,handlerRegister,ifSignUp,setSignUpSuccessful}, dispatch)
+	(dispatch) => bindActionCreators({ 
+		SignUp, 
+		handleAuthentication,
+		handleSignUp }, dispatch)
 )(Login);
