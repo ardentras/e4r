@@ -58,7 +58,7 @@ class Private extends React.Component {
                         <button onClick={this.hideModal} className={Styles.modalbtn}>OK</button>
                     </div>
                 </div>
-                <div className={Styles.contents}>
+                <div className={[Styles.contents, (this.props.states.THEME === "Light" ? null : Styles.darkcontents)].join(" ")}>
                     <NewDash func={{handleLogOut: this.logout}}/>
                     {Routes.map((elem, index)=>(
                         <Route key={index} exact={elem.exact} path={elem.path} component={elem.component}/>

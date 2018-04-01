@@ -19,6 +19,7 @@ const initialState = {
 	PERSIST: false,
 	THEME: "Light",
 	SOCKET: null,
+	CHAT_CONNECTED: false,
 	SHOW_QUESTION: false,
 	SHOW_SETTING: false,
 	SHOW_DASH: false,
@@ -78,6 +79,10 @@ const stateReducer = (state=initialState, action) => {
 	case Types.State.SET_SOCKET:
 		return Object.assign({}, state, {
 			SOCKET: action.value
+		});
+	case Types.State.SET_CHAT_CONNECTED:
+		return Object.assign({}, state, {
+			CHAT_CONNECTED: action.value
 		});
 	case Types.State.SHOW_CHAT:
 		return Object.assign({}, state, {

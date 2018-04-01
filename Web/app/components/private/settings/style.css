@@ -8,7 +8,6 @@
     display: flex;
     flex-flow: column;
     padding: 0 40px;
-    background: white;
     width: 100%;
 }
 .initials {
@@ -17,6 +16,7 @@
 .fieldhead {
     margin-bottom: 5px;
 }
+
 .level {
     align-self: center;
     margin-bottom: 15px;
@@ -77,6 +77,10 @@
 }
 #token, #charity {
     border: none;
+}
+
+.darkfields {
+    background: rgb(41, 50, 61);
 }
 @media (min-width: 741px) {
     .savebtn {

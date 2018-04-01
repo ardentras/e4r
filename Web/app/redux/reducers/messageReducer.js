@@ -14,18 +14,11 @@ import Types from "../types";
  *
 *****************************************************************************/
 const initialState = {
-	message: undefined,
-	from: undefined,
 	totalUsers: 0
 };
 
 const messageReducer = (state=initialState, action) => {
 	switch(action.type) {
-	case Types.Messages.SET_MESSAGE:
-		return Object.assign({}, state, {
-			message: action.value.msg,
-			from: action.value.name
-		});
 	case Types.Messages.SET_TOTAL_USER:
 		return Object.assign({}, state, {
 			totalUsers: action.value

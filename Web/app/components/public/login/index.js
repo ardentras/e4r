@@ -14,8 +14,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { handleAuthentication, handleSignUp } from "../../../redux/actions/user"; 
-import { SignUp } from "../../../redux/actions/state";
+import { SignUp, setTheme } from "../../../redux/actions/state";
 
+import iCookie from "../../../libraries/iCookie";
 import Visit from "./components/visit";
 import Signup from "./components/signup";
 import Return from "./components/return";
@@ -27,6 +28,12 @@ class Login extends React.Component {
 		this.login = this.login.bind(this);
 		this.signup = this.signup.bind(this);
 		this.register = this.register.bind(this);
+	}
+	componentWillMount() {
+		const savedTheme = iCookie.getStorage("theme");
+		if (savedTheme && this.props.states.THEME !== savedTheme) {
+			this.props.setTheme(savedTheme);
+		}
 	}
 	login(event) {
 		event.preventDefault();
@@ -71,5 +78,6 @@ export default connect(
 	(dispatch) => bindActionCreators({ 
 		SignUp, 
 		handleAuthentication,
-		handleSignUp }, dispatch)
+		handleSignUp,
+		setTheme }, dispatch)
 )(Login);

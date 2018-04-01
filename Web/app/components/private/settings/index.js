@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleSaveButton, handleGameRestart, handlePasswordResetButton } from "../../../redux/actions/user";
+import { handleTheme } from "../../../redux/actions/state";
 
 class Settings extends React.Component {
     constructor(props) {
@@ -54,11 +55,11 @@ class Settings extends React.Component {
                 <div className={Styles.level}>{"Level " + (parseInt(this.props.user.userobject.game_data.difficulty) + 1)}</div>
                 <div className={[Styles.fnamefield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>FIRST NAME</span>
-                    <input id={Styles.fname} className={Styles.fieldinput} type="text" defaultValue={this.props.user.userobject.user_data.first_name}/>
+                    <input id={Styles.fname} className={[Styles.fieldinput, (this.props.states.THEME === "Light" ? null : Styles.darkfields)].join(" ")} type="text" defaultValue={this.props.user.userobject.user_data.first_name}/>
                 </div>
                 <div className={[Styles.lnamefield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>LAST NAME</span>
-                    <input id={Styles.lname} className={Styles.fieldinput} type="text" defaultValue={this.props.user.userobject.user_data.last_name}/>
+                    <input id={Styles.lname} className={[Styles.fieldinput, (this.props.states.THEME === "Light" ? null : Styles.darkfields)].join(" ")} type="text" defaultValue={this.props.user.userobject.user_data.last_name}/>
                 </div>
                 <div className={[Styles.emailfieled, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>EMAIL</span>
@@ -86,7 +87,7 @@ class Settings extends React.Component {
                 </div>
                 <div className={[Styles.themefield, Styles.fields].join(" ")}>
                     <span className={Styles.fieldhead}>Theme</span>
-                    <span onClick={null} className={Styles.themebtn} id={this.props.states.THEME === "Light" ? Styles.dark : Styles.light}>{this.props.states.THEME === "Light" ? "Dark" : "Light"}</span>
+                    <span onClick={this.props.handleTheme.bind(null,this.props.states.THEME)} className={Styles.themebtn} id={this.props.states.THEME === "Light" ? Styles.dark : Styles.light}>{this.props.states.THEME === "Light" ? "Dark" : "Light"}</span>
                 </div>
                 <span onClick={this.save} className={Styles.savebtn}>SAVE</span>
             </div>
@@ -96,5 +97,5 @@ class Settings extends React.Component {
 
 export default connect(
 	(state) => ({user: state.user, states: state.state}),
-	(dispatch) => bindActionCreators({ handleSaveButton, handleGameRestart, handlePasswordResetButton }, dispatch)
+	(dispatch) => bindActionCreators({ handleSaveButton, handleGameRestart, handlePasswordResetButton, handleTheme }, dispatch)
 )(Settings);

@@ -2,19 +2,7 @@ import Types from "../types";
 import Style from "../../components/private/chatBox/style.css";
 import NavStyle from "../../components/public/navagations/style.css";
 import FooterStyle from "../../components/private/footer/style.css";
-
-export function setMessage(data) {
-	return {
-		type: Types.Messages.SET_MESSAGE,
-		value: data
-	}
-}
-
-export function resetMessages() {
-	return {
-		type: Types.Messages.RESET
-	}
-}
+import { setSocket, setChatConnected } from "./state";
 
 export function setTotalUser(count) {
 	return {
@@ -26,26 +14,53 @@ export function setTotalUser(count) {
 export function initSocketHanlder(socket, uid) {
 	return async dispatch => {
 		if (socket) {
+			socket.on("connect", ()=>{
+				dispatch(setChatConnected(true));
+			});
+			socket.on("disconnect", (data)=>{
+				dispatch(setChatConnected(false));
+			});
 			socket.on("new-message", (data)=>{
-				// dispatch(setMessage({name: undefined, msg: undefined}));
-				// dispatch(setMessage(data));
 				dispatch(displayMessage(data.name, data.msg, uid));
+			});
+			socket.on("connect_timeout", (timeout)=>{	
+				socket.close();
+				dispatch(displayMessage("System", " Connection Timed Out!"));
+				dispatch(setSocket(null));
+			});
+			socket.on("error", (err)=>{
+				socket.close();
+				dispatch(displayMessage("System", "Error has occured!"));
+				dispatch(setSocket(null));
+			});
+			socket.on("connect_error",(err)=>{
+				socket.close();
+				dispatch(displayMessage("System", "Cannot Establish Connection with Server!"));
+				dispatch(setSocket(null));
 			});
 			socket.on("user-connected", (data)=>{
 				console.log("Connected");
 				dispatch(setTotalUser(data));
 			});
 			socket.on("user-disconnected",(data)=>{
-				dispatch(setMessage({name: undefined, msg: undefined}));
 				dispatch(setTotalUser(data));
 			});	
 		}
 	}
 }
 
+export function clearMessages() {
+	return async dispatch => {
+		const messages = document.getElementById(Style.msgcontainer);
+		while (messages.firstChild) {
+			messages.removeChild(messages.firstChild);
+		}
+	}
+}
+
 export function displayMessage(from, text, me) {
 	return async dispatch => {
-		const messages = document.getElementById(Style.messages);
+		const messages = document.getElementById(Style.msgcontainer);
 		const rootcontainer = document.createElement("div");
 		const msgcontainer = document.createElement("div");
 		const textcontainer = document.createElement("div");

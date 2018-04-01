@@ -9,8 +9,12 @@
     display: flex;
     flex-flow: row nowrap;
     position: relative;
-    background: #F4F6F9;
     min-height: calc(100vh - 200px);
+}
+
+.darkcontents {
+    background: #0D1218;
+    color: #FFFFFF;
 }
 
 .levelup {

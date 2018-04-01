@@ -53,7 +53,7 @@ class Footer extends React.Component {
 			if (this.props.states.SOCKET) {
 				this.props.states.SOCKET.close();
 				this.props.setSocket(null);
-				this.props.setTotalUser(this.props.totalUser - 1);
+				this.props.states.CHAT_CONNECTED ? this.props.setTotalUser(this.props.totalUser - 1) : null;
 			}
 		}
 		else {
@@ -76,37 +76,26 @@ class Footer extends React.Component {
 				this.getHelp();
 			}
 		}
-		const helper = document.getElementById(Style.helptext);
+		const helper = document.getElementsByClassName(Style.helptext)[0];
 		const helpbtn = document.getElementById(Style.helpbtn);
-		if (this.props.SHOW_HELP) {
-			helpbtn.style.background = "white";
-			helpbtn.style.color = "#333F4F";
-			helper.style.display = "none";
-			helper.style.opacity = 0;
-			this.props.hideHelp();
-		}
-		else {
-			helpbtn.style.background = "#1E90FF";
-			helpbtn.style.color = "white";
-			helper.style.display = "flex";
-			helper.style.opacity = 1;
-			this.props.showHelp();
-		}
+		helpbtn.classList.toggle(Style.activehelpbtn);
+		helper.classList.toggle(Style.activeHelperText);
+		this.props.SHOW_HELP ? this.props.hideHelp() : this.props.showHelp();
 	}
 	render() {
 		if (this.props.SHOW_HELP) {
-			const helper = document.getElementById(Style.helptext);
+			const helper = document.getElementsByClassName(Style.helptext)[0];
 			if (helper) {
 				helper.style.top = -(helper.clientHeight + 30) + "px";
 			}
 		}	
 		return (
-			<div className={Style.footer}>
+			<div className={[Style.footer, (this.props.states.THEME === "Light" ? null : Style.darkfooter)].join(" ")}>
 				<span className={Style.menu} onClick={this.showDash}><i id={Style.menubtn} className="fa fa-bars"></i></span>
 				<ul className={Style.other}>
-					{this.props.states.SHOW_QUESTION && (<li onClick={this.showHelp} id={Style.helpbtn} className={Style.otherselector}>
+					{this.props.states.SHOW_QUESTION && (<li onClick={this.showHelp} id={Style.helpbtn} className={[Style.otherselector, (this.props.states.THEME === "Light" ? Style.ligthhelpbtn : Style.darkhelpbtn)].join(" ")}>
 						<span>Show Help</span>
-						<div id={Style.helptext} onClick={(event)=>{
+						<div className={Style.helptext} onClick={(event)=>{
 								event.stopPropagation();
 							}}>
 							{this.props.states.error !== error.GET_HELP_TIMEOUT && this.props.HELP ? this.props.HELP.indexOf("http") >= 0 ? <a className={[Style.helplink, Style.help].join(" ")} href={this.props.HELP} target="_blank">{this.props.HELP}</a> : <span className={Style.help}>{this.props.HELP}</span> : this.props.states.error !== undefined ? <span className={Style.help}>{this.props.states.error}</span> : "Fetching..."}

@@ -4,7 +4,6 @@
 	align-items: center;
 	width: 100%;
 	transition: all 0.6s ease;
-	background: white;
 }
 
 .gamecontainer {
@@ -13,7 +12,7 @@
 }
 
 .radios {
-	background: white;
+	background: inherit;
 }
 
 .correct {

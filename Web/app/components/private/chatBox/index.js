@@ -1,6 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
-import { setMessage, displayMessage } from "../../../redux/actions/message";
+import { setMessage, displayMessage, clearMessages } from "../../../redux/actions/message";
 import { connect } from "react-redux";
 import Style from "./style.css";
 import NavStyle from "../../public/navagations/style.css";
@@ -14,7 +14,6 @@ class ChatBox extends React.Component {
 	}
 	componentDidMount() {
 		const messages = document.getElementById(Style.messages);
-		const chatbox = document.getElementsByClassName(Style.chatbox)[0];
 		const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 		const navagator = document.getElementById(NavStyle.navcontainer);
 		const inputfields = document.getElementsByClassName(Style.inputfields)[0];
@@ -25,7 +24,7 @@ class ChatBox extends React.Component {
 	}
 	sendMessage(event) {
 		event.preventDefault();
-		if (event.target.msg.value && event.target.msg.value !== "") {
+		if (this.props.states.CHAT_CONNECTED && event.target.msg.value && event.target.msg.value !== "") {
 			if (this.props.states.SOCKET) {
 				this.props.states.SOCKET.emit("send-message", {name: this.props.user.user_data.username, msg: event.target.msg.value});
 				this.props.displayMessage(this.props.user.user_data.username,event.target.msg.value, this.props.user.user_data.username);
@@ -36,6 +35,12 @@ class ChatBox extends React.Component {
 			event.target.msg.value = "";
 		}
 	}
+	maximizedWindow() {
+		const chatbox = document.getElementsByClassName(Style.activechatbox)[0];
+		if (chatbox) {
+			chatbox.classList.toggle(Style.maximized);
+		}
+	}
 	render() {
 		if (this.props.messages.message) {
 			this.displayMessage(this.props.messages.message, this.props.messages.from);
@@ -43,9 +48,13 @@ class ChatBox extends React.Component {
 		}
 		return (
 			<div className={Style.chatbox}>
-				<div id={Style.messages}></div>
+				<div id={Style.messages}>
+					<button onClick={this.props.clearMessages} className={Style.clearbtn}><i id={Style.clearbtni} className="fa fa-window-close"></i></button>
+					<button onClick={this.maximizedWindow} className={Style.maxbtn}><i id={Style.maxbtni} className="fa fa-window-maximize"></i></button>
+					<div id={Style.msgcontainer}></div>
+				</div>
 				<form className={Style.inputfields} action="javascript:void(0)" onSubmit={this.sendMessage}>
-					<input id={Style.msg} type="text" name="msg"/>
+					<input id={Style.msg} className={this.props.states.THEME === "Light" ? null : Style.darkinput} type="text" name="msg"/>
 					<input id={Style.sendbtn} type="submit" value="send"/>
 				</form>
 			</div>
@@ -55,5 +64,5 @@ class ChatBox extends React.Component {
 
 export default connect(
 	(state) => ({states: state.state, user: state.user.userobject, messages: state.messages}),
-	(dispatch) => bindActionCreators({ setMessage, displayMessage}, dispatch)
+	(dispatch) => bindActionCreators({ setMessage, displayMessage, clearMessages}, dispatch)
 )(ChatBox);

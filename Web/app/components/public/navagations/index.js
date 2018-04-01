@@ -22,7 +22,7 @@ class Navagation extends React.Component {
 			<div id={Styles.navcontainer}>
 				<div className={Styles.navagation}>
 					<Testbanner/>
-					<div className={Styles.header}>
+					<div className={[Styles.header, (this.props.states.THEME === "Light" ? null : Styles.darkheader)].join(" ")}>
 						<div className={Styles.brand}>
 							<img src="/static/logo/logo.png" alt="X" id={Styles.logo}/>
 							<span>Education for Revitalization</span>

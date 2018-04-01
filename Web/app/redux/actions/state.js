@@ -1,4 +1,8 @@
 import Types from "../types";
+import PrivateStyle from "../../components/private/style.css";
+import SettingStyle from "../../components/private/settings/style.css";
+import HomeStyle from "../../components/private/home/style.css";
+import iCookie from "../../libraries/iCookie";
 
 export function authenticating() {
 	return {
@@ -15,6 +19,13 @@ export function authenticated() {
 export function deauthenticating() {
 	return {
 		type: Types.Auth.DEAUTHENTICATING
+	}
+}
+
+export function setTheme(theme) {
+	return {
+		type: Types.State.SET_THEME,
+		value: theme
 	}
 }
 
@@ -83,6 +94,12 @@ export function resetState() {
 	}
 }
 
+export function setChatConnected() {
+	return {
+		type: Types.State.SET_CHAT_CONNECTED
+	}
+}
+
 export function setShowSetting(status) {
 	return {
 		type: Types.State.SET_SHOWSETTING,
@@ -100,6 +117,13 @@ export function showChat(status) {
 export function showDash(status) {
 	return {
 		type: Types.State.SHOW_DASH,
+		value: status
+	}
+}
+
+export function chatConnected(status) {
+	return {
+		type: Types.State.SET_CHAT_CONNECTED,
 		value: status
 	}
 }
@@ -126,5 +150,12 @@ export function setPersist(status) {
 	return {
 		type: Types.State.SET_PERSIST,
 		value: status
+	}
+}
+
+export function handleTheme(current) {
+	return async dispatch => {
+		iCookie.setStorage("theme", (current === "Light" ? "Dark" : "Light"));
+		dispatch(setTheme(current === "Light" ? "Dark" : "Light"));
 	}
 }

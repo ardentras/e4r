@@ -1,7 +1,7 @@
 .chatbox {
 	background: white;
 	width: 0;
-	transition: all 0.4s ease;
+	transition: all 0.2s ease;
 	overflow: hidden;
 	position: relative;
 }
@@ -10,14 +10,53 @@
 	height: 100%;
 }
 
+.maxbtn {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+#msgcontainer {
+	font-size: inherit;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+#maxbtni {
+	background: none;
+	color: white;
+}
+
+.clearbtn {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+#clearbtni {
+	background: none;
+	color: white;
+}
+
 .activechatbox {
 	background: #141b22;
 	width: 250px;
 	max-width: 250px;
-	transition: all 0.4s ease;
+	transition: all 0.2s ease;
 	position: relative;
 	max-height: 100%;
 	overflow: hidden;
+}
+
+.maximized {
+	position: fixed;
+	z-index: 9999;
+	width: 100%;
+	max-width: none;
+	right: 0;
+	transition: all 0.2s ease;
 }
 
 #messages::-webkit-scrollbar {
@@ -124,7 +163,14 @@
 	margin-left: 5px;
 }
 
+.darkinput {
+	color: #141b22;
+}
+
 @media (max-width: 740px) {
+	.maxbtn {
+		display: none;
+	}
 	.chatbox {
 		position: fixed;
 		right: 0;

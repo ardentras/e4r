@@ -12,6 +12,8 @@ import {
 import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleUserPersist } from "../../redux/actions/user";
+import { setTheme } from "../../redux/actions/state";
+import iCookie from "../../libraries/iCookie";
 import Navagations from "./navagations"; // eslint-disable-line no-unused-vars
 import Routes from "./routes";
 import PrivateRoute from "./routes/private";
@@ -31,6 +33,10 @@ class App extends React.Component {
 		if (!this.props.states.redirectToRefer) {
 			this.props.handleUserPersist();
 		}
+	}
+	componentWillMount() {
+		const savedTheme = iCookie.getStorage("theme");
+		savedTheme ? this.props.setTheme(savedTheme) : null;		
 	}
 	render() {
 		return (
@@ -52,5 +58,5 @@ class App extends React.Component {
 
 export default connect(
 	(state) => ({states: state.state}),
-	(dispatch) => bindActionCreators({ handleUserPersist }, dispatch)
+	(dispatch) => bindActionCreators({ handleUserPersist, setTheme }, dispatch)
 )(App);
