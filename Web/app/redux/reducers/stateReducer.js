@@ -19,7 +19,7 @@ const initialState = {
 	PERSIST: false,
 	THEME: "Light",
 	SOCKET: null,
-	CHAT_CONNECTED: false,
+	CHAT_CONNECTED: "offline",
 	SHOW_QUESTION: false,
 	SHOW_SETTING: false,
 	SHOW_DASH: false,

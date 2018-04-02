@@ -40,7 +40,7 @@ class Question extends React.Component {
 		}
 		const helper = document.getElementById(FooterStyle.helptext);
 		const helpbtn = document.getElementById(FooterStyle.helpbtn);
-		if (helper.style.display === "flex") {
+		if (helper && helper.style.display === "flex") {
 			helpbtn.style.background = "white";
 			helpbtn.style.color = "#333F4F";
 			helper.style.display = "none";

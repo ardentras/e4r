@@ -41,7 +41,6 @@ const userReducer = (state=initialState, action) => {
 			}
 		});
 	case Types.User.SOLVED_QUESTION: 
-		console.log("increment",(parseInt(state.userobject.game_data.totalQuestions) + 1));
 		return Object.assign({}, state, {
 			userobject: {
 				...state.userobject,

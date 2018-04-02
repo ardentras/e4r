@@ -42,15 +42,27 @@
 }
 
 .error {
-    background: #fd7f69;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: #f7e9e9;
 }
 
 .warning {
-    background: #ffe77e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: #ffffcc;
 }
 
 .auth {
-    background: #beff81;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: #e9f7f1;
 }
 
 .signupbtn {

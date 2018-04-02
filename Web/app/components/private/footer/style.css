@@ -86,6 +86,16 @@
 	margin-right: 5px;
 }
 
+#connecting {
+	color: #ffee59;
+	margin-right: 5px;
+}
+
+#offline {
+	color: #c24646;
+	margin-right: 5px;
+}
+
 #totaluser {
 	color: #46c28e;
 }

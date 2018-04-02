@@ -94,12 +94,6 @@ export function resetState() {
 	}
 }
 
-export function setChatConnected() {
-	return {
-		type: Types.State.SET_CHAT_CONNECTED
-	}
-}
-
 export function setShowSetting(status) {
 	return {
 		type: Types.State.SET_SHOWSETTING,
@@ -121,7 +115,7 @@ export function showDash(status) {
 	}
 }
 
-export function chatConnected(status) {
+export function setChatConnected(status) {
 	return {
 		type: Types.State.SET_CHAT_CONNECTED,
 		value: status

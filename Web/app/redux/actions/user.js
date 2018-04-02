@@ -67,19 +67,19 @@ export function handleUserPersist() {
 		try {
 			dispatch(setPersist(true));
 			dispatch(Error(error.NONE));
-			const uo = iCookie.getStorage("userobject");
-			const token = iCookie.getStorage("token");
+			const uo = iCookie.getStorage("userobject", true);
+			const token = iCookie.getStorage("token", true);
 			if (token && EFRapi.ValidateObject(uo)) {
 				const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
 				Loading.style.display = "flex";
 				const renewToken = await EFRapi.renewSession(token);
 				if (renewToken.data.code === http.Ok) {
-					iCookie.setStorage("token", renewToken.data.session_id);
+					iCookie.setStorage("token", renewToken.data.session_id, true);
 					dispatch(setToken(renewToken.data.session_id));
 					const updatedUO = await EFRapi.updateUser({session: renewToken.data.session_id, userobject: uo});
 					if (updatedUO.data.code === http.Ok) {
 						if (EFRapi.ValidateObject(updatedUO.data.userobject)) {
-							iCookie.setStorage("userobject", updatedUO.data.userobject);
+							iCookie.setStorage("userobject", updatedUO.data.userobject, true);
 							dispatch(setUserObject(updatedUO.data.userobject));
 							dispatch(authenticated());
 							dispatch(redirect(true));
@@ -145,8 +145,8 @@ export function handleAuthentication(uid=undefined, pw=undefined) {
 					dispatch(authenticated());
 					dispatch(setUserObject(result.data.user_object));
 					dispatch(setToken(result.data.session_id));
-					iCookie.setStorage("userobject",result.data.user_object);
-					iCookie.setStorage("token", result.data.session_id);
+					iCookie.setStorage("userobject",result.data.user_object, true);
+					iCookie.setStorage("token", result.data.session_id, true);
 					dispatch(redirect(true));
 				}
 				else {
@@ -221,7 +221,7 @@ export function handleUserObjectUpdate(token=undefined, userobject=undefined) {
 				const result = await EFRapi.updateUser({session: token, userobject: userobject});
 				console.log(result.data);
 				if (result.data.code === http.Ok) {
-					iCookie.setStorage("userobject", result.data.userobject);
+					iCookie.setStorage("userobject", result.data.userobject, true);
 					dispatch(setUserObject(result.data.userobject));
 				}
 				else {
@@ -251,7 +251,7 @@ export function handleSaveButton(fname, lname, userobject) {
 						last_name: lname
 					}
 				});
-				dispatch(handleUserObjectUpdate(iCookie.getStorage("token"), newObject));
+				dispatch(handleUserObjectUpdate(iCookie.getStorage("token", true), newObject));
 			}
 			else {
 				alert("Invalid Object Detected!");

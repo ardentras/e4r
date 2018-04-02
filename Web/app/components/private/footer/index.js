@@ -1,7 +1,7 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { showChat, showDash, setSocket } from "../../../redux/actions/state";
+import { showChat, showDash, setSocket, setChatConnected } from "../../../redux/actions/state";
 import { showHelp, hideHelp, getHelp } from "../../../redux/actions/questions";
 import { initSocketHanlder, setTotalUser } from "../../../redux/actions/message";
 import error from "../../../redux/errorCodes";
@@ -53,8 +53,9 @@ class Footer extends React.Component {
 			if (this.props.states.SOCKET) {
 				this.props.states.SOCKET.close();
 				this.props.setSocket(null);
-				this.props.states.CHAT_CONNECTED ? this.props.setTotalUser(this.props.totalUser - 1) : null;
+				this.props.states.CHAT_CONNECTED === "online" ? this.props.setTotalUser(this.props.totalUser - 1) : null;
 			}
+			this.props.setChatConnected("offline");
 		}
 		else {
 			const connection = io("52.40.134.152:3002");
@@ -64,6 +65,7 @@ class Footer extends React.Component {
 				this.props.setSocket(connection);
 				this.props.initSocketHanlder(connection, this.props.uo.user_data.username);
 			}
+			this.props.setChatConnected("connecting");
 		}
 		this.props.showChat(!this.props.states.SHOW_CHAT);
 	}
@@ -103,7 +105,9 @@ class Footer extends React.Component {
 						</div>
 					</li>)}
 					<li onClick={this.showChat} className={Style.otherselector}>
-						<i id={Style.online} className="fa fa-circle"></i>
+						<i id={this.props.states.CHAT_CONNECTED === "online" ? Style.online :
+							   this.props.states.CHAT_CONNECTED === "offline" ? Style.offline :
+							   Style.connecting} className="fa fa-circle"></i>
 						<span id={Style.totaluser}>{this.props.totalUser}</span>
 					</li>
 				</ul>
@@ -114,5 +118,5 @@ class Footer extends React.Component {
 
 export default connect(
 	(state) => ({states: state.state, SHOW_HELP: state.questions.showHelp, HELP: state.questions.helpText, questions: state.questions, totalUser: state.messages.totalUsers, uo: state.user.userobject}),
-	(dispatch) => bindActionCreators({ showChat, showDash, showHelp, hideHelp, setSocket, initSocketHanlder, getHelp, setTotalUser}, dispatch)
+	(dispatch) => bindActionCreators({ showChat, showDash, showHelp, hideHelp, setSocket, initSocketHanlder, getHelp, setTotalUser, setChatConnected}, dispatch)
 )(Footer);

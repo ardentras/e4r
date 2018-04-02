@@ -15,10 +15,10 @@ export function initSocketHanlder(socket, uid) {
 	return async dispatch => {
 		if (socket) {
 			socket.on("connect", ()=>{
-				dispatch(setChatConnected(true));
+				dispatch(setChatConnected("online"));
 			});
 			socket.on("disconnect", (data)=>{
-				dispatch(setChatConnected(false));
+				dispatch(setChatConnected("offline"));
 			});
 			socket.on("new-message", (data)=>{
 				dispatch(displayMessage(data.name, data.msg, uid));
@@ -27,19 +27,21 @@ export function initSocketHanlder(socket, uid) {
 				socket.close();
 				dispatch(displayMessage("System", " Connection Timed Out!"));
 				dispatch(setSocket(null));
+				dispatch(setChatConnected("offline"));
 			});
 			socket.on("error", (err)=>{
 				socket.close();
 				dispatch(displayMessage("System", "Error has occured!"));
 				dispatch(setSocket(null));
+				dispatch(setChatConnected("offline"));
 			});
 			socket.on("connect_error",(err)=>{
 				socket.close();
 				dispatch(displayMessage("System", "Cannot Establish Connection with Server!"));
 				dispatch(setSocket(null));
+				dispatch(setChatConnected("offline"));
 			});
 			socket.on("user-connected", (data)=>{
-				console.log("Connected");
 				dispatch(setTotalUser(data));
 			});
 			socket.on("user-disconnected",(data)=>{
