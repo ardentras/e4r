@@ -12,10 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using EFRFrontEndTest2.Assets;
-/*
- 
-     DONT TOUCH I GOT IT!!!!!!!!!! 
-     */
 
 namespace EFRFrontEndTest2
 {
@@ -118,19 +114,6 @@ namespace EFRFrontEndTest2
                     //JsonValue k = block["question_block"][QuestionBlockNum++];
                     //SetQuestions(k);
                     QuestionAnswered = false;
-
-                    base.OnCreate(savedInstanceState);
-                    SetContentView(Resource.Layout.QuestionsPage);
-                    setBackground();
-
-                    m_database = new CallDatabase(this);
-
-                    BigGrayButton.Text = currentquestion.m_QuestionText;
-                    Answer1.Text = currentquestion.m_QuestionOne;
-                    Answer2.Text = currentquestion.m_QuestionTwo;
-                    Answer3.Text = currentquestion.m_QuestionThree;
-                    Answer4.Text = currentquestion.m_QuestionFour;
-
                     if (QuestionBlockNum >= 10)
                     {
                         NextBlock();
@@ -181,6 +164,11 @@ namespace EFRFrontEndTest2
                 }
             };
 
+            // block of ten questions
+            // load page puts it in layout
+            // code all four buttons so when pressed 
+            // match queston to answer in text button
+            // set boolean to check if answer was selected
 
             Answer3.Click += (sender, b) =>
             {
