@@ -40,11 +40,12 @@ const efrApi = (()=>{
             _questionHelp.set(this, undefined);
             iAuth.config({
                 host: _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this),
-                timeout: 10000
+                timeout: 5000
             });
+            Axios.defaults.timeout = 5000;
         }
         config({host="localhost", port=8080, protocol="http", gamePath=undefined, 
-                renewPath=undefined, loginPath=undefined, timeout=1000, headers=undefined,
+                renewPath=undefined, loginPath=undefined, timeout=5000, headers=undefined,
                 signupPath=undefined, logoutPath=undefined, updatePath=undefined, resetPWPath=undefined, verifyPW=undefined, questionHelp=undefined}) {
             _host.set(this, host);
             _port.set(this, port);
@@ -66,7 +67,7 @@ const efrApi = (()=>{
         }
         validateUserData(user_data) {
             let check = false;
-            if (user_data) {
+            if (typeof user_data === "object") {
                 if (user_data.username && typeof user_data.username === "string" &&
                     user_data.email && typeof user_data.email === "string" &&
                     user_data.first_name && typeof user_data.first_name === "string" &&
@@ -80,7 +81,7 @@ const efrApi = (()=>{
         }
         validateGameData(game_data) {
             let check = false;
-            if (game_data) {
+            if (typeof game_data === "object") {
                 if (game_data.subject_name  !== undefined&& typeof game_data.subject_name === "string" &&
                     game_data.subject_id !== undefined && typeof game_data.subject_id === "number" &&
                     game_data.difficulty !== undefined && typeof game_data.difficulty === "number" &&
@@ -104,38 +105,14 @@ const efrApi = (()=>{
             }
             return true;
         }
-		createJSON({username=undefined, email=undefined, first_name=undefined, last_name=undefined, charity_name=undefined,
-			subject_id=undefined, subject_name=undefined, difficulty=undefined, completed_blocks=undefined}) {
-			return Promise.resolve(
-                {
-                userobject: {
-                    user_data: {
-                        username: username,
-                        email: email,
-                        first_name: first_name,
-                        last_name: last_name,
-                        charity_name: charity_name,
-                        },
-                    game_data: {
-                        subject_id: subject_id,
-                        subject_name: subject_name,
-                        difficulty: difficulty,
-                        completed_blocks: completed_blocks
-                    }
-                }
-            });
-        }
         login(user) {
             return iAuth.Authenticate(user, _loginPath.get(this));
         }
         signup(user) {
             return iAuth.Register(user, _signupPath.get(this));
         }
-        logout(userobject) {
-            return iAuth.Deauthenticate({
-			session: iCookie.get("session"),
-			userobject: userobject
-			}, _logoutPath.get(this));
+        logout(user) {
+            return iAuth.Deauthenticate({user}, _logoutPath.get(this));
         }
         getQuestions(user) {
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _gamePath.get(this);
@@ -157,9 +134,8 @@ const efrApi = (()=>{
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _questionHelp.get(this);
             return Axios.put(apiRoute, {question_id: qid});
         }
-        renewSession() {
-            const session = iCookie.get("session");
-            const objToSent = {user: {session: session}};
+        renewSession(token) {
+            const objToSent = {user: {session: token}};
             const apiRoute = _protocol.get(this) + "://" + _host.get(this) + ":" + _port.get(this) + _renewPath.get(this);
 			return Axios.put(apiRoute, objToSent);
         }

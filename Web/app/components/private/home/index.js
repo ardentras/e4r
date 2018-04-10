@@ -1,6 +1,7 @@
 import React from "react";
 import Styles from "./style.css";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import ProgressBar from "progressbar.js";
 import Proptypes from "prop-types";
 import iCookie from "../../../libraries/iCookie";
@@ -20,6 +21,11 @@ class Home extends React.Component {
         percentage.innerHTML = (index*100) + "%";
     }
     render() {
+        if (!this.props.user) {
+            return (
+                <div>Error loading userobject!</div>
+            )
+        }
         return (
             <div className={Styles.home}>
                 <div className={Styles.recentactivity}>
@@ -51,7 +57,7 @@ class Home extends React.Component {
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
                                 <path fillOpacity="0" strokeWidth="1" stroke="#bbb" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
                                 <path id="heart-path" fillOpacity="0" strokeWidth="3" stroke="#ED6A5A" d="M81.495,13.923c-11.368-5.261-26.234-0.311-31.489,11.032C44.74,13.612,29.879,8.657,18.511,13.923  C6.402,19.539,0.613,33.883,10.175,50.804c6.792,12.04,18.826,21.111,39.831,37.379c20.993-16.268,33.033-25.344,39.819-37.379  C99.387,33.883,93.598,19.539,81.495,13.923z"/>
-                                <text id={Styles.percentage} x="40%" y="50%" position="absolute" fontFamily="inherit" fontSize="inherit"/>
+                                <text id={Styles.percentage} fill={this.props.states.THEME === "Light" ? "#0D1218" : "#FFFFFF"} x="40%" y="50%" position="absolute" fontFamily="inherit" fontSize="inherit"/>
                             </svg>
                         </div>
                     </div>
@@ -61,5 +67,5 @@ class Home extends React.Component {
     }
 }
 export default connect(
-	(state) => ({user: state.user, questions: state.questions.questions, index: state.questions.index, uid: state.auth.uid})
+	(state) => ({user: state.user.userobject, index: state.questions.index, states: state.state})
 )(Home);

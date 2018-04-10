@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import error from "../../../../../redux/errorCodes";
 import Styles from "./style.css";
 
 const Return = props =>(
     <form className={Styles.returning} action="javascript:void(0);" onSubmit={props.func.auth}>
         <h1 className={Styles.headers}>Returning</h1>
-        {props.error === "AUTH_FAIL" && <span className={Styles.warning}>Incorrect username/password</span> }
-        {props.error === "AUTH_TIMEOUT" && <span className={Styles.warning}>Timeout, please try again...</span> }
-        {props.error === "AUTH_ERROR" && <span className={Styles.error}>Cannot connect to server</span> }
+        {props.error === error.LOGIN_FAIL && <span className={Styles.warning}>Incorrect username/password</span> }
+        {props.error === error.TIME_OUT && <span className={Styles.warning}>Timeout, please try again...</span> }
+        {props.error === error.PERSIST_TIMEOUT && <span className={Styles.warning}>Persist Login Timeout, please login again...</span> }
+        {props.error === error.CONN_FAIL && <span className={Styles.error}>Cannot connect to server</span> }
         {props.SIGN_SUC && <span className={Styles.auth}>Please verify your email...</span>}
         {props.AUTHING && <span className={Styles.auth}>Authenicating...</span> }
         <span>username:</span>

@@ -1,6 +1,6 @@
 import React from "react";
 import Home from "../home";
-import Question from "../questions";
+import Question from "../newQuestion";
 import Leaderboard from "../leaderboard";
 import Settings from "../settings";
 const iconStyle = {
