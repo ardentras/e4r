@@ -23,7 +23,6 @@ export function setLName(name) {
 }
 
 export function solvedQuestion() {
-	console.log("solved questions");
 	return {
 		type: Types.User.SOLVED_QUESTION
 	}
@@ -86,30 +85,30 @@ export function handleUserPersist() {
 						}
 						else {
 							dispatch(setPersist(false));
-							iCookie.removeStorage("userobject");
-							iCookie.removeStorage("token");
+							iCookie.removeStorage("userobject", true);
+							iCookie.removeStorage("token", true);
 							dispatch(Error(error.INVALID_OBJECT));
 						}
 					}
 					else {
 						dispatch(setPersist(false));
-						iCookie.removeStorage("userobject");
-						iCookie.removeStorage("token");
+						iCookie.removeStorage("userobject",true);
+						iCookie.removeStorage("token",true);
 						dispatch(Error(error.UPDATE_FAIL));
 					}
 				}
 				else {
 					dispatch(setPersist(false));
-					iCookie.removeStorage("userobject");
-					iCookie.removeStorage("token");
+					iCookie.removeStorage("userobject",true);
+					iCookie.removeStorage("token",true);
 					dispatch(Error(error.INVALID_TOKEN));
 				}
 				Loading.style.display = "none";
 			}
 			else {
 				dispatch(setPersist(false));
-				iCookie.removeStorage("userobject");
-				iCookie.removeStorage("token");
+				iCookie.removeStorage("userobject",true);
+				iCookie.removeStorage("token",true);
 				dispatch(Error(error.CORRUPTED_FIELDS));
 			}
 		}
@@ -117,8 +116,8 @@ export function handleUserPersist() {
 			dispatch(setPersist(false));
 			const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
 			Loading.style.display = "none";
-			iCookie.removeStorage("userobject");
-			iCookie.removeStorage("token");
+			iCookie.removeStorage("userobject",true);
+			iCookie.removeStorage("token",true);
 			dispatch(Error((err.message.indexOf("timeout") >= 0 ? error.PERSIST_TIMEOUT : error.CONN_FAIL)));
 			console.log("Persist Error: ", err);
 		}
@@ -180,11 +179,11 @@ export function handleDeAuthentication(token=undefined, userobject=undefined) {
 	// }
 	return async dispatch => {
 		try {
+			iCookie.removeStorage("token", true);
+			iCookie.removeStorage("userobject", true);
 			const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
 			Loading.style.display = "flex";
 			dispatch(deauthenticating());
-			iCookie.removeStorage("token");
-			iCookie.removeStorage("userobject");
 			dispatch(Error(error.NONE));
 			if (token && EFRapi.ValidateObject(userobject)) {
 				EFRapi.logout({session: token, userobject: userobject});
@@ -219,7 +218,6 @@ export function handleUserObjectUpdate(token=undefined, userobject=undefined) {
 		try {
 			if (EFRapi.ValidateObject(userobject)) {
 				const result = await EFRapi.updateUser({session: token, userobject: userobject});
-				console.log(result.data);
 				if (result.data.code === http.Ok) {
 					iCookie.setStorage("userobject", result.data.userobject, true);
 					dispatch(setUserObject(result.data.userobject));
@@ -271,7 +269,6 @@ export function handleSignUp(userinfo) {
 			const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
 			Loading.style.display = "flex";
 			const result = await EFRapi.signup(userinfo);
-			console.log(result);
 			if (result.data.code === 201) {
 				dispatch(SignedUp());
 				dispatch(SignUp(false));
