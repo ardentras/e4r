@@ -532,6 +532,40 @@ class TDatabase {
         }
     }
 
+    // Returns a list of all possible achievements
+	//
+	// curl -XGET localhost:3002/api/all_achievements
+    async retrieveAchievementList(client, data) {
+        let res = await this.db.request().query("SELECT DISTINCT AchievementName, Description, EXPVALUE FROM EFRAcc.Achievements");
+
+        if (res.rowsAffected == 0) {
+            client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown error occurred. Please try again."});
+        } else {
+            client.json({response: "Success", type: "GET", code: 200, data: res.recordset[0]});
+        }
+    }
+
+    // Returns a list of all possible achievements
+	//
+	// curl -XPUT localhost:3002/api/user_achievements -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a"}}'
+    async retrieveUserAchievements(client, data) {
+        let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+        if (res.rowsAffected == 0) {
+        	client.json({response: "Failed", type: "PUT", code: 500, reason: "Session invalid. Please try again with valid session"});
+        } else {
+            let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                .query("SELECT DISTINCT AchievementName, Description, EXPVALUE FROM EFRAcc.Achievements JOIN EFRAcc.AchievementList \
+                                        ON EFRAcc.Achievements.AchievementID = EFRAcc.AchievementList.AchievementID WHERE UserID = @userid");
+
+            if (res.rowsAffected == 0) {
+                client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown error occurred. Please try again."});
+            } else {
+                client.json({response: "Success", type: "GET", code: 200, data: res2.recordset[0]});
+            }
+        }
+    }
+
     // Returns a new block of questions from the database
     //
     // Example:

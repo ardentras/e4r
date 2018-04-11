@@ -365,6 +365,37 @@ On User Object out of date:
     userobject: {user_object}
 }
 ```
+#### ALL_ACHIEVEMENTS RESPONSE:
+```
+{
+    response: "Success",
+    type: "GET",
+    code: 200,
+    data: {all_achievements}
+}
+```
+#### USER_ACHIEVEMENTS REQUEST:
+```
+
+```
+#### USER_ACHIEVEMENTS RESPONSE:
+```
+On valid session id:
+{
+    response: "Success",
+    type: "PUT",
+    code: 200,
+    data: {user_achievements}
+}
+
+On invalid session id:
+{
+    response: "Failed",
+    type: "PUT",
+    code: 500,
+    reason: "Session invalid. Please try again with valid session"
+}
+```
 ## Misc Requests:
 #### CHECK_USERNAME REQUEST:
 ```

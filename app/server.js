@@ -92,6 +92,12 @@ Router.put('/q/request_block', (req, res) => {
 Router.put('/q/request_help', (req, res) => {
 	db.requestHelp(res, req.body);
 });
+Router.get('/all_achievements', (req, res) => {
+	db.retrieveAchievementList(res, req.body);
+});
+Router.put('/user_achievements', (req, res) => {
+	db.retrieveUserAchievements(res, req.body.user);
+});
 Router.get('/test/display', (req, res) => {
     db.displayUsers(res);
 });
