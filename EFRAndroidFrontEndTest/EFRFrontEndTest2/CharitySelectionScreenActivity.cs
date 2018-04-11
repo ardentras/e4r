@@ -172,7 +172,7 @@ namespace EFRFrontEndTest2
             //Loop through the charity list from index 1, since the first element is None
             for (int i = 1; i < _charities.Count; ++i, ++colorCodes_index)
             {
-                if (colorCodes_index > 4)
+                if (colorCodes_index >= 4)
                 {
                     colorCodes_index = 0;
                 }
