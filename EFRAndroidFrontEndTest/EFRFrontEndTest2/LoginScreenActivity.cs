@@ -69,19 +69,21 @@ namespace EFRFrontEndTest2
                             }
                         case 401:
                             {
-                                alert.SetMessage("This account doesnt exist");
-                                alert.Show();
-                                break;
-                            }
-                        case 402:
-                            {
-                                alert.SetMessage("Invalid Password");
+                                alert.SetMessage("Invalid username/password");
                                 alert.Show();
                                 break;
                             }
                         case 428:
                             {
                                 alert.SetMessage("Check your email to verify your account");
+                                alert.Show();
+                                break;
+                            }
+                        case 503: // Network issues
+                        case 504:
+                            {
+
+                                alert.SetMessage(responce.m_reason);
                                 alert.Show();
                                 break;
                             }
