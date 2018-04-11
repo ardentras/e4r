@@ -37,7 +37,7 @@ const iCookie = (()=>{
 		}
 		getStorage(name, secure=false) {
 			let value = (secure ? (localStorage.getItem(this.encrypt(name))) : localStorage.getItem(name));
-			secure && value ? JSON.parse(this.decrypt(value)) : null;
+			secure && value ? value = JSON.parse(this.decrypt(value)) : null;
 			return value;
 		}
 		removeStorage(name, secure=false) {
