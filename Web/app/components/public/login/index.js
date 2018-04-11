@@ -48,6 +48,7 @@ class Login extends React.Component {
 		this.props.handleSignUp({email: event.target.email.value, username: event.target.username.value, password: event.target.password.value});
 	}
 	render() {
+		console.log(this.props.states.error);
 		const { redirectToRefer } = this.props.states;
 		if (redirectToRefer) {
 			return (
