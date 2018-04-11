@@ -58,7 +58,7 @@ class Footer extends React.Component {
 			this.props.setChatConnected("offline");
 		}
 		else {
-			const connection = io("52.40.134.152:3002");
+			const connection = io("97.94.243.67:40196");
 			const ChatBox = document.getElementsByClassName(ChatStyle.chatbox)[0];
 			ChatBox.className = ChatStyle.activechatbox;
 			if (!this.props.states.SOCKET) {
