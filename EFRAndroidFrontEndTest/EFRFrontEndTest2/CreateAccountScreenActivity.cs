@@ -67,11 +67,28 @@ namespace EFRFrontEndTest2
                     Responce responce = await database.CheckUsername(usernameBox.Text, emailBox.Text);
 
                     //Parses JSON responce to see if (User not found) returns, if so then username is acceptable
-                    if (responce.m_responce == "Failed")
-                        usernameErrorBox.Visibility = invisible;
-                    else
-                        usernameErrorBox.Visibility = visible;
-                    ;
+                    switch (responce.m_code)
+                    {
+                        case 200:
+                            usernameErrorBox.Visibility = invisible;
+                            break;
+                        case 100:
+                            usernameErrorBox.Visibility = visible;
+                            break;
+                        case 503: // Network issues
+                        case 504:
+                            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                            AlertDialog alert = dialog.Create();
+                            alert.SetTitle("You couldn't log in");
+                            alert.SetButton("OK", (c, ev) =>
+                            { });
+                            alert.SetMessage(responce.m_reason);
+                            alert.Show();
+                            usernameErrorBox.Visibility = invisible;
+                            break;
+                        default:
+                            throw new Exception(); // Should never be hit
+                    }
                 }
             };
 
@@ -109,29 +126,32 @@ namespace EFRFrontEndTest2
                 {
                     finalErrorBox.Visibility = invisible;
                     Responce responce = await database.CreateAccount(usernameBox.Text, emailBox.Text, passwordBoxOne.Text);
-                    if (responce.m_responce == "Succeed")
+                    Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("");
+                    alert.SetButton("OK", (c, ev) =>
+                    { });
+                    switch (responce.m_code)
                     {
-                        Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                        AlertDialog alert = dialog.Create();
-                        alert.SetTitle("");
-                        alert.SetMessage("Account Created!\nPlease check your email to confirm your account.");
-                        alert.SetButton("OK", (c, ev) =>
-                        {
-                            Finish();
-                        });
-                        alert.Show();
+                        case 201:
+                            alert.SetMessage("Account Created!\nPlease check your email to confirm your account.");
+                            alert.SetButton("OK", (c, ev) =>
+                            {
+                                Finish();
+                            });
+                            break;
+                        case 100:
+                            alert.SetMessage("username or email unavalable");
+                            break;
+                        case 503: // Network issues
+                        case 504:
+                            alert.SetMessage(responce.m_reason);
+                            usernameErrorBox.Visibility = visible;
+                            break;
+                        default:
+                            throw new Exception(); // Should never reach here
                     }
-                    else //This should never be called if it does, tell Jacob
-                    {
-                        Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                        AlertDialog alert = dialog.Create();
-                        alert.SetTitle("");
-                        alert.SetMessage("username or email unavalable");
-                        alert.SetButton("OK", (c, ev) =>
-                        {
-                        });
-                        alert.Show();
-                    }
+                    alert.Show();
                 }
             };
 
