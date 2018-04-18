@@ -2,11 +2,13 @@ const mssql = require('mssql');
 const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
 const uuidv4 = require('uuid/v4');
+const fs = require('fs');
 const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
 const SERVER_HOSTNAME = "http://34.216.143.255:3002"
 const WEBSITE_HOSTNAME = "http://52.40.134.152"
+const TOP_TEN_Q_FILE_LOC = process.cwd() + "/e4r-toptenq"
 
 class TDatabase {
     	// Creates the connection to the database given the passed parameters.
@@ -15,6 +17,9 @@ class TDatabase {
         this.bubbleCharity = "";
         this.recentDonations = [];
         this.totalRaised = 0;
+        this.topTen = [];
+
+        this.topTen = JSON.parse(fs.readFileSync(TOP_TEN_Q_FILE_LOC, "utf8"));
 
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
@@ -123,6 +128,25 @@ class TDatabase {
                                             .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
 
         return randNum;
+    }
+
+    checkTopTen(userid, totalQuestions) {
+        var ind = this.topTen.findIndex(element => element < totalQuestions);
+
+        if (this.topTen.length == 0 || ind > -1) {
+            if (this.topTen.length == 10)
+                this.topTen.pop();
+
+            this.topTen.push({"user_id": userid, "total_questions": totalQuestions});
+        }
+    }
+
+    // Retrieves the top ten users with most answered questions.
+    //
+    // Example:
+    // curl -XGET localhost:3002/api/top_ten_q
+    async getTopTenQuestions(client) {
+        client.json(this.topTen);
     }
 
     // Attempts to create an account with the given username, email, and password
@@ -602,6 +626,8 @@ class TDatabase {
             uo = data.userobject;
         }
 
+        checkTopTen(res.recordsets[0][0].UserID, data.userobject.game_data.totalQuestions);
+
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
     }
 
@@ -672,7 +698,14 @@ class TDatabase {
 	// Ensures that the database connection is closed on object destruction.
 	gracefulShutdown() {
 		this.db.close();
+
+        this.saveTopTen();
 	}
+
+    saveTopTen() {
+        var data = JSON.stringify(this.topTen);
+        fs.writeFileSync(TOP_TEN_Q_FILE_LOC, data);
+    }
 }
 
 module.exports = TDatabase;
