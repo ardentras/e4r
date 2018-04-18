@@ -174,11 +174,13 @@ namespace EFRFrontEndTest2
                 if (currentquestion.m_QuestionOne == currentquestion.m_CorrectAnswer)
                 {
                     Answer1.Text = "correct";
+                    CorrectAnswer();
            
                 }
                 else
                 {
                     Answer1.Text = "incorrect";
+                    IncorrectAnswer();
                 }
             };
 
@@ -190,11 +192,13 @@ namespace EFRFrontEndTest2
                 if (currentquestion.m_QuestionTwo == currentquestion.m_CorrectAnswer)
                 {
                     Answer2.Text = "correct";
+                    CorrectAnswer();
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
                 }
                 else
                 {
                     Answer2.Text = "incorrect";
+                    IncorrectAnswer();
                 }
             };
 
@@ -207,11 +211,13 @@ namespace EFRFrontEndTest2
                 if (currentquestion.m_QuestionThree == currentquestion.m_CorrectAnswer)
                 {
                     Answer3.Text = "correct";
+                    CorrectAnswer();
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
                 }
                 else
                 {
                     Answer3.Text = "incorrect";
+                    IncorrectAnswer();
                 }
             };
 
@@ -223,11 +229,13 @@ namespace EFRFrontEndTest2
                 if (currentquestion.m_QuestionFour == currentquestion.m_CorrectAnswer)
                 {
                     Answer4.Text = "correct";
+                    CorrectAnswer();
                     //   var intent = new Intent(this, typeof(QuestionspageActivity));
                 }
                 else
                 {
                     Answer4.Text = "incorrect";
+                    IncorrectAnswer();
                 }
             };
 
@@ -251,6 +259,40 @@ namespace EFRFrontEndTest2
             }
         }
 
-      
+        protected void CorrectAnswer()
+        {
+            UserObject user = SingleUserObject.getObject();
+            int lv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
+            user.TotalQuestions += 1;
+            // note replace with real value gained/////////////////////////////////////////////////////////////////
+            user.TotalDonated += .01;
+            int newlv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
+            if (lv != newlv)
+            {
+                View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
+                AlertDialog builder = new AlertDialog.Builder(this).Create();
+                builder.SetView(view);
+                builder.Show();
+            }
+            
+        }
+
+        protected void IncorrectAnswer()
+        {
+            UserObject user = SingleUserObject.getObject();
+            int lv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
+            // note replace with real value gained/////////////////////////////////////////////////////////////////
+            user.TotalDonated += .01;
+            int newlv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
+            if (lv != newlv)
+            {
+                View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
+                AlertDialog builder = new AlertDialog.Builder(this).Create();
+                builder.SetView(view);
+                builder.Show();
+            }
+
+        }
+
     }
 }

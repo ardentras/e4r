@@ -94,6 +94,7 @@ namespace EFRFrontEndTest2
             bool spawn = true;
             while (spawn)
             {
+                JsonArray prevdata = null;
                 using (WebResponse response = await request.GetResponseAsync())
                 {
                     // Get a stream representation of the HTTP web response:
@@ -102,10 +103,34 @@ namespace EFRFrontEndTest2
                         // Use this stream to build a JSON document object:
                         JsonValue jsonDoc = JsonObject.Load(stream);
                         JsonArray data = (JsonArray)jsonDoc["data"];
-                        for (int x = 0; x < data.Count; x++)
+                        if (prevdata != data)
                         {
-                            spawnBubble(((JsonValue)data[x])["donated"]);
-                            Thread.Sleep(100);
+                            if (((JsonValue)data[0])["donated"] != ((JsonValue)prevdata[0])["donated"])
+                            {
+                                for (int x = 0; x < data.Count; x++)
+                                {
+                                    spawnBubble(((JsonValue)data[x])["donated"]);
+                                    Thread.Sleep(100);
+                                }
+                            }
+                            else
+                            {
+                                int y;
+                                for (int x = 0; x < data.Count && x < prevdata.Count; x++)
+                                {
+                                    if (((JsonValue)data[x])["donated"] != ((JsonValue)prevdata[x])["donated"])
+                                    {
+                                        spawnBubble(((JsonValue)data[x])["donated"]);
+                                        Thread.Sleep(100);
+                                    }
+                                }
+                                for (y =0; y < data.Count; y++)
+                                {
+                                    spawnBubble(((JsonValue)data[y])["donated"]);
+                                    Thread.Sleep(100);
+                                }
+                            }
+                            prevdata = data;
                         }
                     }
                 }
