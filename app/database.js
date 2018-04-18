@@ -2,11 +2,14 @@ const mssql = require('mssql');
 const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
 const uuidv4 = require('uuid/v4');
+const fs = require('fs');
 const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
 const SERVER_HOSTNAME = "http://34.216.143.255:3002"
 const WEBSITE_HOSTNAME = "http://52.40.134.152"
+const TOP_TEN_Q_FILE_LOC = process.cwd() + "/e4r-toptenq"
+const TOP_TEN_MON_FILE_LOC = process.cwd() + "/e4r-toptenmon"
 
 class TDatabase {
     	// Creates the connection to the database given the passed parameters.
@@ -15,6 +18,10 @@ class TDatabase {
         this.bubbleCharity = "";
         this.recentDonations = [];
         this.totalRaised = 0;
+        this.topTen = [];
+
+        this.topTen = JSON.parse(fs.readFileSync(TOP_TEN_Q_FILE_LOC, "utf8"));
+        this.topTenMoney = JSON.parse(fs.readFileSync(TOP_TEN_MON_FILE_LOC, "utf8"));
 
         this.db = new mssql.ConnectionPool(config);
       	this.db.connect((err) => {
@@ -123,6 +130,56 @@ class TDatabase {
                                             .query("INSERT INTO EFRAcc.PasswordRecovery VALUES (@recoveryid, @userid)");
 
         return randNum;
+    }
+
+    checkTopTen(userid, totalQuestions, totalDonated) {
+        var ind = this.topTen.top_ten.findIndex(element => element.user_id == userid);
+
+        if (ind == -1) {
+            ind = this.topTen.top_ten.findIndex(element => element < totalQuestions);
+        } else {
+            if (this.topTen.top_ten[9].total_questions > totalQuestions)
+                ind = -1;
+        }
+
+        if (this.topTen.top_ten.length == 0 || ind > -1) {
+            if (this.topTen.top_ten.length == 10)
+                this.topTen.top_ten.pop();
+
+            this.topTen.top_ten.push({"user_id": userid, "total_questions": totalQuestions});
+        }
+
+        ind = this.topTenMoney.top_ten.findIndex(element => element.user_id == userid);
+
+        if (ind == -1) {
+            ind = this.topTenMoney.top_ten.findIndex(element => element < totalDonated);
+        } else {
+            if (this.topTenMoney.top_ten[9].total_donated > totalDonated)
+                ind = -1;
+        }
+
+        if (this.topTenMoney.top_ten.length == 0 || ind > -1) {
+            if (this.topTenMoney.top_ten.length == 10)
+                this.topTenMoney.top_ten.pop();
+
+            this.topTenMoney.top_ten.push({"user_id": userid, "total_donated": totalDonated});
+        }
+    }
+
+    // Retrieves the top ten users with most answered questions.
+    //
+    // Example:
+    // curl -XGET localhost:3002/api/top_ten_q
+    async getTopTenQuestions(client) {
+        client.json(this.topTen.top_ten);
+    }
+
+    // Retrieves the top ten users with most donated money.
+    //
+    // Example:
+    // curl -XGET localhost:3002/api/top_ten_mon
+    async getTopTenMoney(client) {
+        client.json(this.topTenMoney.top_ten);
     }
 
     // Attempts to create an account with the given username, email, and password
@@ -602,6 +659,8 @@ class TDatabase {
             uo = data.userobject;
         }
 
+        checkTopTen(res.recordsets[0][0].UserID, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
     }
 
@@ -672,7 +731,17 @@ class TDatabase {
 	// Ensures that the database connection is closed on object destruction.
 	gracefulShutdown() {
 		this.db.close();
+
+        this.saveGlobalStats();
 	}
+
+    saveGlobalStats() {
+        var data = JSON.stringify(this.topTen);
+        fs.writeFileSync(TOP_TEN_Q_FILE_LOC, data);
+
+        data = JSON.stringify(this.topTenMoney);
+        fs.writeFileSync(TOP_TEN_MON_FILE_LOC, data);
+    }
 }
 
 module.exports = TDatabase;
