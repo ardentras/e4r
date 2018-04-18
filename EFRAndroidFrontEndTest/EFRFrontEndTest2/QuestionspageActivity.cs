@@ -156,7 +156,13 @@ namespace EFRFrontEndTest2
             async void NextBlock()
             {
                 await m_database.RetreaveQuestionBlock();
-                //block = m_database.responce.m_json;
+
+                //uncomment after testing.
+
+                //var block = m_database.responce.m_json;
+                //int id = block[0]["QuestionBlockID"];
+                //var uo = SingleUserObject.getObject();
+                //uo.AddCompletedBlock(id);
             }
 
             
