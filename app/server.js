@@ -89,6 +89,9 @@ Router.get('/bubble_feed', (req, res) => {
 Router.get('/top_ten_q', (req, res) => {
 	db.getTopTenQuestions(res);
 });
+Router.get('/top_ten_mon', (req, res) => {
+	db.getTopTenMoney(res);
+});
 Router.put('/q/request_block', (req, res) => {
 	db.requestQuestionBlock(res, req.body.user, req.body.game);
 });
