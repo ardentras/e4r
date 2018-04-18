@@ -36,11 +36,12 @@ const iCookie = (()=>{
 			secure ? localStorage.setItem(this.encrypt(name), this.encrypt(JSON.stringify(value))) : localStorage.setItem(name, value);
 		}
 		getStorage(name, secure=false) {
-			let value = JSON.parse(secure ? this.decrypt(localStorage.getItem(this.encrypt(name))) : localStorage.getItem(name));
+			let value = (secure ? (localStorage.getItem(this.encrypt(name))) : localStorage.getItem(name));
+			secure && value ? value = JSON.parse(this.decrypt(value)) : null;
 			return value;
 		}
-		removeStorage(name) {
-			localStorage.removeItem(name);
+		removeStorage(name, secure=false) {
+			localStorage.removeItem((secure ? this.encrypt(name) : name));
 		}
 		get(key) {
 			let match = document.cookie.match(new RegExp(key + "=([^;]+)"));

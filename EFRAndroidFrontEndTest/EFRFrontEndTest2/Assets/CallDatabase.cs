@@ -80,7 +80,7 @@ namespace EFRFrontEndTest2.Assets
             request.Method = method;
             try
             {
-                request.Timeout = 500; // One half second timeout. Timeout it in milliseconds
+                request.Timeout = 2000; // Two second timeout. Timeout it in milliseconds
                                        // Send the request to the server and wait for the response:
                 request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
                 using (WebResponse response = await request.GetResponseAsync())

@@ -31,7 +31,9 @@ class App extends React.Component {
 		const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
 		Loading.style.display = "none";
 		if (!this.props.states.redirectToRefer) {
-			this.props.handleUserPersist();
+			if (iCookie.getStorage("token", true)) {
+				this.props.handleUserPersist();
+			}
 		}
 	}
 	componentWillMount() {
