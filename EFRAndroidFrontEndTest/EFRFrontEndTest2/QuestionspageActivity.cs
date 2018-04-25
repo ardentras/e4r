@@ -67,11 +67,10 @@ namespace EFRFrontEndTest2
         protected override void OnCreate(Bundle savedInstanceState)
         {
            int inca = 0;
-            inca++;
             if (inca == 0)
             {
                 m_database = new CallDatabase(this);
-                Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
+                Task.Run(async () => { currentquestion = await setup(); }).Wait(); // TODO: Wait should not be used, rewrite when a fix is found.
 
                 RequestWindowFeature(WindowFeatures.NoTitle);
                 base.OnCreate(savedInstanceState);
@@ -91,10 +90,10 @@ namespace EFRFrontEndTest2
                 Answer2.Text = currentquestion.m_QuestionTwo;
                 Answer3.Text = currentquestion.m_QuestionThree;
                 Answer4.Text = currentquestion.m_QuestionFour;
+                inca++;
             }
-
-     
-            else {
+            else
+            {
                 m_database = new CallDatabase(this);
               //  Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
 
