@@ -55,7 +55,7 @@ namespace EFRFrontEndTest2
                     {
                         case 200:
                             {
-                                m_database.GetUserObject.Save(this);
+                                //m_database.GetUserObject.Save(this);
                                 //changed into dashboard activity for new userdashboard, only test
                                 var intent = new Intent(this, typeof(DashboardActivity));
                                 StartActivity(intent);
@@ -128,7 +128,7 @@ namespace EFRFrontEndTest2
             Responce responce = await m_database.RenewSession();
             if (responce.m_responce == "Success")
             {
-                m_database.GetUserObject.Load(this);
+                //m_database.GetUserObject.Load(this);
                 var intent = new Intent(this, typeof(UserDashboardActivity));
                 StartActivity(intent);
             }

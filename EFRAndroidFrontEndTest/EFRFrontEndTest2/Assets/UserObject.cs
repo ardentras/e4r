@@ -83,11 +83,14 @@ namespace
             data += "\"last_name\": \""+ m_LastName +"\",";
             data += "\"selected_charity\": \""+ m_CharityName +"\", ";
             data += "\"favorite_charities\": [\"";
-            for (int x = 0; x < m_FavoriteCharities.Length; x++)
+            if (m_FavoriteCharities.Length != 1 && m_FavoriteCharities[0] != "")
             {
-                data += m_FavoriteCharities[x];
-                if (x < m_CompletedBlocks.Length - 1)
-                    data += "\", \"";
+                for (int x = 0; x < m_FavoriteCharities.Length; x++)
+                {
+                    data += m_FavoriteCharities[x];
+                    if (x < m_CompletedBlocks.Length - 1)
+                        data += "\", \"";
+                }
             }
             data += "\"] ";
             data += "},";
@@ -145,14 +148,22 @@ namespace
 
         public int AddCompletedBlock(int value)
         {
-            CompletedBlocks = new int[m_CompletedBlocks.Length+1];
-            for(int x =0; x < m_CompletedBlocks.Length; x++)
+            int length = CompletedBlocks.Length;
+            int[] newCompletedBlocks;
+            if (length != 0)
             {
-                CompletedBlocks[x] = m_CompletedBlocks[x];
+                newCompletedBlocks = new int[length + 1];
+                for (int x = 0; x < length; x++)
+                {
+                    newCompletedBlocks[x] = m_CompletedBlocks[x];
+                }
             }
-            CompletedBlocks[m_CompletedBlocks.Length] = value;
-            m_CompletedBlocks = CompletedBlocks;
-            return m_CompletedBlocks.Length;
+            else
+                newCompletedBlocks = new int[1];
+
+            newCompletedBlocks[length] = value;
+            m_CompletedBlocks = newCompletedBlocks;
+            return length + 1;
         }
     }
 }
