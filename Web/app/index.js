@@ -13,7 +13,6 @@ import App from "./components/public"; // eslint-disable-line no-unused-vars
 import "./style.css";
 import Spinner from "./components/loading";
 import efrApi from "./libraries/efrApi";
-import SpinnerStyle from "./components/loading/style.css";
 
 efrApi.config({
     host: "34.216.143.255", 
@@ -43,12 +42,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("app")
 );
-
-function windowLoaded() {
-    const Loading = document.getElementsByClassName(SpinnerStyle.spinnercontainer)[0];
-    Loading.style.display = "none";
-};
-
-window.onload = () => {
-    setTimeout(windowLoaded, 300);
-};

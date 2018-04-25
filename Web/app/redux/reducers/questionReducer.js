@@ -5,7 +5,7 @@
  *
 *****************************************************************************/
 
-import * as Types from "../types";
+import Types from "../types";
 
 /****************************************************************************
  * 
@@ -16,59 +16,66 @@ import * as Types from "../types";
 const initialState = {
 	questions: [],
 	index: 0,
-	selectedAnswer: undefined,
+	answer: false,
 	showHelp: false,
+	fetching: false,
+	fetched: false,
+	fetching_help: false,
+	fetched_help: false,
 	helpText: undefined
 };
 
-const authReducer = (state=initialState, action) => {
+const questionReducer = (state=initialState, action) => {
 	switch(action.type) {
-	case Types.SET_QUESTIONS:
+	case Types.Questions.FETCHING_HELP:
+		return Object.assign({}, state, {
+			fetching_help: true,
+			fetched_help: false
+		});
+	case Types.Questions.FETCHED_HELP:
+		return Object.assign({}, state, {
+			fetching_help: false,
+			fetched_help: true
+		});
+	case Types.Questions.FETCHED:
+		return Object.assign({}, state, {
+			fetched: true,
+			fetching: false
+		});
+	case Types.Questions.FETCHING:
+		return Object.assign({}, state, {
+			fetching: true,
+			fetched: false
+		});
+	case Types.Questions.SET_QUESTIONS:
 		return Object.assign({}, state, {
 			questions: action.value
 		});
-	case Types.NEXT_INDEX:
+	case Types.Questions.SET_INDEX:
 		return Object.assign({}, state, {
-			index: state.index + 1,
-			showHelp: false
+			index: action.value
 		});
-	case Types.RESET_INDEX:
-		return Object.assign({}, state, {
-			index: 0
-		});
-	case Types.RESET_QUESTION:
-		return Object.assign({}, initialState);
-	case Types.CORRECT_ANSWER:
-		return Object.assign({}, state, {
-			selectedAnswer: "correct"
-		});
-	case Types.SET_HELP_TEXT:
-		return Object.assign({}, state, {
-			helpText: action.value
-		});
-	case Types.INCORRECT_ANSWER:
-		return Object.assign({}, state, {
-			selectedAnswer: "incorrect"
-		});
-	case Types.RESET_ANSWER:
-		return Object.assign({}, state, {
-			selectedAnswer: undefined
-		});
-	case Types.RESET_SELECTEDANSWER:
-		return Object.assign({}, state, {
-			selectedAnswer: undefined
-		});
-	case Types.SHOW_HELP:
+	case Types.Questions.SHOW_HELP:
 		return Object.assign({}, state, {
 			showHelp: true
 		});
-	case Types.HIDE_HELP:
+	case Types.Questions.SET_HELP_TEXT:
+		return Object.assign({}, state, {
+			helpText: action.value
+		});
+	case Types.Questions.SET_ANSWER:
+		return Object.assign({}, state, {
+			answer: action.value
+		});
+	case Types.Questions.HIDE_HELP:
 		return Object.assign({}, state, {
 			showHelp: false
 		});
+	case Types.Questions.RESET:
+		return Object.assign({}, state, initialState);
 	default:
 		return Object.assign({}, state);
 	}
 };
 
-export default authReducer;
+export default questionReducer;

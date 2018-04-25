@@ -22,14 +22,26 @@ const iCookie = (()=>{
 			const cookie = name + "=" + value + ";" + expire + ";path=/";
 			this.set(cookie);
 		}
-		setStorage(name, value) {
-			localStorage.setItem(name, JSON.stringify(value));
+		encrypt(string) {
+			return btoa(encodeURIComponent(string).replace(/%([0-9A-F]{2})/g, (match, p1)=>{
+				return String.fromCharCode("0x" + p1);
+			}));
 		}
-		getStorage(name) {
-			return JSON.parse(localStorage.getItem(name));
+		decrypt(string) {
+			return decodeURIComponent(Array.prototype.map.call(atob(string), (c)=>{
+				return "%" + c.charCodeAt(0).toString(16);
+			}).join(""));
 		}
-		removeStorage(name) {
-			localStorage.removeItem(name);
+		setStorage(name, value, secure) {
+			secure ? localStorage.setItem(this.encrypt(name), this.encrypt(JSON.stringify(value))) : localStorage.setItem(name, value);
+		}
+		getStorage(name, secure=false) {
+			let value = (secure ? (localStorage.getItem(this.encrypt(name))) : localStorage.getItem(name));
+			secure && value ? value = JSON.parse(this.decrypt(value)) : null;
+			return value;
+		}
+		removeStorage(name, secure=false) {
+			localStorage.removeItem((secure ? this.encrypt(name) : name));
 		}
 		get(key) {
 			let match = document.cookie.match(new RegExp(key + "=([^;]+)"));

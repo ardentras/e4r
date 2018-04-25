@@ -3,7 +3,7 @@ import Styles from "./style.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Proptypes from "prop-types";
-import { resetPW } from "../../../redux/actions/user";
+import { handlePasswordRest } from "../../../redux/actions/user";
 import url from "url";
 
 class Password extends React.Component {
@@ -17,8 +17,9 @@ class Password extends React.Component {
 		this.VerifyID = queryData.get("id");
 	}
 	reset(event) {
+		event.preventDefault();
 		if (event.target.npw.value === event.target.cnpw.value) {
-			this.props.resetPW({id: this.VerifyID, pw: event.target.cnpw.value});
+			this.props.handlePasswordRest(this.VerifyID, event.target.cnpw.value);
 		}
 		else {
 			confirm("Passwords do not match!");
@@ -50,5 +51,5 @@ class Password extends React.Component {
 
 export default connect(
 	(state) => ({user: state.user, error: state.state.error}),
-	(dispatch) => bindActionCreators({resetPW}, dispatch)
+	(dispatch) => bindActionCreators({handlePasswordRest}, dispatch)
 )(Password);

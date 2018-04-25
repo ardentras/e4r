@@ -1,6 +1,5 @@
 .settings {
     overflow-y: scroll;
-    height: 100%;
 }
 .initials {
     font-size: 45px;
@@ -8,8 +7,7 @@
 .settings {
     display: flex;
     flex-flow: column;
-    padding: 0 25px;
-    background: white;
+    padding: 0 40px;
     width: 100%;
 }
 .initials {
@@ -18,6 +16,7 @@
 .fieldhead {
     margin-bottom: 5px;
 }
+
 .level {
     align-self: center;
     margin-bottom: 15px;
@@ -37,18 +36,31 @@
 #fname, #lname, #charity {
     font-weight: lighter;
 }
-.pwfield, .gamefield, .infofield {
+.pwfield, .gamefield, .infofield, .themefield {
     flex-flow: row nowrap;
 }
-.pwfield, .gamefield, .infofield {
+.pwfield, .gamefield, .infofield, .themefield {
     justify-content: space-between;
 }
-.pwreset, .restartbtn, .resetbtn {
+.pwreset, .restartbtn, .resetbtn, .themebtn {
     color: #1E90FF;
 }
-.pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn {
+.pwreset:hover, .savebtn:hover, .restartbtn, .resetbtn, .themebtn {
     cursor: pointer;
 }
+
+#dark {
+    color: #141b22;
+}
+
+#light {
+    color: white;
+}
+
+.themebtncont {
+    float: left;
+}
+
 .savebtn {
     background: #1E90FF;
     color: white;
@@ -66,10 +78,13 @@
 #token, #charity {
     border: none;
 }
+
+.darkfields {
+    background: rgb(41, 50, 61);
+}
 @media (min-width: 741px) {
     .savebtn {
         position: absolute;
-        width: calc(100% - 162px);
         bottom: 0;
         right: 0;
     }

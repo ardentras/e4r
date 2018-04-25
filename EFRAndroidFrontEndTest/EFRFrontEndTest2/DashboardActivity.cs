@@ -17,6 +17,11 @@ namespace EFRFrontEndTest2
     [Activity(Label = "DashboardActivity")]
     public class DashboardActivity : Activity
     {
+        protected override void OnResume()
+        {
+            base.OnResume();
+            setBackground();
+        }
         private TextView play_btn = null;
         private TextView charity_btn = null;
         private TextView feed_btn = null;
@@ -115,6 +120,15 @@ namespace EFRFrontEndTest2
         public override void OnBackPressed()
         {
             return;
+        }
+
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                GridLayout background = FindViewById<GridLayout>(Resource.Id.settingsgrid);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
  *
 *****************************************************************************/
 
-import { SET_UID } from "../types";
+import Types from "../types";
 
 /****************************************************************************
  * 
@@ -14,18 +14,18 @@ import { SET_UID } from "../types";
  *
 *****************************************************************************/
 const initialState = {
-	uid: undefined,
+	totalUsers: 0
 };
 
-const authReducer = (state=initialState, action) => {
+const messageReducer = (state=initialState, action) => {
 	switch(action.type) {
-	case SET_UID:
+	case Types.Messages.SET_TOTAL_USER:
 		return Object.assign({}, state, {
-			uid: action.value
+			totalUsers: action.value
 		});
 	default:
 		return Object.assign({}, state);
 	}
 };
 
-export default authReducer;
+export default messageReducer;

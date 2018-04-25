@@ -12,6 +12,11 @@
     height: 140px;
 }
 
+#navcontainer {
+    font-weight: lighter;
+    height: 100%;
+}
+
 .navagation {
     position: fixed;
     display: flex;
@@ -19,6 +24,7 @@
     justify-content: space-around;
     width: 100%;
     z-index: 9998;
+    min-height: 140px;
 }
 
 .navagation::after {
@@ -37,6 +43,12 @@
     align-items: flex-end;
     padding: 30px 0;
     position: relative;
+    min-height: 90px;
+}
+
+.darkheader {
+    background: #0D1218;
+    color: white;
 }
 
 #logo {
@@ -103,6 +115,7 @@
     .header {
         padding-bottom: 0;
         padding-top: 10px;
+        align-items: flex-start;
     }
     .navagations {
         padding-top: 10px;

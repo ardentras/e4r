@@ -72,7 +72,7 @@
     border-radius: 16px;
     margin: 10px 0;
     padding: 5px 20px;
-    max-width: 200px;
+    max-width: 240px;
     display: flex;
     color: white;
     justify-content: center;
@@ -85,7 +85,7 @@
     margin: 10px 0;
     padding: 5px 20px;
     background: white;
-    max-width: 200px;
+    max-width: 240px;
     display: flex;
     color: #141b22;
     justify-content: center;
@@ -183,7 +183,7 @@
         height: 100%;
     }
     .choicelabel {
-        padding: 1% 10px;
+        padding: 2% 10px;
         max-width: none;
         margin: 0;
     }
@@ -218,11 +218,17 @@
         margin-bottom: 5px;
     }
     .nextbtn, .helpbtn {
-        padding: 1% 10px;
+        padding: 2% 10px;
         width: 100%;
         max-width: none;
         margin: 0;
         margin-top: 5px;
+    }
+    .helptext {
+        border-radius: 10px;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 20px;
     }
 }
 

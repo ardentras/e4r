@@ -14,7 +14,7 @@ using Android.Views;
 using Android.Widget;
 
 
-namespace EFRFrontEndTest2.Assets 
+namespace EFRFrontEndTest2.Assets
 {
     public struct Responce
     {
@@ -24,7 +24,7 @@ namespace EFRFrontEndTest2.Assets
             m_reason = reason;
             m_code = code;
             m_json = json;//holds the object
-            
+
         }
 
         public string m_responce;
@@ -65,7 +65,7 @@ namespace EFRFrontEndTest2.Assets
             return await APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
         }
 
-// TODO: Update to username/email request when API allows for individual checking
+        // TODO: Update to username/email request when API allows for individual checking
         public async Task<Responce> CheckUsername(string username, string password)
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
@@ -73,28 +73,50 @@ namespace EFRFrontEndTest2.Assets
         }
 
 
-        public async Task<Responce> APICall(string method, string uri, byte [] bytestream, bool need_UO = false)
+        public async Task<Responce> APICall(string method, string uri, byte[] bytestream, bool need_UO = false)
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + uri));
             request.ContentType = "application/json";
             request.Method = method;
-            request.GetRequestStream().Write(bytestream, 0, bytestream.Length);
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
+            try
             {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
+                request.Timeout = 2000; // Two second timeout. Timeout it in milliseconds
+                                       // Send the request to the server and wait for the response:
+                request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
+                using (WebResponse response = await request.GetResponseAsync())
                 {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = JsonObject.Load(stream);
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-                    SaveLastResponce(jsonDoc);
+                    // Get a stream representation of the HTTP web response:
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        // Use this stream to build a JSON document object:
+                        JsonValue jsonDoc = JsonObject.Load(stream);
+                        Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+                        SaveLastResponce(jsonDoc);
 
-                    if (LastResponce.m_code == 200 && need_UO == true)
-                        CreateUserObject(jsonDoc);
+                        if (LastResponce.m_code == 200 && need_UO == true)
+                            CreateUserObject(jsonDoc);
 
-                    return LastResponce;
+                        return LastResponce;
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                LastResponce.m_responce = "Failure";
+                switch (e.Message)
+                {
+                    case "Error: ConnectFailure (Network is unreachable)":
+                        LastResponce.m_reason = "Unable to connect to network";
+                        LastResponce.m_code = 503; // Airplane mode or other similar issues
+                        break;
+                    case "The request timed out":
+                        LastResponce.m_reason = "HTTP Request Timeout";
+                        LastResponce.m_code = 504; // Timeout error code
+                        break;
+                    default:
+                        break;
+                }
+                return LastResponce;
             }
         }
 
@@ -103,11 +125,11 @@ namespace EFRFrontEndTest2.Assets
             string response = json["response"];
             int code = json["code"];
             string reason = "None";
-// TODO: Ask Shaun if he can link code to the existance of reason. Or at lease have a reason in every response.
+            // TODO: Ask Shaun if he can link code to the existance of reason. Or at lease have a reason in every response.
             try { reason = json["reason"]; } // Reason isnt linked to error code so must be checked every time.
             catch (Exception) { }
 
-            LastResponce = new Responce(response, code, reason,json);
+            LastResponce = new Responce(response, code, reason, json);
         }
 
         private void CreateUserObject(JsonValue json)

@@ -2,15 +2,12 @@
     display: flex;
     flex-flow: column;
     width: 100%;
-    padding: 10px 10px;
 }
 
 .recentactivity {
     display: flex;
     width: 100%;
     flex-flow: column;
-    background: #F4F6F9;
-    padding: 5px 0;
     height: 100%;
     justify-content: center;
     position: relative;
@@ -42,7 +39,6 @@
     display: flex;
     justify-content: center;
     align-items: center;    
-    background: white;
     width: 100%;
     height: 30%;
 }
@@ -92,7 +88,6 @@
     width: 100%;
     height: 100%;
     margin-bottom: 5px;
-    background: white;
 }
 
 .totals {
@@ -140,11 +135,9 @@
     .home {
         padding: 0;
         position: relative;
-        background: #F4F6F9;
     }
     .userdata {
         flex-flow: row nowrap;
-        background: white;
         padding: 20px;
         width: 100%;
         margin-bottom: 0;
@@ -156,7 +149,6 @@
     .activity {
         border: none;
         border-radius: 0;
-        background: white;
         margin-bottom: 5px;
         padding: 10px 0;
         width: 100%;
@@ -168,7 +160,6 @@
         justify-content: center;
     }
     .recentactivity {
-        background: #F4F6F9;
         padding: 0 10px;
         height: 100%;
     }

@@ -5,7 +5,7 @@
  *
 *****************************************************************************/
 
-import * as Types from "../types";
+import Types from "../types";
 /****************************************************************************
  * 
  *->Object Name: initialState
@@ -13,44 +13,77 @@ import * as Types from "../types";
  *
 *****************************************************************************/
 const initialState = {
-	user_data: undefined,
-	game_data: undefined,
-	timestamp: undefined
+	userobject: undefined,
+	token: undefined,
+	charities: ["American Red Cross", "United Way", "Salvation Army", "Direct Relief", "Wounded Warrior Project", "Feeding America", "Task Force for Global Health", "Leukemia and Lymphoma Society"]
 };
 
 const userReducer = (state=initialState, action) => {
 	switch(action.type) {
-	case Types.SET_USER_OBJECT:
-		return Object.assign({}, state, action.value);
-	case Types.SET_COMPLETED:
+	case Types.User.SET_FNAME:
 		return Object.assign({}, state, {
-			game_data: {
-				...state.game_data,
-				completed_blocks: state.game_data.completed_blocks.concat(action.value)
+			userobject: {
+				...state.userobject,
+				user_data: {
+					...state.userobject.user_data,
+					first_name: action.value
+				}
 			}
 		});
-	case Types.RESET_COMPLETE:
+	case Types.User.SET_LNAME:
 		return Object.assign({}, state, {
-			game_data: {
-				...state.game_data,
-				completed_blocks: [],
-				difficulty: "0"
+			userobject: {
+				...state.userobject,
+				user_data: {
+					...state.userobject.user_data,
+					last_name: action.value
+				}
 			}
 		});
-	case Types.SET_F_NAME:
+	case Types.User.SOLVED_QUESTION: 
 		return Object.assign({}, state, {
-			user_data: {
-				...state.user_data,
-				first_name: action.value
+			userobject: {
+				...state.userobject,
+				game_data: {
+					...state.userobject.game_data,
+					totalQuestions: (parseInt(state.userobject.game_data.totalQuestions) + 1)
+				}
 			}
 		});
-	case Types.SET_L_NAME:
+	case Types.User.SET_SESSION_TOKEN:
 		return Object.assign({}, state, {
-			user_data: {
-				...state.user_data,
-				last_name: action.value
+			token: action.value
+		});
+	case Types.User.SET_USER_OBJECT:
+		return Object.assign({}, state, {
+			userobject: action.value
+		});
+	case Types.User.SET_COMPLETED:
+		return Object.assign({}, state, {
+			userobject: {
+				...state.userobject,
+				game_data: {
+					...state.userobject.game_data,
+					completed_blocks: state.userobject.game_data.completed_blocks.concat(action.value)
+				}
 			}
 		});
+	case Types.User.GAME_RESET:
+		return Object.assign({}, state, {
+			userobject: {
+				...state.userobject,
+				game_data: {
+					...state.userobject.game_data,
+					subject_id: 1,
+					difficulty: 0,
+					totalQuestions: 0,
+					totalDonated: 0,
+					completed_blocks: []
+				}
+			}
+		});
+	case Types.User.RESET:
+		return Object.assign({}, state, initialState);
 	default:
 		return Object.assign({}, state);
 	}

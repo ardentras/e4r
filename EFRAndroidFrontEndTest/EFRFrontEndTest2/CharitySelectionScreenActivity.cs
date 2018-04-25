@@ -51,15 +51,60 @@ namespace EFRFrontEndTest2
         private Charity None = new Charity("None",
         "None",
         "None");
+        private Charity alzheimersassociation = new Charity("Alzheimer's Association",
+                "is an association that works on a global, national and local level to provide care and support for all those affected by Alzheimer’s and other dementias.",
+                "https://www.alz.org/");
+        private Charity americancancersociety = new Charity("American Cancer Society",
+                "is a nationwide, community-based voluntary health organization dedicated to eliminating cancer as a major health problem.",
+                "https://www.cancer.org/");
+        private Charity americanheartassociation = new Charity("American Heart Association",
+                "is the nation’s oldest and largest voluntary organization dedicated to fighting heart disease and stroke. Founded by six cardiologists in 1924, our organization now includes more than 22.5 million volunteers and supporters.",
+                "https://www.compassion.com/");
+        private Charity redcross = new Charity("American Red Cross",
+                "is a humanitarian organization that provides emergency assistance, disaster relief and education in the United States.",
+                "http://www.redcross.org/");
+        private Charity aspca = new Charity("ASPCA",
+                "is founded on the belief that animals are entitled to kind and respectful treatment at the hands of humans and must be protected under the law.",
+                "https://www.aspca.org/");
+        private Charity boysandgirlsclub = new Charity("Boy's and Girl's Club's of America",
+                "is providing a world-class Club Experience that assures success is within reach of every young person who enters our doors.",
+                "https://www.bgca.org/");
+        private Charity compassion = new Charity("Compassion",
+                "is a child sponsorship ministry that connects one child with one sponsor to help the child achieve his or her God given potential.",
+                "https://www.compassion.com/");
         private Charity directrelief = new Charity("Direct Relief",
                 "a nonprofit, nonpartisan organization with a stated mission to “improve the health and lives of people affected by poverty or emergency situations by mobilizing and providing essential medical resources needed for their care.",
                 "https://www.directrelief.org/");
-        private Charity redcross = new Charity("American Red Cross",
-                "a humanitarian organization that provides emergency assistance, disaster relief and education in the United States.",
-                "http://www.redcross.org/");
+        private Charity feedingamerica = new Charity("Feeding America",
+                "is the nation’s largest domestic hunger-relief organization. Together with individuals, charities, businesses and government we can end hunger.",
+                "http://www.feedingamerica.org/");
+        private Charity makeawish = new Charity("Make-A-Wish",
+                "is a collection of tens of thousands of volunteers, donors and supporters who advance the Make-A-Wish® vision to grant the wish of every child diagnosed with a critical illness.",
+                "http://wish.org");
+        private Charity stjudechildrensresearch = new Charity("St. Jude Childrens Research Hospital",
+                "is leading the way the world understands, treats and defeats childhood cancer and other life-threatening diseases.",
+                "https://www.stjude.org/");
+        private Charity susangkomen = new Charity("Susan G Komen",
+                "is a sisters promise to end breast cancer forever.",
+                "https://ww5.komen.org/");
+        private Charity taskforceglobalhealth = new Charity("Task Force Global Health",
+                "is an independent, nongovernmental organization based in Decatur, GA, USA. They focus on controlling and eliminating debilitating diseases and building durable systems that protect and promote health.",
+                "https://www.taskforce.org/");
+        private Charity humanesociety = new Charity("The Humane Society",
+                "is the nation's most effective animal protection organization. With hands-on care and services to more than 100,000 animals each year.",
+                "http://www.humanesociety.org");
+        private Charity toysfortots = new Charity("Toys-For-Tots",
+                "is a mission to collect new, unwrapped toys during October, November and December each year, and distribute those toys as Christmas gifts to less fortunate children in the community in which the campaign is conducted.",
+                "https://www.toysfortots.org/");
         private Charity unitedway = new Charity("United Way",
                 "is the leadership and support organization for the network of nearly 1,800 community-based United Ways in 45 countries and territories.",
                 "https://www.unitedway.org/");
+        private Charity worldwildlifefunt = new Charity("World Wildlife Fund",
+                "is a mission to conserve nature and reduce the most pressing threats to the diversity of life on Earth.",
+                "https://www.worldwildlife.org/");
+        private Charity woundedwarriorproject = new Charity("Wounded Warrior Project",
+                "is an organization that serves veterans and service members who incurred a physical or mental injury, illness, or wound, co-incident to their military service on or after September 11, 2001 and their families.",
+                "https://www.woundedwarriorproject.org/");
         //**************************************************************************************************************************
         /***************************************************************************************************************************
          * 
@@ -106,13 +151,28 @@ namespace EFRFrontEndTest2
             TextView selected_charity = FindViewById<TextView>(Resource.Id.selected_charitiy_name);
             selected_charity.Text = SingleUserObject.getObject().CharityName;
             _charities.Add(None);
-            _charities.Add(directrelief);
+            _charities.Add(alzheimersassociation);
+            _charities.Add(americancancersociety);
+            _charities.Add(americanheartassociation);
             _charities.Add(redcross);
+            _charities.Add(aspca);
+            _charities.Add(boysandgirlsclub);
+            _charities.Add(compassion);
+            _charities.Add(directrelief);
+            _charities.Add(feedingamerica);
+            _charities.Add(makeawish);
+            _charities.Add(stjudechildrensresearch);
+            _charities.Add(susangkomen);
+            _charities.Add(taskforceglobalhealth);
+            _charities.Add(humanesociety);
+            _charities.Add(toysfortots);
             _charities.Add(unitedway);
+            _charities.Add(worldwildlifefunt);
+            _charities.Add(woundedwarriorproject);
             //Loop through the charity list from index 1, since the first element is None
             for (int i = 1; i < _charities.Count; ++i, ++colorCodes_index)
             {
-                if (colorCodes_index > 4)
+                if (colorCodes_index >= 4)
                 {
                     colorCodes_index = 0;
                 }

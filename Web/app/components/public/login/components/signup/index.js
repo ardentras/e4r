@@ -1,12 +1,14 @@
 import React from "react";
+import error from "../../../../../redux/errorCodes";
 import Styles from "./style.css";
 
 
 const Signup = props => (
     <form className={Styles.signup} action="javascript:void(0);" onSubmit={props.func.register}>
         <h1 className={Styles.headers}>Join Us</h1>
-        {props.error === "REG_FAIL" && <span className={Styles.warning}>Username/email already exist</span> }
-        {props.error === "REG_ERROR" && <span className={Styles.error}>Cannot connect to server</span> }
+        {props.error === error.SIGNUP_FAIL && <span className={Styles.warning}>Username/email already exist</span> }
+        {props.error === error.TIME_OUT && <span className={Styles.warning}>Timeout, please try again...</span> }
+        {props.error === error.CONN_FAIL && <span className={Styles.error}>Cannot connect to server</span> }
         <span>email:</span>
         <input type="email" className={Styles.inputs} name="email" placeholder="email" required/>
         <span>username:</span>

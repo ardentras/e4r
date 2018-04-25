@@ -28,6 +28,8 @@ API Calls:
           Log Out               -> hostname:port/api/logout         -> PUT
           Delete User           -> hostname:port/api/delete_user    -> DELETE
           Bubble Live Feed      -> hostname:port/api/bubble_feed    -> GET
+          Top Ten Questions     -> hostname:port/api/top_ten_q      -> GET
+          Top Ten Money         -> hostname:port/api/top_ten_mon    -> GET
           Request Question Block-> hostname:port/api/q/request_block-> PUT
           Request Question Help -> hostname:port/api/q/request_help -> PUT
 
