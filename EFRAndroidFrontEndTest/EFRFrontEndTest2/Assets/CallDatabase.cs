@@ -48,7 +48,7 @@ namespace EFRFrontEndTest2.Assets
 
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/q/request_block", bytestream);
-            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(5000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
