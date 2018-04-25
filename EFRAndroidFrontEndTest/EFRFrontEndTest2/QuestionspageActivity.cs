@@ -161,12 +161,12 @@ namespace EFRFrontEndTest2
 
                 //uncomment after testing.
 
-                var block = m_database.responce.m_json;
-                int id = block[0]["QuestionBlockID"];
-                var uo = SingleUserObject.getObject();
-                uo.AddCompletedBlock(id);
-                CallDatabase DB = new CallDatabase(this);
-                Task.Run(async () => { await DB.UpdateUO(); }).Wait();
+                //var block = m_database.responce.m_json;
+                //int id = block[0]["QuestionBlockID"];
+                //var uo = SingleUserObject.getObject();
+                //uo.AddCompletedBlock(id);
+                //CallDatabase DB = new CallDatabase(this);
+                //Task.Run(async () => { await DB.UpdateUO(); }).Wait();
             }
 
             
