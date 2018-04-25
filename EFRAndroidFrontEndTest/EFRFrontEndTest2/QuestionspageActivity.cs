@@ -96,9 +96,9 @@ namespace EFRFrontEndTest2
      
             else {
                 m_database = new CallDatabase(this);
-              //  Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
+               Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
 
-               // RequestWindowFeature(WindowFeatures.NoTitle);
+                RequestWindowFeature(WindowFeatures.NoTitle);
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.QuestionsPage);
                 setBackground();
