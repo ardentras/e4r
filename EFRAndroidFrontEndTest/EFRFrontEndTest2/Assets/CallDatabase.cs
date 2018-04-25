@@ -59,6 +59,12 @@ namespace EFRFrontEndTest2.Assets
             return await APICall("POST", "/login", bytestream, true);
         }
 
+        public async Task<Responce> UpdateUO()
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"session\": \"{" + SingleUserObject.getObject().SessionID + "}\", \"userobject\": \"{" + SingleUserObject.getObject().UserObjectForm() + "}\"} }");
+            return await APICall("POST", "/update_uo", bytestream, true);
+        }
+
         public async Task<Responce> RenewSession()
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");

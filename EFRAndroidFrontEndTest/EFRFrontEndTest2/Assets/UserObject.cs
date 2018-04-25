@@ -86,7 +86,7 @@ namespace EFRFrontEndTest2.Assets
             {
                 data += m_FavoriteCharities[x];
                 if (x < m_CompletedBlocks.Length - 1)
-                    data += "\" \"";
+                    data += "\", \"";
             }
             data += "\"] ";
             data += "},";
@@ -102,7 +102,7 @@ namespace EFRFrontEndTest2.Assets
             {
                 data += Convert.ToString(m_CompletedBlocks[x]);
                 if (x != m_CompletedBlocks.Length - 1)
-                    data += " ";
+                    data += ", ";
             }
             data += "] }, ";
             data += "\"timestamp\":\""+ m_Timestamp +"\"";
