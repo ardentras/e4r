@@ -28,6 +28,8 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.BubbleLiveFeed);
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
+            Button backbutton = FindViewById<Button>(Resource.Id.bubblefeedbackbutton);
+
             bubble.Click += (sender, e) =>
             {
                 AbsoluteLayout layoutBase = FindViewById<AbsoluteLayout>(Resource.Id.bubble_layout);
@@ -78,14 +80,15 @@ namespace EFRFrontEndTest2
                         if (newval.IndexOf('.') - newval.Length == -2)
                             newval += '0';
                         bubbleButton.Text = newval;
-                        
-
                     }
                 };
-
-
             };
-        }//
+
+            backbutton.Click += (sender, e) =>
+            {
+                base.OnBackPressed();
+            };
+        }
         public async Task<bool> CallDatabase()
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api/bubble_feed"));
@@ -190,13 +193,8 @@ namespace EFRFrontEndTest2
                     if (newval.IndexOf('.') - newval.Length == -2)
                         newval += '0';
                     bubbleButton.Text = newval;
-
-
                 }
-
             };
-
         }
-
     };
 }
