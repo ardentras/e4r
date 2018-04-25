@@ -25,6 +25,7 @@ namespace EFRFrontEndTest2.Assets
             }
 
         }
+
         public static ref UserObject getObject()
         {
             if(singleObj == null)

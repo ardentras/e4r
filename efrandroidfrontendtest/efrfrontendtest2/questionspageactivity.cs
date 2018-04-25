@@ -91,8 +91,6 @@ namespace EFRFrontEndTest2
                 Answer2.Text = currentquestion.m_QuestionTwo;
                 Answer3.Text = currentquestion.m_QuestionThree;
                 Answer4.Text = currentquestion.m_QuestionFour;
-
-              
             }
 
      
@@ -125,8 +123,7 @@ namespace EFRFrontEndTest2
             //calls the block of questions
             //string y = m_currentquestion["QuestionID"];
 
-
-            int QuestionNum = 0;
+           
 
             int QuestionBlockNum = 1;
 
