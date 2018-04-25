@@ -34,9 +34,9 @@ namespace EFRFrontEndTest2
                 ImageView img = new ImageView(this);
                 Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
                 //create new bubble image
-                img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
+                img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.MatchParent, height: ViewGroup.LayoutParams.MatchParent);
                 img.Visibility = ViewStates.Visible;
-                img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+                img.SetImageResource(Resource.Drawable.Bubble);
                 var metrics = Resources.DisplayMetrics;
                 //place the bubble on screen randomizing it's x pos
                 layoutBase.AddView(img,100,100);
@@ -144,9 +144,9 @@ namespace EFRFrontEndTest2
             ImageView img = new ImageView(this);
             Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
             //create new bubble image
-            img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
+            img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.MatchParent, height: ViewGroup.LayoutParams.MatchParent);
             img.Visibility = ViewStates.Visible;
-            img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+            img.SetImageResource(Resource.Drawable.Bubble);
             var metrics = Resources.DisplayMetrics;
             //place the bubble on screen randomizing it's x pos
             layoutBase.AddView(img, 100+spawn, 100 + spawn);

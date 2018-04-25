@@ -97,7 +97,6 @@ namespace EFRFrontEndTest2
             {
                 var intent = new Intent(this, typeof(ColorPickerActivity));
                 StartActivity(intent);
-
             };
         }
         protected void setBackground()

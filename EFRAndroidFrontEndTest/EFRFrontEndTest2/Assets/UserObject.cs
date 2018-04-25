@@ -11,7 +11,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace EFRFrontEndTest2.Assets
+namespace 
+    EFRFrontEndTest2.Assets
 {
     public class UserObject
     {

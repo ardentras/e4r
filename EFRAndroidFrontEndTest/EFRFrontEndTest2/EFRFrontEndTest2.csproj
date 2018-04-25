@@ -157,6 +157,7 @@
     <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="DashboardActivity.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="UserDashboardActivity.cs" />
     <Compile Include="LevelupActivity.cs" />
     <Compile Include="LoginScreenActivity.cs" />
