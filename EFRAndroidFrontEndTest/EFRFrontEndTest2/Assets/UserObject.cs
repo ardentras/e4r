@@ -145,14 +145,22 @@ namespace
 
         public int AddCompletedBlock(int value)
         {
-            CompletedBlocks = new int[m_CompletedBlocks.Length+1];
-            for(int x =0; x < m_CompletedBlocks.Length; x++)
+            int length = CompletedBlocks.Length;
+            int[] newCompletedBlocks;
+            if (length != 0)
             {
-                CompletedBlocks[x] = m_CompletedBlocks[x];
+                newCompletedBlocks = new int[length + 1];
+                for (int x = 0; x < length; x++)
+                {
+                    newCompletedBlocks[x] = m_CompletedBlocks[x];
+                }
             }
-            CompletedBlocks[m_CompletedBlocks.Length] = value;
-            m_CompletedBlocks = CompletedBlocks;
-            return m_CompletedBlocks.Length;
+            else
+                newCompletedBlocks = new int[1];
+
+            newCompletedBlocks[length] = value;
+            m_CompletedBlocks = newCompletedBlocks;
+            return length + 1;
         }
     }
 }
