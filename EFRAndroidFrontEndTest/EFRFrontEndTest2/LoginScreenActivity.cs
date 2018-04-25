@@ -10,7 +10,7 @@ using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
-    [Activity(Label = "E4R", MainLauncher = true)]
+    [Activity(Label = "E4R")]
     public class LoginScreenActivity : Activity
     {
         private LocalArchive m_archive;

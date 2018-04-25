@@ -158,6 +158,7 @@
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="DashboardActivity.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="SplashScreenActivity.cs" />
     <Compile Include="UserDashboardActivity.cs" />
     <Compile Include="LevelupActivity.cs" />
     <Compile Include="LoginScreenActivity.cs" />
@@ -453,6 +454,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\charity_make_a_wish.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\style.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />

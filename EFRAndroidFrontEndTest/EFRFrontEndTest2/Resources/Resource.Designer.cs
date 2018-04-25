@@ -2300,26 +2300,26 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f0200b0
-			public const int avd_hide_password_1 = 2130837680;
-			
-			// aapt resource value: 0x7f0200b1
-			public const int avd_hide_password_2 = 2130837681;
-			
 			// aapt resource value: 0x7f0200b2
-			public const int avd_hide_password_3 = 2130837682;
+			public const int avd_hide_password_1 = 2130837682;
+			
+			// aapt resource value: 0x7f0200b3
+			public const int avd_hide_password_2 = 2130837683;
+			
+			// aapt resource value: 0x7f0200b4
+			public const int avd_hide_password_3 = 2130837684;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f0200b3
-			public const int avd_show_password_1 = 2130837683;
-			
-			// aapt resource value: 0x7f0200b4
-			public const int avd_show_password_2 = 2130837684;
-			
 			// aapt resource value: 0x7f0200b5
-			public const int avd_show_password_3 = 2130837685;
+			public const int avd_show_password_1 = 2130837685;
+			
+			// aapt resource value: 0x7f0200b6
+			public const int avd_show_password_2 = 2130837686;
+			
+			// aapt resource value: 0x7f0200b7
+			public const int avd_show_password_3 = 2130837687;
 			
 			// aapt resource value: 0x7f020056
 			public const int back_arrow = 2130837590;
@@ -2522,11 +2522,11 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f020098
 			public const int notification_icon_background = 2130837656;
 			
-			// aapt resource value: 0x7f0200ae
-			public const int notification_template_icon_bg = 2130837678;
+			// aapt resource value: 0x7f0200b0
+			public const int notification_template_icon_bg = 2130837680;
 			
-			// aapt resource value: 0x7f0200af
-			public const int notification_template_icon_low_bg = 2130837679;
+			// aapt resource value: 0x7f0200b1
+			public const int notification_template_icon_low_bg = 2130837681;
 			
 			// aapt resource value: 0x7f020099
 			public const int notification_tile_bg = 2130837657;
@@ -2577,19 +2577,25 @@ namespace EFRFrontEndTest2
 			public const int silverarrowright = 2130837672;
 			
 			// aapt resource value: 0x7f0200a9
-			public const int starIcon = 2130837673;
+			public const int splash_logo = 2130837673;
 			
 			// aapt resource value: 0x7f0200aa
-			public const int tooltip_frame_dark = 2130837674;
+			public const int splash_screen = 2130837674;
 			
 			// aapt resource value: 0x7f0200ab
-			public const int tooltip_frame_light = 2130837675;
+			public const int starIcon = 2130837675;
 			
 			// aapt resource value: 0x7f0200ac
-			public const int trophyIcon = 2130837676;
+			public const int tooltip_frame_dark = 2130837676;
 			
 			// aapt resource value: 0x7f0200ad
-			public const int unfavorited = 2130837677;
+			public const int tooltip_frame_light = 2130837677;
+			
+			// aapt resource value: 0x7f0200ae
+			public const int trophyIcon = 2130837678;
+			
+			// aapt resource value: 0x7f0200af
+			public const int unfavorited = 2130837679;
 			
 			static Drawable()
 			{
@@ -4552,6 +4558,15 @@ namespace EFRFrontEndTest2
 			
 			// aapt resource value: 0x7f09016c
 			public const int Base_Widget_Design_TabLayout = 2131296620;
+			
+			// aapt resource value: 0x7f09018c
+			public const int MyTheme = 2131296652;
+			
+			// aapt resource value: 0x7f09018b
+			public const int MyTheme_Base = 2131296651;
+			
+			// aapt resource value: 0x7f09018d
+			public const int MyTheme_Splash = 2131296653;
 			
 			// aapt resource value: 0x7f09001f
 			public const int Platform_AppCompat = 2131296287;
