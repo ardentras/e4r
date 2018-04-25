@@ -98,7 +98,7 @@ namespace EFRFrontEndTest2
      
             else {
                 m_database = new CallDatabase(this);
-                Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
+              //  Task.Run(async () => { currentquestion = await setup(); }).Wait(); //Wait should not be used, rewrite when a fix is found.
 
                // RequestWindowFeature(WindowFeatures.NoTitle);
                 base.OnCreate(savedInstanceState);
@@ -157,12 +157,16 @@ namespace EFRFrontEndTest2
             {
                 await m_database.RetreaveQuestionBlock();
 
+
+
                 //uncomment after testing.
 
-                //var block = m_database.responce.m_json;
-                //int id = block[0]["QuestionBlockID"];
-                //var uo = SingleUserObject.getObject();
-                //uo.AddCompletedBlock(id);
+                var block = m_database.responce.m_json;
+                int id = block[0]["QuestionBlockID"];
+                var uo = SingleUserObject.getObject();
+                uo.AddCompletedBlock(id);
+                CallDatabase DB = new CallDatabase(this);
+                Task.Run(async () => { await DB.UpdateUO(); }).Wait();
             }
 
             
@@ -288,7 +292,7 @@ namespace EFRFrontEndTest2
             UserObject user = SingleUserObject.getObject();
             int lv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
             // note replace with real value gained/////////////////////////////////////////////////////////////////
-            user.TotalDonated += .01;
+          //  useC:\Users\kelcey\Source\Repos\e4r\EFRAndroidFrontEndTest\EFRFrontEndTest2\Resources\layout\LoginPageScreen.axmlr.TotalDonated += .01;
             int newlv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
             if (lv != newlv)
             {
