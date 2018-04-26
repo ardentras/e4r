@@ -1,8 +1,8 @@
 <resources>
-  <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
   </style>
 
-    <style name="MyTheme" parent="MyTheme.Base">
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
   </style>
 
   <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">

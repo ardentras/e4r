@@ -57,7 +57,7 @@ namespace EFRFrontEndTest2
                             {
                                 //m_database.GetUserObject.Save(this);
                                 //changed into dashboard activity for new userdashboard, only test
-                                var intent = new Intent(this, typeof(DashboardActivity));
+                                var intent = new Intent(this, typeof(BottomMenuTest));
                                 StartActivity(intent);
                                 break;
                             }
