@@ -63,8 +63,11 @@ namespace EFRFrontEndTest2
             Android.Support.V4.App.Fragment fragment = null;
             switch (id)
             {
+                case Resource.Id.EasyButton:
+                    fragment = Questions.NewInstance();
+                    break;
                 case Resource.Id.math_button:
-                    fragment = Difficulty.NewInstance();
+                    fragment = Difficulty.NewInstance(this);
                     break;
                 case Resource.Id.action_home:
                     fragment = Home.NewInstance();
@@ -92,6 +95,7 @@ namespace EFRFrontEndTest2
                 id != Resource.Id.action_setting)
             {
                 SupportFragmentManager.BeginTransaction()
+                    .SetCustomAnimations(Resource.Animation.slide_in, Resource.Animation.slide_out, Resource.Animation.slide_in, Resource.Animation.slide_out)
                     .Replace(Resource.Id.content_frame, fragment)
                     .AddToBackStack(previous.Class.Name)
                     .Commit();
@@ -100,6 +104,13 @@ namespace EFRFrontEndTest2
             //just simple replace the view
             else
             {
+                if (SupportFragmentManager.BackStackEntryCount > 0)
+                {
+                    for(int i = 0; i < SupportFragmentManager.BackStackEntryCount; ++i)
+                    {
+                        SupportFragmentManager.PopBackStack();
+                    }
+                }
                 SupportFragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, fragment)
                 .Commit();
