@@ -28,44 +28,40 @@ namespace EFRFrontEndTest2
             ImageButton HardButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
             ImageButton HardestButton = FindViewById<ImageButton>(Resource.Id.EasyButton);
             ImageButton BackButton = FindViewById<ImageButton>(Resource.Id.backButton);
+            UserObject user = SingleUserObject.getObject();
+            int difficulty = user.Difficulty;
 
             continueButton.Click += (sender, e) =>
             {
+                user.Difficulty = difficulty;
                 var intent = new Intent(this, typeof(QuestionspageActivity));
                 StartActivity(intent);
             };
 
             EasyButton.Click += (sender, e) =>
             {
-                UserObject var = SingleUserObject.getObject();
-                var.Difficulty = 1;
-
+                difficulty = 0;
             };
 
             NormalButton.Click += (sender, e) =>
             {
-                UserObject var = SingleUserObject.getObject();
-                var.Difficulty = 2;
-
+                difficulty = 0;
             };
 
             HardButton.Click += (sender, e) =>
             {
-                UserObject var = SingleUserObject.getObject();
-                var.Difficulty = 3;
+                difficulty = 0;
             };
 
             HardestButton.Click += (sender, e) =>
             {
-                UserObject var = SingleUserObject.getObject();
-                var.Difficulty = 4;
+                difficulty = 0;
             };
             BackButton.Click += (sender, e) =>
             {
+                user.Difficulty = difficulty;
                 Finish();
             };
-
-
         }
         protected void setBackground()
         {
@@ -75,6 +71,5 @@ namespace EFRFrontEndTest2
                 background.Background = AppBackground.background;
             }
         }
-
     }
 }

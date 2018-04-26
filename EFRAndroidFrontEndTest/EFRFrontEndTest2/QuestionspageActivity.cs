@@ -8,6 +8,7 @@ using System.Json;
 using System.Threading.Tasks;
 
 using EFRFrontEndTest2.Assets;
+using Android.Content;
 
 namespace EFRFrontEndTest2
 {
@@ -99,8 +100,6 @@ namespace EFRFrontEndTest2
                 }
             };
 
-            
-
             BigGrayButton.Click += (sender, e) =>
             {
                 QuestionAnswered = true;
@@ -187,6 +186,7 @@ namespace EFRFrontEndTest2
             Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
 
             Task.Run(async () => { await NextBlock(); }).Wait();
+
             NextQuestion();
         }
 
@@ -196,6 +196,8 @@ namespace EFRFrontEndTest2
                 user.AddCompletedBlock(blockID);
 
             await m_database.RetreaveQuestionBlock();
+            if (m_database.responce.m_code != 200)
+                kick_to_home();
 
             JsonValue block = m_database.responce.m_json;
             m_questionBlock = block["question_block"];
@@ -251,6 +253,18 @@ namespace EFRFrontEndTest2
                 builder.SetView(view);
                 builder.Show();
             }
+        }
+
+        protected void kick_to_home()
+        {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Uh Oh! Something went wrong with the server!");
+            alert.SetButton("OK", (c, ev) =>
+            {
+                var intent = new Intent(this, typeof(DashboardActivity));
+                StartActivity(intent);
+            });
         }
     }
 }
