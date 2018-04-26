@@ -26,7 +26,7 @@ namespace EFRFrontEndTest2
 
             TextView lvText = FindViewById<TextView>(Resource.Id.lvLabel);
             UserObject obj = SingleUserObject.getObject();
-            string text = Convert.ToString((int)(Math.Sqrt(obj.TotalQuestions / 10) + obj.TotalDonated / 50));
+            string text = obj.Level.ToString();
             lvText.Text = "You are now level" + text + "!"; 
             var searchTimer = new Timer(600);
             searchTimer.Elapsed += delegate

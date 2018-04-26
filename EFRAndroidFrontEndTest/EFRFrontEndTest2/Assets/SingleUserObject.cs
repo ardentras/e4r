@@ -14,7 +14,7 @@ namespace EFRFrontEndTest2.Assets
 {
     class SingleUserObject
     {
-        //to use this class you can either instantiate the singleton or
+        // To use this class you can either instantiate the singleton or
         // simply type UserObject var = SingleUserObject.getObject();
         // and you should get the user object.
         public SingleUserObject()
@@ -22,8 +22,8 @@ namespace EFRFrontEndTest2.Assets
             if(singleObj == null)
             {
                 singleObj = new UserObject();
+                singleObj.Level = (int)(Math.Sqrt(singleObj.TotalQuestions / 10) + singleObj.TotalDonated / 50 + 1);
             }
-
         }
 
         public static ref UserObject getObject()
@@ -31,9 +31,11 @@ namespace EFRFrontEndTest2.Assets
             if(singleObj == null)
             {
                 singleObj = new UserObject();
+                singleObj.Level = (int)(Math.Sqrt(singleObj.TotalQuestions / 10) + singleObj.TotalDonated / 50 + 1);
             }
             return ref singleObj;
         }
+
         private static UserObject singleObj;
     }
 }

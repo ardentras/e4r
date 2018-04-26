@@ -131,7 +131,7 @@ namespace EFRFrontEndTest2.Assets
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
                 int i = 0;
                 i++;
@@ -152,24 +152,21 @@ namespace EFRFrontEndTest2.Assets
 
         private void CheckTask(Task task)
         {
-            if (!task.IsCompleted)
+            if (!task.IsCompleted || task.IsFaulted)
             {
-                if (task.IsFaulted)
+                LastResponce.m_responce = "Failure";
+                switch (task.Exception.InnerException.Message)
                 {
-                    LastResponce.m_responce = "Failure";
-                    switch (task.Exception.InnerException.Message)
-                    {
-                        case "Error: ConnectFailure (Network is unreachable)":
-                            LastResponce.m_reason = "Unable to connect to network";
-                            LastResponce.m_code = 503; // Airplane mode or other similar issues
-                            break;
-                        case "The request timed out":
-                            LastResponce.m_reason = "HTTP Request Timeout";
-                            LastResponce.m_code = 504; // Timeout error code
-                            break;
-                        default:
-                            break;
-                    }
+                    case "Error: ConnectFailure (Network is unreachable)":
+                        LastResponce.m_reason = "Unable to connect to network";
+                        LastResponce.m_code = 503; // Airplane mode or other similar issues
+                        break;
+                    case "The request timed out":
+                        LastResponce.m_reason = "HTTP Request Timeout";
+                        LastResponce.m_code = 504; // Timeout error code
+                        break;
+                    default:
+                        break;
                 }
             }
         }
