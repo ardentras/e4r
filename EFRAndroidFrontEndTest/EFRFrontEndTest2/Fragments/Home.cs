@@ -20,6 +20,7 @@ namespace EFRFrontEndTest2.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            // Do everything else here that's not UI related
             // Create your fragment here
         }
         public static Home NewInstance()
@@ -29,9 +30,17 @@ namespace EFRFrontEndTest2.Fragments
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            //Use this to initialize all the click handlers and stuff
+            //all UI related functionalities here
             View view = inflater.Inflate(Resource.Layout.Home, container, false);
+            TextView uid_txt = view.FindViewById<TextView>(Resource.Id.uid_txt);
+            TextView level_txt = view.FindViewById<TextView>(Resource.Id.level_txt);
+            TextView solve_txt = view.FindViewById<TextView>(Resource.Id.solved_val);
+            TextView donate_txt = view.FindViewById<TextView>(Resource.Id.donate_val);
+            uid_txt.Text = uo.FirstName;
+            level_txt.Text = (uo.Difficulty + 1).ToString();
+            solve_txt.Text = uo.TotalQuestions.ToString();
+            donate_txt.Text = uo.TotalDonated.ToString();
             return view;
         }
     }

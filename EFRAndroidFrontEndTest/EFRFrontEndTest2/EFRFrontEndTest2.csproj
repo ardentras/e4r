@@ -158,6 +158,7 @@
     <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="DashboardActivity.cs" />
+    <Compile Include="Fragments\Difficulty.cs" />
     <Compile Include="Fragments\Feeds.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="Fragments\Settings.cs" />
@@ -239,6 +240,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Home.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Solve.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -499,6 +503,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\trophy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\heart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />

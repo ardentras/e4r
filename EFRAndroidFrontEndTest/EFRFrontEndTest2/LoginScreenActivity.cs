@@ -104,14 +104,14 @@ namespace EFRFrontEndTest2
                     alert.SetButton("OK", (c, ev) =>
                     {
                         //changed into dashboard activity for new userdashboard, only test
-                        var intent = new Intent(this, typeof(DashboardActivity));
+                        var intent = new Intent(this, typeof(BottomMenuTest));
                         StartActivity(intent);
                     });
                     alert.Show();
                     alert.DismissEvent += (sndr, eF) =>
                     {
                         //changed into dashboard activity for new userdashboard, only test
-                        var intent = new Intent(this, typeof(DashboardActivity));
+                        var intent = new Intent(this, typeof(BottomMenuTest));
                         StartActivity(intent);
                     };
                     clicked = false;

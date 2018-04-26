@@ -14,12 +14,30 @@ using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using EFRFrontEndTest2.Fragments;
 
+
+/*
+ * NOTE:  This new UI uses fragments, which means we don't need activities no more 
+ *        If you don't know how to make fragments, go to the Fragments folder
+ *        and just follow the guidelines on Home.cs
+ *        
+ * NOTE:  If the page has sub pages, make sure you pass an instance of this
+ *        so it can access the LoadFragment(int id) function
+ *        
+ * NOTE:  If you edit something and it won't build, its because you need to clean
+ *        the solution first, if clean fails, clean a few more times to see if
+ *        it succeeds, if it does, then you can build again
+ */
+
 namespace EFRFrontEndTest2
 {
     [Activity(Label = "Main")]
     public class BottomMenuTest : AppCompatActivity
     {
+        //this is our bottom navigation
         private BottomNavigationView bottomNavigation;
+        //this is use to keep track of the previous fragment
+        //for back press
+        private Android.Support.V4.App.Fragment previous;
         //Main function, called on run
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,9 +45,11 @@ namespace EFRFrontEndTest2
             SetContentView(Resource.Layout.bottomMenu);
             BottomNavigationView test = FindViewById<BottomNavigationView>(Resource.Id.bottom_nav);
             ShiftMode.SetShiftMode(test, false, false);
+            //this is needed to display the home page
             SupportFragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, Home.NewInstance())
                 .Commit();
+            //add the handler so it knows where to go base on id of the tab
             bottomNavigation = FindViewById<BottomNavigationView>(Resource.Id.bottom_nav);
             bottomNavigation.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
         }
@@ -37,16 +57,22 @@ namespace EFRFrontEndTest2
         {
             LoadFragment(e.Item.ItemId);
         }
-        void LoadFragment(int id)
+        public void LoadFragment(int id)
         {
+            //this checks for the id of the selection
             Android.Support.V4.App.Fragment fragment = null;
             switch (id)
             {
+                case Resource.Id.math_button:
+                    fragment = Difficulty.NewInstance();
+                    break;
                 case Resource.Id.action_home:
                     fragment = Home.NewInstance();
                     break;
                 case Resource.Id.action_solve:
-                    fragment = Solve.NewInstance();
+                    //passing this, because it needs to access LoadFragment(int id)
+                    //only if this page has sub routes tho
+                    fragment = Solve.NewInstance(this);
                     break;
                 case Resource.Id.action_feed:
                     fragment = Feeds.NewInstance();
@@ -58,26 +84,41 @@ namespace EFRFrontEndTest2
 
             if (fragment == null)
                 return;
-
-            SupportFragmentManager.BeginTransaction()
+            //if the selection is not the main navigators,
+            //push it to stack so we can back button out of it
+            if (id != Resource.Id.action_home &&
+                id != Resource.Id.action_solve &&
+                id != Resource.Id.action_feed &&
+                id != Resource.Id.action_setting)
+            {
+                SupportFragmentManager.BeginTransaction()
+                    .Replace(Resource.Id.content_frame, fragment)
+                    .AddToBackStack(previous.Class.Name)
+                    .Commit();
+            }
+            //if it is the main navigators
+            //just simple replace the view
+            else
+            {
+                SupportFragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, fragment)
                 .Commit();
+            }
+            //keep track of previous fragment
+            previous = fragment;
         }
         public override void OnBackPressed()
         {
-            return;
+            //if anything is on the stack, just back out
+            if (SupportFragmentManager.BackStackEntryCount > 0)
+            {
+                SupportFragmentManager.PopBackStack();
+            }
+            //if nothing is on stack, dont do anything
+            else
+            {
+                return;
+            }
         }
     }
 }
-
-
-// Testing
-
-//Great reference for calling event function out of main.
-//SetContentView doesnt give a transition animation
-
-/*createAccount.Click += OnTapGestureRecognizerTapped;
-private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
-{
-    SetContentView(Resource.Layout.CreateAccountScreen);
-}*/
