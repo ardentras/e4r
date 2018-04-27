@@ -126,7 +126,7 @@ namespace EFRFrontEndTest2
             if (responce.m_responce == "Success")
             {
                 //m_database.GetUserObject.Load(this);
-                var intent = new Intent(this, typeof(UserDashboardActivity));
+                var intent = new Intent(this, typeof(DashboardActivity));
                 StartActivity(intent);
             }
 

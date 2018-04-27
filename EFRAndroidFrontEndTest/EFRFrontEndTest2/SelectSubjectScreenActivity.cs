@@ -59,7 +59,7 @@ namespace EFRFrontEndTest2
 
             continueButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(QuestionDificultypageActivity));
+                var intent = new Intent(this, typeof(QuestionDifficultypageActivity));
                 uo.SubjectID = currentSubject.id;
                 uo.SubjectName = currentSubject.name;
                 StartActivity(intent);

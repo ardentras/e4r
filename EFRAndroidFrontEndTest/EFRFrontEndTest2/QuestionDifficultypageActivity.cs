@@ -7,8 +7,8 @@ using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
-    [Activity(Label = "QuestionDificultypageActivity")]
-    public class QuestionDificultypageActivity : Activity
+    [Activity(Label = "QuestionDifficultypageActivity")]
+    public class QuestionDifficultypageActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

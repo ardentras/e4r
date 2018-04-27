@@ -210,7 +210,6 @@ namespace EFRFrontEndTest2
                 Answer3.Text = currentquestion.m_QuestionThree;
                 Answer4.Text = currentquestion.m_QuestionFour;
             }
-            var stuff = user.UserObjectForm();
         }
 
         protected void setBackground()
