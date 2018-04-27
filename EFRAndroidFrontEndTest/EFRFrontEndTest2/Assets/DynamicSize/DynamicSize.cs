@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace EFRFrontEndTest2.Assets.DynamicSize
+﻿namespace EFRFrontEndTest2.Assets.DynamicSize
 {
     public class DynamicSize
     {
         private Android.Util.DisplayMetrics _metrics = null;
         private Android.Content.Res.Resources _resources = null;
-        private static DynamicSize _instance = null;
+
         public DynamicSize(Android.Content.Res.Resources resources)
         {
             _resources = resources;

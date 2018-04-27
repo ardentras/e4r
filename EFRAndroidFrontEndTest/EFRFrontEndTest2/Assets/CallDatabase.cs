@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
 
 namespace EFRFrontEndTest2.Assets
 {
@@ -23,8 +16,7 @@ namespace EFRFrontEndTest2.Assets
             m_responce = responce;
             m_reason = reason;
             m_code = code;
-            m_json = json;//holds the object
-
+            m_json = json; // Holds the object
         }
 
         public string m_responce;
@@ -44,45 +36,77 @@ namespace EFRFrontEndTest2.Assets
         {
             string stream = "{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}";
             byte[] bytestream = Encoding.ASCII.GetBytes(stream);
-            return await APICall("PUT", "/q/request_block", bytestream);
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("PUT", "/q/request_block", bytestream);
+            await Task.WhenAny(task, Task.Delay(5000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
         }
 
         public async Task<Responce> CreateAccount(string username, string email, string password)
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
-            return await APICall("POST", "/signup", bytestream);
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }"); CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("POST", "/signup", bytestream);
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
         }
 
         public async Task<Responce> FetchLogin(string username, string password)
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            return await APICall("POST", "/login", bytestream, true);
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("POST", "/login", bytestream, true);
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
+        }
+
+        public async Task<Responce> UpdateUO()
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"session\": \"{" + SingleUserObject.getObject().SessionID + "}\", \"userobject\": \"{" + SingleUserObject.getObject().UserObjectForm() + "}\"} }");
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("POST", "/update_uo", bytestream, true);
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
         }
 
         public async Task<Responce> RenewSession()
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");
-            return await APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
         }
 
-        // TODO: Update to username/email request when API allows for individual checking
-        public async Task<Responce> CheckUsername(string username, string password)
+        public async Task<Responce> CheckUsername(string username, string email)
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
-            return await APICall("POST", "/login", bytestream);
+            byte[] bytestream = Encoding.ASCII.GetBytes(@"{ ""user"": { ""username"": """ + username + @""", ""email"": """ + email + @""" } }");
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("POST", "/check_username", bytestream);
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
         }
 
-
-        public async Task<Responce> APICall(string method, string uri, byte[] bytestream, bool need_UO = false)
+        public async Task APICall(string method, string uri, byte[] bytestream, bool need_UO = false)
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + uri));
             request.ContentType = "application/json";
             request.Method = method;
+            request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {
-                request.Timeout = 2000; // Two second timeout. Timeout it in milliseconds
-                                       // Send the request to the server and wait for the response:
-                request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
                 using (WebResponse response = await request.GetResponseAsync())
                 {
                     // Get a stream representation of the HTTP web response:
@@ -95,28 +119,13 @@ namespace EFRFrontEndTest2.Assets
 
                         if (LastResponce.m_code == 200 && need_UO == true)
                             CreateUserObject(jsonDoc);
-
-                        return LastResponce;
                     }
                 }
             }
             catch (Exception e)
             {
-                LastResponce.m_responce = "Failure";
-                switch (e.Message)
-                {
-                    case "Error: ConnectFailure (Network is unreachable)":
-                        LastResponce.m_reason = "Unable to connect to network";
-                        LastResponce.m_code = 503; // Airplane mode or other similar issues
-                        break;
-                    case "The request timed out":
-                        LastResponce.m_reason = "HTTP Request Timeout";
-                        LastResponce.m_code = 504; // Timeout error code
-                        break;
-                    default:
-                        break;
-                }
-                return LastResponce;
+                int i = 0;
+                i++;
             }
         }
 
@@ -130,6 +139,34 @@ namespace EFRFrontEndTest2.Assets
             catch (Exception) { }
 
             LastResponce = new Responce(response, code, reason, json);
+        }
+
+        private void CheckTask(Task task)
+        {
+            if (task.Status == TaskStatus.WaitingForActivation) // Timeout exception caused by server not responding
+            {
+                LastResponce.m_responce = "Failure";
+                LastResponce.m_reason = "The server failed to respond";
+                LastResponce.m_code = 504;
+            }
+            else if (!task.IsCompleted || task.IsFaulted)
+            {
+                LastResponce.m_responce = "Failure";
+
+                switch (task.Exception.InnerException.Message)
+                {
+                    case "Error: ConnectFailure (Network is unreachable)":
+                        LastResponce.m_reason = "Unable to connect to network";
+                        LastResponce.m_code = 503; // Airplane mode or other similar issues
+                        break;
+                    case "The request timed out":
+                        LastResponce.m_reason = "HTTP Request Timeout";
+                        LastResponce.m_code = 504; // Timeout error code
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private void CreateUserObject(JsonValue json)
@@ -175,8 +212,7 @@ namespace EFRFrontEndTest2.Assets
             }
             m_userObject.FavoriteCharities = strings;
         }
-
-        public UserObject GetUserObject { get { return m_userObject; } }
+        
         public Responce responce { get { return LastResponce; } }
 
         private Activity m_activity;

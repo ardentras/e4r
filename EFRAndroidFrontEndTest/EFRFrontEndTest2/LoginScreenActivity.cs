@@ -4,27 +4,19 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.IO;
-using System.Json;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-
-using Acr.UserDialogs;
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
 {
-    [Activity(Label = "EFRFrontEndTest2", MainLauncher = true)]
+    [Activity(Label = "E4R")]
     public class LoginScreenActivity : Activity
     {
+        private CallDatabase m_database;
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            LocalArchive m_archive = new LocalArchive(this);
-            CallDatabase m_database = new CallDatabase(this);
-            //m_database.GetUserObject.Load(this);
-           // Task.Run(async () => { await RenewSessionAsync(); });
+            m_database = new CallDatabase(this);
 
             //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -46,7 +38,6 @@ namespace EFRFrontEndTest2
             {
                 if (!clicked)
                 {
-                    
                     clicked = true;
                     // Fetch the login information asynchronously, parse the results, then update the screen.
                     Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
@@ -61,7 +52,7 @@ namespace EFRFrontEndTest2
                     {
                         case 200:
                             {
-                                m_database.GetUserObject.Save(this);
+                                //m_database.GetUserObject.Save(this);
                                 //changed into dashboard activity for new userdashboard, only test
                                 var intent = new Intent(this, typeof(DashboardActivity));
                                 StartActivity(intent);
@@ -122,7 +113,6 @@ namespace EFRFrontEndTest2
                     };
                     clicked = false;
                 }
-
             };
 
             forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
@@ -135,8 +125,8 @@ namespace EFRFrontEndTest2
             Responce responce = await m_database.RenewSession();
             if (responce.m_responce == "Success")
             {
-                m_database.GetUserObject.Load(this);
-                var intent = new Intent(this, typeof(UserDashboardActivity));
+                //m_database.GetUserObject.Load(this);
+                var intent = new Intent(this, typeof(DashboardActivity));
                 StartActivity(intent);
             }
 
@@ -193,9 +183,6 @@ namespace EFRFrontEndTest2
         {
 
         }
-
-        LocalArchive m_archive;
-        CallDatabase m_database;
     }
 }
 

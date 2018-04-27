@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Animation;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -28,15 +23,17 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.BubbleLiveFeed);
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
+            Button backbutton = FindViewById<Button>(Resource.Id.bubblefeedbackbutton);
+
             bubble.Click += (sender, e) =>
             {
                 AbsoluteLayout layoutBase = FindViewById<AbsoluteLayout>(Resource.Id.bubble_layout);
                 ImageView img = new ImageView(this);
                 Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
                 //create new bubble image
-                img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
+                img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.MatchParent, height: ViewGroup.LayoutParams.MatchParent);
                 img.Visibility = ViewStates.Visible;
-                img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+                img.SetImageResource(Resource.Drawable.Bubble);
                 var metrics = Resources.DisplayMetrics;
                 //place the bubble on screen randomizing it's x pos
                 layoutBase.AddView(img,100,100);
@@ -74,18 +71,19 @@ namespace EFRFrontEndTest2
                     if (1 == f.Animation.AnimatedFraction)
                     {
                         layoutBase.RemoveView(img);
-                        string newval  = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
+                        string newval  = '$' + (double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01).ToString();
                         if (newval.IndexOf('.') - newval.Length == -2)
                             newval += '0';
                         bubbleButton.Text = newval;
-                        
-
                     }
                 };
-
-
             };
-        }//
+
+            backbutton.Click += (sender, e) =>
+            {
+                base.OnBackPressed();
+            };
+        }
         public async Task<bool> CallDatabase()
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api/bubble_feed"));
@@ -144,9 +142,9 @@ namespace EFRFrontEndTest2
             ImageView img = new ImageView(this);
             Button bubbleButton = FindViewById<Button>(Resource.Id.bigbubble);
             //create new bubble image
-            img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.FillParent, height: ViewGroup.LayoutParams.FillParent);
+            img.LayoutParameters = new LinearLayout.LayoutParams(width: ViewGroup.LayoutParams.MatchParent, height: ViewGroup.LayoutParams.MatchParent);
             img.Visibility = ViewStates.Visible;
-            img.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.Bubble));
+            img.SetImageResource(Resource.Drawable.Bubble);
             var metrics = Resources.DisplayMetrics;
             //place the bubble on screen randomizing it's x pos
             layoutBase.AddView(img, 100+spawn, 100 + spawn);
@@ -186,17 +184,12 @@ namespace EFRFrontEndTest2
                     double cashout = img.Width-100;
                     cashout /= 100;
                     layoutBase.RemoveView(img);
-                    string newval = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout);
+                    string newval = '$' + (double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout).ToString();
                     if (newval.IndexOf('.') - newval.Length == -2)
                         newval += '0';
                     bubbleButton.Text = newval;
-
-
                 }
-
             };
-
         }
-
     };
 }

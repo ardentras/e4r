@@ -4,15 +4,10 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.IO;
-using System.Json;
-using System.Net;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using EFRFrontEndTest2.Assets.Charities_Selection_Layout;
 using EFRFrontEndTest2.Assets;
-
 
 /***************************************************************************************************************************
  * Author: Kevin Xu - if you change anything, update this!!!
@@ -112,11 +107,6 @@ namespace EFRFrontEndTest2
          * Purpose: To initialize the creater with the context of this.
          * 
         ****************************************************************************************************************************/
-        public CharityLayout Current
-        {
-            get { return _current; }
-            set { _current = value; }
-        }
         public CharityLayout Selected
         {
             get { return _selected; }
@@ -243,6 +233,8 @@ namespace EFRFrontEndTest2
                     _current = _selected;
                     selected_charity.Text = _current.Charity.Name;
                     SingleUserObject.getObject().CharityName = _current.Charity.Name;
+                    CallDatabase DB = new CallDatabase(this);
+                    Task.Run(async () => { await DB.UpdateUO(); }).Wait();
                     alert.SetTitle("Saved");
                     alert.SetMessage("Your selected charity has been updated.");
                 }
