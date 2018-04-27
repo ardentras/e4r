@@ -1,14 +1,7 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Timers;
 
 using EFRFrontEndTest2.Assets;
@@ -26,7 +19,7 @@ namespace EFRFrontEndTest2
 
             TextView lvText = FindViewById<TextView>(Resource.Id.lvLabel);
             UserObject obj = SingleUserObject.getObject();
-            string text = Convert.ToString((int)(Math.Sqrt(obj.TotalQuestions / 10) + obj.TotalDonated / 50));
+            string text = obj.Level.ToString();
             lvText.Text = "You are now level" + text + "!"; 
             var searchTimer = new Timer(600);
             searchTimer.Elapsed += delegate

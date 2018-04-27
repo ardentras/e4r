@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
 
 namespace EFRFrontEndTest2.Assets
 {
@@ -25,7 +17,6 @@ namespace EFRFrontEndTest2.Assets
             m_reason = reason;
             m_code = code;
             m_json = json; // Holds the object
-
         }
 
         public string m_responce;
@@ -152,24 +143,28 @@ namespace EFRFrontEndTest2.Assets
 
         private void CheckTask(Task task)
         {
-            if (!task.IsCompleted)
+            if (task.Status == TaskStatus.WaitingForActivation) // Timeout exception caused by server not responding
             {
-                if (task.IsFaulted)
+                LastResponce.m_responce = "Failure";
+                LastResponce.m_reason = "The server failed to respond";
+                LastResponce.m_code = 504;
+            }
+            else if (!task.IsCompleted || task.IsFaulted)
+            {
+                LastResponce.m_responce = "Failure";
+
+                switch (task.Exception.InnerException.Message)
                 {
-                    LastResponce.m_responce = "Failure";
-                    switch (task.Exception.InnerException.Message)
-                    {
-                        case "Error: ConnectFailure (Network is unreachable)":
-                            LastResponce.m_reason = "Unable to connect to network";
-                            LastResponce.m_code = 503; // Airplane mode or other similar issues
-                            break;
-                        case "The request timed out":
-                            LastResponce.m_reason = "HTTP Request Timeout";
-                            LastResponce.m_code = 504; // Timeout error code
-                            break;
-                        default:
-                            break;
-                    }
+                    case "Error: ConnectFailure (Network is unreachable)":
+                        LastResponce.m_reason = "Unable to connect to network";
+                        LastResponce.m_code = 503; // Airplane mode or other similar issues
+                        break;
+                    case "The request timed out":
+                        LastResponce.m_reason = "HTTP Request Timeout";
+                        LastResponce.m_code = 504; // Timeout error code
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -217,8 +212,7 @@ namespace EFRFrontEndTest2.Assets
             }
             m_userObject.FavoriteCharities = strings;
         }
-
-        public UserObject GetUserObject { get { return m_userObject; } }
+        
         public Responce responce { get { return LastResponce; } }
 
         private Activity m_activity;
