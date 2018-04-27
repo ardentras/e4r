@@ -630,8 +630,8 @@ class TDatabase {
                 console.log(err);
             }
         }
-
-        let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
+	
+	    let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
                                             .input('subject_id', mssql.Int, data.userobject.game_data.subject_id)
                                             .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID");
 
@@ -654,12 +654,14 @@ class TDatabase {
         if (data.userobject.game_data.blocksRemaining != undefined) {
             data.userobject.game_data.blocksRemaining = missing_blocks.length;
 
-            uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
+            uo = await this.persistUserObject(data.userobject, res.recordset[0].UserID);
+	    console.log("persisted user object");
         } else {
             uo = data.userobject;
         }
 
-        checkTopTen(res.recordsets[0][0].UserID, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+        this.checkTopTen(res.recordset[0].UserID, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+	console.log("checked top 10");
 
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
     }
@@ -674,7 +676,7 @@ class TDatabase {
         if (res.rowsAffected == 0) {
 	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
 	    } else {
-            let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+            let user_object = await this.getUserObject(res.recordset[0].UserID, data);
 
             var cliTimestamp = data.userobject.timestamp;
             var dbTimestamp = user_object.timestamp;
@@ -692,8 +694,9 @@ class TDatabase {
             uostring = uostring.replace("\\", "");
 
             await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
+                                    .input('userid', mssql.Int, res.recordset[0].UserID)
                                     .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+	    console.log("saved to db");
 	    }
 
         return data.userobject;
