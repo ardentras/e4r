@@ -2,8 +2,6 @@
 using Android.Content;
 using Android.OS;
 using Android.Util;
-using System.Threading.Tasks;
-
 
 namespace EFRFrontEndTest2
 {
@@ -11,12 +9,6 @@ namespace EFRFrontEndTest2
     public class SplashActivity : Activity
     {
         static readonly string TAG = "X:" + typeof (SplashActivity).Name;
-
-        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
-        {
-            base.OnCreate(savedInstanceState, persistentState);
-            Log.Debug(TAG, "SplashActivity.OnCreate");
-        }
 
         // Launches the startup task
         protected override void OnResume()

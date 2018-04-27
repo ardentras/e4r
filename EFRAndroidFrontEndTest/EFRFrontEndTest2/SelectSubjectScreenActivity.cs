@@ -3,14 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.IO;
-using System.Json;
-using System.Net;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -42,7 +35,6 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SelectSubjectScreen);
-
    
             setBackground();
             UserObject uo = SingleUserObject.getObject();
@@ -55,6 +47,8 @@ namespace EFRFrontEndTest2
             ImageButton mathOption = FindViewById<ImageButton>(Resource.Id.mathOption);
             ImageButton historyOption = FindViewById<ImageButton>(Resource.Id.historyOption);
             ImageButton shuffleOption = FindViewById<ImageButton>(Resource.Id.shuffleOption);
+            currentSubject.id = uo.SubjectID;
+            currentSubject.name = uo.SubjectName;
 
             backButton.Click += (sender, e) =>
             {

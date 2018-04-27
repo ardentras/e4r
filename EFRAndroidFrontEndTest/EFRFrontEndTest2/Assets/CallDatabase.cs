@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
 
 namespace EFRFrontEndTest2.Assets
 {
@@ -25,7 +17,6 @@ namespace EFRFrontEndTest2.Assets
             m_reason = reason;
             m_code = code;
             m_json = json; // Holds the object
-
         }
 
         public string m_responce;
@@ -131,7 +122,7 @@ namespace EFRFrontEndTest2.Assets
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
                 int i = 0;
                 i++;
@@ -152,9 +143,16 @@ namespace EFRFrontEndTest2.Assets
 
         private void CheckTask(Task task)
         {
-            if (!task.IsCompleted || task.IsFaulted)
+            if (task.Status == TaskStatus.WaitingForActivation) // Timeout exception caused by server not responding
             {
                 LastResponce.m_responce = "Failure";
+                LastResponce.m_reason = "The server failed to respond";
+                LastResponce.m_code = 504;
+            }
+            else if (!task.IsCompleted || task.IsFaulted)
+            {
+                LastResponce.m_responce = "Failure";
+
                 switch (task.Exception.InnerException.Message)
                 {
                     case "Error: ConnectFailure (Network is unreachable)":
@@ -214,8 +212,7 @@ namespace EFRFrontEndTest2.Assets
             }
             m_userObject.FavoriteCharities = strings;
         }
-
-        public UserObject GetUserObject { get { return m_userObject; } }
+        
         public Responce responce { get { return LastResponce; } }
 
         private Activity m_activity;

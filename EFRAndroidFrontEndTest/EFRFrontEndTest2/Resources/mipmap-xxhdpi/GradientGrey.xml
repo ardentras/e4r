@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-  <gradient
-      android:startColor="@color/notification_material_background_media_default_color"
-      android:endColor="#FFFFFF"
-      android:angle="90"/>
-</shape>

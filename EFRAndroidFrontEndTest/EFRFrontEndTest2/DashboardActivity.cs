@@ -1,14 +1,8 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.IO;
-using System.Json;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using EFRFrontEndTest2.Assets;
 using EFRFrontEndTest2.Assets.DynamicSize;
 

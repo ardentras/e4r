@@ -4,12 +4,6 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
-using System;
-using System.IO;
-using System.Json;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EFRFrontEndTest2
 {
@@ -21,6 +15,7 @@ namespace EFRFrontEndTest2
             base.OnResume();
             setBackground();
         }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -56,7 +51,6 @@ namespace EFRFrontEndTest2
                 var intent = new Intent(this, typeof(BubbleLiveFeedActivity));
                 StartActivity(intent);
             };
-
         }
 
         /***************************************************************************************************************************

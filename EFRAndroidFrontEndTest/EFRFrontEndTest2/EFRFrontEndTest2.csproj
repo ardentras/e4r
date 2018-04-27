@@ -149,7 +149,6 @@
     <Compile Include="Assets\Charities_Selection_Layout\CharityLayout.cs" />
     <Compile Include="Assets\Charities_Selection_Layout\CharityFavorite.cs" />
     <Compile Include="Assets\Charities_Selection_Layout\Charity.cs" />
-    <Compile Include="Assets\LocalArchive.cs" />
     <Compile Include="Assets\SingleUserObject.cs" />
     <Compile Include="Assets\UserObject.cs" />
     <Compile Include="BubbleLiveFeedActivity.cs" />
@@ -168,7 +167,6 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="SelectSubjectScreenActivity.cs" />
     <Compile Include="settingsPageActivity.cs" />
-    <Compile Include="WinPageActivity.cs" />
     <Compile Include="Assets\DynamicSize\DynamicSize.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,9 +233,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\redcross2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\CreateAccountScreenPrototype.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\OptionsIcon.png" />
