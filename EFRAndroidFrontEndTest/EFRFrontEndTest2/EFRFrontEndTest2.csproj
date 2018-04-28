@@ -51,6 +51,8 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>true</BundleAssemblies>
+    <EnableProguard>true</EnableProguard>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -158,8 +160,11 @@
     <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="DashboardActivity.cs" />
+    <Compile Include="Fragments\AccountSettings.cs" />
+    <Compile Include="Fragments\CharitySelection.cs" />
     <Compile Include="Fragments\Difficulty.cs" />
     <Compile Include="Fragments\Feeds.cs" />
+    <Compile Include="Fragments\GeneralSettings.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="Fragments\Questions.cs" />
     <Compile Include="Fragments\Settings.cs" />
@@ -244,6 +249,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Solve.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Questions.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Settings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CharitySlection.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

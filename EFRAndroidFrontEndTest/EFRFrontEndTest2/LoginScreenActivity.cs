@@ -59,6 +59,8 @@ namespace EFRFrontEndTest2
                                 //changed into dashboard activity for new userdashboard, only test
                                 var intent = new Intent(this, typeof(BottomMenuTest));
                                 StartActivity(intent);
+                                //finish will destory this page
+                                Finish();
                                 break;
                             }
                         case 401:
@@ -106,6 +108,8 @@ namespace EFRFrontEndTest2
                         //changed into dashboard activity for new userdashboard, only test
                         var intent = new Intent(this, typeof(BottomMenuTest));
                         StartActivity(intent);
+                        //finish will destory this page
+                        Finish();
                     });
                     alert.Show();
                     alert.DismissEvent += (sndr, eF) =>
@@ -113,6 +117,8 @@ namespace EFRFrontEndTest2
                         //changed into dashboard activity for new userdashboard, only test
                         var intent = new Intent(this, typeof(BottomMenuTest));
                         StartActivity(intent);
+                        //finish will destory this page
+                        Finish();
                     };
                     clicked = false;
                 }

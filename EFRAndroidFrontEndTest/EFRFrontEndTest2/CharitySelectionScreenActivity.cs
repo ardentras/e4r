@@ -177,7 +177,7 @@ namespace EFRFrontEndTest2
                     colorCodes_index = 0;
                 }
                 //Create the layout for that charity and add it to the root, which here, is charities_list(scroll view)
-                charities_list.AddView((new CharityLayout(this, this, _charities[i], colorCodes[colorCodes_index], Resources)).Container);
+                //charities_list.AddView((new CharityLayout(this, this, _charities[i], colorCodes[colorCodes_index], Resources)).Container);
             }
 
         }

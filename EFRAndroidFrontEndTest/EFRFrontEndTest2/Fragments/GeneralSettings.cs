@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace EFRFrontEndTest2.Fragments
 {
-    public class Questions : Android.Support.V4.App.Fragment
+    public class GeneralSettings : Android.Support.V4.App.Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -21,16 +21,17 @@ namespace EFRFrontEndTest2.Fragments
 
             // Create your fragment here
         }
-        public static Questions NewInstance()
+        public static GeneralSettings NewInstance()
         {
-            Questions temp = new Questions();
+            GeneralSettings temp = new GeneralSettings();
             return temp;
         }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            View view = inflater.Inflate(Resource.Layout.Questions, container, false);
+            View view = inflater.Inflate(Resource.Layout.settingsPage, container, false);
             return view;
         }
     }

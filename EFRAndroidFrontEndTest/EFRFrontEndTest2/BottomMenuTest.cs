@@ -57,6 +57,14 @@ namespace EFRFrontEndTest2
         {
             LoadFragment(e.Item.ItemId);
         }
+        public void LogOut()
+        {
+            //changed into dashboard activity for new userdashboard, only test
+            var intent = new Intent(this, typeof(LoginScreenActivity));
+            StartActivity(intent);
+            //finish will destory this page
+            Finish();
+        }
         public void LoadFragment(int id)
         {
             //this checks for the id of the selection
@@ -81,7 +89,16 @@ namespace EFRFrontEndTest2
                     fragment = Feeds.NewInstance();
                     break;
                 case Resource.Id.action_setting:
-                    fragment = Settings.NewInstance();
+                    fragment = Settings.NewInstance(this);
+                    break;
+                case Resource.Id.account_settings:
+                    fragment = AccountSettings.NewInstance();
+                    break;
+                case Resource.Id.general_settings:
+                    fragment = GeneralSettings.NewInstance();
+                    break;
+                case Resource.Id.charity_selection:
+                    fragment = CharitySelection.NewInstance(this);
                     break;
             }
 
@@ -125,11 +142,11 @@ namespace EFRFrontEndTest2
             {
                 SupportFragmentManager.PopBackStack();
             }
-            //if nothing is on stack, dont do anything
-            else
-            {
-                return;
-            }
+            ////if nothing is on stack, dont do anything
+            //else
+            //{
+            //    return;
+            //}
         }
     }
 }

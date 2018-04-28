@@ -15,15 +15,20 @@ namespace EFRFrontEndTest2.Fragments
 {
     public class Settings : Android.Support.V4.App.Fragment
     {
+        private EFRFrontEndTest2.BottomMenuTest _main;
+        public Settings(EFRFrontEndTest2.BottomMenuTest main)
+        {
+            _main = main;
+        }
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
         }
-        public static Settings NewInstance()
+        public static Settings NewInstance(EFRFrontEndTest2.BottomMenuTest main)
         {
-            Settings temp = new Settings();
+            Settings temp = new Settings(main);
             return temp;
         }
 
@@ -31,7 +36,26 @@ namespace EFRFrontEndTest2.Fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            View view = inflater.Inflate(Resource.Layout.settingsPage, container, false);
+            View view = inflater.Inflate(Resource.Layout.Settings, container, false);
+            TextView accountSettings = view.FindViewById<TextView>(Resource.Id.account_settings);
+            TextView generalSettings = view.FindViewById<TextView>(Resource.Id.general_settings);
+            TextView charitySelection = view.FindViewById<TextView>(Resource.Id.charity_selection);
+            TextView logoutBTN = view.FindViewById<TextView>(Resource.Id.logout);
+
+            accountSettings.Click += delegate {
+                _main.LoadFragment(accountSettings.Id);
+            };
+            generalSettings.Click += delegate {
+                _main.LoadFragment(generalSettings.Id);
+            };
+            charitySelection.Click += delegate {
+                _main.LoadFragment(charitySelection.Id);
+            };
+            logoutBTN.Click += delegate
+            {
+                _main.LogOut();
+            };
+
             return view;
         }
     }

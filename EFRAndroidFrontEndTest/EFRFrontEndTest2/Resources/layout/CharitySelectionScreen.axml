@@ -15,7 +15,9 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3">
+            android:id="@+id/linearLayout3"
+            android:minWidth="25px"
+            android:minHeight="25px">
             <ImageButton
                 android:src="@drawable/back_arrow"
                 android:layout_width="50dp"

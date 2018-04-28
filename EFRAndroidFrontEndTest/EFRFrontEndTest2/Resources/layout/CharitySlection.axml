@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6EAEF"
+    android:id="@+id/charity_screen">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#FFFFFF"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+        <TextView
+            android:text="Current:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView1"
+            android:textColor="#212121"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
+            android:text="None"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2"
+            android:textColor="#212121"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
+            android:text="info"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView3"
+            android:textColor="#1e90ff"
+            android:layout_weight="1"
+            android:gravity="center" />
+    </LinearLayout>
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll_view111"
+        android:layout_weight="1"
+        android:background="#FFFFFF">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/charities" />
+    </ScrollView>
+</LinearLayout>

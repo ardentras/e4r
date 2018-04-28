@@ -11,6 +11,7 @@ using Android.Widget;
 using Android.Net;
 using EFRFrontEndTest2.Assets.Charities_Selection_Layout;
 using EFRFrontEndTest2.Assets.DynamicSize;
+using EFRFrontEndTest2.Fragments;
 
 
 /***************************************************************************************************************************
@@ -34,9 +35,9 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         private CharityButton _logoBtn = null;
         private DynamicSize.DynamicSize _Dsize = null;
 
-        private CharitySelectionScreenActivity _main = null;
+        private CharitySelection _main = null;
 
-        public CharityLayout(CharitySelectionScreenActivity main, Context ctx, Charity charity, string seperator_color, Android.Content.Res.Resources Re)
+        public CharityLayout(CharitySelection main, Context ctx, Charity charity, string seperator_color, Android.Content.Res.Resources Re)
         {
             _charity = charity;
             _ctx = ctx;
