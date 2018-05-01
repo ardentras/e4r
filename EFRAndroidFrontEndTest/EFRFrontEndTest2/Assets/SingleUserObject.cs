@@ -12,7 +12,7 @@ namespace EFRFrontEndTest2.Assets
             if(singleObj == null)
             {
                 singleObj = new UserObject();
-                singleObj.Level = (int)(Math.Sqrt(singleObj.TotalQuestions / 10) + singleObj.TotalDonated / 50 + 1);
+                singleObj.Level = (int)(Math.Sqrt(singleObj.TotalQuestions / 10) + singleObj.TotalDonated / 10 + 1);
             }
         }
 
@@ -21,7 +21,7 @@ namespace EFRFrontEndTest2.Assets
             if(singleObj == null)
             {
                 singleObj = new UserObject();
-                singleObj.Level = (int)(Math.Sqrt(singleObj.TotalQuestions / 10) + singleObj.TotalDonated / 50 + 1);
+                singleObj.Level = (int)(Math.Sqrt(singleObj.TotalQuestions / 10) + singleObj.TotalDonated / 10 + 1);
             }
             return ref singleObj;
         }
