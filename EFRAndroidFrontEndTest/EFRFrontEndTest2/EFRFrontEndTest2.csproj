@@ -158,7 +158,6 @@
     <Compile Include="DashboardActivity.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SplashScreenActivity.cs" />
-    <Compile Include="LevelupActivity.cs" />
     <Compile Include="LoginScreenActivity.cs" />
     <Compile Include="QuestionDifficultypageActivity.cs" />
     <Compile Include="QuestionspageActivity.cs" />
