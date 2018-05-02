@@ -1,11 +1,14 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+
+using System;
 using System.Json;
 using System.Threading.Tasks;
+
 using EFRFrontEndTest2.Assets;
+using Android.Content;
 
 namespace EFRFrontEndTest2
 {
@@ -202,14 +205,12 @@ namespace EFRFrontEndTest2
         {
             if (m_database.responce.m_code != 200) // Go to home if the API call failed
                 kick_to_home();
-            else
-            {
-                BigGrayButton.Text = currentquestion.m_QuestionText;
-                Answer1.Text = currentquestion.m_QuestionOne;
-                Answer2.Text = currentquestion.m_QuestionTwo;
-                Answer3.Text = currentquestion.m_QuestionThree;
-                Answer4.Text = currentquestion.m_QuestionFour;
-            }
+            
+            BigGrayButton.Text = currentquestion.m_QuestionText;
+            Answer1.Text = currentquestion.m_QuestionOne;
+            Answer2.Text = currentquestion.m_QuestionTwo;
+            Answer3.Text = currentquestion.m_QuestionThree;
+            Answer4.Text = currentquestion.m_QuestionFour;
         }
 
         protected void setBackground()
@@ -241,14 +242,12 @@ namespace EFRFrontEndTest2
         {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             AlertDialog alert = dialog.Create();
-            alert.SetTitle("Uh Oh!");
-            alert.SetMessage("Something went wrong with the server!");
+            alert.SetTitle("Uh Oh! Something went wrong with the server!");
             alert.SetButton("OK", (c, ev) =>
             {
                 var intent = new Intent(this, typeof(DashboardActivity));
                 StartActivity(intent);
             });
-            alert.Show();
         }
     }
 }

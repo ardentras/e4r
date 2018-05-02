@@ -15,6 +15,7 @@ namespace EFRFrontEndTest2
         {
             base.OnResume();
             setBackground();
+            InitializeUserBasicInformation();
         }
         private TextView play_btn = null;
         private TextView charity_btn = null;
