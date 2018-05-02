@@ -17,13 +17,14 @@ namespace EFRFrontEndTest2.Fragments
 {
     public class CharitySelection : Android.Support.V4.App.Fragment
     {
+        private UserObject uo = SingleUserObject.getObject();
         private CharityLayout _current = null;
         private CharityLayout _selected = null;
         private Context _ctx = null;
         //current list of available charities
         private List<Charity> _favorites = new List<Charity>();
         private List<Charity> _charities = new List<Charity>();
-        private string[] colorCodes = new string[] { "#FF7D61", "#5EFDFF", "#5787FF", "#FFD04A" };
+        private string[] colorCodes = { "#FF7D61", "#5EFDFF", "#5787FF", "#FFD04A" };
         private int colorCodes_index = 0;
         private Charity[] charityNames = {
             new Charity("Alzheimer's Association", 
@@ -97,7 +98,6 @@ namespace EFRFrontEndTest2.Fragments
         {
             _ctx = ctx;
         }
-
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -120,13 +120,72 @@ namespace EFRFrontEndTest2.Fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             View view = inflater.Inflate(Resource.Layout.CharitySlection, container, false);
             LinearLayout charities = view.FindViewById<LinearLayout>(Resource.Id.charities);
+            TextView currentCharity = view.FindViewById<TextView>(Resource.Id.current);
+            TextView currentInfo = view.FindViewById<TextView>(Resource.Id.info);
+            Button savebutton = view.FindViewById<Button>(Resource.Id.savebutton);
+            bool found = false;
+
+            if (uo.CharityName != "")
+            {
+                currentCharity.Text = uo.CharityName;
+            }
+            currentInfo.Click += delegate
+            {
+                if (_current != null && _current.Charity.Name != "None")
+                {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle(_current.Charity.Name);
+                    alert.SetMessage(_current.Charity.Description);
+                    alert.SetButton("OK", (c, ev) =>
+                    {
+                        alert.Dismiss();
+                    });
+                    alert.SetButton2("Learn More", (c, ev) =>
+                    {
+                        var uri = Android.Net.Uri.Parse(_current.Charity.Url);
+                        var intent = new Intent(Intent.ActionView, uri);
+                        StartActivity(intent);
+                    });
+                    alert.Show();
+                }
+                else
+                {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("No Charity has Been Selected");
+                    alert.SetButton("OK", (c, ev) =>
+                    {
+                        alert.Dismiss();
+                    });
+                    alert.Show();
+                }
+            };
+            savebutton.Click += delegate
+            {
+                if (_selected != null && _current != _selected)
+                {
+                    _current = _selected;
+                    currentCharity.Text = _selected.Charity.Name;
+                    uo.CharityName = _selected.Charity.Name;
+                }
+            };
             for (int i = 0; i < _charities.Count; ++i, ++colorCodes_index)
             {
                 if (colorCodes_index >= 4)
                 {
                     colorCodes_index = 0;
                 }
-                charities.AddView((new CharityLayout(this, _ctx, _charities[i], colorCodes[colorCodes_index], Resources)).Container);
+                CharityLayout temp = new CharityLayout(this, _ctx, _charities[i], colorCodes[colorCodes_index], Resources);
+                if (!found && uo.CharityName != "")
+                {
+                    if (_charities[i].Name == uo.CharityName)
+                    {
+                        _current = temp;
+                        found = true;
+                    }
+                }
+                charities.AddView(temp.Container);
             }
             return view;
         }

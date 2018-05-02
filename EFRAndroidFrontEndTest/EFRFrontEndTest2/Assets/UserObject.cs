@@ -43,7 +43,7 @@ namespace
         private string m_SubjectName     = "Math";
         private double m_TotalDonated    = 0.0;
         private int    m_TotalQuestions  = 0;
-        private string m_CharityName     = "Red Cross";
+        private string m_CharityName     = "American Red Cross";
         private string m_Email           = "guest@default.com";
         private string m_FirstName       = "Anon";
         private string m_LastName        = "Guest";

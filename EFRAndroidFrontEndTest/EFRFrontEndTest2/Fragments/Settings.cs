@@ -10,12 +10,14 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2.Fragments
 {
     public class Settings : Android.Support.V4.App.Fragment
     {
         private EFRFrontEndTest2.BottomMenuTest _main;
+        private UserObject uo = SingleUserObject.getObject();
         public Settings(EFRFrontEndTest2.BottomMenuTest main)
         {
             _main = main;
@@ -41,6 +43,26 @@ namespace EFRFrontEndTest2.Fragments
             TextView generalSettings = view.FindViewById<TextView>(Resource.Id.general_settings);
             TextView charitySelection = view.FindViewById<TextView>(Resource.Id.charity_selection);
             TextView logoutBTN = view.FindViewById<TextView>(Resource.Id.logout);
+            TextView initials = view.FindViewById<TextView>(Resource.Id.initials);
+
+
+            if (uo.FirstName != "" && uo.LastName != "")
+            {
+                initials.Text = new StringBuilder(uo.FirstName[0].ToString().ToUpper()).Append('.').Append(uo.LastName[0].ToString().ToUpper()).ToString();
+            }
+            else if (uo.FirstName != "")
+            {
+                initials.Text = uo.FirstName;
+            }
+            else if (uo.LastName != "")
+            {
+                initials.Text = uo.LastName;
+            }
+            else
+            {
+                initials.Text = "N.U";
+            }
+            
 
             accountSettings.Click += delegate {
                 _main.LoadFragment(accountSettings.Id);
@@ -53,7 +75,15 @@ namespace EFRFrontEndTest2.Fragments
             };
             logoutBTN.Click += delegate
             {
-                _main.LogOut();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
+                AlertDialog alert = dialog.Create();
+                alert.SetTitle("Logout");
+                alert.SetMessage("are you sure?");
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    _main.LogOut();
+                });
+                alert.Show();
             };
 
             return view;

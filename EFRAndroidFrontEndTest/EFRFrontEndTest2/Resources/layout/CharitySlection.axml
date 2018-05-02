@@ -29,7 +29,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView2"
+            android:id="@+id/current"
             android:textColor="#212121"
             android:layout_weight="1"
             android:gravity="center" />
@@ -38,7 +38,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView3"
+            android:id="@+id/info"
             android:textColor="#1e90ff"
             android:layout_weight="1"
             android:gravity="center" />
@@ -59,4 +59,11 @@
             android:layout_height="match_parent"
             android:id="@+id/charities" />
     </ScrollView>
+    <Button
+        android:text="Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/savebutton"
+        android:background="#1e90ff"
+        android:textColor="#FFFFFF" />
 </LinearLayout>
