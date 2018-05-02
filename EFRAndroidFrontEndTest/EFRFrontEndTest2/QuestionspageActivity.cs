@@ -93,9 +93,10 @@ namespace EFRFrontEndTest2
                         QuestionCount = 0;
                     }
                     else
+                    {
                         currentquestion = new Question(m_questionBlock[QuestionCount]);
-
                         NextQuestion();
+                    }
                 }
             };
 
@@ -187,7 +188,6 @@ namespace EFRFrontEndTest2
             Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
 
             Task.Run(async () => { await NextBlock(); }).Wait();
-            NextQuestion();
         }
 
         private async Task NextBlock()
@@ -201,6 +201,7 @@ namespace EFRFrontEndTest2
             m_questionBlock = block["question_block"];
             blockID = m_questionBlock[0]["QuestionBlockID"];
             currentquestion = new Question(m_questionBlock[0]);
+            NextQuestion();
         }
 
         private void NextQuestion()
