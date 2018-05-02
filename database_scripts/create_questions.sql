@@ -1,20 +1,22 @@
 INSERT INTO EFRQuest.Subjects VALUES ('Mathematics');
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (1, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (1, 1);
-
 INSERT INTO EFRQuest.Subjects VALUES ('English');
+
+INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+
 INSERT INTO EFRQuest.QuestionsDB VALUES (2, 2);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2, 2);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2, 2);
 INSERT INTO EFRQuest.QuestionsDB VALUES (0, 2);
 INSERT INTO EFRQuest.QuestionsDB VALUES (0, 2);
 INSERT INTO EFRQuest.QuestionsDB VALUES (0, 2);
+
+INSERT INTO EFRQuest.QuestionsDB VALUES (1, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (1, 1);
 
 INSERT INTO EFRQuest.QuestionHelp VALUES ('https://www.basic-mathematics.com/whole-numbers.html');
 INSERT INTO EFRQuest.QuestionHelp VALUES ('https://blog.prepscholar.com/how-to-approach-identifying-sentence-errors-sat-writing-strategies');
@@ -145,23 +147,23 @@ INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, Question
 INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Choose the best word for the following sentence:\n\nJack _______ English, Spanish, and a bit of French', 'speaks', 'speak', 'speaking', 'is speaking', 'speaks', 12, NULL);
 
 /* Mathematics Intermediate */
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\nx + 8 = -5', '-13', '-3', '3', '13', '-13', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n7(x - 3) = 2 + 6(x - 5)', '-10', '1', '-14', '-7', '-7', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('The length of a rectangle is 2 less than 3 times the width. The perimeter is 60 inches. Find the width.', '8 inches', '22 inches', '15.5 inches', '20.7 inches', '8 inches', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n9x - 5 = 8x', '0', '5', '-5', '5/17', '5', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for x if ax + by = c', '(c - by) / a', '(c + by) / a', '(c / a) - by', 'c - a - by', '(c - by) / a', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n7x - 1 = 6x - 4', '-5', '5', '-3', '-3/13', '-3', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for x if y = mx + b', '(y + b) / m', 'y / bm', '(y / m) - b', '(y - b) / m', '(y - b) / m', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n5x - 30 + 3x = 10 + 3x - 20', '4/3', '6', '4', '-6', '4', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following inequality:\n\n3 - x < 4', 'x > 1', 'x < 1', 'x > -1', 'x < -1', 'x > -1', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n3 - (2x + 5) = 4', '-3', '-3/2', '-11/6', '2', '-3', 12, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n(3/5)x = 15', '9', '25', '30', '-9', '25', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Twice a number decrease by 7 is 1. What is the number?', '-3', '-4', '4', '6', '4', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n7x = -14', '-7', '2', '-2', '-21', '-2', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following inequality:\n\n7 - 2x < 21', 'x < 7', 'x > 7', 'x < -7', 'x > -7', 'x > -7', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n11x - 5 = 3x + 2', '7/8', '-3/8', '15', '1', '7/8', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for t if I = prt', 'Ipr', 'I / (pr)', 'I / (pt)', 'I / (rt)', 'I / (pr)', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('The sum of three consecutive numbers is 108. What is the largest number?', '35', '37', '36', '38', '37', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('18 is 3 less than a number. What is the number?', '15', '-15', '21', '6', '21', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n6(2x + 1) - 5x = 3x + 2', '3/4', '2', '-1', '1/2', '-1', 13, 3);
-INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for W if P = 2L + 2W', '(P - 2L) / 2', '(P - L) / 2', '(2L - P) / 2', '(P + 2L) / 2', '(P - 2L) / 2', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\nx + 8 = -5', '-13', '-3', '3', '13', '-13', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n7(x - 3) = 2 + 6(x - 5)', '-10', '1', '-14', '-7', '-7', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('The length of a rectangle is 2 less than 3 times the width. The perimeter is 60 inches. Find the width.', '8 inches', '22 inches', '15.5 inches', '20.7 inches', '8 inches', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n9x - 5 = 8x', '0', '5', '-5', '5/17', '5', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for x if ax + by = c', '(c - by) / a', '(c + by) / a', '(c / a) - by', 'c - a - by', '(c - by) / a', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n7x - 1 = 6x - 4', '-5', '5', '-3', '-3/13', '-3', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for x if y = mx + b', '(y + b) / m', 'y / bm', '(y / m) - b', '(y - b) / m', '(y - b) / m', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n5x - 30 + 3x = 10 + 3x - 20', '4/3', '6', '4', '-6', '4', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following inequality:\n\n3 - x < 4', 'x > 1', 'x < 1', 'x > -1', 'x < -1', 'x > -1', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n3 - (2x + 5) = 4', '-3', '-3/2', '-11/6', '2', '-3', 13, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n(3/5)x = 15', '9', '25', '30', '-9', '25', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Twice a number decrease by 7 is 1. What is the number?', '-3', '-4', '4', '6', '4', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n7x = -14', '-7', '2', '-2', '-21', '-2', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following inequality:\n\n7 - 2x < 21', 'x < 7', 'x > 7', 'x < -7', 'x > -7', 'x > -7', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n11x - 5 = 3x + 2', '7/8', '-3/8', '15', '1', '7/8', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for t if I = prt', 'Ipr', 'I / (pr)', 'I / (pt)', 'I / (rt)', 'I / (pr)', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('The sum of three consecutive numbers is 108. What is the largest number?', '35', '37', '36', '38', '37', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('18 is 3 less than a number. What is the number?', '15', '-15', '21', '6', '21', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve the following equation:\n\n6(2x + 1) - 5x = 3x + 2', '3/4', '2', '-1', '1/2', '-1', 14, 3);
+INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('Solve for W if P = 2L + 2W', '(P - 2L) / 2', '(P - L) / 2', '(2L - P) / 2', '(P + 2L) / 2', '(P - 2L) / 2', 14, 3);
