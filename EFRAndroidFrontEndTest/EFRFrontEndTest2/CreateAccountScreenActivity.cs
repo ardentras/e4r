@@ -3,12 +3,6 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.IO;
-using System.Json;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -177,7 +171,3 @@ namespace EFRFrontEndTest2
         }
     }
 }
-
-
-
-//look up data context for windows (updated data in real time)

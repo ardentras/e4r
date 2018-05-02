@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Animation;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -76,7 +71,7 @@ namespace EFRFrontEndTest2
                     if (1 == f.Animation.AnimatedFraction)
                     {
                         layoutBase.RemoveView(img);
-                        string newval  = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
+                        string newval  = '$' + (double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01).ToString();
                         if (newval.IndexOf('.') - newval.Length == -2)
                             newval += '0';
                         bubbleButton.Text = newval;
@@ -189,7 +184,7 @@ namespace EFRFrontEndTest2
                     double cashout = img.Width-100;
                     cashout /= 100;
                     layoutBase.RemoveView(img);
-                    string newval = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout);
+                    string newval = '$' + (double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout).ToString();
                     if (newval.IndexOf('.') - newval.Length == -2)
                         newval += '0';
                     bubbleButton.Text = newval;

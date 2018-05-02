@@ -193,7 +193,8 @@ class TDatabase {
             try {
                 let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                             						.input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                            						.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
+                            						.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;")
+                                                    .catch(err => { this.dbErrorGen(err, client); });
 
                 if (res.rowsAffected > 0) {
                     client.json({response: "Failed", type: "POST",code: 100, reason: "User already exists"});
@@ -216,11 +217,13 @@ class TDatabase {
                                             .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                             .input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
                                             .input('newuo', mssql.VarChar(5000), uostring)
-                                            .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);");
+                                            .query("INSERT INTO EFRAcc.Users VALUES (@username, @email, @password, CAST(@newuo AS VARBINARY(MAX)), NULL);")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
                     let res = await this.db.request().input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
                                                         .input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
-                                                        .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email");
+                                                        .query("SELECT UserID FROM EFRAcc.Users WHERE Username = @username AND EmailAddr = @email")
+                                                        .catch(err => { this.dbErrorGen(err, client); });
 
                     let randNum = await this.createRecoveryID(res.recordsets[0][0].UserID);
 
@@ -246,7 +249,8 @@ class TDatabase {
         try {
             let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                             .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                                            .query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;");
+                                            .query("SELECT * FROM EFRAcc.Users WHERE EmailAddr = @email OR Username = @username;")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
             if (res.rowsAffected > 0) {
                 client.json({response: "Failed", type: "GET", code: 100, reason: "User already exists"});
@@ -265,14 +269,16 @@ class TDatabase {
 	// curl -XGET localhost:3002/api/verify_email/${VerifyID}
     async verifyEmail(client, data) {
         let res = await this.db.request().input('verifyid', mssql.Int, data.VerifyID)
-                                            .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
+                                            .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         console.log(data.VerifyID);
         if (res.rowsAffected == 0) {
             client.json({response: "Failed", type: "GET", code: 100, reason: "That ID was not found."});
         } else {
             await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                     .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+                                     .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid")
+                                     .catch(err => { this.dbErrorGen(err, client); });
 
             client.redirect(WEBSITE_HOSTNAME + "/login");
         }
@@ -285,7 +291,8 @@ class TDatabase {
     async resendVerify(client, data) {
         let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                         .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                                        .query("SELECT UserID FROM EFRAcc.Users WHERE EmailAddr = @email AND Username = @username;");
+                                        .query("SELECT UserID FROM EFRAcc.Users WHERE EmailAddr = @email AND Username = @username;")
+                                        .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
             client.json({response: "Failed", type: "PUT", code: 100, action: "RESEND_VERIFY", reason: "That username/email was not found."});
@@ -304,7 +311,8 @@ class TDatabase {
     async resetPassword(client, data) {
         let res = await this.db.request().input('email', mssql.NVarChar(User.EMAIL_LENGTH), data.email)
                                         .input('username', mssql.NVarChar(User.USERNAME_LENGTH), data.username)
-                                        .query("SELECT UserID FROM EFRAcc.Users WHERE EmailAddr = @email AND Username = @username;");
+                                        .query("SELECT UserID FROM EFRAcc.Users WHERE EmailAddr = @email AND Username = @username;")
+                                        .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
             client.json({response: "Failed", type: "PUT", code: 100, action: "RESET_PASSWORD", reason: "That username/email was not found."});
@@ -322,7 +330,8 @@ class TDatabase {
 	// curl -XPUT localhost:3002/api/verify_password_reset -H 'Content-Type: application/json' -d '{"user":{"verifyid":302358324, "password":"defaultpass"}}'
     async verifyPasswordReset(client, data) {
         let res = await this.db.request().input('verifyid', mssql.Int, data.VerifyID)
-                                            .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid");
+                                            .query("SELECT UserID FROM EFRAcc.PasswordRecovery WHERE RecoveryID = @verifyid")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         console.log(data.VerifyID);
         if (res.rowsAffected == 0) {
@@ -333,10 +342,12 @@ class TDatabase {
 
             await this.db.request().input('password', mssql.NVarChar(User.PASSWORD_LENGTH), hashedPassword)
                                     .input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                    .query("UPDATE EFRAcc.Users SET PasswordHash = @password WHERE UserID = @userid");
+                                    .query("UPDATE EFRAcc.Users SET PasswordHash = @password WHERE UserID = @userid")
+                                    .catch(err => { this.dbErrorGen(err, client); });
 
             await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                     .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+                                     .query("DELETE FROM EFRAcc.PasswordRecovery WHERE UserID = @userid")
+                                     .catch(err => { this.dbErrorGen(err, client); });
 
             client.json({response: "Success", type: "PUT", code: 200, reason: "Password reset accepted"})
         }
@@ -349,11 +360,13 @@ class TDatabase {
     async attemptLogin(client, data) {
         try {
             let res = await this.db.request().input('username', mssql.NVarChar(User.EMAIL_LENGTH), data.username)
-    				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username");
+    				.query("SELECT * FROM EFRAcc.Users WHERE EmailAddr=@username OR Username=@username")
+                    .catch(err => { this.dbErrorGen(err, client); });
 
             if (res.rowsAffected > 0) {
                 let res2 = await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
-        				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid");
+        				                            .query("SELECT * FROM EFRAcc.PasswordRecovery WHERE UserID = @userid")
+                                                    .catch(err => { this.dbErrorGen(err, client); });
 
                 if (res2.rowsAffected > 0) {
                     client.json({response: "Failed", type: "POST", code: 428, reason: "Email not verified or password reset. Login failed"});
@@ -393,13 +406,15 @@ class TDatabase {
 	// curl -XPUT localhost:3002/api/renew -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a"}}'
 	async renewSessionToken(client, data) {
 		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
 			client.json({response: "Failed", type: "PUT", code: 401, action: "RENEW", reason: "User's session token was not found."});
 		} else {
 			this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-							.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
+							.query("DELETE EFRAcc.Sessions WHERE SessionID = @token")
+                            .catch(err => { this.dbErrorGen(err, client); });
 
             var datenum = Date.now();
             datenum = datenum.toPrecision(datenum.toString().length - 3).valueOf();
@@ -423,7 +438,8 @@ class TDatabase {
 	async setSessionID(userID) {
 		let sessionid = uuidv4();
 		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), sessionid)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected != 0) {
 			sessionid = setSessionID(userID);
@@ -431,7 +447,8 @@ class TDatabase {
 			this.db.request().input('sessionid', mssql.VarChar(User.SESSION_TOKEN_LENGTH), sessionid)
 							.input('exptime', mssql.DateTime2, new Date(Date.now()).toISOString())
 							.input('userid', mssql.Int, userID)
-							.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)");
+							.query("INSERT INTO EFRAcc.Sessions VALUES (@sessionid, @exptime, @userid)")
+                            .catch(err => { this.dbErrorGen(err, client); });
 
             console.log(sessionid);
 		}
@@ -445,7 +462,8 @@ class TDatabase {
 	// curl -XPUT localhost:3002/api/update_uo -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}}'
 	async update_uo(client, data) {
 		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
 			client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token was not found."});
@@ -523,7 +541,9 @@ class TDatabase {
 	// curl -XPUT localhost:3002/api/logout -H 'Content-type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d", "userobject":{}}}'
 	async attemptLogout(client, data) {
 		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
+                                            .catch(err => { this.dbErrorGen(err, client); });
+
         if (res.rowsAffected == 0) {
         	client.json({response: "Failed", type: "PUT", code: 500, reason: "Session invalid. User object could not be saved"});
         } else {
@@ -539,7 +559,9 @@ class TDatabase {
                     var uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
 
                     await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                					.query("DELETE EFRAcc.Sessions WHERE SessionID = @token");
+                					.query("DELETE EFRAcc.Sessions WHERE SessionID = @token")
+                                    .catch(err => { this.dbErrorGen(err, client); });
+
                 	client.json({response: "Success", type: "PUT", code: 200, action: "LOGOUT", reason: "User successfully logged out."});
                 }
             } catch (err) {
@@ -555,16 +577,19 @@ class TDatabase {
 	// curl -XDELETE localhost:3002/api/delete_user -H 'Content-type: application/json' -d '{"user":{"session":"d5841d01-42d8-4caf-84d4-fa493c22156d"}}'
 	async deleteUser(client, data) {
 		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
         	client.json({response: "Failed", type: "DELETE", code: 401, action: "DELETE_USER", reason: "Session invalid, user logged out."});
         } else {
             try {
                 await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
-            					      .query("DELETE EFRAcc.Sessions WHERE UserID = @userid");
+            					      .query("DELETE EFRAcc.Sessions WHERE UserID = @userid")
+                                      .catch(err => { this.dbErrorGen(err, client); });
                 await this.db.request().input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                		              .query("DELETE EFRAcc.Users WHERE UserID = @userid");
+                		              .query("DELETE EFRAcc.Users WHERE UserID = @userid")
+                                      .catch(err => { this.dbErrorGen(err, client); });
 
                 client.json({response: "Success", type: "DELETE", code: 200, action: "DELETE_USER"})
             } catch (err) {
@@ -631,9 +656,10 @@ class TDatabase {
             }
         }
 
-        let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
+	    let res = await this.db.request().input('difficulty', mssql.Int, data.userobject.game_data.difficulty)
                                             .input('subject_id', mssql.Int, data.userobject.game_data.subject_id)
-                                            .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID");
+                                            .query("SELECT DISTINCT QuestionBlockID FROM EFRQuest.QuestionsDB WHERE Difficulty = @difficulty AND SubjectID = @subject_id GROUP BY QuestionBlockID")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         var questionBlocks = res.recordset;
         var totalBlocks = questionBlocks.length;
@@ -647,19 +673,22 @@ class TDatabase {
         var chosen_block = missing_blocks[Math.floor(Math.random() * missing_blocks.length)];
 
         let response = await this.db.request().input('blockid', mssql.Int, chosen_block)
-                                                .query("SELECT * FROM EFRQuest.Questions WHERE QuestionBlockID = @blockid");
+                                                .query("SELECT * FROM EFRQuest.Questions WHERE QuestionBlockID = @blockid")
+                                                .catch(err => { this.dbErrorGen(err, client); });
 
         var uo;
 
         if (data.userobject.game_data.blocksRemaining != undefined) {
             data.userobject.game_data.blocksRemaining = missing_blocks.length;
 
-            uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
+            uo = await this.persistUserObject(data.userobject, res.recordset[0].UserID);
+            console.log("persisted user object");
         } else {
             uo = data.userobject;
         }
 
-        checkTopTen(res.recordsets[0][0].UserID, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+        this.checkTopTen(res.recordset[0].UserID, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+        console.log("checked top 10");
 
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
     }
@@ -667,14 +696,15 @@ class TDatabase {
     // Verifies the user objects are in sync and corrects errors if they exist.
     async verifyQuestionBlocks(client, data) {
         let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token");
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         console.log(data);
         console.log(res);
         if (res.rowsAffected == 0) {
 	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
 	    } else {
-            let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+            let user_object = await this.getUserObject(res.recordset[0].UserID, data);
 
             var cliTimestamp = data.userobject.timestamp;
             var dbTimestamp = user_object.timestamp;
@@ -692,8 +722,10 @@ class TDatabase {
             uostring = uostring.replace("\\", "");
 
             await this.db.request().input('userobject', mssql.VarChar(5000), uostring)
-                                    .input('userid', mssql.Int, res.recordsets[0][0].UserID)
-                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid");
+                                    .input('userid', mssql.Int, res.recordset[0].UserID)
+                                    .query("UPDATE EFRAcc.Users SET UserObject = CAST(@userobject AS VARBINARY(MAX)) WHERE UserID = @userid")
+                                    .catch(err => { this.dbErrorGen(err, client); });
+            console.log("saved to db");
 	    }
 
         return data.userobject;
@@ -704,7 +736,8 @@ class TDatabase {
 	// curl -XPUT localhost:3002/api/q/request_help -H 'Content-type: application/json' -d '{"question_id":0}'
     async requestHelp(client, data) {
         let res = await this.db.request().input('question_id', mssql.Int, data.question_id)
-                                            .query("SELECT HelpInfo FROM EFRQuest.QuestionHelp WHERE HelpID = (SELECT HelpID FROM EFRQuest.Questions WHERE QuestionID = @question_id)");
+                                            .query("SELECT HelpInfo FROM EFRQuest.QuestionHelp WHERE HelpID = (SELECT HelpID FROM EFRQuest.Questions WHERE QuestionID = @question_id)")
+                                            .catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
             client.json({response: "Failed", type: "PUT", code: 100, action: "REQUEST_HELP", reason: "This question does not contain a help topic."});
@@ -726,6 +759,10 @@ class TDatabase {
               client.json({response: 'Successful', type: "GET" ,code: 200, action: "DISPLAY", userCount: res.length, result: res.recordset});
           }
       });
+    }
+
+    dbErrorGen(err, client) {
+        client.json({response: "Failed", type: "", code: 500, reason: err});
     }
 
 	// Ensures that the database connection is closed on object destruction.

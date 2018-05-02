@@ -5,7 +5,6 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Threading.Tasks;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -13,12 +12,10 @@ namespace EFRFrontEndTest2
     [Activity(Label = "E4R")]
     public class LoginScreenActivity : Activity
     {
-        private LocalArchive m_archive;
         private CallDatabase m_database;
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            m_archive = new LocalArchive(this);
             m_database = new CallDatabase(this);
 
             //Removes title bar
@@ -129,7 +126,7 @@ namespace EFRFrontEndTest2
             if (responce.m_responce == "Success")
             {
                 //m_database.GetUserObject.Load(this);
-                var intent = new Intent(this, typeof(UserDashboardActivity));
+                var intent = new Intent(this, typeof(DashboardActivity));
                 StartActivity(intent);
             }
 

@@ -1,14 +1,8 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.IO;
-using System.Json;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using EFRFrontEndTest2.Assets;
 using EFRFrontEndTest2.Assets.DynamicSize;
 
@@ -85,7 +79,7 @@ namespace EFRFrontEndTest2
             user_initials.Text = (new StringBuilder().Append((uo.FirstName.Length > 0 ? uo.FirstName[0] : 'N')).Append(".").Append((uo.LastName.Length > 0 ? uo.LastName[0] : 'U')).ToString());
             user_donated.Text = new StringBuilder().Append("$").Append(" ").Append(uo.TotalDonated).ToString();
             user_solved.Text = uo.TotalQuestions.ToString();
-            user_level.Text = uo.Difficulty.ToString();
+            user_level.Text = uo.Level.ToString();
         }
         private void InitializeClickHandlers()
         {

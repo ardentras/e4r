@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -27,9 +20,9 @@ namespace EFRFrontEndTest2
             TextView money = FindViewById<TextView>(Resource.Id.moneyRaised);
             UserObject obj = SingleUserObject.getObject();
 
-            questions.Text = Convert.ToString(obj.TotalQuestions);
-            money.Text = Convert.ToString(obj.TotalDonated);
-            lv.Text = Convert.ToString((int)(Math.Sqrt(obj.TotalQuestions/10) + obj.TotalDonated / 50+1));
+            questions.Text = obj.TotalQuestions.ToString();
+            money.Text = obj.TotalDonated.ToString();
+            lv.Text = obj.Level.ToString();
         }
     }
 }

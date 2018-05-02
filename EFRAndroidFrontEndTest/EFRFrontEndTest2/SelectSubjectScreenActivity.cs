@@ -3,14 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.IO;
-using System.Json;
-using System.Net;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -18,12 +11,24 @@ namespace EFRFrontEndTest2
     [Activity(Label = "SelectSubjectScreenActivity")]
     public class SelectSubjectScreenActivity : Activity
     {
-        const int PHYSICS = 4;
-        const int CHEMISTRY = 3;
-        const int BIOLOGY = 2;
-        const int HISTORY = 1;
-        const int MATH = 0;
-        int currentSubjectID;
+        private struct Subject
+        {
+            public int id;
+            public string name;
+
+            public Subject(int m_id, string m_name)
+            {
+                id = m_id;
+                name = m_name;
+            }
+        }
+
+        private Subject Physics = new Subject(1, "Mathematics");
+        private Subject Chemistry = new Subject(1, "Mathematics");
+        private Subject Biology = new Subject(1, "Mathematics");
+        private Subject History = new Subject(1, "Mathematics");
+        private Subject Math = new Subject(1, "Mathematics");
+        private Subject currentSubject;
         RNGCryptoServiceProvider rand = new RNGCryptoServiceProvider(); // So the garbage collector is called less often if a kid just LOVES tapping the shuffle button
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,7 +38,6 @@ namespace EFRFrontEndTest2
    
             setBackground();
             UserObject uo = SingleUserObject.getObject();
-            currentSubjectID = uo.SubjectID;
 
             ImageButton backButton = FindViewById<ImageButton>(Resource.Id.backButton);
             ImageButton continueButton = FindViewById<ImageButton>(Resource.Id.continueButton);
@@ -43,74 +47,79 @@ namespace EFRFrontEndTest2
             ImageButton mathOption = FindViewById<ImageButton>(Resource.Id.mathOption);
             ImageButton historyOption = FindViewById<ImageButton>(Resource.Id.historyOption);
             ImageButton shuffleOption = FindViewById<ImageButton>(Resource.Id.shuffleOption);
+            currentSubject.id = uo.SubjectID;
+            currentSubject.name = uo.SubjectName;
 
             backButton.Click += (sender, e) =>
             {
-                uo.SubjectID = currentSubjectID;
+                uo.SubjectID = currentSubject.id;
+                uo.SubjectName = currentSubject.name;
                 Finish();
             };
 
             continueButton.Click += (sender, e) =>
             {
-                var intent = new Intent(this, typeof(QuestionDificultypageActivity));
-                uo.SubjectID = currentSubjectID;
+                var intent = new Intent(this, typeof(QuestionDifficultypageActivity));
+                uo.SubjectID = currentSubject.id;
+                uo.SubjectName = currentSubject.name;
                 StartActivity(intent);
             };
             physicsOption.Click += (sender, e) =>
             {
-                selectButton(PHYSICS);
+                selectButton(Physics.id);
             };
             chemistryOption.Click += (sender, e) =>
             {
-                selectButton(CHEMISTRY);
+                selectButton(Chemistry.id);
             };
             biologyOption.Click += (sender, e) =>
             {
-                selectButton(BIOLOGY);
+                selectButton(Biology.id);
             };
             mathOption.Click += (sender, e) =>
             {
-                selectButton(MATH);
+                selectButton(History.id);
             };
             historyOption.Click += (sender, e) =>
             {
-                selectButton(HISTORY);
+                selectButton(Math.id);
             };
             shuffleOption.Click += (sender, e) =>
             {
                 byte[] number = new byte[1];
                 rand.GetBytes(number);
-                selectButton((int)number[0] % 5); // Create a number 0 - 4 and selects the corresponding button
+                selectButton(1); // Remove and uncomment next line when new subjects are added
+                //selectButton((int)number[0] % 5); // Create a number 0 - 4 and selects the corresponding button
             };
 
             void selectButton(int selected)
             {
-                currentButton(currentSubjectID).SetBackgroundResource(Resource.Drawable.GreenButtonIcon);
+                currentButton(selected).SetBackgroundResource(Resource.Drawable.GreenButtonIcon);
                 switch (selected)
                 {
-                    case 0:
-                        mathOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-                        currentSubjectID = MATH;
-                        break;
                     case 1:
-                        historyOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-                        currentSubjectID = HISTORY;
+                        mathOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
+                        currentSubject = Math;
                         break;
                     case 2:
-                        biologyOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-                        currentSubjectID = BIOLOGY;
+                        historyOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
+                        currentSubject = History;
                         break;
                     case 3:
-                        chemistryOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-                        currentSubjectID = CHEMISTRY;
+                        biologyOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
+                        currentSubject = Biology;
                         break;
                     case 4:
+                        chemistryOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
+                        currentSubject = Chemistry;
+                        break;
+                    case 5:
                         physicsOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-                        currentSubjectID = PHYSICS;
+                        currentSubject = Physics;
                         break;
                     default: // Should never reach this stage, but defaults to math just in case
                         mathOption.SetBackgroundResource(Resource.Drawable.GreenButtonSelectedIcon);
-                        currentSubjectID = MATH;
+                        currentSubject = Math;
                         break;
                 }
 
@@ -118,15 +127,15 @@ namespace EFRFrontEndTest2
                 {
                     switch (button)
                     {
-                        case 0:
-                            return mathOption;
                         case 1:
-                            return historyOption;
+                            return mathOption;
                         case 2:
-                            return biologyOption;
+                            return historyOption;
                         case 3:
-                            return chemistryOption;
+                            return biologyOption;
                         case 4:
+                            return chemistryOption;
+                        case 5:
                             return physicsOption;
                         default: // Should never reach this stage, but defaults to math just in case
                             return mathOption;

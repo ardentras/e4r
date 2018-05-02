@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -30,7 +23,6 @@ namespace EFRFrontEndTest2
             Button darkred = FindViewById<Button>(Resource.Id.setdarkred);
             Button darkgreen = FindViewById<Button>(Resource.Id.setdarkgreen);
             Button purple = FindViewById<Button>(Resource.Id.setpurple);
-
 
             blue.Click += (sender, e) =>
             {

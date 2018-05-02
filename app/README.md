@@ -62,33 +62,6 @@ Debugging API Calls:
     },
     "timestamp":"2018-01-24T02:06:58+00:00"
 }
-curl -XPUT localhost:3002/api/q/request_block
-                -H 'Content-Type: application/json'
-                -d '{
-                        "user": {
-                            "session": "254a031f-522c-4f39-be2c-0e4251973e96",
-                            "userobject": {
-                                "user_data": {
-                                    "username": "abcde12345",
-                                    "email": "abcde12345@gmail.com",
-                                    "first_name": "",
-                                    "last_name": "",
-                                    "selected_charity": "",
-                                    "favorite_charities": [""]
-                                },
-                                "game_data": {
-                                    "subject_name": "",
-                                    "subject_id": 1,
-                                    "difficulty": 0,
-                                    "totalQuestions": 0,
-                                    "totalDonated": 0,
-                                    "blocksRemaining": 0,
-                                    "completed_blocks": []
-                                },
-                                "timestamp": "2018-03-07T04:11:55.847Z"
-                            }
-                        }
-                    }'
 ```
 
 #### SIGN UP REQUEST:
