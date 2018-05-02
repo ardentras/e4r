@@ -24,14 +24,15 @@ namespace
         public int Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
         public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
         public string SubjectName { get { return m_SubjectName; } set { m_SubjectName = value; } }
-        public double TotalDonated { get { return m_TotalDonated; } set { m_TotalDonated = value; } }
-        public int TotalQuestions { get { return m_TotalQuestions; } set { m_TotalQuestions = value; } }
+        public double TotalDonated { get { return m_TotalDonated; } set { m_TotalDonated = value; m_Level = (int)(Math.Sqrt(m_TotalQuestions / 5) + m_TotalDonated / 10 + 1); } }
+        public int TotalQuestions { get { return m_TotalQuestions; } set { m_TotalQuestions = value; m_Level = (int)(Math.Sqrt(m_TotalQuestions / 5) + m_TotalDonated / 10 + 1); } }
         public string CharityName { get { return m_CharityName; } set { m_CharityName = value; } }
         public string Email { get { return m_Email; } set { m_Email = value; } }
         public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
         public string LastName { get { return m_LastName; } set { m_LastName = value; } }
         public string Username { get { return m_Username; } set { m_Username = value; } }
         public string[] FavoriteCharities { get { return m_FavoriteCharities; } set { m_FavoriteCharities = value; } }
+        public int Level { get { return m_Level;  } set { m_Level = value; } }
 
         private JsonValue m_json;
         private string m_SessionID       = "guest";
@@ -49,6 +50,7 @@ namespace
         private string m_LastName        = "Guest";
         private string m_Username        = "Slenderman";
         private string[] m_FavoriteCharities = new string[0];
+        private int m_Level = 1;
 
 
         public string GetObjectString()

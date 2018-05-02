@@ -8,6 +8,7 @@ using System.Json;
 using System.Threading.Tasks;
 
 using EFRFrontEndTest2.Assets;
+using Android.Content;
 
 namespace EFRFrontEndTest2
 {
@@ -67,7 +68,7 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             m_database = new CallDatabase(this);
             setup();
-            
+
             //find correct and compare it to variable
             //add 1 to the correct answer tally
             //boolean the question is answered 
@@ -95,11 +96,9 @@ namespace EFRFrontEndTest2
                     else
                         currentquestion = new Question(m_questionBlock[QuestionCount]);
 
-                        NextQuestion();
+                    NextQuestion();
                 }
             };
-
-            
 
             BigGrayButton.Click += (sender, e) =>
             {
@@ -117,7 +116,6 @@ namespace EFRFrontEndTest2
                 else
                 {
                     Answer1.Text = "incorrect";
-                    IncorrectAnswer();
                 }
             };
 
@@ -133,10 +131,9 @@ namespace EFRFrontEndTest2
                 else
                 {
                     Answer2.Text = "incorrect";
-                    IncorrectAnswer();
                 }
             };
-            
+
             Answer3.Click += (sender, e) =>
             {
                 QuestionAnswered = true;
@@ -149,7 +146,6 @@ namespace EFRFrontEndTest2
                 else
                 {
                     Answer3.Text = "incorrect";
-                    IncorrectAnswer();
                 }
             };
 
@@ -165,7 +161,6 @@ namespace EFRFrontEndTest2
                 else
                 {
                     Answer4.Text = "incorrect";
-                    IncorrectAnswer();
                 }
             };
 
@@ -187,6 +182,7 @@ namespace EFRFrontEndTest2
             Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
 
             Task.Run(async () => { await NextBlock(); }).Wait();
+
             NextQuestion();
         }
 
@@ -196,15 +192,20 @@ namespace EFRFrontEndTest2
                 user.AddCompletedBlock(blockID);
 
             await m_database.RetreaveQuestionBlock();
-
-            JsonValue block = m_database.responce.m_json;
-            m_questionBlock = block["question_block"];
-            blockID = m_questionBlock[0]["QuestionBlockID"];
-            currentquestion = new Question(m_questionBlock[0]);
+            if (m_database.responce.m_code == 200)
+            {
+                JsonValue block = m_database.responce.m_json;
+                m_questionBlock = block["question_block"];
+                blockID = m_questionBlock[0]["QuestionBlockID"];
+                currentquestion = new Question(m_questionBlock[0]);
+            }
         }
 
         private void NextQuestion()
         {
+            if (m_database.responce.m_code != 200) // Go to home if the API call failed
+                kick_to_home();
+
             BigGrayButton.Text = currentquestion.m_QuestionText;
             Answer1.Text = currentquestion.m_QuestionOne;
             Answer2.Text = currentquestion.m_QuestionTwo;
@@ -223,11 +224,11 @@ namespace EFRFrontEndTest2
 
         protected void CorrectAnswer()
         {
-            int lv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
+            int lv = user.Level;
             user.TotalQuestions += 1;
             // note replace with real value gained/////////////////////////////////////////////////////////////////
             user.TotalDonated += .01;
-            int newlv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
+            int newlv = user.Level;
             if (lv != newlv)
             {
                 View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
@@ -237,20 +238,16 @@ namespace EFRFrontEndTest2
             }
         }
 
-        protected void IncorrectAnswer()
+        protected void kick_to_home()
         {
-            UserObject user = SingleUserObject.getObject();
-            int lv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
-            // note replace with real value gained/////////////////////////////////////////////////////////////////
-          //  useC:\Users\kelcey\Source\Repos\e4r\EFRAndroidFrontEndTest\EFRFrontEndTest2\Resources\layout\LoginPageScreen.axmlr.TotalDonated += .01;
-            int newlv = (int)(Math.Sqrt(user.TotalQuestions / 10) + user.TotalDonated / 50 + 1);
-            if (lv != newlv)
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Uh Oh! Something went wrong with the server!");
+            alert.SetButton("OK", (c, ev) =>
             {
-                View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
-                AlertDialog builder = new AlertDialog.Builder(this).Create();
-                builder.SetView(view);
-                builder.Show();
-            }
+                var intent = new Intent(this, typeof(DashboardActivity));
+                StartActivity(intent);
+            });
         }
     }
 }
