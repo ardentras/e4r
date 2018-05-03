@@ -159,7 +159,6 @@
     <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
-    <Compile Include="DashboardActivity.cs" />
     <Compile Include="Fragments\AccountSettings.cs" />
     <Compile Include="Fragments\CharitySelection.cs" />
     <Compile Include="Fragments\Difficulty.cs" />
@@ -172,7 +171,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="BottomMenuTest.cs" />
     <Compile Include="SplashScreenActivity.cs" />
-    <Compile Include="UserDashboardActivity.cs" />
     <Compile Include="LevelupActivity.cs" />
     <Compile Include="LoginScreenActivity.cs" />
     <Compile Include="QuestionDificultypageActivity.cs" />
@@ -181,7 +179,6 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="SelectSubjectScreenActivity.cs" />
     <Compile Include="settingsPageActivity.cs" />
-    <Compile Include="WinPageActivity.cs" />
     <Compile Include="Assets\DynamicSize\DynamicSize.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,7 +235,6 @@
     <AndroidResource Include="Resources\layout\ColorPicker.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Dashboard.axml" />
     <AndroidResource Include="Resources\menu\bottom_navagation_main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -272,9 +268,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\redcross2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\CreateAccountScreenPrototype.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\OptionsIcon.png" />
@@ -365,9 +358,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\LoginBackground.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Jacob Notes.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\back_arrow.png" />

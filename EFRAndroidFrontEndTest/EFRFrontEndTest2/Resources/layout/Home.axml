@@ -39,7 +39,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/uid_txt"
+            android:id="@+id/user_fname"
             android:gravity="center"
             android:textColor="#141b22" />
     </LinearLayout>
@@ -83,7 +83,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/level_txt"
+                android:id="@+id/user_level"
                 android:gravity="center"
                 android:textColor="#141b22"
                 android:paddingTop="10dp" />
@@ -133,7 +133,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/solved_val"
+                    android:id="@+id/total_solved"
                     android:textColor="#212121" />
             </LinearLayout>
         </LinearLayout>
@@ -180,7 +180,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/donate_val"
+                    android:id="@+id/total_donated"
                     android:textColor="#212121"
                     android:layout_marginRight="40dp"
                     android:layout_marginLeft="20dp" />
