@@ -16,7 +16,7 @@ namespace EFRFrontEndTest2.Fragments
 {
     public class Home : Android.Support.V4.App.Fragment
     {
-        private UserObject uo = SingleUserObject.getObject();
+        private UserObject user = SingleUserObject.getObject();
         private View view = null;
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,10 +39,10 @@ namespace EFRFrontEndTest2.Fragments
             TextView user_level = view.FindViewById<TextView>(Resource.Id.user_level);
             TextView total_solved = view.FindViewById<TextView>(Resource.Id.total_solved);
             TextView total_donated = view.FindViewById<TextView>(Resource.Id.total_donated);
-            user_fname.Text = (uo.FirstName.Length > 0 ? uo.FirstName : uo.Username);
-            user_level.Text = uo.Level.ToString();
-            total_solved.Text = uo.TotalQuestions.ToString();
-            total_donated.Text = new StringBuilder().Append("$").Append(" ").Append(uo.TotalDonated).ToString();
+            user_fname.Text = (user.FirstName.Length > 0 ? user.FirstName : user.Username);
+            user_level.Text = user.Level.ToString();
+            total_solved.Text = user.TotalQuestions.ToString();
+            total_donated.Text = new StringBuilder().Append("$").Append(" ").Append(user.TotalDonated).ToString();
 
             return view;
         }

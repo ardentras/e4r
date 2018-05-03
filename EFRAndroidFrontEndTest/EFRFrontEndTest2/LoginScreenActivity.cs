@@ -5,7 +5,6 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Threading.Tasks;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -13,12 +12,10 @@ namespace EFRFrontEndTest2
     [Activity(Label = "E4R")]
     public class LoginScreenActivity : Activity
     {
-        private LocalArchive m_archive;
         private CallDatabase m_database;
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            m_archive = new LocalArchive(this);
             m_database = new CallDatabase(this);
 
             //Removes title bar
@@ -129,19 +126,6 @@ namespace EFRFrontEndTest2
             createAccount.Click += StartCreateAccountActivity;
         }
 
-        private async Task<bool> RenewSessionAsync()
-        {
-            Responce responce = await m_database.RenewSession();
-            if (responce.m_responce == "Success")
-            {
-                //m_database.GetUserObject.Load(this);
-                var intent = new Intent(this, typeof(UserDashboardActivity));
-                StartActivity(intent);
-            }
-
-            return true;
-        }
-
         private void StartCreateAccountActivity(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CreateAccountScreenActivity));
@@ -194,15 +178,3 @@ namespace EFRFrontEndTest2
         }
     }
 }
-
-
-// Testing
-
-//Great reference for calling event function out of main.
-//SetContentView doesnt give a transition animation
-
-/*createAccount.Click += OnTapGestureRecognizerTapped;
-private void OnTapGestureRecognizerTapped(object sender, EventArgs e)
-{
-    SetContentView(Resource.Layout.CreateAccountScreen);
-}*/

@@ -10,12 +10,15 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2.Fragments
 {
     public class Difficulty : Android.Support.V4.App.Fragment
     {
         private EFRFrontEndTest2.BottomMenuTest _main;
+        private UserObject user = SingleUserObject.getObject();
+        private View view = null;
         public Difficulty(EFRFrontEndTest2.BottomMenuTest main)
         {
             _main = main;
@@ -35,13 +38,49 @@ namespace EFRFrontEndTest2.Fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            View view = inflater.Inflate(Resource.Layout.QuestionDifficultypage, container, false);
-            ImageButton easy = view.FindViewById<ImageButton>(Resource.Id.EasyButton);
-            easy.Click += delegate
+            view = inflater.Inflate(Resource.Layout.QuestionDifficultypage, container, false);
+            ImageButton EasyButton = view.FindViewById<ImageButton>(Resource.Id.EasyButton);
+            ImageButton NormalButton = view.FindViewById<ImageButton>(Resource.Id.NormalButton);
+            ImageButton HardButton = view.FindViewById<ImageButton>(Resource.Id.HardButton);
+            ImageButton HardestButton = view.FindViewById<ImageButton>(Resource.Id.HardestButton);
+            EasyButton.Click += delegate
             {
-                _main.LoadFragment(easy.Id);
+                user.Difficulty = 0;
+                _main.LoadFragment(EasyButton.Id);
+            };
+            NormalButton.Click += delegate
+            {
+                user.Difficulty = 0;
+                _main.LoadFragment(NormalButton.Id);
+            };
+            HardButton.Click += delegate
+            {
+                user.Difficulty = 0;
+                _main.LoadFragment(HardButton.Id);
+            };
+            HardestButton.Click += delegate
+            {
+                user.Difficulty = 0;
+                _main.LoadFragment(HardestButton.Id);
             };
             return view;
         }
+        protected void setBackground()
+        {
+            if (AppBackground.background != null)
+            {
+                GridLayout background = view.FindViewById<GridLayout>(Resource.Id.gridLayout1);
+                background.Background = AppBackground.background;
+            }
+        }
     }
 }
+
+
+// Code that hasnt been coppied over yet.
+/*
+    protected override void OnCreate(Bundle savedInstanceState)
+    {
+        setBackground();
+    }
+*/

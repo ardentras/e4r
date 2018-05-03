@@ -72,6 +72,9 @@ namespace EFRFrontEndTest2
             switch (id)
             {
                 case Resource.Id.EasyButton:
+                case Resource.Id.NormalButton:
+                case Resource.Id.HardButton:
+                case Resource.Id.HardestButton:
                     fragment = Questions.NewInstance();
                     break;
                 case Resource.Id.math_button:

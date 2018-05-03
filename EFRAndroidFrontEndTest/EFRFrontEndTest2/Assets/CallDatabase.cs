@@ -131,7 +131,7 @@ namespace EFRFrontEndTest2.Assets
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception e) // Exception is created here for debugging
             {
                 int i = 0;
                 i++;

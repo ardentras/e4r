@@ -245,8 +245,8 @@ namespace EFRFrontEndTest2
             alert.SetTitle("Uh Oh! Something went wrong with the server!");
             alert.SetButton("OK", (c, ev) =>
             {
-                var intent = new Intent(this, typeof(DashboardActivity));
-                StartActivity(intent);
+              //  var intent = new Intent(this, typeof(DashboardActivity));
+               // StartActivity(intent);
             });
         }
     }
