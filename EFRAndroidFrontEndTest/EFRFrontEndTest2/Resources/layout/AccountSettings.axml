@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+    <TextView
+        android:text="K.X"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accountname"
+        android:textColor="#1e90ff"
+        android:gravity="center"
+        android:textSize="40dp"
+        android:height="100dp"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="First Name:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView2"
+            android:textColor="#212121"
+            android:gravity="center" />
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/accountfirstname"
+            android:layout_weight="1"
+            android:backgroundTint="#ff00ffff"
+            android:gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:text="Last Name:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView3"
+            android:textColor="#212121"
+            android:gravity="center" />
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:backgroundTint="#ff00ffff"
+            android:id="@+id/accountlastname" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:id="@+id/linearLayout3">
+        <TextView
+            android:text="Charity:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView4"
+            android:textColor="#212121"
+            android:gravity="center_vertical"
+            android:layout_weight="1" />
+        <TextView
+            android:text="American Red Cross"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/currentcharityname"
+            android:textColor="#212121"
+            android:layout_weight="0"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_weight="0.5"
+        android:id="@+id/linearLayout4">
+        <TextView
+            android:text="Password:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView6"
+            android:textColor="#212121"
+            android:gravity="center_vertical"
+            android:layout_weight="1" />
+        <TextView
+            android:text="RESET"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pwresetbtn"
+            android:textColor="#1e90ff"
+            android:gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_weight="0.5"
+        android:id="@+id/linearLayout5">
+        <TextView
+            android:text="Game:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView8"
+            android:textColor="#212121"
+            android:layout_weight="1"
+            android:gravity="center_vertical" />
+        <TextView
+            android:text="RESET"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/gameresetbtn"
+            android:textColor="#1e90ff"
+            android:gravity="center" />
+    </LinearLayout>
+    <Button
+        android:text="Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/accountsavebtn"
+        android:textColor="#FFFFFF"
+        android:background="#1e90ff" />
+</LinearLayout>

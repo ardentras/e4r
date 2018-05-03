@@ -260,6 +260,9 @@
     <AndroidResource Include="Resources\layout\CharitySlection.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\AccountSettings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\LoginPageScreen.axml">
