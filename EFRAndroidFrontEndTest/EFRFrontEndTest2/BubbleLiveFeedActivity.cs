@@ -76,7 +76,7 @@ namespace EFRFrontEndTest2
                     if (1 == f.Animation.AnimatedFraction)
                     {
                         layoutBase.RemoveView(img);
-                        string newval  = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01);
+                        string newval  = '$' + (double.Parse(bubbleButton.Text.Remove(0, 1)) + 0.01).ToString();
                         if (newval.IndexOf('.') - newval.Length == -2)
                             newval += '0';
                         bubbleButton.Text = newval;
@@ -189,7 +189,7 @@ namespace EFRFrontEndTest2
                     double cashout = img.Width-100;
                     cashout /= 100;
                     layoutBase.RemoveView(img);
-                    string newval = '$' + Convert.ToString(double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout);
+                    string newval = '$' + (double.Parse(bubbleButton.Text.Remove(0, 1)) + cashout).ToString();
                     if (newval.IndexOf('.') - newval.Length == -2)
                         newval += '0';
                     bubbleButton.Text = newval;

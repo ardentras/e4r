@@ -152,7 +152,6 @@
     <Compile Include="Assets\Charities_Selection_Layout\CharityLayout.cs" />
     <Compile Include="Assets\Charities_Selection_Layout\CharityFavorite.cs" />
     <Compile Include="Assets\Charities_Selection_Layout\Charity.cs" />
-    <Compile Include="Assets\LocalArchive.cs" />
     <Compile Include="Assets\SingleUserObject.cs" />
     <Compile Include="Assets\UserObject.cs" />
     <Compile Include="BubbleLiveFeedActivity.cs" />
