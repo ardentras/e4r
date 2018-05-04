@@ -124,7 +124,7 @@
                 p1:layout_columnWeight="1"
                 p1:layout_columnSpan="1" />
             <TextView
-                p1:text="Username Taken"
+                p1:text="Email or Username Taken"
                 p1:id="@+id/UsernameErrorBox"
                 p1:clickable="false"
                 p1:visibility="invisible"

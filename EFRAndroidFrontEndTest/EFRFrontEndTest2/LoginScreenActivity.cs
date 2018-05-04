@@ -93,6 +93,15 @@ namespace EFRFrontEndTest2
 
             guestLogin.Click += (sender, e) =>
             {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                AlertDialog alert = dialog.Create();
+                alert.SetTitle("Stay tuned!");
+                alert.SetMessage("Guest accounts are still in the works. Try again later.");
+                alert.SetButton("OK", (c, ev) =>
+                {
+                });
+                alert.Show();
+                /*
                 if (!clicked)
                 {
                     clicked = true;
@@ -119,6 +128,7 @@ namespace EFRFrontEndTest2
                     };
                     clicked = false;
                 }
+                */
             };
 
             forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
