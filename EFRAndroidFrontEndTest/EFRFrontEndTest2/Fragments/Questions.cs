@@ -119,60 +119,69 @@ namespace EFRFrontEndTest2.Fragments
 
             answer_one.Click += (sender, e) =>
             {
-                QuestionAnswered = true;
-                if (currentquestion.m_QuestionOne == currentquestion.m_CorrectAnswer)
+                if (!QuestionAnswered)
                 {
-                    answer_one.Text = "correct";
-                    CorrectAnswer();
-                }
-                else
-                {
-                    answer_one.Text = "incorrect";
+                    QuestionAnswered = true;
+                    if (currentquestion.m_QuestionOne == currentquestion.m_CorrectAnswer)
+                    {
+                        answer_one.Text = "correct";
+                        CorrectAnswer();
+                    }
+                    else
+                    {
+                        answer_one.Text = "incorrect";
+                    }
                 }
             };
 
             answer_two.Click += (sender, e) =>
             {
-                QuestionAnswered = true;
-
-                if (currentquestion.m_QuestionTwo == currentquestion.m_CorrectAnswer)
+                if (!QuestionAnswered)
                 {
-                    answer_two.Text = "correct";
-                    CorrectAnswer();
-                }
-                else
-                {
-                    answer_two.Text = "incorrect";
+                    QuestionAnswered = true;
+                    if (currentquestion.m_QuestionTwo == currentquestion.m_CorrectAnswer)
+                    {
+                        answer_two.Text = "correct";
+                        CorrectAnswer();
+                    }
+                    else
+                    {
+                        answer_two.Text = "incorrect";
+                    }
                 }
             };
 
             answer_three.Click += (sender, e) =>
             {
-                QuestionAnswered = true;
-
-                if (currentquestion.m_QuestionThree == currentquestion.m_CorrectAnswer)
+                if (!QuestionAnswered)
                 {
-                    answer_three.Text = "correct";
-                    CorrectAnswer();
-                }
-                else
-                {
-                    answer_three.Text = "incorrect";
+                    QuestionAnswered = true;
+                    if (currentquestion.m_QuestionThree == currentquestion.m_CorrectAnswer)
+                    {
+                        answer_three.Text = "correct";
+                        CorrectAnswer();
+                    }
+                    else
+                    {
+                        answer_three.Text = "incorrect";
+                    }
                 }
             };
 
             answer_four.Click += (sender, e) =>
             {
-                QuestionAnswered = true;
-
-                if (currentquestion.m_QuestionFour == currentquestion.m_CorrectAnswer)
+                if (!QuestionAnswered)
                 {
-                    answer_four.Text = "correct";
-                    CorrectAnswer();
-                }
-                else
-                {
-                    answer_four.Text = "incorrect";
+                    QuestionAnswered = true;
+                    if (currentquestion.m_QuestionFour == currentquestion.m_CorrectAnswer)
+                    {
+                        answer_four.Text = "correct";
+                        CorrectAnswer();
+                    }
+                    else
+                    {
+                        answer_four.Text = "incorrect";
+                    }
                 }
             };
             return view;
