@@ -20,7 +20,7 @@
             android:id="@+id/linearLayout2"
             android:background="#FFFFFF">
             <TextView
-                android:text="You've answered all of the questions for this subject and difficulty"
+                android:text="Loading..."
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

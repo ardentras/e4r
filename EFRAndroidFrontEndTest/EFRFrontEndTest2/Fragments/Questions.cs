@@ -226,29 +226,50 @@ namespace EFRFrontEndTest2.Fragments
 
         private void NextQuestion()
         {
-            //if (m_database.responce.m_code != 200) // Go to home if the API call failed
-            //kick_to_home();
-            if (user.BlocksRemaining != 0)
+            AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
+            AlertDialog alert = dialog.Create();
+            alert.SetButton("OK", (c, ev) =>
             {
-                question_view.Text = currentquestion.m_QuestionText;
-                answer_one.Text = currentquestion.m_QuestionOne;
-                answer_two.Text = currentquestion.m_QuestionTwo;
-                answer_three.Text = currentquestion.m_QuestionThree;
-                answer_four.Text = currentquestion.m_QuestionFour;
-            }
-            else
+                _main.OnBackPressed();
+                _main.OnBackPressed();
+            });
+            switch (m_database.responce.m_code)
             {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
-                AlertDialog alert = dialog.Create();
-                alert.SetTitle("Congratulations!");
-                alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
-                alert.SetButton("OK", (c, ev) =>
-                {
-                    _main.OnBackPressed();
-                    _main.OnBackPressed();
-                });
-                alert.Show();
+                case 200:
+                    {
+                        if (user.BlocksRemaining != 0)
+                        {
+                            question_view.Text = currentquestion.m_QuestionText;
+                            answer_one.Text = currentquestion.m_QuestionOne;
+                            answer_two.Text = currentquestion.m_QuestionTwo;
+                            answer_three.Text = currentquestion.m_QuestionThree;
+                            answer_four.Text = currentquestion.m_QuestionFour;
+                        }
+                        else
+                        {
+                            question_view.Text = "You've answered all of the questions for this subject and difficulty";
+                            alert.SetTitle("Congratulations!");
+                            alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                            alert.Show();
+                        }
+                        break;
+                    }
+                case 503: // Network issues
+                case 504:
+                    {
+
+                        alert.SetMessage(m_database.responce.m_reason);
+                        alert.Show();
+                        break;
+                    }
+                default:
+                    {
+                        alert.SetMessage("Unknown Error");
+                        alert.Show();
+                        break;
+                    }
             }
+
         }
 
         protected void CorrectAnswer()
