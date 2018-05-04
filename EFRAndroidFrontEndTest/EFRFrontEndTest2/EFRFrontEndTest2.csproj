@@ -177,7 +177,6 @@
     <Compile Include="QuestionspageActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="SelectSubjectScreenActivity.cs" />
     <Compile Include="settingsPageActivity.cs" />
     <Compile Include="Assets\DynamicSize\DynamicSize.cs" />
   </ItemGroup>
@@ -190,28 +189,16 @@
     <AndroidResource Include="Resources\layout\CreateAccountScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\UserDashboardScreen.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\settingsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\BubbleLiveFeed.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\SelectSubjectScreen.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\CharitySelectionScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\QuestionsPage.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\WinPage.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\DifficultyPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ForgotPasswordAlertDialogScreen.axml">

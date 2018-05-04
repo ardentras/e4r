@@ -28,7 +28,7 @@
                 android:src="@drawable/historyicon"
                 android:layout_height="match_parent"
                 android:layout_width="50dp"
-                android:id="@+id/imageButton2"
+                android:id="@+id/history_button"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent" />
@@ -40,20 +40,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout3">
-            <ImageView
+            <ImageButton
                 android:src="@drawable/chemistryicon"
-                android:layout_width="50dp"
                 android:layout_height="150dp"
-                android:id="@+id/imageView1"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter" />
-            <ImageView
-                android:src="@drawable/biologyicon"
+                android:id="@+id/chemistry_button"
                 android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView2"
                 android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent" />
+            <ImageButton
+                android:src="@drawable/biologyicon"
+                android:layout_height="150dp"
+                android:id="@+id/biology_button"
+                android:layout_width="50dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
                 android:background="@android:color/transparent" />
         </LinearLayout>
         <LinearLayout
@@ -66,7 +67,7 @@
             <ImageButton
                 android:src="@drawable/physicsicon"
                 android:layout_height="150dp"
-                android:id="@+id/imageButton3"
+                android:id="@+id/physics_button"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:scaleType="fitCenter"
@@ -74,7 +75,7 @@
             <ImageButton
                 android:src="@drawable/shuffleicon"
                 android:layout_height="match_parent"
-                android:id="@+id/imageButton4"
+                android:id="@+id/shuffle_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
