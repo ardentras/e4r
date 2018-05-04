@@ -28,7 +28,6 @@ namespace EFRFrontEndTest2
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.BubbleLiveFeed);
             Button bubble = FindViewById<Button>(Resource.Id.bigbubble);
-            Button backbutton = FindViewById<Button>(Resource.Id.bubblefeedbackbutton);
 
             bubble.Click += (sender, e) =>
             {
@@ -82,11 +81,6 @@ namespace EFRFrontEndTest2
                         bubbleButton.Text = newval;
                     }
                 };
-            };
-
-            backbutton.Click += (sender, e) =>
-            {
-                base.OnBackPressed();
             };
         }
         public async Task<bool> CallDatabase()
