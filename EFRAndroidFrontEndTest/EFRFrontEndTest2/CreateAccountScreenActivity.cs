@@ -22,7 +22,7 @@ namespace EFRFrontEndTest2
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CreateAccountScreen);
-            CallDatabase database = new CallDatabase(this);
+            CallDatabase database = new CallDatabase();
 
             EditText emailBox = FindViewById<EditText>(Resource.Id.EmailBox);
             EditText usernameBox = FindViewById<EditText>(Resource.Id.UsernameBox);

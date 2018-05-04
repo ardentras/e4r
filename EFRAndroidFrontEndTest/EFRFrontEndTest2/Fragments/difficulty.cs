@@ -16,10 +16,10 @@ namespace EFRFrontEndTest2.Fragments
 {
     public class Difficulty : Android.Support.V4.App.Fragment
     {
-        private EFRFrontEndTest2.BottomMenuTest _main;
+        private BottomMenuTest _main;
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
-        public Difficulty(EFRFrontEndTest2.BottomMenuTest main)
+        public Difficulty(BottomMenuTest main)
         {
             _main = main;
         }
@@ -29,7 +29,7 @@ namespace EFRFrontEndTest2.Fragments
 
             // Create your fragment here
         }
-        public static Difficulty NewInstance(EFRFrontEndTest2.BottomMenuTest main)
+        public static Difficulty NewInstance(BottomMenuTest main)
         {
             Difficulty temp = new Difficulty(main);
             return temp;

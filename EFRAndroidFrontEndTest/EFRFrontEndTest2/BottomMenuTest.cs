@@ -75,7 +75,7 @@ namespace EFRFrontEndTest2
                 case Resource.Id.NormalButton:
                 case Resource.Id.HardButton:
                 case Resource.Id.HardestButton:
-                    fragment = Questions.NewInstance();
+                    fragment = Questions.NewInstance(this);
                     break;
                 case Resource.Id.math_button:
                 case Resource.Id.history_button:

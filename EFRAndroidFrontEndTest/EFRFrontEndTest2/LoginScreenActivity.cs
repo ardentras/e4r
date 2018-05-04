@@ -16,7 +16,7 @@ namespace EFRFrontEndTest2
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            m_database = new CallDatabase(this);
+            m_database = new CallDatabase();
 
             //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);

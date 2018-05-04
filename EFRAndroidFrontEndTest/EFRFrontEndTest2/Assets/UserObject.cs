@@ -60,7 +60,7 @@ namespace
             data += m_SessionID + ",";
             data += m_Timestamp + ",";
             data += m_BlocksRemaining.ToString() + ",";
-            //data += m_CompletedBlocks + ",";
+            data += m_CompletedBlocks + ",";
             data += m_Difficulty + ",";
             data += m_SubjectID.ToString() + ",";
             data += m_SubjectName + ",";

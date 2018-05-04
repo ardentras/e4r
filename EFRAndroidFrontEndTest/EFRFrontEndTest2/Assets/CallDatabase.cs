@@ -36,9 +36,8 @@ namespace EFRFrontEndTest2.Assets
 
     class CallDatabase
     {
-        public CallDatabase(Activity activity)
+        public CallDatabase()
         {
-            m_activity = activity;
             m_userObject = SingleUserObject.getObject();
         }
         public async Task<Responce> RetreaveQuestionBlock()
@@ -220,8 +219,7 @@ namespace EFRFrontEndTest2.Assets
 
         public UserObject GetUserObject { get { return m_userObject; } }
         public Responce responce { get { return LastResponce; } }
-
-        private Activity m_activity;
+        
         private UserObject m_userObject;
         private Responce LastResponce;
     }

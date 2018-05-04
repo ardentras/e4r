@@ -243,7 +243,7 @@ namespace EFRFrontEndTest2
                     _current = _selected;
                     selected_charity.Text = _current.Charity.Name;
                     SingleUserObject.getObject().CharityName = _current.Charity.Name;
-                    CallDatabase DB = new CallDatabase(this);
+                    CallDatabase DB = new CallDatabase();
                     Task.Run(async () => { await DB.UpdateUO(); }).Wait();
                     alert.SetTitle("Saved");
                     alert.SetMessage("Your selected charity has been updated.");

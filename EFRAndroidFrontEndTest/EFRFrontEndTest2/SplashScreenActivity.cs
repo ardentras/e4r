@@ -33,6 +33,7 @@ namespace EFRFrontEndTest2
         {
             Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
             StartActivity(new Intent(Application.Context, typeof (LoginScreenActivity)));
+            Finish();
         }
     }
 }
