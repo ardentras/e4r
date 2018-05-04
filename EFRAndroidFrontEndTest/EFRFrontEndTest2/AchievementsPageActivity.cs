@@ -25,11 +25,11 @@ namespace EFRFrontEndTest2
             TextView lv = FindViewById<TextView>(Resource.Id.level);
             TextView questions = FindViewById<TextView>(Resource.Id.questionsAnswered);
             TextView money = FindViewById<TextView>(Resource.Id.moneyRaised);
-            UserObject obj = SingleUserObject.getObject();
+            UserObject user = SingleUserObject.getObject();
 
-            questions.Text = obj.TotalQuestions.ToString();
-            money.Text = obj.TotalDonated.ToString();
-            lv.Text = (Math.Sqrt(obj.TotalQuestions/10) + obj.TotalDonated / 50+1).ToString();
+            questions.Text = user.TotalQuestions.ToString();
+            money.Text = user.TotalDonated.ToString();
+            lv.Text = user.Level.ToString();
         }
     }
 }

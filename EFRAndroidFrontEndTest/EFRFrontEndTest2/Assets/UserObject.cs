@@ -24,8 +24,8 @@ namespace
         public int Difficulty { get { return m_Difficulty; } set { m_Difficulty = value; } }
         public int SubjectID { get { return m_SubjectID; } set { m_SubjectID = value; } }
         public string SubjectName { get { return m_SubjectName; } set { m_SubjectName = value; } }
-        public double TotalDonated { get { return m_TotalDonated; } set { m_TotalDonated = value; m_Level = (int)(Math.Sqrt(m_TotalQuestions / 5) + m_TotalDonated / 10 + 1); } }
-        public int TotalQuestions { get { return m_TotalQuestions; } set { m_TotalQuestions = value; m_Level = (int)(Math.Sqrt(m_TotalQuestions / 5) + m_TotalDonated / 10 + 1); } }
+        public double TotalDonated { get { return m_TotalDonated; } set { m_TotalDonated = value; UpdateLevel(); } }
+        public int TotalQuestions { get { return m_TotalQuestions; } set { m_TotalQuestions = value; UpdateLevel(); } }
         public string CharityName { get { return m_CharityName; } set { m_CharityName = value; } }
         public string Email { get { return m_Email; } set { m_Email = value; } }
         public string FirstName { get { return m_FirstName; } set { m_FirstName = value; } }
@@ -134,6 +134,11 @@ namespace
             newCompletedBlocks[length] = value;
             m_CompletedBlocks = newCompletedBlocks;
             return length + 1;
+        }
+
+        private void UpdateLevel()
+        {
+            m_Level = (int)(Math.Sqrt(TotalQuestions / 10) + TotalDonated / 10 + 1);
         }
     }
 }

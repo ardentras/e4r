@@ -260,6 +260,7 @@ namespace EFRFrontEndTest2.Fragments
             int newlv = user.Level;
             if (lv != newlv)
             {
+                user.Level = newlv;
                 View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
                 AlertDialog builder = new AlertDialog.Builder(_main).Create();
                 builder.SetView(view);
