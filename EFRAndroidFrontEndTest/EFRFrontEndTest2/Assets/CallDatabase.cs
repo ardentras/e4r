@@ -47,7 +47,7 @@ namespace EFRFrontEndTest2.Assets
 
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/q/request_block", bytestream);
-            await Task.WhenAny(task, Task.Delay(5000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -112,6 +112,7 @@ namespace EFRFrontEndTest2.Assets
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + uri));
             request.ContentType = "application/json";
             request.Method = method;
+            request.Timeout = 2000;
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {
@@ -151,24 +152,21 @@ namespace EFRFrontEndTest2.Assets
 
         private void CheckTask(Task task)
         {
-            if (!task.IsCompleted)
+            if (!task.IsCompleted || task.Status == TaskStatus.Faulted)
             {
-                if (task.IsFaulted)
+                LastResponce.m_responce = "Failure";
+                switch (task.Exception.InnerException.Message)
                 {
-                    LastResponce.m_responce = "Failure";
-                    switch (task.Exception.InnerException.Message)
-                    {
-                        case "Error: ConnectFailure (Network is unreachable)":
-                            LastResponce.m_reason = "Unable to connect to network";
-                            LastResponce.m_code = 503; // Airplane mode or other similar issues
-                            break;
-                        case "The request timed out":
-                            LastResponce.m_reason = "HTTP Request Timeout";
-                            LastResponce.m_code = 504; // Timeout error code
-                            break;
-                        default:
-                            break;
-                    }
+                    case "Error: ConnectFailure (Network is unreachable)":
+                        LastResponce.m_reason = "Unable to connect with the server. Check your internet connection and try again.";
+                        LastResponce.m_code = 503; // Airplane mode or other similar issues
+                        break;
+                    case "The request timed out":
+                        LastResponce.m_reason = "This app is no longer supported.";
+                        LastResponce.m_code = 504; // Timeout error code
+                        break;
+                    default:
+                        break;
                 }
             }
         }
