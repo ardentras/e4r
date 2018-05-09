@@ -3,18 +3,20 @@ const nodemailer = require('nodemailer');
 const shajs = require('sha.js');
 const uuidv4 = require('uuid/v4');
 const fs = require('fs');
+const CronJob = require('cron').CronJob;
+const shell = require('shelljs');
 const User = require('./configurations/config').DB_USER_CONFIG;
 const DEFAULT_USER_OBJECT = require('./configurations/config').DEFAULT_USER_OBJECT;
 const adminEmail = require('./configurations/config').EMAIL_CONFIG;
-const SERVER_HOSTNAME = "http://34.216.143.255:3002"
-const WEBSITE_HOSTNAME = "http://kevinjxu.me"
-const TOP_TEN_Q_FILE_LOC = process.cwd() + "/e4r-toptenq"
-const TOP_TEN_MON_FILE_LOC = process.cwd() + "/e4r-toptenmon"
+const SERVER_HOSTNAME = "http://34.216.143.255:3002";
+const WEBSITE_HOSTNAME = "http://kevinjxu.me";
+const TOP_TEN_Q_FILE_LOC = process.cwd() + "/e4r-toptenq";
+const TOP_TEN_MON_FILE_LOC = process.cwd() + "/e4r-toptenmon";
 
 class TDatabase {
     	// Creates the connection to the database given the passed parameters.
     constructor(config) {
-        this.bubbleFeedIsActive = true;
+        this.bubbleFeedIsActive = false;
         this.bubbleCharity = "";
         this.recentDonations = [];
         this.totalRaised = 0;
@@ -30,6 +32,10 @@ class TDatabase {
                 console.log('Connected to database' + (config.database == '' ? ' ' : ' ' + config.database + ' ') + 'at ' + config.server + ':' + config.port);
             }
         });
+
+        this.cronjob = new CronJob('00 33 19 * * *', function() {
+            shell.exec('cd ./web-crawler; ./send_data.sh');
+        }, function() { console.log("bubble feed updated"); }, true, 'America/Los_Angeles');
     }
 
 	// Prints details given the passed error.
@@ -612,6 +618,41 @@ class TDatabase {
         } else {
             client.sendStatus(404);
         }
+    }
+
+    // Takes a list of charities and if not empty, activates the feed for the given charities.
+    //
+    // curl -XGET localhost:3002/api/try_activate_live_feed
+    async tryActivateBubbleFeed(client, data) {
+        console.log("Recieved data");
+        if (data.cause != "") {
+            this.bubbleFeedIsActive = true;
+            var pickedCharity = data.charities[0];
+
+            let res = await this.db.request().input('charity_name', mssql.VarChar(1000), data.charities[0])
+                                            .query("SELECT * FROM EFRAcc.Charities WHERE CharityName = @charity_name");
+
+            var i = 1;
+            while (i < data.charities.length && res.rowsAffected == 0) {
+                pickedCharity = data.charities[i];
+                res = await this.db.request().input('charity_name', mssql.VarChar(1000), data.charities[i])
+                                            .query("SELECT * FROM EFRAcc.Charities WHERE CharityName = @charity_name");
+                i++;
+            }
+
+            if (i < data.charities.length) {
+                this.bubbleCharity = pickedCharity;
+            }
+        } else {
+            this.bubbleCharity = "";
+        }
+
+        if (this.bubbleCharity == "") {
+            this.bubbleFeedIsActive = false;
+        }
+
+        console.log("Sending response");
+        client.json({response: "Success", type: "PUT", code: 200, pickedCharity: this.bubbleCharity});
     }
 
     // Returns a new block of questions from the database

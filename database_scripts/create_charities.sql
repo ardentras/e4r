@@ -1,0 +1,17 @@
+INSERT INTO EFRAcc.Charities VALUES ('Alzheimers Association', '');
+INSERT INTO EFRAcc.Charities VALUES ('American Cancer Society', '');
+INSERT INTO EFRAcc.Charities VALUES ('Red Cross', '');
+INSERT INTO EFRAcc.Charities VALUES ('ASPCA', '');
+INSERT INTO EFRAcc.Charities VALUES ('Boys and Girls Club', '');
+INSERT INTO EFRAcc.Charities VALUES ('Compassion', '');
+INSERT INTO EFRAcc.Charities VALUES ('Direct Relief', '');
+INSERT INTO EFRAcc.Charities VALUES ('Feeding America', '');
+INSERT INTO EFRAcc.Charities VALUES ('Make a Wish', '');
+INSERT INTO EFRAcc.Charities VALUES ('St. Jude Children''s Research', '');
+INSERT INTO EFRAcc.Charities VALUES ('Susan G. Komen', '');
+INSERT INTO EFRAcc.Charities VALUES ('Taskforce Global Health', '');
+INSERT INTO EFRAcc.Charities VALUES ('Humane Society', '');
+INSERT INTO EFRAcc.Charities VALUES ('Toys for Tots', '');
+INSERT INTO EFRAcc.Charities VALUES ('United Way', '');
+INSERT INTO EFRAcc.Charities VALUES ('World Wildlife Funt', '');
+INSERT INTO EFRAcc.Charities VALUES ('Wounded Warrior Project', '');
