@@ -190,9 +190,6 @@ namespace EFRFrontEndTest2
             Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
             Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
             var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
-            //edit.PutString("Block", m_questionBlock.ToString());
-            //edit.PutInt("QuestionNum", 0);
-            //localData.GetInt("sound",100);
             if (localData.GetString("Block","fail") == "fail" || localData.GetInt("subject",-1) != user.SubjectID || localData.GetInt("difficulty", -1) != user.Difficulty)
                 Task.Run(async () => { await NextBlock(); }).Wait();
             else
