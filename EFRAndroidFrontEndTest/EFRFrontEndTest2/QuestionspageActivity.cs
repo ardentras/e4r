@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 using EFRFrontEndTest2.Assets;
 using Android.Content;
-using System.Timers;
 
 namespace EFRFrontEndTest2
 {
@@ -63,12 +62,7 @@ namespace EFRFrontEndTest2
         Question currentquestion;
         private int QuestionCount = 0;
         private int blockID = -1;
-        protected override void OnStop()
-        {
-            Task.Run(async () => { await m_database.UpdateUO(); }).Wait();
-            base.OnStop();
 
-        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -92,10 +86,7 @@ namespace EFRFrontEndTest2
             {
                 if (QuestionAnswered)
                 {
-                    var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
-                    var edit = localData.Edit();
                     QuestionCount += 1;
-                    edit.PutInt("QuestionNum", QuestionCount);
                     QuestionAnswered = false;
                     if (QuestionCount >= 10)
                     {
@@ -189,18 +180,8 @@ namespace EFRFrontEndTest2
             Answer2 = FindViewById<TextView>(Resource.Id.Answer2);
             Answer3 = FindViewById<TextView>(Resource.Id.Answer3);
             Answer4 = FindViewById<TextView>(Resource.Id.Answer4);
-            var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
-            if (localData.GetString("Block","fail") == "fail" || localData.GetInt("subject",-1) != user.SubjectID || localData.GetInt("difficulty", -1) != user.Difficulty)
-                Task.Run(async () => { await NextBlock(); }).Wait();
-            else
-            {
-                string block = localData.GetString("Block", "fail");
-                m_questionBlock = JsonValue.Parse(block);
-                blockID = m_questionBlock[0]["QuestionBlockID"];
-                QuestionCount = localData.GetInt("QuestionNum", 0);
-                currentquestion = new Question(m_questionBlock[QuestionCount]);
 
-            }
+            Task.Run(async () => { await NextBlock(); }).Wait();
 
             NextQuestion();
         }
@@ -218,12 +199,6 @@ namespace EFRFrontEndTest2
                 blockID = m_questionBlock[0]["QuestionBlockID"];
                 currentquestion = new Question(m_questionBlock[0]);
             }
-            var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
-            var edit = localData.Edit();
-            edit.PutString("Block", m_questionBlock.ToString());
-            edit.PutInt("QuestionNum", 0);
-            edit.PutInt("subject", user.SubjectID);
-            edit.PutInt("difficulty", user.Difficulty);
         }
 
         private void NextQuestion()
@@ -259,15 +234,6 @@ namespace EFRFrontEndTest2
                 View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
                 AlertDialog builder = new AlertDialog.Builder(this).Create();
                 builder.SetView(view);
-                TextView lvText = view.FindViewById<TextView>(Resource.Id.lvLabel);
-                UserObject obj = SingleUserObject.getObject();
-                string text = obj.Level.ToString();
-                lvText.Text = "You are now level " + text + "!";
-                var searchTimer = new Timer(600);
-                searchTimer.Elapsed += delegate
-                {
-                    builder.Dismiss();
-                };
                 builder.Show();
             }
         }
