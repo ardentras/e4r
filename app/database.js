@@ -33,7 +33,7 @@ class TDatabase {
             }
         });
 
-        this.cronjob = new CronJob('00 33 19 * * *', function() {
+        this.cronjob = new CronJob('00 00 00 * * *', function() {
             shell.exec('cd ./web-crawler; ./send_data.sh');
         }, function() { console.log("bubble feed updated"); }, true, 'America/Los_Angeles');
     }
