@@ -1,0 +1,17 @@
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Alzheimers Association', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('American Cancer Society', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Red Cross', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('ASPCA', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Boys and Girls Club', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Compassion', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Direct Relief', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Feeding America', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Make a Wish', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('St. Jude Children''s Research', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Susan G. Komen', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Taskforce Global Health', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Humane Society', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Toys for Tots', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('United Way', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('World Wildlife Funt', '');
+INSERT INTO EFRAcc.Charities (CharityName, CharityLink) VALUES ('Wounded Warrior Project', '');

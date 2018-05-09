@@ -373,3 +373,6 @@ OpenCover/
 
 #testing files
 test.sql
+
+charity_data
+package-lock.json

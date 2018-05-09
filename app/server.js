@@ -86,6 +86,9 @@ Router.get('/verify_email/:VerifyID', (req, res) => {
 Router.get('/bubble_feed', (req, res) => {
 	db.bubbleFeed(res);
 });
+Router.put('/try_activate_live_feed', (req, res) => {
+	db.tryActivateBubbleFeed(res, req.body);
+});
 Router.get('/top_ten_q', (req, res) => {
 	db.getTopTenQuestions(res);
 });
