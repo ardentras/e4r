@@ -25,15 +25,19 @@ user_agent = {'User-Agent': 'gnu-linux:com.e4r.charity-web-crawler:v0.1'}
 soup = str(BeautifulSoup(requests.get(BASE_URI + "/charitywatch-hot-topics", headers=user_agent).text, "html.parser").prettify("ascii"))
 
 old_date_div = 0
-post_date = date.today()
-this_year = date.today() - timedelta(days=365)
+this_year = date.today() - timedelta(days=30)
 
-while (post_date > this_year):
-    date_div = old_date_div + soup[old_date_div:].find("class=\"blog_published\"")
-    old_date_div = date_div + 10
+out_file = open('charity_data', 'w')
 
-    the_date = soup[date_div:].split(">")[1].replace("\\n", "").replace("</div", "").replace("Posted on", "").strip(' \t\n\r')
-    post_date = date.fromtimestamp(time.mktime(time.strptime(the_date, "%B %d, %Y")))
+out_file.write("{\"charities\": ")
+
+date_div = old_date_div + soup[old_date_div:].find("class=\"blog_published\"")
+old_date_div = date_div + 10
+
+the_date = soup[date_div:].split(">")[1].replace("\\n", "").replace("</div", "").replace("Posted on", "").strip(' \t\n\r')
+post_date = date.fromtimestamp(time.mktime(time.strptime(the_date, "%B %d, %Y")))
+
+if (post_date > this_year):
 
     readmore_div = date_div + soup[date_div:].find("class=\"button small blue\"")
     article_uri = BASE_URI + soup[readmore_div:].split("href=\"")[1].split("\">")[0].strip(' \t\n\r')
@@ -41,6 +45,9 @@ while (post_date > this_year):
     charities = get_charities(article_uri)
 
     if (len(charities) > 0):
-        print(charities)
-    else:
-        print(0)
+        out_file.write(str(charities))
+else:
+    out_file.write("[]")
+
+out_file.write("}")
+out_file.close()
