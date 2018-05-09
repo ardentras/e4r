@@ -12,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
+using System.Timers;
 
 using EFRFrontEndTest2.Assets;
 
@@ -72,6 +73,13 @@ namespace EFRFrontEndTest2.Fragments
         {
             _main = main;
         }
+        public override void OnStop()
+        {
+            Task.Run(async () => { await m_database.UpdateUO(); }).Wait();
+            base.OnStop();
+
+        }
+
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -98,7 +106,11 @@ namespace EFRFrontEndTest2.Fragments
             {
                 if (QuestionAnswered)
                 {
+                    var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
+                    var edit = localData.Edit();
                     QuestionCount += 1;
+                    edit.PutInt("QuestionNum", QuestionCount);
+                    edit.Apply();
                     QuestionAnswered = false;
                     if (QuestionCount >= 10)
                     {
@@ -200,9 +212,22 @@ namespace EFRFrontEndTest2.Fragments
             answer_three = view.FindViewById<Button>(Resource.Id.answer_three);
             answer_four = view.FindViewById<Button>(Resource.Id.answer_four);
 
-            Task.Run(async () => { await NextBlock(); }).Wait();
+            var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
+
+            if (localData.GetString("Block", "fail") == "fail" || localData.GetInt("subject", -1) != user.SubjectID || localData.GetInt("difficulty", -1) != user.Difficulty)
+                Task.Run(async () => { await NextBlock(); }).Wait();
+            else
+            {
+                string block = localData.GetString("Block", "fail");
+                m_questionBlock = JsonValue.Parse(block);
+                blockID = m_questionBlock[0]["QuestionBlockID"];
+                QuestionCount = localData.GetInt("QuestionNum", 0);
+                currentquestion = new Question(m_questionBlock[QuestionCount]);
+
+            }
 
             NextQuestion();
+
         }
 
         private async Task NextBlock()
@@ -220,6 +245,15 @@ namespace EFRFrontEndTest2.Fragments
                     m_questionBlock = block["question_block"];
                     blockID = m_questionBlock[0]["QuestionBlockID"];
                     currentquestion = new Question(m_questionBlock[0]);
+
+                    var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
+                    var edit = localData.Edit();
+                    edit.PutString("Block", m_questionBlock.ToString());
+                    edit.PutInt("QuestionNum", 0);
+                    edit.PutInt("subject", user.SubjectID);
+                    edit.PutInt("difficulty", user.Difficulty);
+                    edit.Apply();
+
                 }
             }
         }
