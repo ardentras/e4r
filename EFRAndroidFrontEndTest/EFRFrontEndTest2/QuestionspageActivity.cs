@@ -96,6 +96,7 @@ namespace EFRFrontEndTest2
                     var edit = localData.Edit();
                     QuestionCount += 1;
                     edit.PutInt("QuestionNum", QuestionCount);
+                    edit.Apply();
                     QuestionAnswered = false;
                     if (QuestionCount >= 10)
                     {
@@ -208,7 +209,7 @@ namespace EFRFrontEndTest2
 
         private async Task NextBlock()
         {
-            if (blockID != -1)
+            if (blockID >= 0)
                 user.AddCompletedBlock(blockID);
 
             await m_database.RetreaveQuestionBlock();
@@ -218,13 +219,16 @@ namespace EFRFrontEndTest2
                 m_questionBlock = block["question_block"];
                 blockID = m_questionBlock[0]["QuestionBlockID"];
                 currentquestion = new Question(m_questionBlock[0]);
+
+                var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
+                var edit = localData.Edit();
+                edit.PutString("Block", m_questionBlock.ToString());
+                edit.PutInt("QuestionNum", 0);
+                edit.PutInt("subject", user.SubjectID);
+                edit.PutInt("difficulty", user.Difficulty);
+                edit.Apply();
             }
-            var localData = Application.Context.GetSharedPreferences("CurrentBlock", FileCreationMode.Private);
-            var edit = localData.Edit();
-            edit.PutString("Block", m_questionBlock.ToString());
-            edit.PutInt("QuestionNum", 0);
-            edit.PutInt("subject", user.SubjectID);
-            edit.PutInt("difficulty", user.Difficulty);
+            
         }
 
         private void NextQuestion()
