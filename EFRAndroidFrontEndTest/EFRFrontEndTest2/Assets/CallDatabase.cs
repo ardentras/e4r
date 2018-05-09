@@ -57,7 +57,7 @@ namespace EFRFrontEndTest2.Assets
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }"); CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/signup", bytestream);
-            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -68,7 +68,7 @@ namespace EFRFrontEndTest2.Assets
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/login", bytestream, true);
-            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -79,7 +79,7 @@ namespace EFRFrontEndTest2.Assets
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"session\": \"{" + SingleUserObject.getObject().SessionID + "}\", \"userobject\": \"{" + SingleUserObject.getObject().UserObjectForm() + "}\"} }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/update_uo", bytestream, true);
-            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -101,7 +101,7 @@ namespace EFRFrontEndTest2.Assets
             byte[] bytestream = Encoding.ASCII.GetBytes(@"{ ""user"": { ""username"": """ + username + @""", ""email"": """ + email + @""" } }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/check_username", bytestream);
-            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -112,7 +112,7 @@ namespace EFRFrontEndTest2.Assets
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + uri));
             request.ContentType = "application/json";
             request.Method = method;
-            request.Timeout = 2000;
+            request.Timeout = 10000;
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {
@@ -152,7 +152,13 @@ namespace EFRFrontEndTest2.Assets
 
         private void CheckTask(Task task)
         {
-            if (!task.IsCompleted || task.Status == TaskStatus.Faulted)
+            if (task.Status == TaskStatus.WaitingForActivation)
+            {
+                LastResponce.m_responce = "Failure";
+                LastResponce.m_reason = "This app is no longer supported.";
+                LastResponce.m_code = 504;
+            }
+            else if (!task.IsCompleted || task.Status == TaskStatus.Faulted)
             {
                 LastResponce.m_responce = "Failure";
                 switch (task.Exception.InnerException.Message)
