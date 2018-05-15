@@ -43,7 +43,7 @@ namespace EFRFrontEndTest2
                     Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
                     AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                     AlertDialog alert = dialog.Create();
-                    alert.SetTitle("You couldn't log in");
+                    alert.SetTitle("Unable to log in");
                     alert.SetButton("OK", (c, ev) =>
                     {
                         passBox.Text = "";
@@ -75,7 +75,6 @@ namespace EFRFrontEndTest2
                         case 503: // Network issues
                         case 504:
                             {
-
                                 alert.SetMessage(responce.m_reason);
                                 alert.Show();
                                 break;
@@ -131,7 +130,66 @@ namespace EFRFrontEndTest2
                 */
             };
 
-            forgotPassword.Click += (sender, e) => { ShowForgotPasswordScreen(); };
+            forgotPassword.Click += (sender, e) => 
+            {
+                //Inflate layout
+                View view = LayoutInflater.Inflate(Resource.Layout.ForgotPasswordAlertDialogScreen, null);
+                AlertDialog builder = new AlertDialog.Builder(this).Create();
+                builder.SetView(view);
+                builder.SetCanceledOnTouchOutside(false);
+                EditText textUsername = view.FindViewById<EditText>(Resource.Id.textUsername);
+                EditText textEmail = view.FindViewById<EditText>(Resource.Id.textEmail);
+                Button buttonSubmit = view.FindViewById<Button>(Resource.Id.buttonSubmit);
+                Button buttonCancel = view.FindViewById<Button>(Resource.Id.buttonCancel);
+                buttonCancel.Click += delegate 
+                {
+                    builder.Dismiss();
+                };
+                buttonSubmit.Click += async delegate
+                {
+                    if (textUsername.Text.Length > 0)
+                    {
+                        await m_database.ResetPassword(textUsername.Text, textEmail.Text);
+                        Responce responce = m_database.responce;
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        AlertDialog alert = dialog.Create();
+                        alert.SetTitle("Unable to reset password");
+                        alert.SetButton("OK", (c, ev) =>
+                        {
+                            passBox.Text = "";
+                        });
+                        switch (responce.m_code)
+                        {
+                            case 201:
+                                {
+                                    Toast.MakeText(this, "Email sent!", ToastLength.Long).Show();
+                                    builder.Dismiss();
+                                    break;
+                                }
+                            case 100:
+                                {
+                                    alert.SetMessage(responce.m_reason);
+                                    alert.Show();
+                                    break;
+                                }
+                            case 503: // Network issues
+                            case 504:
+                                {
+                                    alert.SetMessage(responce.m_reason);
+                                    alert.Show();
+                                    break;
+                                }
+                                
+                        }
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Please enter your username and email", ToastLength.Short).Show();
+                    }
+                };
+                builder.Show();
+            };
+
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
             createAccount.Click += StartCreateAccountActivity;
         }
@@ -144,31 +202,7 @@ namespace EFRFrontEndTest2
 
         void ShowForgotPasswordScreen()
         {
-            //Inflate layout
-            View view = LayoutInflater.Inflate(Resource.Layout.ForgotPasswordAlertDialogScreen, null);
-            AlertDialog builder = new AlertDialog.Builder(this).Create();
-            builder.SetView(view);
-            builder.SetCanceledOnTouchOutside(false);
-            EditText textUsername = view.FindViewById<EditText>(Resource.Id.textUsername);
-            Button buttonSubmit = view.FindViewById<Button>(Resource.Id.buttonSubmit);
-            Button buttonCancel = view.FindViewById<Button>(Resource.Id.buttonCancel);
-            buttonCancel.Click += delegate {
-                builder.Dismiss();
-            };
-            buttonSubmit.Click += delegate
-            {
-                if (textUsername.Text.Length > 0)
-                {
-                    SendAccountRecoveryEmail(textUsername.Text);
-                    builder.Dismiss();
-                    Toast.MakeText(this, "Email sent!", ToastLength.Long).Show();
-                }
-                else
-                {
-                    Toast.MakeText(this, "Please enter your username", ToastLength.Short).Show();
-                }
-            };
-            builder.Show();
+           
         }
 
         /***************************************************************************************************************************
@@ -179,12 +213,6 @@ namespace EFRFrontEndTest2
         public override void OnBackPressed()
         {
             return;
-        }
-
-        //TODO: Implement once Shaun has created a password recovery API call
-        private void SendAccountRecoveryEmail(string username)
-        {
-
         }
     }
 }

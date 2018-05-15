@@ -76,7 +76,7 @@ namespace EFRFrontEndTest2.Fragments
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
                 AlertDialog alert = dialog.Create();
                 alert.SetTitle("Password reset");
-                alert.SetMessage("are you sure?");
+                alert.SetMessage("Are you sure you want to reset your password?");
                 alert.SetButton("OK", (c, ev) =>
                 {
                     //put password reset functionality here
@@ -88,7 +88,7 @@ namespace EFRFrontEndTest2.Fragments
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
                 AlertDialog alert = dialog.Create();
                 alert.SetTitle("Game reset");
-                alert.SetMessage("are you sure?");
+                alert.SetMessage("Are you sure you want to reset your account?");
                 alert.SetButton("OK", (c, ev) =>
                 {
                     //put game reset functionality here

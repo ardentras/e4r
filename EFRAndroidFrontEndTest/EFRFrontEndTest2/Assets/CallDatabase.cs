@@ -57,7 +57,7 @@ namespace EFRFrontEndTest2.Assets
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }"); CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/signup", bytestream);
-            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -68,7 +68,7 @@ namespace EFRFrontEndTest2.Assets
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"username\":\"" + username + "\",\"password\":\"" + password + "\"} }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/login", bytestream, true);
-            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -79,7 +79,7 @@ namespace EFRFrontEndTest2.Assets
             byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"session\": \"{" + SingleUserObject.getObject().SessionID + "}\", \"userobject\": \"{" + SingleUserObject.getObject().UserObjectForm() + "}\"} }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/update_uo", bytestream, true);
-            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -87,9 +87,20 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> RenewSession()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("P \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
+        }
+
+        public async Task<Responce> ResetPassword(string username, string email)
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\" : { \"username\": \"" + username + "\", \"email\": \"" + email + "\" } }");
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("POST", "/reset_password", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
@@ -101,7 +112,7 @@ namespace EFRFrontEndTest2.Assets
             byte[] bytestream = Encoding.ASCII.GetBytes(@"{ ""user"": { ""username"": """ + username + @""", ""email"": """ + email + @""" } }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/check_username", bytestream);
-            await Task.WhenAny(task, Task.Delay(10000, cts.Token));
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
             return LastResponce;
@@ -112,7 +123,7 @@ namespace EFRFrontEndTest2.Assets
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api" + uri));
             request.ContentType = "application/json";
             request.Method = method;
-            request.Timeout = 10000;
+            request.Timeout = 2000;
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {

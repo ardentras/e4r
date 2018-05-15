@@ -78,8 +78,8 @@ namespace EFRFrontEndTest2.Fragments
                 AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
                 AlertDialog alert = dialog.Create();
                 alert.SetTitle("Logout");
-                alert.SetMessage("are you sure?");
-                alert.SetButton("OK", (c, ev) =>
+                alert.SetMessage("Are you sure you want to log out?");
+                alert.SetButton("YES", (c, ev) =>
                 {
                     _main.LogOut();
                 });
