@@ -10,6 +10,9 @@ RUN npm i
 #RUN apt-get update
 #RUN apt-get install -y -t jessie-backports certbot
 
+RUN apt-get update
+RUN apt-get install -y -qq python3
+
 COPY app /opt/app/
 
 CMD ["npm", "start"]

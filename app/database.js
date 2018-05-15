@@ -33,9 +33,9 @@ class TDatabase {
             }
         });
 
-        this.cronjob = new CronJob('00 00 00 * * *', function() {
-            shell.exec('cd ./web-crawler; ./send_data.sh');
-        }, function() { console.log("bubble feed updated"); }, true, 'America/Los_Angeles');
+        // this.cronjob = new CronJob('00 00 00 * * *', function() {
+        //     shell.exec('cd ./web-crawler; ./send_data.sh');
+        // }, function() { console.log("bubble feed updated"); }, true, 'America/Los_Angeles');
     }
 
 	// Prints details given the passed error.
@@ -703,13 +703,18 @@ class TDatabase {
                                             .catch(err => { this.dbErrorGen(err, client); });
 
         var questionBlocks = res.recordset;
+
+        console.log(data.userobject.game_data.subject_id);
+        console.log(questionBlocks);
         var totalBlocks = questionBlocks.length;
 
         var missing_blocks = [];
         for (var i = 0; i < totalBlocks; i++) {
             if (!data.userobject.game_data.completed_blocks.includes(questionBlocks[i].QuestionBlockID))
-                missing_blocks.push(i + 1);
+                missing_blocks.push(questionBlocks[i].QuestionBlockID);
         }
+
+        console.log(missing_blocks);
 
         var chosen_block = missing_blocks[Math.floor(Math.random() * missing_blocks.length)];
 
