@@ -1,25 +1,28 @@
 INSERT INTO EFRQuest.Subjects VALUES ('Mathematics');
 INSERT INTO EFRQuest.Subjects VALUES ('English');
 
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 1);
+/* VALUES (BlockID, Difficulty, Subject) */
+INSERT INTO EFRQuest.QuestionsDB VALUES (1, 0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (2, 0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (3, 0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (4, 0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (5, 0, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (6, 0, 1);
 
-INSERT INTO EFRQuest.QuestionsDB VALUES (2, 2);
-INSERT INTO EFRQuest.QuestionsDB VALUES (2, 2);
-INSERT INTO EFRQuest.QuestionsDB VALUES (2, 2);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 2);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 2);
-INSERT INTO EFRQuest.QuestionsDB VALUES (0, 2);
+INSERT INTO EFRQuest.QuestionsDB VALUES (7, 2, 2);
+INSERT INTO EFRQuest.QuestionsDB VALUES (8, 2, 2);
+INSERT INTO EFRQuest.QuestionsDB VALUES (9, 2, 2);
+INSERT INTO EFRQuest.QuestionsDB VALUES (10, 0, 2);
+INSERT INTO EFRQuest.QuestionsDB VALUES (11, 0, 2);
+INSERT INTO EFRQuest.QuestionsDB VALUES (12, 0, 2);
 
-INSERT INTO EFRQuest.QuestionsDB VALUES (1, 1);
-INSERT INTO EFRQuest.QuestionsDB VALUES (1, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (13, 1, 1);
+INSERT INTO EFRQuest.QuestionsDB VALUES (14, 1, 1);
 
 INSERT INTO EFRQuest.QuestionHelp VALUES ('https://www.basic-mathematics.com/whole-numbers.html');
 INSERT INTO EFRQuest.QuestionHelp VALUES ('https://blog.prepscholar.com/how-to-approach-identifying-sentence-errors-sat-writing-strategies');
+
+/* VALUES (QuestionText, Answer1, Answer2, Answer3, Answer4, CorrectAnswer, BlockID, QuestionHelpID) */
 
 /* Mathematics Beginner */
 INSERT INTO EFRQuest.Questions (QuestionText, QuestionOne, QuestionTwo, QuestionThree, QuestionFour, CorrectAnswer, QuestionBlockID, HelpID) VALUES ('What is 10 * 6?', '60', '93', '16', '96', '60', 1, 1);

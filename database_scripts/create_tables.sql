@@ -68,7 +68,7 @@ CREATE TABLE EFRQuest.Subjects
 );
 
 CREATE TABLE EFRQuest.QuestionsDB
- (QuestionBlockID   INT            NOT NULL IDENTITY PRIMARY KEY,
+ (QuestionBlockID   INT            NOT NULL PRIMARY KEY,
   Difficulty        INT            NOT NULL,
   SubjectID         INT            FOREIGN KEY REFERENCES
                                    EFRQuest.Subjects
