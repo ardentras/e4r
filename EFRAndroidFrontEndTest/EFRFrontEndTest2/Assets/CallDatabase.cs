@@ -77,7 +77,7 @@ namespace EFRFrontEndTest2.Assets
         {
             byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}");
             CancellationTokenSource cts = new CancellationTokenSource();
-            Task task = APICall("PUT", "/update_uo", bytestream);
+            Task task = APICall("PUT", "/update_uo", bytestream, true);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
@@ -126,7 +126,7 @@ namespace EFRFrontEndTest2.Assets
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {
-                using (WebResponse response = await request.GetResponseAsync())
+                using (WebResponse response = request.GetResponse())
                 {
                     // Get a stream representation of the HTTP web response:
                     using (Stream stream = response.GetResponseStream())
@@ -189,7 +189,9 @@ namespace EFRFrontEndTest2.Assets
 
         private void CreateUserObject(JsonValue json)
         {
-            m_userObject.SessionID = json["session_id"];
+            if (json["action"] != "SAVE UO") // UO updating doesn't come with a session ID
+                m_userObject.SessionID = json["session_id"];
+
             m_userObject.Json = json;
             JsonValue user = json["user_object"];
             m_userObject.Timestamp = user["timestamp"];

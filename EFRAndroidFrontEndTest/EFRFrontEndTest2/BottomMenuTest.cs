@@ -102,7 +102,7 @@ namespace EFRFrontEndTest2
                     fragment = AccountSettings.NewInstance();
                     break;
                 case Resource.Id.general_settings:
-                    fragment = GeneralSettings.NewInstance();
+                    //fragment = GeneralSettings.NewInstance();
                     break;
                 case Resource.Id.charity_selection:
                     fragment = CharitySelection.NewInstance(this);

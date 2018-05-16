@@ -53,7 +53,6 @@ namespace EFRFrontEndTest2.Fragments
 
             savebtn.Click += delegate
             {
-                /*
                 if (firstName.Text != "" || lastName.Text != "")
                 {
                     if (firstName.Text != uo.FirstName || lastName.Text != uo.LastName)
@@ -84,7 +83,6 @@ namespace EFRFrontEndTest2.Fragments
                         alert.Show();
                     }
                 }
-                */
             };
 
             pwresetbtn.Click += delegate
