@@ -24,6 +24,13 @@ namespace EFRFrontEndTest2.Fragments
             // Do everything else here that's not UI related
             // Create your fragment here
         }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackground();
+        }
+
         public static Home NewInstance()
         {
             Home temp = new Home();
@@ -35,6 +42,8 @@ namespace EFRFrontEndTest2.Fragments
             //Use this to initialize all the click handlers and stuff
             //all UI related functionalities here
             view = inflater.Inflate(Resource.Layout.Home, container, false);
+            setBackground();
+
             TextView user_fname = view.FindViewById<TextView>(Resource.Id.user_fname);
             TextView user_level = view.FindViewById<TextView>(Resource.Id.user_level);
             TextView total_solved = view.FindViewById<TextView>(Resource.Id.total_solved);
@@ -51,7 +60,7 @@ namespace EFRFrontEndTest2.Fragments
         {
             if (AppBackground.background != null)
             {
-                GridLayout background = view.FindViewById<GridLayout>(Resource.Id.settingsgrid);
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.home_background);
                 background.Background = AppBackground.background;
             }
         }

@@ -88,6 +88,12 @@ namespace EFRFrontEndTest2.Fragments
             // Create your fragment here
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+            SetBackgrounds();
+        }
+
         public static Questions NewInstance(BottomMenuTest main)
         {
             Questions temp = new Questions(main);
@@ -99,6 +105,7 @@ namespace EFRFrontEndTest2.Fragments
             // Use this to return your custom view for this Fragment
             view = inflater.Inflate(Resource.Layout.Questions, container, false);
             setup();
+            SetBackgrounds();
 
             bool QuestionAnswered = false;
 
@@ -320,6 +327,14 @@ namespace EFRFrontEndTest2.Fragments
                 AlertDialog builder = new AlertDialog.Builder(_main).Create();
                 builder.SetView(view);
                 builder.Show();
+            }
+        }
+        protected void SetBackgrounds()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.questionlayout);
+                background.Background = AppBackground.background;
             }
         }
     }

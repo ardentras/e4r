@@ -19,11 +19,17 @@ namespace EFRFrontEndTest2.Fragments
         private UserObject uo = SingleUserObject.getObject();
         private CallDatabase m_database;
         private TextView charity;
+        View view = null;
         public override void OnCreate(Bundle savedInstanceState)
         {
             m_database = new CallDatabase();
             base.OnCreate(savedInstanceState);
             // Create your fragment here
+        }
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackgrounds();
         }
         public static AccountSettings NewInstance()
         {
@@ -35,7 +41,9 @@ namespace EFRFrontEndTest2.Fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            View view = inflater.Inflate(Resource.Layout.AccountSettings, container, false);
+            view = inflater.Inflate(Resource.Layout.AccountSettings, container, false);
+            setBackgrounds();
+
             TextView username = view.FindViewById<TextView>(Resource.Id.accountname);
             EditText firstName = view.FindViewById<EditText>(Resource.Id.accountfirstname);
             EditText lastName = view.FindViewById<EditText>(Resource.Id.accountlastname);
@@ -165,6 +173,14 @@ namespace EFRFrontEndTest2.Fragments
             await m_database.ResetPassword(uo.Username, uo.Email);
 
             return 0;
+        }
+        protected void setBackgrounds()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.AccountBackground);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

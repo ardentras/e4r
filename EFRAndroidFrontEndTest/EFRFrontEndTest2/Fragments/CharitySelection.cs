@@ -21,6 +21,7 @@ namespace EFRFrontEndTest2.Fragments
         private CharityLayout _current = null;
         private CharityLayout _selected = null;
         private Context _ctx = null;
+        View view = null;
         //current list of available charities
         private List<Charity> _favorites = new List<Charity>();
         private List<Charity> _charities = new List<Charity>();
@@ -108,6 +109,13 @@ namespace EFRFrontEndTest2.Fragments
                 _charities.Add(c);
             }
         }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackgrounds();
+        }
+
         public static CharitySelection NewInstance(Context ctx)
         {
             CharitySelection temp = new CharitySelection(ctx);
@@ -118,7 +126,9 @@ namespace EFRFrontEndTest2.Fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            View view = inflater.Inflate(Resource.Layout.CharitySlection, container, false);
+            view = inflater.Inflate(Resource.Layout.CharitySlection, container, false);
+            setBackgrounds();
+
             LinearLayout charities = view.FindViewById<LinearLayout>(Resource.Id.charities);
             TextView currentCharity = view.FindViewById<TextView>(Resource.Id.current);
             TextView currentInfo = view.FindViewById<TextView>(Resource.Id.info);
@@ -188,6 +198,15 @@ namespace EFRFrontEndTest2.Fragments
                 charities.AddView(temp.Container);
             }
             return view;
+        }
+
+        protected void setBackgrounds()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.charity_screen);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }
