@@ -53,7 +53,8 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> CreateAccount(string username, string email, string password)
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }"); CancellationTokenSource cts = new CancellationTokenSource();
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"username\": \"" + username + "\", \"email\": \"" + email + "\", \"password\": \"" + password + "\"} }");
+            CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("POST", "/signup", bytestream);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
@@ -125,7 +126,7 @@ namespace EFRFrontEndTest2.Assets
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {
-                using (WebResponse response = await request.GetResponseAsync())
+                using (WebResponse response = request.GetResponse())
                 {
                     // Get a stream representation of the HTTP web response:
                     using (Stream stream = response.GetResponseStream())
@@ -188,11 +189,22 @@ namespace EFRFrontEndTest2.Assets
 
         private void CreateUserObject(JsonValue json)
         {
-            if (json["action"] != "SAVE UO") // UO updating doesn't come with a session ID
+            try
+            { // UO updating doesn't come with a session ID
                 m_userObject.SessionID = json["session_id"];
-
+            }
+            catch { }
             m_userObject.Json = json;
-            JsonValue user = json["user_object"];
+
+            JsonValue user;
+            try
+            {
+                user = json["user_object"];
+            }
+            catch
+            {
+                user = json["userobject"]; // Both shouldnt fail, but the server returns boths in different cases
+            }
             m_userObject.Timestamp = user["timestamp"];
 
             JsonValue game = user["game_data"];
