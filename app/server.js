@@ -77,6 +77,7 @@ Router.delete('/delete_user', (req, res) => {
 });
 // Tested
 Router.put('/update_uo', (req, res) => {
+	console.log(req.body);
 	db.update_uo(res, req.body.user);
 });
 // Tested

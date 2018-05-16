@@ -33,6 +33,10 @@ class TDatabase {
             }
         });
 
+        mssql.on('error', err => {
+            this.dbErrorGen(err, client);
+        });
+
         // this.cronjob = new CronJob('00 00 00 * * *', function() {
         //     shell.exec('cd ./web-crawler; ./send_data.sh');
         // }, function() { console.log("bubble feed updated"); }, true, 'America/Los_Angeles');
@@ -387,10 +391,10 @@ class TDatabase {
                     let sessionid = await this.setSessionID(res.recordsets[0][0].UserID);
 
                     try {
-                        let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+                        let userobject = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
-                        var uo = user_object;
-                        client.json({response: "Success", type: "POST", code: 200, action: "LOGIN", session_id: sessionid, user_object: uo});
+                        var uo = userobject;
+                        client.json({response: "Success", type: "POST", code: 200, action: "LOGIN", session_id: sessionid, userobject: uo});
                     } catch (err) {
                         console.log(err);
                     }
@@ -467,9 +471,9 @@ class TDatabase {
 	// Example:
 	// curl -XPUT localhost:3002/api/update_uo -H 'Content-Type: application/json' -d '{"user":{"session":"5a808320-6062-4193-9720-55046ff5dd3a", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}}}'
 	async update_uo(client, data) {
+        console.log(data);
 		let res = await this.db.request().input('token', mssql.VarChar(User.SESSION_TOKEN_LENGTH), data.session)
-                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token")
-                                            .catch(err => { this.dbErrorGen(err, client); });
+                                            .query("SELECT * FROM EFRAcc.Sessions WHERE SessionID = @token").catch(err => { this.dbErrorGen(err, client); });
 
         if (res.rowsAffected == 0) {
 			client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token was not found."});
@@ -478,13 +482,13 @@ class TDatabase {
 				client.json({response: "Failed", type: "PUT", code: 401, action: "LOGOUT", reason: "User's session token is invalid."});
 			} else {
                 try {
-                    let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+                    let userobject = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                     var cliTimestamp = data.userobject.timestamp;
-                    var dbTimestamp = user_object.timestamp;
+                    var dbTimestamp = userobject.timestamp;
 
                     if (cliTimestamp < dbTimestamp) {
-                        var uo = user_object;
+                        var uo = userobject;
                         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE UO", reason: "User object out of date. Retrieving from database.", userobject: uo});
                     } else {
                         var uo = await this.persistUserObject(data.userobject, res.recordsets[0][0].UserID);
@@ -497,6 +501,8 @@ class TDatabase {
                 }
 			}
 		}
+
+        console.log("User object updated");
 	}
 
     // Retrieves the user object and ensures it was properly saved.
@@ -554,10 +560,10 @@ class TDatabase {
         	client.json({response: "Failed", type: "PUT", code: 500, reason: "Session invalid. User object could not be saved"});
         } else {
             try {
-                let user_object = await this.getUserObject(res.recordsets[0][0].UserID, data);
+                let userobject = await this.getUserObject(res.recordsets[0][0].UserID, data);
 
                 var cliTimestamp = data.userobject.timestamp;
-                var dbTimestamp = user_object.timestamp;
+                var dbTimestamp = userobject.timestamp;
 
                 if (cliTimestamp < dbTimestamp) {
                     client.json({response: "Success", type: "PUT", code: 409, action: "LOGOUT", reason: "Out of date user object cannot be saved. User logged out"});
@@ -750,13 +756,13 @@ class TDatabase {
         if (res.rowsAffected == 0) {
 	        client.json({response: "Failed", type: "GET", code: 403, action: "LOGOUT", reason: "User's session token was not found."});
 	    } else {
-            let user_object = await this.getUserObject(res.recordset[0].UserID, data);
+            let userobject = await this.getUserObject(res.recordset[0].UserID, data);
 
             var cliTimestamp = data.userobject.timestamp;
-            var dbTimestamp = user_object.timestamp;
+            var dbTimestamp = userobject.timestamp;
 
             if (cliTimestamp < dbTimestamp) {
-                var spliceBlocks = data.userobject.game_data.completed_blocks.concat(user_object.game_data.completed_blocks)
+                var spliceBlocks = data.userobject.game_data.completed_blocks.concat(userobject.game_data.completed_blocks)
                 spliceBlocks = spliceBlocks.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
                 data.userobject.game_data.completed_blocks = spliceBlocks;
 
@@ -808,6 +814,7 @@ class TDatabase {
     }
 
     dbErrorGen(err, client) {
+        console.log("Sending error: " + err);
         client.json({response: "Failed", type: "", code: 500, reason: err});
     }
 

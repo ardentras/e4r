@@ -111,7 +111,7 @@ On successful login:
   "code": 200,
   "action": "LOGIN",
   "session_id": "{session_token}",
-  "user_object": "{}"
+  "userobject": "{}"
 }
 
 On invalid username/email:
@@ -283,7 +283,7 @@ On non-existant session:
 {
     "user": {
         "session": "{session_token}",
-        "userobject": "{user_object}"
+        "userobject": "{userobject}"
     }
 }
 ```
@@ -320,7 +320,7 @@ On invalid session:
 {
     "user": {
         "session": "{session_token}",
-        "userobject": "{user_object}"
+        "userobject": "{userobject}"
     }
 }
 ```
@@ -332,7 +332,7 @@ On User Object current:
     type: "PUT",
     code: 200,
     action: "SAVE UO",
-    userobject: {user_object}
+    userobject: {userobject}
 }
 
 On User Object out of date:
@@ -342,7 +342,7 @@ On User Object out of date:
     code: 200,
     action: "RETRIEVE UO",
     reason: "User object out of date. Retrieving from database.",
-    userobject: {user_object}
+    userobject: {userobject}
 }
 ```
 #### BUBBLE_FEED RESPONSE:
@@ -426,7 +426,7 @@ On valid session token:
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object},
+        "userobject": {userobject},
         "donated": "150"
     }
 }
@@ -436,7 +436,7 @@ OR
 {
     "user": {
         "session":"{session_id}",
-        "userobject": {user_object},
+        "userobject": {userobject},
         "donated": "150"
     },
     "game": {
@@ -484,7 +484,7 @@ OR
         },
         {...},
     ],
-    user_object: {user_object}
+    userobject: {userobject}
 }
 ```
 #### REQUEST_HELP REQUEST:
