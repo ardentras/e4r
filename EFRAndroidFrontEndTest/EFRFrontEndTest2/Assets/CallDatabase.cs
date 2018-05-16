@@ -25,7 +25,6 @@ namespace EFRFrontEndTest2.Assets
             m_reason = reason;
             m_code = code;
             m_json = json; // Holds the object
-
         }
 
         public string m_responce;
@@ -126,7 +125,7 @@ namespace EFRFrontEndTest2.Assets
             request.GetRequestStream().Write(bytestream, 0, bytestream.Length); // Can cause an exception if phone is in airplane mode
             try
             {
-                using (WebResponse response = request.GetResponse())
+                using (WebResponse response = await request.GetResponseAsync())
                 {
                     // Get a stream representation of the HTTP web response:
                     using (Stream stream = response.GetResponseStream())
