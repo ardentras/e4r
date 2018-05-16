@@ -31,10 +31,12 @@
             android:id="@+id/textView2"
             android:textColor="#212121"
             android:gravity="center" />
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/accountfirstname"
+            android:nextFocusForward="@+id/accountlastname"
+            android:inputType="text"
             android:layout_weight="1"
             android:backgroundTint="#ff00ffff"
             android:gravity="center" />
@@ -55,13 +57,16 @@
             android:id="@+id/textView3"
             android:textColor="#212121"
             android:gravity="center" />
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:backgroundTint="#ff00ffff"
-            android:id="@+id/accountlastname" />
+            android:id="@+id/accountlastname"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:inputType="text" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

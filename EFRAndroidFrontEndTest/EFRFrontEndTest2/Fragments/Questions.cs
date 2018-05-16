@@ -73,14 +73,14 @@ namespace EFRFrontEndTest2.Fragments
         {
             _main = main;
         }
+
         public override void OnStop()
         {
-            Task.Run(async () => { await m_database.UpdateUO(); }).Wait();
+            m_database.UpdateUO().Wait();
             base.OnStop();
 
         }
-
-
+        
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

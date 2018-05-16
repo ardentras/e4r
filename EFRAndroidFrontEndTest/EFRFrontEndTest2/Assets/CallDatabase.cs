@@ -40,11 +40,10 @@ namespace EFRFrontEndTest2.Assets
         {
             m_userObject = SingleUserObject.getObject();
         }
+
         public async Task<Responce> RetreaveQuestionBlock()
         {
-            string stream = "{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}";
-            byte[] bytestream = Encoding.ASCII.GetBytes(stream);
-
+            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/q/request_block", bytestream);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
@@ -76,9 +75,10 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> UpdateUO()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\":{ \"session\": \"{" + SingleUserObject.getObject().SessionID + "}\", \"userobject\": \"{" + SingleUserObject.getObject().UserObjectForm() + "}\"} }");
+            string str = "{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}";
+            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}");
             CancellationTokenSource cts = new CancellationTokenSource();
-            Task task = APICall("POST", "/update_uo", bytestream, true);
+            Task task = APICall("PUT", "/update_uo", bytestream, true);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 

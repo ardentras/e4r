@@ -17,8 +17,11 @@ namespace EFRFrontEndTest2.Fragments
     public class AccountSettings : Android.Support.V4.App.Fragment
     {
         private UserObject uo = SingleUserObject.getObject();
+        private CallDatabase m_database;
+        private TextView charity;
         public override void OnCreate(Bundle savedInstanceState)
         {
+            m_database = new CallDatabase();
             base.OnCreate(savedInstanceState);
             // Create your fragment here
         }
@@ -36,7 +39,7 @@ namespace EFRFrontEndTest2.Fragments
             TextView username = view.FindViewById<TextView>(Resource.Id.accountname);
             EditText firstName = view.FindViewById<EditText>(Resource.Id.accountfirstname);
             EditText lastName = view.FindViewById<EditText>(Resource.Id.accountlastname);
-            TextView charity = view.FindViewById<TextView>(Resource.Id.currentcharityname);
+            charity = view.FindViewById<TextView>(Resource.Id.currentcharityname);
             TextView pwresetbtn = view.FindViewById<TextView>(Resource.Id.pwresetbtn);
             TextView gameresetbtn = view.FindViewById<TextView>(Resource.Id.gameresetbtn);
             Button savebtn = view.FindViewById<Button>(Resource.Id.accountsavebtn);
@@ -44,13 +47,10 @@ namespace EFRFrontEndTest2.Fragments
             firstName.Hint = uo.FirstName;
             lastName.Hint = uo.LastName;
             if (charity.Text == "")
-            {
                 charity.Text = "None";
-            }
             else
-            {
                 charity.Text = uo.CharityName;
-            }
+
             savebtn.Click += delegate
             {
                 if (firstName.Text != "" || lastName.Text != "")
@@ -62,11 +62,24 @@ namespace EFRFrontEndTest2.Fragments
                         AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
                         AlertDialog alert = dialog.Create();
                         alert.SetTitle("Name change");
-                        alert.SetMessage("Information updated.");
                         alert.SetButton("OK", (c, ev) =>
                         {
                             alert.Dismiss();
                         });
+                        m_database.UpdateUO().Wait();
+                        if (m_database.responce.m_reason == "User object out of date. Retrieving from database.")
+                        {
+                            alert.SetMessage("Looks like you've been playing on the computer.\nHeres the updated information.");
+                            firstName.Text = uo.FirstName;
+                            lastName.Text = uo.LastName;
+                            if (charity.Text == "")
+                                charity.Text = "None";
+                            else
+                                charity.Text = uo.CharityName;
+                        }
+                        else
+                            alert.SetMessage("Information updated.");
+
                         alert.Show();
                     }
                 }
@@ -88,7 +101,7 @@ namespace EFRFrontEndTest2.Fragments
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
                 AlertDialog alert = dialog.Create();
                 alert.SetTitle("Game reset");
-                alert.SetMessage("Are you sure you want to reset your account?");
+                alert.SetMessage("Are you sure you want to reset your account?\nThis will reset all of your data.");
                 alert.SetButton("OK", (c, ev) =>
                 {
                     //put game reset functionality here

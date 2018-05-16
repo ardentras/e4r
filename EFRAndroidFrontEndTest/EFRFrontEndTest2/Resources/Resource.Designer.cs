@@ -2733,8 +2733,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b008d
 			public const int accountfirstname = 2131427469;
 			
-			// aapt resource value: 0x7f0b0090
-			public const int accountlastname = 2131427472;
+			// aapt resource value: 0x7f0b008e
+			public const int accountlastname = 2131427470;
 			
 			// aapt resource value: 0x7f0b008a
 			public const int accountname = 2131427466;
@@ -3126,8 +3126,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b00f7
 			public const int linearLayout10 = 2131427575;
 			
-			// aapt resource value: 0x7f0b008e
-			public const int linearLayout2 = 2131427470;
+			// aapt resource value: 0x7f0b008f
+			public const int linearLayout2 = 2131427471;
 			
 			// aapt resource value: 0x7f0b0091
 			public const int linearLayout3 = 2131427473;
@@ -3507,8 +3507,8 @@ namespace EFRFrontEndTest2
 			// aapt resource value: 0x7f0b008c
 			public const int textView2 = 2131427468;
 			
-			// aapt resource value: 0x7f0b008f
-			public const int textView3 = 2131427471;
+			// aapt resource value: 0x7f0b0090
+			public const int textView3 = 2131427472;
 			
 			// aapt resource value: 0x7f0b0092
 			public const int textView4 = 2131427474;

@@ -60,7 +60,7 @@ namespace EFRFrontEndTest2.Fragments
             }
             else
             {
-                initials.Text = "N.U";
+                initials.Text = "New User";
             }
             
 
