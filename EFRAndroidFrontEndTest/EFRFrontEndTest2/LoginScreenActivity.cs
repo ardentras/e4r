@@ -200,11 +200,6 @@ namespace EFRFrontEndTest2
             StartActivity(intent);
         }
 
-        void ShowForgotPasswordScreen()
-        {
-           
-        }
-
         /***************************************************************************************************************************
          * Author: Kevin Xu - if you change anything, update this!!!
          * Function: OnBackPressed

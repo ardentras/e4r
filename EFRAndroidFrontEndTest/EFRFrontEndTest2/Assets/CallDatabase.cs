@@ -75,10 +75,9 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> UpdateUO()
         {
-            string str = "{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}";
             byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}");
             CancellationTokenSource cts = new CancellationTokenSource();
-            Task task = APICall("PUT", "/update_uo", bytestream, true);
+            Task task = APICall("PUT", "/update_uo", bytestream);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
             CheckTask(task);
 
