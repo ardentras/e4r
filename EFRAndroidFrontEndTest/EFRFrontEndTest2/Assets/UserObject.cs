@@ -85,14 +85,22 @@ namespace
             data += "\"last_name\": \""+ m_LastName +"\",";
             data += "\"selected_charity\": \""+ m_CharityName +"\", ";
             data += "\"favorite_charities\": [\"";
-            if (m_FavoriteCharities.Length != 1 && m_FavoriteCharities[0] != "")
+            try
             {
-                for (int x = 0; x < m_FavoriteCharities.Length; x++)
+                if (m_FavoriteCharities.Length > 0 && m_FavoriteCharities[0] != "")
                 {
-                    data += m_FavoriteCharities[x];
-                    if (x < m_CompletedBlocks.Length - 1)
-                        data += "\", \"";
+                    for (int x = 0; x < m_FavoriteCharities.Length; x++)
+                    {
+                        data += m_FavoriteCharities[x];
+                        if (x < m_CompletedBlocks.Length - 1)
+                            data += "\", \"";
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                int i = 0;
+                i++;
             }
             data += "\"] ";
             data += "},";
