@@ -160,6 +160,7 @@
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="Fragments\AccountSettings.cs" />
     <Compile Include="Fragments\CharitySelection.cs" />
+    <Compile Include="Fragments\ColorPicker.cs" />
     <Compile Include="Fragments\Difficulty.cs" />
     <Compile Include="Fragments\Feeds.cs" />
     <Compile Include="Fragments\GeneralSettings.cs" />

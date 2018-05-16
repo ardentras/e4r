@@ -93,6 +93,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout5"
         android:background="#EBF5FF" />
+    <TextView
+        android:text="change background"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Color_Picker"
+        android:textColor="#1e90ff"
+        android:gravity="center_vertical"
+        android:layout_weight="0.5"
+        android:paddingLeft="30dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout5"
+        android:background="#EBF5FF" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

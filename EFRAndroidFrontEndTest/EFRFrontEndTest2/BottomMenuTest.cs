@@ -107,6 +107,9 @@ namespace EFRFrontEndTest2
                 case Resource.Id.charity_selection:
                     fragment = CharitySelection.NewInstance(this);
                     break;
+                case Resource.Id.Color_Picker:
+                    fragment = ColorPicker.NewInstance(this);
+                    break;
             }
 
             if (fragment == null)

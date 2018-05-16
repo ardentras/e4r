@@ -44,6 +44,7 @@ namespace EFRFrontEndTest2.Fragments
             TextView charitySelection = view.FindViewById<TextView>(Resource.Id.charity_selection);
             TextView logoutBTN = view.FindViewById<TextView>(Resource.Id.logout);
             TextView initials = view.FindViewById<TextView>(Resource.Id.initials);
+            TextView backgroundSelection = view.FindViewById<TextView>(Resource.Id.Color_Picker);
 
 
             if (uo.FirstName != "" && uo.LastName != "")
@@ -84,6 +85,10 @@ namespace EFRFrontEndTest2.Fragments
                     _main.LogOut();
                 });
                 alert.Show();
+            };
+            backgroundSelection.Click += delegate 
+            {
+                _main.LoadFragment(backgroundSelection.Id);
             };
 
             return view;
