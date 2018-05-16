@@ -1,5 +1,17 @@
 INSERT INTO EFRQuest.Subjects VALUES ('Mathematics');
 INSERT INTO EFRQuest.Subjects VALUES ('English');
+INSERT INTO EFRQuest.Subjects VALUES ('Science');
+INSERT INTO EFRQuest.Subjects VALUES ('History');
+INSERT INTO EFRQuest.Subjects VALUES ('Geography');
+INSERT INTO EFRQuest.Subjects VALUES ('General');
+
+/* SUBJECT_NAME | ID
+** Mathematics  | 1
+** English      | 2
+** Science      | 3
+** History      | 4
+** Geography    | 5
+** General      | 6
 
 /* VALUES (BlockID, Difficulty, Subject) */
 INSERT INTO EFRQuest.QuestionsDB VALUES (1, 0, 1);
