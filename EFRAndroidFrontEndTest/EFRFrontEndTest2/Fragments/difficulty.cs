@@ -29,6 +29,13 @@ namespace EFRFrontEndTest2.Fragments
 
             // Create your fragment here
         }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackground();
+        }
+
         public static Difficulty NewInstance(BottomMenuTest main)
         {
             Difficulty temp = new Difficulty(main);
@@ -39,6 +46,7 @@ namespace EFRFrontEndTest2.Fragments
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             view = inflater.Inflate(Resource.Layout.QuestionDifficultypage, container, false);
+            setBackground();
             Button easyButton = view.FindViewById<Button>(Resource.Id.easyButton);
             Button mediumButton = view.FindViewById<Button>(Resource.Id.mediumButton);
             Button hardButton = view.FindViewById<Button>(Resource.Id.hardButton);
