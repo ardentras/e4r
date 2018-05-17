@@ -73,46 +73,28 @@ namespace EFRFrontEndTest2
         {
             //This checks for the id of the selection
             Android.Support.V4.App.Fragment fragment = null;
-            switch (id)
-            {
-                case Resource.Id.easyButton:
-                    fragment = Questions.NewInstance(this);
-                    break;
-                case Resource.Id.math_button:
-                case Resource.Id.history_button:
-                case Resource.Id.science_button:
-                case Resource.Id.english_button:
-                case Resource.Id.geography_button:
-                case Resource.Id.general_button:
-                    fragment = Difficulty.NewInstance(this);
-                    break;
-                case Resource.Id.action_home:
-                    fragment = Home.NewInstance();
-                    break;
-                case Resource.Id.action_solve:
-                    //Passing this, because it needs to access LoadFragment(int id)
-                    //Only if this page has sub routes tho
-                    fragment = Solve.NewInstance(this);
-                    break;
-                case Resource.Id.action_feed:
-                    fragment = Feeds.NewInstance();
-                    break;
-                case Resource.Id.action_setting:
-                    fragment = Settings.NewInstance(this);
-                    break;
-                case Resource.Id.account_settings:
-                    fragment = AccountSettings.NewInstance();
-                    break;
-                case Resource.Id.general_settings:
-                    //Fragment = GeneralSettings.NewInstance();
-                    break;
-                case Resource.Id.charity_selection:
-                    fragment = CharitySelection.NewInstance(this);
-                    break;
-                case Resource.Id.Color_Picker:
-                    fragment = ColorPicker.NewInstance(this);
-                    break;
-            }
+            if (id == Resource.Id.easyButton)
+                fragment = Questions.NewInstance(this);
+            else if (id == Resource.Id.math_button)
+                fragment = Difficulty.NewInstance(this);
+            else if (id == Resource.Id.action_home)
+                fragment = Home.NewInstance();
+            else if (id == Resource.Id.action_solve) //Passing this, because it needs to access LoadFragment(int id)
+                fragment = Solve.NewInstance(this);  //Only if this page has sub routes tho
+            else if (id == Resource.Id.action_feed)
+                fragment = Feeds.NewInstance();
+            else if (id == Resource.Id.action_setting)
+                fragment = Settings.NewInstance(this);
+            else if (id == Resource.Id.account_settings)
+                fragment = AccountSettings.NewInstance();
+            //else if (id == Resource.Id.general_settings)
+                //fragment = GeneralSettings.NewInstance();
+            else if (id == Resource.Id.charity_selection)
+                fragment = CharitySelection.NewInstance(this);
+            else if (id == Resource.Id.Color_Picker)
+                fragment = ColorPicker.NewInstance(this);
+
+            
 
             if (fragment == null)
                 return;

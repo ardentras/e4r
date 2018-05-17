@@ -15,6 +15,8 @@ namespace EFRFrontEndTest2.Fragments
 {
     public class Feeds : Android.Support.V4.App.Fragment
     {
+        private View m_view;
+        private UserObject user = SingleUserObject.getObject();
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,7 +37,6 @@ namespace EFRFrontEndTest2.Fragments
 
             return temp;
         }
-        View m_view;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -45,7 +46,6 @@ namespace EFRFrontEndTest2.Fragments
             setBackgrounds();
 
             Task.Run(async () => { await CallDatabase(); });
-            //Removes title bar
             Button bubble = m_view.FindViewById<Button>(Resource.Id.bigbubble);
 
             bubble.Click += (sender, e) =>
@@ -223,6 +223,65 @@ namespace EFRFrontEndTest2.Fragments
             {
                 AbsoluteLayout background = m_view.FindViewById<AbsoluteLayout>(Resource.Id.bubble_layout);
                 background.Background = AppBackground.background;
+            }
+            ImageView charity = m_view.FindViewById<ImageView>(Resource.Id.currentCharity);
+
+            switch (user.CharityName)
+            {
+                case "Alzheimer's Association":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_alzheimers_association);
+                    break;
+                case "American Cancer Society":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_american_cancer_society);
+                    break;
+                case "American Heart Association":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_american_heart_association);
+                    break;
+                case "American Red Cross":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_red_cross);
+                    break;
+                case "ASPCA":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_ASPCA);
+                    break;
+                case "Boy's and Girl's Club's of America":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_boys_and_girls_club);
+                    break;
+                case "Compassion":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_compassion);
+                    break;
+                case "Direct Relief":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_direct_relief);
+                    break;
+                case "Make-A-Wish":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_make_a_wish);
+                    break;
+                case "St. Jude Childrens Research Hospital":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_st_jude_childrens_research);
+                    break;
+                case "Susan G Komen":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_susan_g_komen);
+                    break;
+                case "Task Force Global Health":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_task_force_for_global_health);
+                    break;
+                case "The Humane Society":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_the_humane_society);
+                    break;
+                case "Toys-For-Tots":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_toys_for_tots);
+                    break;
+                case "United Way":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_united_way);
+                    break;
+                case "World Wildlife Fund":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_world_wildlife_foundation);
+                    break;
+                case "Wounded Warrior Project":
+                    charity.SetBackgroundResource(Resource.Drawable.charity_wounded_warrior_project);
+                    break;
+                default:
+                    charity.SetBackgroundResource(Resource.Drawable.charity_red_cross);
+                    break;
             }
         }
     }
