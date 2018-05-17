@@ -71,7 +71,7 @@ namespace EFRFrontEndTest2.Fragments
         {
             if (AppBackground.background != null)
             {
-                GridLayout background = view.FindViewById<GridLayout>(Resource.Id.gridLayout1);
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.difficulty_background);
                 background.Background = AppBackground.background;
             }
         }
