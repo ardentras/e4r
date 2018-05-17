@@ -19,7 +19,6 @@ namespace EFRFrontEndTest2.Fragments
     {
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
-        private RNGCryptoServiceProvider rand = new RNGCryptoServiceProvider(); // So the garbage collector is called less often if a kid just LOVES tapping the shuffle button
 
         private EFRFrontEndTest2.BottomMenuTest _main;
         public Solve(EFRFrontEndTest2.BottomMenuTest main)

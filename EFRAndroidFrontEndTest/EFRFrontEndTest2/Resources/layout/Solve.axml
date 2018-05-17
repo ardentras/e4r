@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/subject_background"
-    android:background="#FFFFFF">
+    android:background="#ffffffff">
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout4">
             <ImageButton
-                android:src="@drawable/physicsicon"
+                android:src="@drawable/geographyicon"
                 android:layout_height="150dp"
                 android:id="@+id/geography_button"
                 android:layout_weight="1"
