@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout3"
         android:layout_weight="0.3"
+        android:background="#FFFFFF"
         android:layout_gravity="center">
         <LinearLayout
             android:orientation="vertical"

@@ -26,6 +26,7 @@
         android:layout_marginTop="18.0dp"
         android:layout_marginBottom="0.0dp">
         <ImageButton
+            android:src="@android:drawable/ic_menu_gallery"
             android:layout_height="wrap_content"
             android:id="@+id/starIcon"
             android:background="@drawable/staricon"
@@ -49,6 +50,7 @@
         android:layout_marginTop="25.0dp"
         android:layout_marginBottom="25.0dp">
         <ImageButton
+            android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="54.5dp"
             android:layout_height="match_parent"
             android:id="@+id/trophyIcon"
@@ -72,6 +74,7 @@
         android:background="@android:color/white"
         android:layout_marginLeft="0.0dp">
         <ImageButton
+            android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="60.5dp"
             android:layout_height="match_parent"
             android:id="@+id/heartIcon"

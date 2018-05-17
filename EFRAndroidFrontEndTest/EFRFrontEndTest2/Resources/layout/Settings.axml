@@ -95,7 +95,7 @@
         android:id="@+id/linearLayout5"
         android:background="#EBF5FF" />
     <TextView
-        android:text="Set Background"
+        android:text="change background"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

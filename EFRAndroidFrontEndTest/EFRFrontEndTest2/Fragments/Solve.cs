@@ -59,35 +59,35 @@ namespace EFRFrontEndTest2.Fragments
             {
                 user.SubjectID = 4;
                 user.SubjectName = "History";
-                _main.LoadFragment(Math.Id);
+                _main.LoadFragment(History.Id);
             };
 
             Science.Click += delegate
             {
                 user.SubjectID = 3;
                 user.SubjectName = "Science";
-                _main.LoadFragment(Math.Id);
+                _main.LoadFragment(Science.Id);
             };
 
             English.Click += delegate
             {
                 user.SubjectID = 2;
                 user.SubjectName = "English";
-                _main.LoadFragment(Math.Id);
+                _main.LoadFragment(English.Id);
             };
 
             Geography.Click += delegate
             {
                 user.SubjectID = 5;
                 user.SubjectName = "Geography";
-                _main.LoadFragment(Math.Id);
+                _main.LoadFragment(Geography.Id);
             };
 
             General.Click += delegate
             {
                 user.SubjectID = 6;
                 user.SubjectName = "General";
-                _main.LoadFragment(Math.Id);
+                _main.LoadFragment(General.Id);
             };
 
             return view;
