@@ -12,6 +12,7 @@ INSERT INTO EFRQuest.Subjects VALUES ('General');
 ** History      | 4
 ** Geography    | 5
 ** General      | 6
+*/
 
 /* VALUES (BlockID, Difficulty, Subject) */
 INSERT INTO EFRQuest.QuestionsDB VALUES (1, 0, 1);
