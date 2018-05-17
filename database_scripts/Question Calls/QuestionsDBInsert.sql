@@ -6,12 +6,13 @@
 ** Geography    | 5
 ** General      | 6
 /* VALUES (BlockID, Difficulty, Subject) */
-//Easy Mathematics
+
+/* Easy Mathematics */
 INSERT INTO EFRQuest.QuestionsDB VALUES (60, 0, 1);
 INSERT INTO EFRQuest.QuestionsDB VALUES (61, 0, 1);
-//Hard Mathematics
+/* Hard Mathematics */
 INSERT INTO EFRQuest.QuestionsDB VALUES (80, 2, 1);
-//Easy Science
+/* Easy Science */
 INSERT INTO EFRQuest.QuestionsDB VALUES (160, 0, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (161, 0, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (162, 0, 3);
@@ -20,7 +21,7 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (164, 0, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (165, 0, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (166, 0, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (167, 0, 3);
-//Medium Science
+/* Medium Science */
 INSERT INTO EFRQuest.QuestionsDB VALUES (200, 1, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (201, 1, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (202, 1, 3);
@@ -32,7 +33,7 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (207, 1, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (208, 1, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (209, 1, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (210, 1, 3);
-//Hard Science
+/* Hard Science */
 INSERT INTO EFRQuest.QuestionsDB VALUES (240, 2, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (241, 2, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (242, 2, 3);
@@ -40,12 +41,12 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (241, 2, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (244, 2, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (245, 2, 3);
 INSERT INTO EFRQuest.QuestionsDB VALUES (246, 2, 3);
-//Easy History
+/* Easy History */
 INSERT INTO EFRQuest.QuestionsDB VALUES (120, 0, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (121, 0, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (122, 0, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (123, 0, 4);
-//Medium History
+/* Medium History */
 INSERT INTO EFRQuest.QuestionsDB VALUES (130, 1, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (131, 1, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (132, 1, 4);
@@ -56,19 +57,19 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (135, 1, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (137, 1, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (138, 1, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (139, 1, 4);
-//Hard History
+/* Hard History */
 INSERT INTO EFRQuest.QuestionsDB VALUES (140, 2, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (141, 2, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (142, 2, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (143, 2, 4);
 INSERT INTO EFRQuest.QuestionsDB VALUES (144, 2, 4);
-//Easy Geography
+/* Easy Geography */
 INSERT INTO EFRQuest.QuestionsDB VALUES (90, 0, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (91, 0, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (92, 0, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (93, 0, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (94, 0, 5);
-//Medium Geography
+/* Medium Geography */
 INSERT INTO EFRQuest.QuestionsDB VALUES (100, 1, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (101, 1, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (102, 1, 5);
@@ -78,12 +79,12 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (105, 1, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (106, 1, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (107, 1, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (108, 1, 5);
-//Hard Geography
+/* Hard Geography */
 INSERT INTO EFRQuest.QuestionsDB VALUES (110, 2, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (111, 2, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (112, 2, 5);
 INSERT INTO EFRQuest.QuestionsDB VALUES (113, 2, 5);
-//Easy General
+/* Easy General */
 INSERT INTO EFRQuest.QuestionsDB VALUES (1000, 0, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (1001, 0, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (1002, 0, 6);
@@ -143,7 +144,7 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (1055, 0, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (1056, 0, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (1057, 0, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (1058, 0, 6);
-//Medium General
+/* Medium General */
 INSERT INTO EFRQuest.QuestionsDB VALUES (2000, 1, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2001, 1, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2002, 1, 6);
@@ -233,7 +234,7 @@ INSERT INTO EFRQuest.QuestionsDB VALUES (2070, 1, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2086, 1, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2087, 1, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (2088, 1, 6);
-//Hard General
+/* Hard General */
 INSERT INTO EFRQuest.QuestionsDB VALUES (3000, 2, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (3001, 2, 6);
 INSERT INTO EFRQuest.QuestionsDB VALUES (3002, 2, 6);
