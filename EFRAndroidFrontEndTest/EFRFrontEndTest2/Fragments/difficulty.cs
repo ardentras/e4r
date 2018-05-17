@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Util;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -19,10 +10,12 @@ namespace EFRFrontEndTest2.Fragments
         private BottomMenuTest _main;
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
+
         public Difficulty(BottomMenuTest main)
         {
             _main = main;
         }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,8 +32,10 @@ namespace EFRFrontEndTest2.Fragments
         public static Difficulty NewInstance(BottomMenuTest main)
         {
             Difficulty temp = new Difficulty(main);
+
             return temp;
         }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -65,8 +60,10 @@ namespace EFRFrontEndTest2.Fragments
                 user.Difficulty = 2;
                 _main.LoadFragment(easyButton.Id); // Because any button will work
             };
+
             return view;
         }
+
         protected void setBackground()
         {
             if (AppBackground.background != null)

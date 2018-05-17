@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -38,42 +31,49 @@ namespace EFRFrontEndTest2
                 setBackgrounds();
                 blue.Background= AppBackground.background;
             };
+
             red.Click += (sender, e) =>
             {
                 AppBackground.background = red.Background;
                 setBackgrounds();
                 red.Background = AppBackground.background;
             };
+
             green.Click += (sender, e) =>
             {
                 AppBackground.background = green.Background;
                 setBackgrounds();
                 green.Background = AppBackground.background;
             };
+
             gray.Click += (sender, e) =>
             {
                 AppBackground.background = gray.Background;
                 setBackgrounds();
                 gray.Background = AppBackground.background;
             };
+
             purple.Click += (sender, e) =>
             {
                 AppBackground.background = purple.Background;
                 setBackgrounds();
                 purple.Background = AppBackground.background;
             };
+
             darkblue.Click += (sender, e) =>
             {
                 AppBackground.background = darkblue.Background;
                 setBackgrounds();
                 darkblue.Background = AppBackground.background;
             };
+
             darkred.Click += (sender, e) =>
             {
                 AppBackground.background = darkred.Background;
                 setBackgrounds();
                 darkred.Background = AppBackground.background;
             };
+
             darkgreen.Click += (sender, e) =>
             {
                 AppBackground.background = darkgreen.Background;
@@ -81,11 +81,11 @@ namespace EFRFrontEndTest2
                 darkgreen.Background = AppBackground.background;
             };
         }
+
         protected void setBackgrounds()
         {
             GridLayout background = FindViewById<GridLayout>(Resource.Id.colorgrid);
             background.Background = AppBackground.background;
         }
-
     }
 }

@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Security.Cryptography;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Util;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -19,8 +9,8 @@ namespace EFRFrontEndTest2.Fragments
     {
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
+        private BottomMenuTest _main;
 
-        private EFRFrontEndTest2.BottomMenuTest _main;
         public Solve(EFRFrontEndTest2.BottomMenuTest main)
         {
             _main = main;
@@ -64,30 +54,35 @@ namespace EFRFrontEndTest2.Fragments
                 user.SubjectName = "Mathematics";
                 _main.LoadFragment(Math.Id);
             };
+
             History.Click += delegate
             {
                 user.SubjectID = 4;
                 user.SubjectName = "History";
                 _main.LoadFragment(History.Id);
             };
+
             Science.Click += delegate
             {
                 user.SubjectID = 3;
                 user.SubjectName = "Science";
                 _main.LoadFragment(Science.Id);
             };
+
             English.Click += delegate
             {
                 user.SubjectID = 2;
                 user.SubjectName = "English";
                 _main.LoadFragment(English.Id);
             };
+
             Geography.Click += delegate
             {
                 user.SubjectID = 5;
                 user.SubjectName = "Geography";
                 _main.LoadFragment(Geography.Id);
             };
+
             General.Click += delegate
             {
                 user.SubjectID = 6;

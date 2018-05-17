@@ -155,8 +155,6 @@
     <Compile Include="Assets\Charities_Selection_Layout\Charity.cs" />
     <Compile Include="Assets\SingleUserObject.cs" />
     <Compile Include="Assets\UserObject.cs" />
-    <Compile Include="BubbleLiveFeedActivity.cs" />
-    <Compile Include="CharitySelectionScreenActivity.cs" />
     <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="CreateAccountScreenActivity.cs" />
     <Compile Include="Fragments\AccountSettings.cs" />
@@ -180,11 +178,8 @@
     <Compile Include="Assets\DynamicSize\DynamicSize.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
-    <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\CreateAccountScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -210,9 +205,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\LevelUp.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\CharityFilterPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ColorPicker.axml">
@@ -515,6 +507,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ScienceIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\CharityFilterPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

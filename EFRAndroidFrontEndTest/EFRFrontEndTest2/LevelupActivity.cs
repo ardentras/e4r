@@ -1,16 +1,8 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Timers;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -33,7 +25,6 @@ namespace EFRFrontEndTest2
             {
                 Finish();
             };
-
         }
     }
 }

@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Animation;
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 
@@ -22,6 +15,7 @@ namespace EFRFrontEndTest2.Fragments
 {
     public class Feeds : Android.Support.V4.App.Fragment
     {
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,9 +32,11 @@ namespace EFRFrontEndTest2.Fragments
         public static Feeds NewInstance()
         {
             Feeds temp = new Feeds();
+
             return temp;
         }
         View m_view;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
@@ -95,6 +91,7 @@ namespace EFRFrontEndTest2.Fragments
                         else
                             img.TranslationX += 3;
                     }
+
                     //remove the bubble and increment the counter
                     if (1 == f.Animation.AnimatedFraction)
                     {
@@ -109,9 +106,10 @@ namespace EFRFrontEndTest2.Fragments
 
             return m_view;
         }
+
         public async Task<bool> CallDatabase()
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri("http://34.216.143.255:3002/api/bubble_feed"));
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri("http://34.216.143.255:3002/api/bubble_feed"));
             request.ContentType = "application/json";
             request.Method = "Get";
             bool spawn = true;
@@ -124,15 +122,15 @@ namespace EFRFrontEndTest2.Fragments
                     using (Stream stream = response.GetResponseStream())
                     {
                         // Use this stream to build a JSON document object:
-                        JsonValue jsonDoc = JsonObject.Load(stream);
+                        JsonValue jsonDoc = JsonValue.Load(stream);
                         JsonArray data = (JsonArray)jsonDoc["data"];
                         if (prevdata != data)
                         {
-                            if (((JsonValue)data[0])["donated"] != ((JsonValue)prevdata[0])["donated"])
+                            if ((data[0])["donated"] != (prevdata[0])["donated"])
                             {
                                 for (int x = 0; x < data.Count; x++)
                                 {
-                                    spawnBubble(((JsonValue)data[x])["donated"]);
+                                    spawnBubble((data[x])["donated"]);
                                     Thread.Sleep(100);
                                 }
                             }
@@ -141,15 +139,15 @@ namespace EFRFrontEndTest2.Fragments
                                 int y;
                                 for (int x = 0; x < data.Count && x < prevdata.Count; x++)
                                 {
-                                    if (((JsonValue)data[x])["donated"] != ((JsonValue)prevdata[x])["donated"])
+                                    if ((data[x])["donated"] != (prevdata[x])["donated"])
                                     {
-                                        spawnBubble(((JsonValue)data[x])["donated"]);
+                                        spawnBubble((data[x])["donated"]);
                                         Thread.Sleep(100);
                                     }
                                 }
                                 for (y = 0; y < data.Count; y++)
                                 {
-                                    spawnBubble(((JsonValue)data[y])["donated"]);
+                                    spawnBubble((data[y])["donated"]);
                                     Thread.Sleep(100);
                                 }
                             }
@@ -161,6 +159,7 @@ namespace EFRFrontEndTest2.Fragments
             }
             return true;
         }
+
         public void spawnBubble(int spawn)
         {
 
@@ -217,6 +216,7 @@ namespace EFRFrontEndTest2.Fragments
                 }
             };
         }
+
         protected void setBackgrounds()
         {
             if (AppBackground.background != null)

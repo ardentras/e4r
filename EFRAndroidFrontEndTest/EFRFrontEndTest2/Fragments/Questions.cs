@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using System.Json;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
-using System.Timers;
 
 using EFRFrontEndTest2.Assets;
-using System.IO;
 using System.Net;
 
 namespace EFRFrontEndTest2.Fragments
 {
     public struct Question
     {
+
         public Question(JsonValue block)
         {
             m_QuestionText = WebUtility.HtmlDecode(block["QuestionText"].ToString());
@@ -59,6 +51,7 @@ namespace EFRFrontEndTest2.Fragments
         private CallDatabase m_database;
         private JsonValue m_questionBlock;
         private Question currentquestion;
+        private int QuestionsInBlock = 0;
         private int QuestionCount = 0;
         private int blockID = -1;
         private TextView question_view;
@@ -80,7 +73,6 @@ namespace EFRFrontEndTest2.Fragments
         {
             m_database.UpdateUO().Wait();
             base.OnStop();
-
         }
         
         public override void OnCreate(Bundle savedInstanceState)
@@ -99,6 +91,7 @@ namespace EFRFrontEndTest2.Fragments
         public static Questions NewInstance(BottomMenuTest main)
         {
             Questions temp = new Questions(main);
+
             return temp;
         }
 
@@ -121,7 +114,7 @@ namespace EFRFrontEndTest2.Fragments
                     edit.PutInt("QuestionNum", QuestionCount);
                     edit.Apply();
                     QuestionAnswered = false;
-                    if (QuestionCount >= 10)    
+                    if (QuestionCount >= QuestionsInBlock)    
                     {
                         Task.Run(async () => { await NextBlock(); }).Wait();
                         QuestionCount = 0;
@@ -205,6 +198,7 @@ namespace EFRFrontEndTest2.Fragments
                     }
                 }
             };
+
             return view;
         }
 
@@ -235,7 +229,6 @@ namespace EFRFrontEndTest2.Fragments
             }
 
             NextQuestion();
-
         }
 
         private async Task NextBlock()
@@ -251,6 +244,7 @@ namespace EFRFrontEndTest2.Fragments
                 if (user.BlocksRemaining != 0)
                 {
                     m_questionBlock = block["question_block"];
+                    QuestionsInBlock = m_questionBlock.Count;
                     blockID = m_questionBlock[0]["QuestionBlockID"];
                     currentquestion = new Question(m_questionBlock[0]);
 
@@ -261,7 +255,6 @@ namespace EFRFrontEndTest2.Fragments
                     edit.PutInt("subject", user.SubjectID);
                     edit.PutInt("difficulty", user.Difficulty);
                     edit.Apply();
-
                 }
             }
         }
@@ -300,7 +293,6 @@ namespace EFRFrontEndTest2.Fragments
                 case 503: // Network issues
                 case 504:
                     {
-
                         alert.SetMessage(m_database.responce.m_reason);
                         alert.Show();
                         break;
@@ -312,7 +304,6 @@ namespace EFRFrontEndTest2.Fragments
                         break;
                     }
             }
-
         }
 
         protected void CorrectAnswer()
@@ -331,6 +322,7 @@ namespace EFRFrontEndTest2.Fragments
                 builder.Show();
             }
         }
+
         protected void SetBackgrounds()
         {
             if (AppBackground.background != null)

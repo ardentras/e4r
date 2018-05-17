@@ -2,8 +2,6 @@
 using Android.Content;
 using Android.OS;
 using Android.Util;
-using System.Threading.Tasks;
-
 
 namespace EFRFrontEndTest2
 {

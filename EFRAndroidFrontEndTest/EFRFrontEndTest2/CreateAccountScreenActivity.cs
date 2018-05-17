@@ -3,12 +3,6 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.IO;
-using System.Json;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -80,8 +74,7 @@ namespace EFRFrontEndTest2
                             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                             AlertDialog alert = dialog.Create();
                             alert.SetTitle("You couldn't log in");
-                            alert.SetButton("OK", (c, ev) =>
-                            { });
+                            alert.SetButton("OK", (c, ev) => { });
                             alert.SetMessage(responce.m_reason);
                             alert.Show();
                             usernameErrorBox.Visibility = invisible;
@@ -129,8 +122,7 @@ namespace EFRFrontEndTest2
                     Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                     AlertDialog alert = dialog.Create();
                     alert.SetTitle("");
-                    alert.SetButton("OK", (c, ev) =>
-                    { });
+                    alert.SetButton("OK", (c, ev) => { });
                     switch (responce.m_code)
                     {
                         case 201:

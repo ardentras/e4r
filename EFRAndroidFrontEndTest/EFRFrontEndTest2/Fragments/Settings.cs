@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Text;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -19,10 +12,12 @@ namespace EFRFrontEndTest2.Fragments
         private EFRFrontEndTest2.BottomMenuTest _main;
         private UserObject uo = SingleUserObject.getObject();
         View view = null;
+
         public Settings(EFRFrontEndTest2.BottomMenuTest main)
         {
             _main = main;
         }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -56,7 +51,6 @@ namespace EFRFrontEndTest2.Fragments
             TextView initials = view.FindViewById<TextView>(Resource.Id.initials);
             TextView backgroundSelection = view.FindViewById<TextView>(Resource.Id.Color_Picker);
 
-
             if (uo.FirstName != "" && uo.LastName != "")
             {
                 initials.Text = new StringBuilder(uo.FirstName[0].ToString().ToUpper()).Append('.').Append(uo.LastName[0].ToString().ToUpper()).ToString();
@@ -73,17 +67,19 @@ namespace EFRFrontEndTest2.Fragments
             {
                 initials.Text = "New User";
             }
-            
 
             accountSettings.Click += delegate {
                 _main.LoadFragment(accountSettings.Id);
             };
+
             generalSettings.Click += delegate {
                 _main.LoadFragment(generalSettings.Id);
             };
+
             charitySelection.Click += delegate {
                 _main.LoadFragment(charitySelection.Id);
             };
+
             logoutBTN.Click += delegate
             {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
@@ -96,6 +92,7 @@ namespace EFRFrontEndTest2.Fragments
                 });
                 alert.Show();
             };
+
             backgroundSelection.Click += delegate 
             {
                 _main.LoadFragment(backgroundSelection.Id);
@@ -103,6 +100,7 @@ namespace EFRFrontEndTest2.Fragments
 
             return view;
         }
+
         protected void setBackgrounds()
         {
             if (AppBackground.background != null)

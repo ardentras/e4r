@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using System.Text;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -18,6 +10,7 @@ namespace EFRFrontEndTest2.Fragments
     {
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -37,6 +30,7 @@ namespace EFRFrontEndTest2.Fragments
 
             return temp;
         }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             //Use this to initialize all the click handlers and stuff

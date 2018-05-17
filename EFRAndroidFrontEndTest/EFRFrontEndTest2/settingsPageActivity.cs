@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -20,6 +15,7 @@ namespace EFRFrontEndTest2
             base.OnResume();
             setBackground();
         }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -55,6 +51,7 @@ namespace EFRFrontEndTest2
                 {
                     builder.Dismiss();
                 };
+
                 buttonDelete.Click += delegate
                 {
                     UserObject obj = SingleUserObject.getObject();
@@ -64,41 +61,48 @@ namespace EFRFrontEndTest2
                     Android.Widget.Toast.MakeText(this, "data deleted", ToastLength.Short).Show();
                     builder.Dismiss();
                 };
-                builder.Show();
 
+                builder.Show();
             };
+
             sound.ProgressChanged += (sender, e) =>
             {
                 //how to save data
                 edit.PutInt("sound", sound.Progress);
                 edit.Commit();
             };
+
             music.ProgressChanged += (sender, e) =>
             {
                 edit.PutInt("music", music.Progress);
                 edit.Commit();
             };
+
             note1.Click += (sender, e) =>
             {
                 edit.PutBoolean("notifications", note1.Checked);
                 edit.Commit();
             };
+
             note2.Click += (sender, e) =>
             {
                 edit.PutBoolean("bubbleNotifications", note2.Checked);
                 edit.Commit();
             };
+
             achievements.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(AchievementsPageActivity));
                 StartActivity(intent);
             };
+
             background.Click += (sender, e) =>
             {
                 var intent = new Intent(this, typeof(ColorPickerActivity));
                 StartActivity(intent);
             };
         }
+
         protected void setBackground()
         {
             if (AppBackground.background != null)

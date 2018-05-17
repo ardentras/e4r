@@ -1,19 +1,11 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Views;
-using Android.Widget;
 using System;
-using System.Threading.Tasks;
-using Android.Support.V4.Widget;
 using Android.Support.V7.App;
-
-using EFRFrontEndTest2.Assets;
 using EFRFrontEndTest2.Assets.BottomNavagation;
-using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using EFRFrontEndTest2.Fragments;
-
 
 /*
  * NOTE:  This new UI uses fragments, which means we don't need activities no more 
@@ -33,11 +25,12 @@ namespace EFRFrontEndTest2
     [Activity(Label = "Main")]
     public class BottomMenuTest : AppCompatActivity
     {
-        //this is our bottom navigation
+        //This is our bottom navigation
         private BottomNavigationView bottomNavigation;
-        //this is use to keep track of the previous fragment
-        //for back press
+        //This is use to keep track of the previous fragment
+        //For back press
         private Android.Support.V4.App.Fragment previous;
+
         //Main function, called on run
         protected override void OnCreate(Bundle bundle)
         {
@@ -53,29 +46,32 @@ namespace EFRFrontEndTest2
                 int i = 0;
                 i++;
             }
-            //this is needed to display the home page
+            //This is needed to display the home page
             SupportFragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, Home.NewInstance())
                 .Commit();
-            //add the handler so it knows where to go base on id of the tab
+            //Add the handler so it knows where to go base on id of the tab
             bottomNavigation = FindViewById<BottomNavigationView>(Resource.Id.bottom_nav);
             bottomNavigation.NavigationItemSelected += BottomNavigation_NavigationItemSelected;
         }
+
         private void BottomNavigation_NavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs e)
         {
             LoadFragment(e.Item.ItemId);
         }
+
         public void LogOut()
         {
-            //changed into dashboard activity for new userdashboard, only test
+            //Changed into dashboard activity for new userdashboard, only test
             var intent = new Intent(this, typeof(LoginScreenActivity));
             StartActivity(intent);
-            //finish will destory this page
+            //Finish will destory this page
             Finish();
         }
+
         public void LoadFragment(int id)
         {
-            //this checks for the id of the selection
+            //This checks for the id of the selection
             Android.Support.V4.App.Fragment fragment = null;
             switch (id)
             {
@@ -94,8 +90,8 @@ namespace EFRFrontEndTest2
                     fragment = Home.NewInstance();
                     break;
                 case Resource.Id.action_solve:
-                    //passing this, because it needs to access LoadFragment(int id)
-                    //only if this page has sub routes tho
+                    //Passing this, because it needs to access LoadFragment(int id)
+                    //Only if this page has sub routes tho
                     fragment = Solve.NewInstance(this);
                     break;
                 case Resource.Id.action_feed:
@@ -108,7 +104,7 @@ namespace EFRFrontEndTest2
                     fragment = AccountSettings.NewInstance();
                     break;
                 case Resource.Id.general_settings:
-                    //fragment = GeneralSettings.NewInstance();
+                    //Fragment = GeneralSettings.NewInstance();
                     break;
                 case Resource.Id.charity_selection:
                     fragment = CharitySelection.NewInstance(this);
@@ -120,8 +116,8 @@ namespace EFRFrontEndTest2
 
             if (fragment == null)
                 return;
-            //if the selection is not the main navigators,
-            //push it to stack so we can back button out of it
+            //If the selection is not the main navigators,
+            //Push it to stack so we can back button out of it
             if (id != Resource.Id.action_home &&
                 id != Resource.Id.action_solve &&
                 id != Resource.Id.action_feed &&
@@ -133,8 +129,8 @@ namespace EFRFrontEndTest2
                     .AddToBackStack(previous.Class.Name)
                     .Commit();
             }
-            //if it is the main navigators
-            //just simple replace the view
+            //If it is the main navigators
+            //Just simple replace the view
             else
             {
                 if (SupportFragmentManager.BackStackEntryCount > 0)
@@ -148,17 +144,18 @@ namespace EFRFrontEndTest2
                 .Replace(Resource.Id.content_frame, fragment)
                 .Commit();
             }
-            //keep track of previous fragment
+            //Keep track of previous fragment
             previous = fragment;
         }
+
         public override void OnBackPressed()
         {
-            //if anything is on the stack, just back out
+            //If anything is on the stack, just back out
             if (SupportFragmentManager.BackStackEntryCount > 0)
             {
                 SupportFragmentManager.PopBackStack();
             }
-            ////if nothing is on stack, dont do anything
+            //If nothing is on stack, dont do anything
             //else
             //{
             //    return;
