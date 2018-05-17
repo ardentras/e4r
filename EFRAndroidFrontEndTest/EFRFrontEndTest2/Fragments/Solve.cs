@@ -54,10 +54,10 @@ namespace EFRFrontEndTest2.Fragments
 
             ImageButton Math = view.FindViewById<ImageButton>(Resource.Id.math_button);
             ImageButton History = view.FindViewById<ImageButton>(Resource.Id.history_button);
-            ImageButton Chemistry = view.FindViewById<ImageButton>(Resource.Id.chemistry_button);
-            ImageButton Biology = view.FindViewById<ImageButton>(Resource.Id.biology_button);
-            ImageButton Physics = view.FindViewById<ImageButton>(Resource.Id.physics_button);
-            ImageButton Shuffle = view.FindViewById<ImageButton>(Resource.Id.shuffle_button);
+            ImageButton Science = view.FindViewById<ImageButton>(Resource.Id.science_button);
+            ImageButton English = view.FindViewById<ImageButton>(Resource.Id.english_button);
+            ImageButton Geography = view.FindViewById<ImageButton>(Resource.Id.geography_button);
+            ImageButton General = view.FindViewById<ImageButton>(Resource.Id.general_button);
 
             Math.Click += delegate
             {
@@ -67,55 +67,33 @@ namespace EFRFrontEndTest2.Fragments
             };
             History.Click += delegate
             {
-                user.SubjectID = 1;
-                user.SubjectName = "Mathematics";
+                user.SubjectID = 4;
+                user.SubjectName = "History";
                 _main.LoadFragment(History.Id);
             };
-            Chemistry.Click += delegate
+            Science.Click += delegate
             {
-                user.SubjectID = 1;
-                user.SubjectName = "Mathematics";
-                _main.LoadFragment(Chemistry.Id);
+                user.SubjectID = 3;
+                user.SubjectName = "Science";
+                _main.LoadFragment(Science.Id);
             };
-            Biology.Click += delegate
+            English.Click += delegate
             {
-                user.SubjectID = 1;
-                user.SubjectName = "Mathematics";
-                _main.LoadFragment(Biology.Id);
+                user.SubjectID = 2;
+                user.SubjectName = "English";
+                _main.LoadFragment(English.Id);
             };
-            Physics.Click += delegate
+            Geography.Click += delegate
             {
-                user.SubjectID = 1;
-                user.SubjectName = "Mathematics";
-                _main.LoadFragment(Physics.Id);
+                user.SubjectID = 5;
+                user.SubjectName = "Geography";
+                _main.LoadFragment(Geography.Id);
             };
-            Shuffle.Click += delegate
+            General.Click += delegate
             {
-                byte[] number = new byte[1];
-                rand.GetBytes(number);
-                switch ((int)number[0] % 5)
-                {
-                    case 2: // Implement 2 - 5 when questions are added and API call allows it
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 1:
-                        {
-                            user.SubjectID = 1;
-                            user.SubjectName = "Mathematics";
-                            _main.LoadFragment(Math.Id);
-                            break;
-                        }
-                    default: // Should never reach this stage, but defaults to math just in case
-                        user.SubjectID = 1;
-                        user.SubjectName = "Mathematics";
-                        _main.LoadFragment(Math.Id);
-                        break;
-                }
-
-                user.SubjectID = 1;
-                user.SubjectName = "Mathematics";
-                _main.LoadFragment(Physics.Id);
+                user.SubjectID = 6;
+                user.SubjectName = "General";
+                _main.LoadFragment(General.Id);
             };
 
             return view;

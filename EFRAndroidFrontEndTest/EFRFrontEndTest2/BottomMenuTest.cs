@@ -76,9 +76,10 @@ namespace EFRFrontEndTest2
                     break;
                 case Resource.Id.math_button:
                 case Resource.Id.history_button:
-                case Resource.Id.chemistry_button:
-                case Resource.Id.biology_button:
-                case Resource.Id.physics_button:
+                case Resource.Id.science_button:
+                case Resource.Id.english_button:
+                case Resource.Id.geography_button:
+                case Resource.Id.general_button:
                     fragment = Difficulty.NewInstance(this);
                     break;
                 case Resource.Id.action_home:
