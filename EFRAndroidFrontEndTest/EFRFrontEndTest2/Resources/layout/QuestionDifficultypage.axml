@@ -3,7 +3,7 @@
     p1:orientation="vertical"
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
-    p1:id="@+id/linearLayout1"
+    p1:id="@+id/difficulty_background"
     p1:background="#ffffffff">
     <Button
         p1:layout_width="match_parent"
