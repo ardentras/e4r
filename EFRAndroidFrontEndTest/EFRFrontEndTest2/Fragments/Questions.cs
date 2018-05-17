@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using System.Timers;
 
 using EFRFrontEndTest2.Assets;
+using System.IO;
+using System.Net;
 
 namespace EFRFrontEndTest2.Fragments
 {
@@ -22,12 +24,12 @@ namespace EFRFrontEndTest2.Fragments
     {
         public Question(JsonValue block)
         {
-            m_QuestionText = block["QuestionText"].ToString();
-            m_QuestionOne = block["QuestionOne"].ToString();
-            m_QuestionTwo = block["QuestionTwo"].ToString();
-            m_QuestionThree = block["QuestionThree"].ToString();
-            m_QuestionFour = block["QuestionFour"].ToString();
-            m_CorrectAnswer = block["CorrectAnswer"].ToString();
+            m_QuestionText = WebUtility.HtmlDecode(block["QuestionText"].ToString());
+            m_QuestionOne = WebUtility.HtmlDecode(block["QuestionOne"].ToString());
+            m_QuestionTwo = WebUtility.HtmlDecode(block["QuestionTwo"].ToString());
+            m_QuestionThree = WebUtility.HtmlDecode(block["QuestionThree"].ToString());
+            m_QuestionFour = WebUtility.HtmlDecode(block["QuestionFour"].ToString());
+            m_CorrectAnswer = WebUtility.HtmlDecode(block["CorrectAnswer"].ToString());
             m_StatsOne = block["StatsOne"];
             m_StatsTwo = block["StatsTwo"];
             m_StatsThree = block["StatsThree"];

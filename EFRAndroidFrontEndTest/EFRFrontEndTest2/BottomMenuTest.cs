@@ -41,10 +41,18 @@ namespace EFRFrontEndTest2
         //Main function, called on run
         protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(bundle);
-            SetContentView(Resource.Layout.bottomMenu);
-            BottomNavigationView test = FindViewById<BottomNavigationView>(Resource.Id.bottom_nav);
-            ShiftMode.SetShiftMode(test, false, false);
+            try
+            {
+                base.OnCreate(bundle);
+                SetContentView(Resource.Layout.bottomMenu);
+                BottomNavigationView test = FindViewById<BottomNavigationView>(Resource.Id.bottom_nav);
+                ShiftMode.SetShiftMode(test, false, false);
+            }
+            catch (Exception e)  //////////////// REMOVE BEFORE DEPLOYMENT, THIS IS FOR TESTING
+            {
+                int i = 0;
+                i++;
+            }
             //this is needed to display the home page
             SupportFragmentManager.BeginTransaction()
                 .Replace(Resource.Id.content_frame, Home.NewInstance())
