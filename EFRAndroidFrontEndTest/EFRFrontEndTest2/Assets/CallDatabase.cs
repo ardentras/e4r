@@ -194,17 +194,11 @@ namespace EFRFrontEndTest2.Assets
                 m_userObject.SessionID = json["session_id"];
             }
             catch { }
+
             m_userObject.Json = json;
 
-            JsonValue user;
-            try
-            {
-                user = json["user_object"];
-            }
-            catch
-            {
-                user = json["userobject"]; // Both shouldnt fail, but the server returns boths in different cases
-            }
+            JsonValue user = json["userobject"];
+
             m_userObject.Timestamp = user["timestamp"];
 
             JsonValue game = user["game_data"];

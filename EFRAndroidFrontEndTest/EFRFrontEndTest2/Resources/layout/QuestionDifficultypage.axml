@@ -1,77 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/gridLayout1"
-    android:columnCount="2"
-    android:rowCount="4"
-    android:background="@drawable/gradientblue">
-    <ImageButton
-        android:layout_column="0"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:layout_row="0"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="1"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:padding="10dp"
-        android:scaleType="fitXY"
-        android:id="@+id/EasyButton"
-        android:background="@drawable/easygreen" />
-    <ImageButton
-        android:layout_column="1"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:layout_row="0"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="1"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:background="@drawable/normalyellow"
-        android:scaleType="fitXY"
-        android:id="@+id/NormalButton" />
-    <ImageButton
-        android:layout_column="0"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:layout_row="1"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="1"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:background="@drawable/redhard"
-        android:scaleType="fitXY"
-        android:id="@+id/HardButton" />
-    <ImageButton
-        android:layout_column="1"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:layout_row="1"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="1"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:background="@drawable/purpleexpert"
-        android:scaleType="fitXY"
-        android:id="@+id/HardestButton" />
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_column="0"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:layout_row="3"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="0.75"
-        android:tint="#00000000"
-        android:alpha="0" />
-    <ImageButton
-        android:id="@+id/continueButton"
-        android:layout_column="1"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:layout_row="3"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="0.75"
-        android:alpha="0" />
-</GridLayout>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1"
+    p1:background="#ffffffff">
+    <Button
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/easyButton"
+        p1:background="@drawable/settings_button"
+        p1:padding="15dp"
+        p1:layout_margin="25dp"
+        p1:text="Easy"
+        p1:textColor="#ff000000"
+        p1:textAllCaps="false"
+        p1:textSize="20dp" />
+    <Button
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/mediumButton"
+        p1:background="@drawable/settings_button"
+        p1:padding="15dp"
+        p1:layout_margin="25dp"
+        p1:text="Medium"
+        p1:textColor="#ff000000"
+        p1:textAllCaps="false"
+        p1:textSize="20dp" />
+    <Button
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/hardButton"
+        p1:background="@drawable/settings_button"
+        p1:layout_margin="25dp"
+        p1:text="Hard"
+        p1:textColor="#ff000000"
+        p1:textAllCaps="false"
+        p1:textSize="20dp" />
+</LinearLayout>
