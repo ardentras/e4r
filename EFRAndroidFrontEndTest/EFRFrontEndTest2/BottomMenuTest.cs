@@ -71,10 +71,7 @@ namespace EFRFrontEndTest2
             Android.Support.V4.App.Fragment fragment = null;
             switch (id)
             {
-                case Resource.Id.EasyButton:
-                case Resource.Id.NormalButton:
-                case Resource.Id.HardButton:
-                case Resource.Id.HardestButton:
+                case Resource.Id.easyButton:
                     fragment = Questions.NewInstance(this);
                     break;
                 case Resource.Id.math_button:

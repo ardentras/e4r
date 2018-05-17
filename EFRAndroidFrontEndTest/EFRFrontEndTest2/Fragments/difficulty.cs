@@ -39,29 +39,23 @@ namespace EFRFrontEndTest2.Fragments
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             view = inflater.Inflate(Resource.Layout.QuestionDifficultypage, container, false);
-            ImageButton EasyButton = view.FindViewById<ImageButton>(Resource.Id.EasyButton);
-            ImageButton NormalButton = view.FindViewById<ImageButton>(Resource.Id.NormalButton);
-            ImageButton HardButton = view.FindViewById<ImageButton>(Resource.Id.HardButton);
-            ImageButton HardestButton = view.FindViewById<ImageButton>(Resource.Id.HardestButton);
-            EasyButton.Click += delegate
+            Button easyButton = view.FindViewById<Button>(Resource.Id.easyButton);
+            Button mediumButton = view.FindViewById<Button>(Resource.Id.mediumButton);
+            Button hardButton = view.FindViewById<Button>(Resource.Id.hardButton);
+            easyButton.Click += delegate
             {
                 user.Difficulty = 0;
-                _main.LoadFragment(EasyButton.Id);
+                _main.LoadFragment(easyButton.Id); // Because any button will work
             };
-            NormalButton.Click += delegate
+            mediumButton.Click += delegate
             {
-                user.Difficulty = 0;
-                _main.LoadFragment(NormalButton.Id);
+                user.Difficulty = 1;
+                _main.LoadFragment(easyButton.Id); // Because any button will work
             };
-            HardButton.Click += delegate
+            hardButton.Click += delegate
             {
-                user.Difficulty = 0;
-                _main.LoadFragment(HardButton.Id);
-            };
-            HardestButton.Click += delegate
-            {
-                user.Difficulty = 0;
-                _main.LoadFragment(HardestButton.Id);
+                user.Difficulty = 2;
+                _main.LoadFragment(easyButton.Id); // Because any button will work
             };
             return view;
         }
