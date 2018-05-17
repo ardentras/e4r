@@ -44,7 +44,7 @@
             <ImageButton
                 android:src="@drawable/chemistryicon"
                 android:layout_height="150dp"
-                android:id="@+id/chemistry_button"
+                android:id="@+id/science_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
@@ -52,7 +52,7 @@
             <ImageButton
                 android:src="@drawable/biologyicon"
                 android:layout_height="150dp"
-                android:id="@+id/biology_button"
+                android:id="@+id/english_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
@@ -68,15 +68,15 @@
             <ImageButton
                 android:src="@drawable/physicsicon"
                 android:layout_height="150dp"
-                android:id="@+id/physics_button"
+                android:id="@+id/geography_button"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent" />
             <ImageButton
-                android:src="@drawable/shuffleicon"
+                android:src="@drawable/generalicon"
                 android:layout_height="match_parent"
-                android:id="@+id/shuffle_button"
+                android:id="@+id/general_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"

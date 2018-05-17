@@ -171,13 +171,15 @@ namespace EFRFrontEndTest2.Fragments
                     alert.Show();
                 }
             };
-            savebutton.Click += delegate
+            savebutton.Click += async delegate
             {
                 if (_selected != null && _current != _selected)
                 {
                     _current = _selected;
                     currentCharity.Text = _selected.Charity.Name;
                     uo.CharityName = _selected.Charity.Name;
+                    CallDatabase db = new CallDatabase();
+                    await db.UpdateUO();
                 }
             };
             for (int i = 0; i < _charities.Count; ++i, ++colorCodes_index)
