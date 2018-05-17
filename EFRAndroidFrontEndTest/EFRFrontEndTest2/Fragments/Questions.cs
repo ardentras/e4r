@@ -32,7 +32,7 @@ namespace EFRFrontEndTest2.Fragments
             m_StatsTwo = block["StatsTwo"];
             m_StatsThree = block["StatsThree"];
             m_StatsFour = block["StatsFour"];
-            m_HelpID = block["HelpID"];
+            m_HelpID = 0;
             m_QuestionID = block["QuestionID"];
             m_QuestionBlockID = block["QuestionBlockID"];
         }
