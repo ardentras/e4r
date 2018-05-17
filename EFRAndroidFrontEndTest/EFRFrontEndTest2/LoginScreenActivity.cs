@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.Threading.Tasks;
 using EFRFrontEndTest2.Assets;
 
 namespace EFRFrontEndTest2
@@ -13,6 +12,7 @@ namespace EFRFrontEndTest2
     public class LoginScreenActivity : Activity
     {
         private CallDatabase m_database;
+
         //Main function, called on run
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -86,6 +86,7 @@ namespace EFRFrontEndTest2
                                 break;
                             }
                     }
+
                     clicked = false;
                 }
             };
@@ -179,7 +180,6 @@ namespace EFRFrontEndTest2
                                     alert.Show();
                                     break;
                                 }
-                                
                         }
                     }
                     else
@@ -187,6 +187,7 @@ namespace EFRFrontEndTest2
                         Toast.MakeText(this, "Please enter your username and email", ToastLength.Short).Show();
                     }
                 };
+
                 builder.Show();
             };
 

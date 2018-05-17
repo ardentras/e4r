@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 
 namespace EFRFrontEndTest2.Assets
@@ -37,12 +29,12 @@ namespace EFRFrontEndTest2.Assets
     {
         public CallDatabase()
         {
-            m_userObject = SingleUserObject.getObject();
+            GetUserObject = SingleUserObject.getObject();
         }
 
         public async Task<Responce> RetreaveQuestionBlock()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}");
+            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + GetUserObject.SessionID + "\", " + GetUserObject.UserObjectForm() + " }}");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/q/request_block", bytestream);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
@@ -75,7 +67,7 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> UpdateUO()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + m_userObject.SessionID + "\", " + m_userObject.UserObjectForm() + " }}");
+            byte[] bytestream = Encoding.ASCII.GetBytes("{\"user\": { \"session\": \"" + GetUserObject.SessionID + "\", " + GetUserObject.UserObjectForm() + " }}");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/update_uo", bytestream, true);
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
@@ -86,7 +78,7 @@ namespace EFRFrontEndTest2.Assets
 
         public async Task<Responce> RenewSession()
         {
-            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"session\": \"{" + m_userObject.SessionID + "}\"} }");
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"session\": \"{" + GetUserObject.SessionID + "}\"} }");
             CancellationTokenSource cts = new CancellationTokenSource();
             Task task = APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
             await Task.WhenAny(task, Task.Delay(2000, cts.Token));
@@ -191,18 +183,18 @@ namespace EFRFrontEndTest2.Assets
         {
             try
             { // UO updating doesn't come with a session ID
-                m_userObject.SessionID = json["session_id"];
+                GetUserObject.SessionID = json["session_id"];
             }
             catch { }
 
-            m_userObject.Json = json;
+            GetUserObject.Json = json;
 
             JsonValue user = json["userobject"];
 
-            m_userObject.Timestamp = user["timestamp"];
+            GetUserObject.Timestamp = user["timestamp"];
 
             JsonValue game = user["game_data"];
-            m_userObject.BlocksRemaining = game["blocksRemaining"];
+            GetUserObject.BlocksRemaining = game["blocksRemaining"];
             //m_userObject.CompletedBlocks =
             //JsonArray stuff = new JsonArray(game["completed_blocks"]);
             JsonArray array = (JsonArray)game["completed_blocks"];
@@ -213,21 +205,21 @@ namespace EFRFrontEndTest2.Assets
             {
                 numbers[i] = array[i];
             }
-            m_userObject.CompletedBlocks = numbers;
+            GetUserObject.CompletedBlocks = numbers;
 
 
-            m_userObject.Difficulty = game["difficulty"];
-            m_userObject.SubjectID = game["subject_id"];
-            m_userObject.SubjectName = game["subject_name"];
-            m_userObject.TotalDonated = game["totalDonated"];
-            m_userObject.TotalQuestions = game["totalQuestions"];
+            GetUserObject.Difficulty = game["difficulty"];
+            GetUserObject.SubjectID = game["subject_id"];
+            GetUserObject.SubjectName = game["subject_name"];
+            GetUserObject.TotalDonated = game["totalDonated"];
+            GetUserObject.TotalQuestions = game["totalQuestions"];
 
             user = user["user_data"];
-            m_userObject.CharityName = user["selected_charity"];
-            m_userObject.Email = user["email"];
-            m_userObject.FirstName = user["first_name"];
-            m_userObject.LastName = user["last_name"];
-            m_userObject.Username = user["username"];
+            GetUserObject.CharityName = user["selected_charity"];
+            GetUserObject.Email = user["email"];
+            GetUserObject.FirstName = user["first_name"];
+            GetUserObject.LastName = user["last_name"];
+            GetUserObject.Username = user["username"];
             JsonArray array2 = (JsonArray)user["favorite_charities"];
             string[] strings = new string[array2.Count];
 
@@ -235,43 +227,12 @@ namespace EFRFrontEndTest2.Assets
             {
                 strings[i] = array2[i];
             }
-            m_userObject.FavoriteCharities = strings;
+            GetUserObject.FavoriteCharities = strings;
         }
 
-        public UserObject GetUserObject { get { return m_userObject; } }
+        public UserObject GetUserObject { get; }
         public Responce responce { get { return LastResponce; } }
-        
-        private UserObject m_userObject;
+
         private Responce LastResponce;
     }
 }
-
-
-
-// User Object example (depricated)
-/* "{
- *      "action": "LOGIN",
- *      "code": 200,
- *      "response": "Success",
- *      "session_id": "77b96593-1516-481e-8479-e944c83ff587",
- *      "type": "GET",
- *          "user_object": 
- *          {
- *              "game_data": 
- *              {
- *                  "completed_blocks": [1, 7, 29],
- *                  "difficulty": "0",
- *                  "subject_id": "1",
- *                  "subject_name": ""
- *              },
- *          "timestamp": "",
- *          "user_data": 
- *          {
- *              "charity_name": "",
- *              "first_name": "",
- *              "last_name": "",
- *              "username": "abc"
- *          }
- *      }
- * }"
- */

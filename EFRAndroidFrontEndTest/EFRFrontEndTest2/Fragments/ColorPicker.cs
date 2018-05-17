@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets;
@@ -91,8 +82,10 @@ namespace EFRFrontEndTest2.Fragments
                 AppBackground.background = Resources.GetDrawable(Resource.Drawable.GradientDarkGreen);
                 setBackgrounds();
             };
+
             return view;
         }
+
         protected void setBackgrounds()
         {
             GridLayout background = view.FindViewById<GridLayout>(Resource.Id.colorgrid);

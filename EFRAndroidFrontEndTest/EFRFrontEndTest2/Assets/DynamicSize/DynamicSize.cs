@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EFRFrontEndTest2.Assets.DynamicSize
+﻿namespace EFRFrontEndTest2.Assets.DynamicSize
 {
     public class DynamicSize
     {

@@ -19,17 +19,17 @@
             android:id="@+id/linearLayout2">
             <ImageButton
                 android:src="@drawable/mathicon"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/math_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent" />
             <ImageButton
-                android:src="@drawable/historyicon"
-                android:layout_height="match_parent"
+                android:src="@drawable/englishicon"
+                android:layout_height="200dp"
                 android:layout_width="50dp"
-                android:id="@+id/history_button"
+                android:id="@+id/english_button"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent" />
@@ -42,17 +42,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout3">
             <ImageButton
-                android:src="@drawable/chemistryicon"
-                android:layout_height="150dp"
+                android:src="@drawable/scienceicon"
+                android:layout_height="200dp"
                 android:id="@+id/science_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent" />
             <ImageButton
-                android:src="@drawable/biologyicon"
-                android:layout_height="150dp"
-                android:id="@+id/english_button"
+                android:src="@drawable/historyicon"
+                android:layout_height="200dp"
+                android:id="@+id/history_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
@@ -67,7 +67,7 @@
             android:id="@+id/linearLayout4">
             <ImageButton
                 android:src="@drawable/geographyicon"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:id="@+id/geography_button"
                 android:layout_weight="1"
                 android:layout_width="50dp"
@@ -75,7 +75,7 @@
                 android:background="@android:color/transparent" />
             <ImageButton
                 android:src="@drawable/generalicon"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:id="@+id/general_button"
                 android:layout_width="50dp"
                 android:layout_weight="1"

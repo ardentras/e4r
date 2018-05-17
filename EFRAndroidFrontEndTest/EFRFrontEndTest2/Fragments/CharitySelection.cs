@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EFRFrontEndTest2.Assets.Charities_Selection_Layout;
@@ -18,12 +12,8 @@ namespace EFRFrontEndTest2.Fragments
     public class CharitySelection : Android.Support.V4.App.Fragment
     {
         private UserObject uo = SingleUserObject.getObject();
-        private CharityLayout _current = null;
-        private CharityLayout _selected = null;
         private Context _ctx = null;
         View view = null;
-        //current list of available charities
-        private List<Charity> _favorites = new List<Charity>();
         private List<Charity> _charities = new List<Charity>();
         private string[] colorCodes = { "#FF7D61", "#5EFDFF", "#5787FF", "#FFD04A" };
         private int colorCodes_index = 0;
@@ -80,25 +70,17 @@ namespace EFRFrontEndTest2.Fragments
                         "is an organization that serves veterans and service members who incurred a physical or mental injury, illness, or wound, co-incident to their military service on or after September 11, 2001 and their families.",
                         "https://www.woundedwarriorproject.org/")
         };
-        public CharityLayout Current
-        {
-            get { return _current; }
-            set { _current = value; }
-        }
-        public CharityLayout Selected
-        {
-            get { return _selected; }
-            set { _selected = value; }
-        }
-        public List<Charity> Favorites
-        {
-            get { return _favorites; }
-            set { _favorites = value; }
-        }
+        public CharityLayout Current { get; set; } = null;
+
+        public CharityLayout Selected { get; set; } = null;
+
+        public List<Charity> Favorites { get; set; } = new List<Charity>();
+
         public CharitySelection(Context ctx)
         {
             _ctx = ctx;
         }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -141,19 +123,19 @@ namespace EFRFrontEndTest2.Fragments
             }
             currentInfo.Click += delegate
             {
-                if (_current != null && _current.Charity.Name != "None")
+                if (Current != null && Current.Charity.Name != "None")
                 {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
                     AlertDialog alert = dialog.Create();
-                    alert.SetTitle(_current.Charity.Name);
-                    alert.SetMessage(_current.Charity.Description);
+                    alert.SetTitle(Current.Charity.Name);
+                    alert.SetMessage(Current.Charity.Description);
                     alert.SetButton("OK", (c, ev) =>
                     {
                         alert.Dismiss();
                     });
                     alert.SetButton2("Learn More", (c, ev) =>
                     {
-                        var uri = Android.Net.Uri.Parse(_current.Charity.Url);
+                        var uri = Android.Net.Uri.Parse(Current.Charity.Url);
                         var intent = new Intent(Intent.ActionView, uri);
                         StartActivity(intent);
                     });
@@ -171,17 +153,19 @@ namespace EFRFrontEndTest2.Fragments
                     alert.Show();
                 }
             };
+
             savebutton.Click += async delegate
             {
-                if (_selected != null && _current != _selected)
+                if (Selected != null && Current != Selected)
                 {
-                    _current = _selected;
-                    currentCharity.Text = _selected.Charity.Name;
-                    uo.CharityName = _selected.Charity.Name;
+                    Current = Selected;
+                    currentCharity.Text = Selected.Charity.Name;
+                    uo.CharityName = Selected.Charity.Name;
                     CallDatabase db = new CallDatabase();
                     await db.UpdateUO();
                 }
             };
+
             for (int i = 0; i < _charities.Count; ++i, ++colorCodes_index)
             {
                 if (colorCodes_index >= 4)
@@ -193,12 +177,13 @@ namespace EFRFrontEndTest2.Fragments
                 {
                     if (_charities[i].Name == uo.CharityName)
                     {
-                        _current = temp;
+                        Current = temp;
                         found = true;
                     }
                 }
                 charities.AddView(temp.Container);
             }
+
             return view;
         }
 

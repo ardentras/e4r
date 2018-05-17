@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EFRFrontEndTest2.Assets
+﻿namespace EFRFrontEndTest2.Assets
 {
     class SingleUserObject
     {
