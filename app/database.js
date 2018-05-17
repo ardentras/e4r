@@ -16,8 +16,8 @@ const TOP_TEN_MON_FILE_LOC = process.cwd() + "/e4r-toptenmon";
 class TDatabase {
     	// Creates the connection to the database given the passed parameters.
     constructor(config) {
-        this.bubbleFeedIsActive = false;
-        this.bubbleCharity = "";
+        this.bubbleFeedIsActive = true;
+        this.bubbleCharity = "American Red Cross";
         this.recentDonations = [];
         this.totalRaised = 0;
         this.topTen = [];
@@ -673,14 +673,17 @@ class TDatabase {
             client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
         }
 
+        console.log(data.donated);
         if (data.donated != undefined) {
             var donation = parseInt(data.donated, 10);
+
+            console.log(data.userobject.user_data.selected_charity);
 
             if (donation > 0 && data.userobject.user_data.selected_charity == this.bubbleCharity) {
                 var currtime = Date.now();
 
                 this.totalRaised += donation;
-                this.recentDonations.push({username: data.userobject.user_data.username, donated: donation, timestamp: currtime});
+                this.recentDonations.push({username: data.userobject.user_data.username, donated: donation, timestamp: currtime, charity: data.userobject.user_data.selected_charity});
             }
         }
 
