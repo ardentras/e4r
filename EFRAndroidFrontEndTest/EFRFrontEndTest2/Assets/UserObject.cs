@@ -146,7 +146,9 @@ namespace
 
         private void UpdateLevel()
         {
-            m_Level = (int)(Math.Sqrt(TotalQuestions / 10) + TotalDonated / 10 + 1);
+            m_Level = (int)(Math.Sqrt(TotalQuestions) + TotalDonated);
+            if (m_Level <= 0)
+                m_Level = 1;
         }
     }
 }
