@@ -119,7 +119,7 @@ namespace EFRFrontEndTest2.Fragments
                     edit.PutInt("QuestionNum", QuestionCount);
                     edit.Apply();
                     QuestionAnswered = false;
-                    if (QuestionCount >= 10)
+                    if (QuestionCount >= 10)    
                     {
                         Task.Run(async () => { await NextBlock(); }).Wait();
                         QuestionCount = 0;
@@ -208,7 +208,6 @@ namespace EFRFrontEndTest2.Fragments
 
         private void setup()
         {
-            //setBackground();
 
             m_database = new CallDatabase();
             user = SingleUserObject.getObject();
@@ -277,6 +276,7 @@ namespace EFRFrontEndTest2.Fragments
             switch (m_database.responce.m_code)
             {
                 case 200:
+                case 0:
                     {
                         if (user.BlocksRemaining != 0)
                         {
@@ -339,16 +339,3 @@ namespace EFRFrontEndTest2.Fragments
         }
     }
 }
-
-
-// Code that hasnt been coppied over yet.
-/*
-        protected void setBackground()
-        {
-            if (AppBackground.background != null)
-            {
-                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.questionlayout);
-                background.Background = AppBackground.background;
-            }
-        }
-*/
