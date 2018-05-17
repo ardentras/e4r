@@ -18,6 +18,7 @@ namespace EFRFrontEndTest2.Fragments
     {
         private EFRFrontEndTest2.BottomMenuTest _main;
         private UserObject uo = SingleUserObject.getObject();
+        View view = null;
         public Settings(EFRFrontEndTest2.BottomMenuTest main)
         {
             _main = main;
@@ -28,6 +29,13 @@ namespace EFRFrontEndTest2.Fragments
 
             // Create your fragment here
         }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackgrounds();
+        }
+
         public static Settings NewInstance(EFRFrontEndTest2.BottomMenuTest main)
         {
             Settings temp = new Settings(main);
@@ -38,7 +46,9 @@ namespace EFRFrontEndTest2.Fragments
         {
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-            View view = inflater.Inflate(Resource.Layout.Settings, container, false);
+            view = inflater.Inflate(Resource.Layout.Settings, container, false);
+            setBackgrounds();
+
             TextView accountSettings = view.FindViewById<TextView>(Resource.Id.account_settings);
             TextView generalSettings = view.FindViewById<TextView>(Resource.Id.general_settings);
             TextView charitySelection = view.FindViewById<TextView>(Resource.Id.charity_selection);
@@ -92,6 +102,14 @@ namespace EFRFrontEndTest2.Fragments
             };
 
             return view;
+        }
+        protected void setBackgrounds()
+        {
+            if (AppBackground.background != null)
+            {
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.settings_background);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

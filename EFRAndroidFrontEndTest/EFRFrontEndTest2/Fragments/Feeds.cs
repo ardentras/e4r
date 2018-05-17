@@ -28,6 +28,13 @@ namespace EFRFrontEndTest2.Fragments
 
             // Create your fragment here
         }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackgrounds();
+        }
+
         public static Feeds NewInstance()
         {
             Feeds temp = new Feeds();
@@ -39,6 +46,7 @@ namespace EFRFrontEndTest2.Fragments
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             m_view = inflater.Inflate(Resource.Layout.BubbleLiveFeed, container, false);
+            setBackgrounds();
 
             Task.Run(async () => { await CallDatabase(); });
             //Removes title bar
@@ -208,6 +216,14 @@ namespace EFRFrontEndTest2.Fragments
                     bubbleButton.Text = newval;
                 }
             };
+        }
+        protected void setBackgrounds()
+        {
+            if (AppBackground.background != null)
+            {
+                AbsoluteLayout background = m_view.FindViewById<AbsoluteLayout>(Resource.Id.bubble_layout);
+                background.Background = AppBackground.background;
+            }
         }
     }
 }

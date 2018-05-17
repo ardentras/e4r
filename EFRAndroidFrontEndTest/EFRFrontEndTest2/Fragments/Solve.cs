@@ -34,6 +34,12 @@ namespace EFRFrontEndTest2.Fragments
             // Create your fragment here
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+            setBackground();
+        }
+
         public static Solve NewInstance(EFRFrontEndTest2.BottomMenuTest main)
         {
             Solve temp = new Solve(main);
@@ -44,6 +50,8 @@ namespace EFRFrontEndTest2.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             view = inflater.Inflate(Resource.Layout.Solve, container, false);
+            setBackground();
+
             ImageButton Math = view.FindViewById<ImageButton>(Resource.Id.math_button);
             ImageButton History = view.FindViewById<ImageButton>(Resource.Id.history_button);
             ImageButton Chemistry = view.FindViewById<ImageButton>(Resource.Id.chemistry_button);
@@ -117,7 +125,7 @@ namespace EFRFrontEndTest2.Fragments
         {
             if (AppBackground.background != null)
             {
-                GridLayout background = view.FindViewById<GridLayout>(Resource.Id.gridLayout1);
+                LinearLayout background = view.FindViewById<LinearLayout>(Resource.Id.subject_background);
                 background.Background = AppBackground.background;
             }
         }
@@ -131,7 +139,7 @@ namespace EFRFrontEndTest2.Fragments
 /*
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            setBackground();
+            setBackground();subject_background
         }
 
 
