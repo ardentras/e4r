@@ -178,7 +178,7 @@ namespace EFRFrontEndTest2.Fragments
                     _current = _selected;
                     currentCharity.Text = _selected.Charity.Name;
                     uo.CharityName = _selected.Charity.Name;
-                    CallDatabase db = new CallDatabase;
+                    CallDatabase db = new CallDatabase();
                     await db.UpdateUO();
                 }
             };
