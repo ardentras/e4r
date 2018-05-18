@@ -26,7 +26,7 @@ namespace EFRFrontEndTest2.Fragments
         public override void OnResume()
         {
             base.OnResume();
-            setBackgrounds();
+            SetBackgrounds();
         }
 
         public static Achievements NewInstance(BottomMenuTest main)
@@ -39,7 +39,7 @@ namespace EFRFrontEndTest2.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             view = inflater.Inflate(Resource.Layout.AchievementsPage, container, false);
-            setBackgrounds();
+            SetBackgrounds();
 
             TextView lv = view.FindViewById<TextView>(Resource.Id.level);
             TextView questions = view.FindViewById<TextView>(Resource.Id.questionsAnswered);
@@ -53,7 +53,7 @@ namespace EFRFrontEndTest2.Fragments
             return view;
         }
 
-        protected void setBackgrounds()
+        protected void SetBackgrounds()
         {
             if (AppBackground.background != null)
             {

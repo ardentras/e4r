@@ -26,7 +26,7 @@ namespace EFRFrontEndTest2.Fragments
         public override void OnResume()
         {
             base.OnResume();
-            setBackground();
+            SetBackground();
         }
 
         public static Difficulty NewInstance(BottomMenuTest main)
@@ -41,7 +41,7 @@ namespace EFRFrontEndTest2.Fragments
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             view = inflater.Inflate(Resource.Layout.QuestionDifficultypage, container, false);
-            setBackground();
+            SetBackground();
             Button easyButton = view.FindViewById<Button>(Resource.Id.easyButton);
             Button mediumButton = view.FindViewById<Button>(Resource.Id.mediumButton);
             Button hardButton = view.FindViewById<Button>(Resource.Id.hardButton);
@@ -64,7 +64,7 @@ namespace EFRFrontEndTest2.Fragments
             return view;
         }
 
-        protected void setBackground()
+        protected void SetBackground()
         {
             if (AppBackground.background != null)
             {
