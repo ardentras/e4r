@@ -144,10 +144,15 @@ class TDatabase {
 
     checkTopTen(username, totalQuestions, totalDonated) {
         var ind = this.topTen.top_ten.findIndex(element => element.username == username);
+        var foundUser = false;
+
+        if (ind != -1)
+            foundUser = true;
 
         if (ind == -1) {
-            ind = this.topTen.top_ten.findIndex(element => element < totalQuestions);
-        } else {
+            if (this.topTen.top_ten.length < 10 || totalQuestions > this.topTen.top_ten[this.topTen.top_ten.length - 1])
+                ind = this.topTen.top_ten.length - 1;
+        } else if (this.topTen.top_ten.length >= 10 && !foundUser) {
             if (this.topTen.top_ten[9].total_questions > totalQuestions)
                 ind = -1;
         }
@@ -156,14 +161,27 @@ class TDatabase {
             if (this.topTen.top_ten.length == 10)
                 this.topTen.top_ten.pop();
 
-            this.topTen.top_ten.push({"username": username, "total_questions": totalQuestions});
+            console.log("pushing");
+
+            if (foundUser)
+                this.topTen.top_ten[ind].total_questions = totalQuestions;
+            else
+                this.topTen.top_ten.push({"username": username, "total_questions": totalQuestions});
         }
 
+        console.log("topten");
+        console.log(this.topTen);
+
         ind = this.topTenMoney.top_ten.findIndex(element => element.username == username);
+        foundUser = false;
+
+        if (ind != -1)
+            foundUser = true;
 
         if (ind == -1) {
-            ind = this.topTenMoney.top_ten.findIndex(element => element < totalDonated);
-        } else {
+            if (this.topTenMoney.top_ten.length < 10 || totalDonated > this.topTenMoney.top_ten[this.topTenMoney.top_ten.length - 1])
+                ind = this.topTenMoney.top_ten.length - 1;
+        } else if (this.topTenMoney.top_ten.length >= 10 && !foundUser) {
             if (this.topTenMoney.top_ten[9].total_donated > totalDonated)
                 ind = -1;
         }
@@ -172,8 +190,19 @@ class TDatabase {
             if (this.topTenMoney.top_ten.length == 10)
                 this.topTenMoney.top_ten.pop();
 
-            this.topTenMoney.top_ten.push({"username": username, "total_donated": totalDonated});
+            console.log("pushing");
+
+            if (foundUser)
+                this.topTenMoney.top_ten[ind].total_donated = totalDonated;
+            else
+                this.topTenMoney.top_ten.push({"username": username, "total_donated": totalDonated});
         }
+
+        console.log("toptenmoney");
+        console.log(this.topTenMoney);
+
+        this.topTen.top_ten.sort((a,b) => {a.total_questions > b.total_questions ? -1 : 1;} );
+        this.topTenMoney.top_ten.sort((a,b) => {a.total_donated > b.total_donated ? -1 : 1;} );
     }
 
     // Retrieves the top ten users with most answered questions.
@@ -667,10 +696,13 @@ class TDatabase {
     // curl -XPUT localhost:3002/api/q/request_block -H 'Content-Type: application/json' -d '{"user":{"session":"87014393-5e70-4c08-8671-a25e661f3d03", "userobject":{"user_data": {"username": "test1","email": "test@test.com","first_name": "John","last_name": "Doe","charity_name": "ACME Charity, LLC"},"game_data": {"subject_name": "Math","subject_id": "1","difficulty": "0","completed_blocks": []}, "timestamp":"2018-01-24T02:06:58+00:00"}, "donated": "175"},
     //                                                                                      "game": {"questions": [{"QuestionID":{id},"QuestionText":"{text}","QuestionOne":"{answer1}","QuestionTwo":"{answer2}","QuestionThree":"{answer3}", "QuestionFour":"{answer4}","CorrectAnswer":"{correct_answer}","StatsOne":"{statsAnswer1}","StatsTwo":"{statsAnswer2}","StatsThree":"{statsAnswer3}","StatsFour":"{statsAnswer4}","QuestionBlockID":"{block_id}"},{...}]}}'
     async requestQuestionBlock(client, data, gameData) {
-        try {
-            data.userobject = await this.verifyQuestionBlocks(client, data);
-        } catch (err) {
-            client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
+        if (data.session != "00000000-0000-0000-0000-000000000000")
+        {
+            try {
+                data.userobject = await this.verifyQuestionBlocks(client, data);
+            } catch (err) {
+                client.json({response: "Failed", type: "GET", code: 500, reason: "Unknown user object verification error. Retry request"});
+            }
         }
 
         console.log(data.donated);
@@ -736,14 +768,24 @@ class TDatabase {
         if (data.userobject.game_data.blocksRemaining != undefined) {
             data.userobject.game_data.blocksRemaining = missing_blocks.length;
 
-            uo = await this.persistUserObject(data.userobject, res.recordset[0].UserID);
-            console.log("persisted user object");
+            if (data.session != "00000000-0000-0000-0000-000000000000")
+            {
+                uo = await this.persistUserObject(data.userobject, res.recordset[0].UserID);
+                console.log("persisted user object");
+            }
+            else
+            {
+                uo = data.userobject;
+            }
         } else {
             uo = data.userobject;
         }
 
-        this.checkTopTen(res.recordset[0].Username, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
-        console.log("checked top 10");
+        if (data.session != "00000000-0000-0000-0000-000000000000")
+        {
+            this.checkTopTen(data.userobject.user_data.username, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+            console.log("checked top 10");
+        }
 
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
     }
