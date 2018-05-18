@@ -142,8 +142,8 @@ class TDatabase {
         return randNum;
     }
 
-    checkTopTen(userid, totalQuestions, totalDonated) {
-        var ind = this.topTen.top_ten.findIndex(element => element.user_id == userid);
+    checkTopTen(username, totalQuestions, totalDonated) {
+        var ind = this.topTen.top_ten.findIndex(element => element.username == username);
 
         if (ind == -1) {
             ind = this.topTen.top_ten.findIndex(element => element < totalQuestions);
@@ -156,10 +156,10 @@ class TDatabase {
             if (this.topTen.top_ten.length == 10)
                 this.topTen.top_ten.pop();
 
-            this.topTen.top_ten.push({"user_id": userid, "total_questions": totalQuestions});
+            this.topTen.top_ten.push({"username": username, "total_questions": totalQuestions});
         }
 
-        ind = this.topTenMoney.top_ten.findIndex(element => element.user_id == userid);
+        ind = this.topTenMoney.top_ten.findIndex(element => element.username == username);
 
         if (ind == -1) {
             ind = this.topTenMoney.top_ten.findIndex(element => element < totalDonated);
@@ -172,7 +172,7 @@ class TDatabase {
             if (this.topTenMoney.top_ten.length == 10)
                 this.topTenMoney.top_ten.pop();
 
-            this.topTenMoney.top_ten.push({"user_id": userid, "total_donated": totalDonated});
+            this.topTenMoney.top_ten.push({"username": username, "total_donated": totalDonated});
         }
     }
 
@@ -742,7 +742,7 @@ class TDatabase {
             uo = data.userobject;
         }
 
-        this.checkTopTen(res.recordset[0].UserID, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
+        this.checkTopTen(res.recordset[0].Username, data.userobject.game_data.totalQuestions, data.userobject.game_data.totalDonated);
         console.log("checked top 10");
 
         client.json({response: "Success", type: "PUT", code: 200, action: "RETRIEVE", question_block: response.recordset, userobject: uo});
