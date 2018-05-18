@@ -163,10 +163,40 @@ namespace EFRFrontEndTest2.Fragments
             uo.SubjectName = "Mathematics";
             uo.TotalDonated = 0;
             uo.TotalQuestions = 0;
-            await m_database.ResetPassword(uo.Username, uo.Email);
+            await m_database.UpdateUO();
+            Responce responce = m_database.responce;
 
+            AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Unable to reset account");
+            alert.SetButton("OK", (c, ev) =>
+            {
+
+            });
+            switch (responce.m_code)
+            {
+                case 201:
+                    {
+                        Toast.MakeText(Context, "Account reset!", ToastLength.Long).Show();
+                        break;
+                    }
+                case 100:
+                    {
+                        alert.SetMessage(responce.m_reason);
+                        alert.Show();
+                        break;
+                    }
+                case 503: // Network issues
+                case 504:
+                    {
+                        alert.SetMessage(responce.m_reason);
+                        alert.Show();
+                        break;
+                    }
+            }
             return 0;
         }
+
         protected void setBackgrounds()
         {
             if (AppBackground.background != null)
