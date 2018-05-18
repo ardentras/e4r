@@ -28,7 +28,7 @@ namespace EFRFrontEndTest2.Fragments
         public override void OnResume()
         {
             base.OnResume();
-            setBackgrounds();
+            SetBackgrounds();
         }
 
         public static Settings NewInstance(EFRFrontEndTest2.BottomMenuTest main)
@@ -42,7 +42,7 @@ namespace EFRFrontEndTest2.Fragments
             // Use this to return your custom view for this Fragment
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             view = inflater.Inflate(Resource.Layout.Settings, container, false);
-            setBackgrounds();
+            SetBackgrounds();
 
             TextView accountSettings = view.FindViewById<TextView>(Resource.Id.account_settings);
             TextView generalSettings = view.FindViewById<TextView>(Resource.Id.general_settings);
@@ -101,7 +101,7 @@ namespace EFRFrontEndTest2.Fragments
             return view;
         }
 
-        protected void setBackgrounds()
+        protected void SetBackgrounds()
         {
             if (AppBackground.background != null)
             {
