@@ -65,7 +65,7 @@ namespace EFRFrontEndTest2.Fragments
             }
             else
             {
-                initials.Text = "New User";
+                initials.Text = uo.Username;
             }
 
             accountSettings.Click += delegate {

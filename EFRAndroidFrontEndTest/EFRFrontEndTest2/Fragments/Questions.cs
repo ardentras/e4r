@@ -63,6 +63,8 @@ namespace EFRFrontEndTest2.Fragments
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
         private BottomMenuTest _main;
+        private bool finished = false;
+        private bool QuestionAnswered = false;
 
         public Questions(BottomMenuTest main)
         {
@@ -102,7 +104,6 @@ namespace EFRFrontEndTest2.Fragments
             setup();
             SetBackgrounds();
 
-            bool QuestionAnswered = false;
 
             next_button.Click += (sender, e) =>
             {
@@ -225,7 +226,6 @@ namespace EFRFrontEndTest2.Fragments
                 blockID = m_questionBlock[0]["QuestionBlockID"];
                 QuestionCount = localData.GetInt("QuestionNum", 0);
                 currentquestion = new Question(m_questionBlock[QuestionCount]);
-
             }
 
             NextQuestion();
@@ -257,52 +257,86 @@ namespace EFRFrontEndTest2.Fragments
                     edit.Apply();
                 }
             }
+            else
+            {
+                finished = true;
+                QuestionAnswered = true;
+            }
         }
 
         private void NextQuestion()
         {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
-            AlertDialog alert = dialog.Create();
-            alert.SetButton("OK", (c, ev) =>
+            if (finished == false)
             {
-                _main.OnBackPressed();
-                _main.OnBackPressed();
-            });
-            switch (m_database.responce.m_code)
-            {
-                case 200:
-                case 0:
-                    {
-                        if (user.BlocksRemaining != 0)
+                AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
+                AlertDialog alert = dialog.Create();
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    _main.OnBackPressed();
+                    _main.OnBackPressed();
+                });
+                switch (m_database.responce.m_code)
+                {
+                    case 200:
+                    case 0:
                         {
-                            question_view.Text = currentquestion.m_QuestionText;
-                            answer_one.Text = currentquestion.m_QuestionOne;
-                            answer_two.Text = currentquestion.m_QuestionTwo;
-                            answer_three.Text = currentquestion.m_QuestionThree;
-                            answer_four.Text = currentquestion.m_QuestionFour;
+                            if (user.BlocksRemaining != 0)
+                            {
+                                question_view.Text = currentquestion.m_QuestionText;
+                                answer_one.Text = currentquestion.m_QuestionOne;
+                                answer_two.Text = currentquestion.m_QuestionTwo;
+                                answer_three.Text = currentquestion.m_QuestionThree;
+                                answer_four.Text = currentquestion.m_QuestionFour;
+                            }
+                            else
+                            {
+                                finished = true;
+                                QuestionAnswered = true;
+
+                                question_view.Text = "You've answered all of the questions for this subject and difficulty";
+                                alert.SetTitle("Congratulations!");
+                                alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                                alert.Show();
+                                answer_one.Clickable = false;
+                                answer_one.Text = "";
+                                answer_two.Clickable = false;
+                                answer_two.Text = "";
+                                answer_three.Clickable = false;
+                                answer_three.Text = "";
+                                answer_four.Clickable = false;
+                                answer_four.Text = "";
+                            }
+                            break;
                         }
-                        else
+                    case 503: // Network issues
+                    case 504:
                         {
-                            question_view.Text = "You've answered all of the questions for this subject and difficulty";
-                            alert.SetTitle("Congratulations!");
-                            alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                            alert.SetMessage(m_database.responce.m_reason);
                             alert.Show();
+                            break;
                         }
-                        break;
-                    }
-                case 503: // Network issues
-                case 504:
-                    {
-                        alert.SetMessage(m_database.responce.m_reason);
-                        alert.Show();
-                        break;
-                    }
-                default:
-                    {
-                        alert.SetMessage("Unknown Error");
-                        alert.Show();
-                        break;
-                    }
+                    default:
+                        {
+                            alert.SetMessage("Unknown Error");
+                            alert.Show();
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
+                AlertDialog alert = dialog.Create();
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    _main.OnBackPressed();
+                    _main.OnBackPressed();
+                });
+                alert.SetTitle("Congratulations!");
+                alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                alert.Show();
+                finished = true;
+                QuestionAnswered = true;
             }
         }
 
