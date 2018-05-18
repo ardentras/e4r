@@ -17,10 +17,10 @@ namespace EFRFrontEndTest2.Fragments
         public Question(JsonValue block)
         {
             m_QuestionText = WebUtility.HtmlDecode(block["QuestionText"].ToString());
-            m_QuestionOne = WebUtility.HtmlDecode(block["QuestionOne"].ToString());
-            m_QuestionTwo = WebUtility.HtmlDecode(block["QuestionTwo"].ToString());
-            m_QuestionThree = WebUtility.HtmlDecode(block["QuestionThree"].ToString());
-            m_QuestionFour = WebUtility.HtmlDecode(block["QuestionFour"].ToString());
+            m_AnswerOne = WebUtility.HtmlDecode(block["QuestionOne"].ToString());
+            m_AnswerTwo = WebUtility.HtmlDecode(block["QuestionTwo"].ToString());
+            m_AnswerThree = WebUtility.HtmlDecode(block["QuestionThree"].ToString());
+            m_AnswerFour = WebUtility.HtmlDecode(block["QuestionFour"].ToString());
             m_CorrectAnswer = WebUtility.HtmlDecode(block["CorrectAnswer"].ToString());
             m_StatsOne = block["StatsOne"];
             m_StatsTwo = block["StatsTwo"];
@@ -32,10 +32,10 @@ namespace EFRFrontEndTest2.Fragments
         }
 
         public string m_QuestionText;
-        public string m_QuestionOne;
-        public string m_QuestionTwo;
-        public string m_QuestionThree;
-        public string m_QuestionFour;
+        public string m_AnswerOne;
+        public string m_AnswerTwo;
+        public string m_AnswerThree;
+        public string m_AnswerFour;
         public string m_CorrectAnswer;
         public int m_StatsOne;
         public int m_StatsTwo;
@@ -137,14 +137,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionOne == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerOne == currentquestion.m_CorrectAnswer)
                     {
-                        answer_one.Text = "correct";
+                        answer_one.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_one.Text = "incorrect";
+                        answer_one.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -154,14 +155,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionTwo == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerTwo == currentquestion.m_CorrectAnswer)
                     {
-                        answer_two.Text = "correct";
+                        answer_two.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_two.Text = "incorrect";
+                        answer_two.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -171,14 +173,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionThree == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerThree == currentquestion.m_CorrectAnswer)
                     {
-                        answer_three.Text = "correct";
+                        answer_three.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_three.Text = "incorrect";
+                        answer_three.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -188,14 +191,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionFour == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerFour == currentquestion.m_CorrectAnswer)
                     {
-                        answer_four.Text = "correct";
+                        answer_four.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_four.Text = "incorrect";
+                        answer_four.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -266,6 +270,10 @@ namespace EFRFrontEndTest2.Fragments
 
         private void NextQuestion()
         {
+            answer_one.SetBackgroundColor(Android.Graphics.Color.White);
+            answer_two.SetBackgroundColor(Android.Graphics.Color.White);
+            answer_three.SetBackgroundColor(Android.Graphics.Color.White);
+            answer_four.SetBackgroundColor(Android.Graphics.Color.White);
             if (finished == false)
             {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
@@ -283,10 +291,10 @@ namespace EFRFrontEndTest2.Fragments
                             if (user.BlocksRemaining != 0)
                             {
                                 question_view.Text = currentquestion.m_QuestionText;
-                                answer_one.Text = currentquestion.m_QuestionOne;
-                                answer_two.Text = currentquestion.m_QuestionTwo;
-                                answer_three.Text = currentquestion.m_QuestionThree;
-                                answer_four.Text = currentquestion.m_QuestionFour;
+                                answer_one.Text = currentquestion.m_AnswerOne;
+                                answer_two.Text = currentquestion.m_AnswerTwo;
+                                answer_three.Text = currentquestion.m_AnswerThree;
+                                answer_four.Text = currentquestion.m_AnswerFour;
                             }
                             else
                             {
@@ -355,6 +363,18 @@ namespace EFRFrontEndTest2.Fragments
                 builder.SetView(view);
                 builder.Show();
             }
+        }
+
+        private void HighlightAnswer()
+        {
+                    if (currentquestion.m_AnswerOne == currentquestion.m_CorrectAnswer)
+                        answer_one.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                    else if (currentquestion.m_AnswerTwo == currentquestion.m_CorrectAnswer)
+                        answer_two.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                    else if (currentquestion.m_AnswerThree == currentquestion.m_CorrectAnswer)
+                        answer_three.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                    else if (currentquestion.m_AnswerFour == currentquestion.m_CorrectAnswer)
+                        answer_four.SetBackgroundColor(Android.Graphics.Color.LightGreen);
         }
 
         protected void SetBackgrounds()
