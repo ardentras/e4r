@@ -7,8 +7,10 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
     {
         bool _favorited = false;
         ImageButton _button = null;
-
-        public CharityFavorite(Context ctx) {
+        string charity_name;
+        public CharityFavorite(Context ctx, string name)
+        {
+            charity_name = name;
             CreateButton(ctx);
         }
         public bool Favorited {
@@ -26,17 +28,21 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         }
         public void HandleFavoriteClicks()
         {
+            var uo = SingleUserObject.getObject();
             if (_favorited)
             {
+                uo.RemoveFavorite(charity_name);
                 updateButton(Resource.Drawable.unfavorited);
             }
             else
             {
+                uo.AddFavorite(charity_name);
                 updateButton(Resource.Drawable.favorited);
             }
         }
         private void CreateButton(Context ctx)
         {
+            var uo = SingleUserObject.getObject();
             ImageButton newButton = new ImageButton(ctx);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(60, 60)
             {
@@ -44,7 +50,10 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
             };
             newButton.SetBackgroundColor(Android.Graphics.Color.Transparent);
             newButton.LayoutParameters = param;
-            newButton.SetBackgroundResource(Resource.Drawable.unfavorited);
+            if(uo.HasFavorite(charity_name))
+                newButton.SetBackgroundResource(Resource.Drawable.favorited);
+            else
+                newButton.SetBackgroundResource(Resource.Drawable.unfavorited);
             newButton.SetScaleType(ImageView.ScaleType.FitCenter);
             _button = newButton;
         }

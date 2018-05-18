@@ -110,7 +110,65 @@ namespace
             return length + 1;
         }
 
-        private void UpdateLevel()
+
+
+        public int AddFavorite(string charity)
+        {
+            int length = FavoriteCharities.Length;
+            string[] newFavorites;
+            if (length != 0)
+            {
+                newFavorites = new string[length + 1];
+                for (int x = 0; x < length; x++)
+                {
+                    newFavorites[x] = FavoriteCharities[x];
+                }
+            }
+            else
+                newFavorites = new string[1];
+
+            newFavorites[length] = charity;
+            FavoriteCharities = newFavorites;
+            return length + 1;
+        }
+
+        public int RemoveFavorite(string charity)
+        {
+            int length = FavoriteCharities.Length;
+            string[] newFavorites;
+            if (length != 0)
+            {
+                newFavorites = new string[length - 1];
+                for (int x = 0, y =0; x < length-1; x++, y++)
+                {
+                    if (charity != FavoriteCharities[x])
+                        newFavorites[y] = FavoriteCharities[x];
+                    else
+                        y--;
+                }
+            }
+            else
+                return 0;
+
+            FavoriteCharities = newFavorites;
+            return length - 1;
+        }
+
+        public bool HasFavorite(string charity)
+        {
+            int length = FavoriteCharities.Length;
+            if (length != 0)
+            {
+                    for (int x = 0; x < length; x++)
+                    {
+                    if (charity == FavoriteCharities[x])
+                        return true;
+                    }
+            }
+            return false;
+        }
+
+            private void UpdateLevel()
         {
             Level = (int)(Math.Sqrt(TotalQuestions) + TotalDonated);
             if (Level <= 0)
