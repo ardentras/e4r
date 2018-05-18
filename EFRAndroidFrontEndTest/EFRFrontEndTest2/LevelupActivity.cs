@@ -17,9 +17,7 @@ namespace EFRFrontEndTest2
             SetContentView(Resource.Layout.LevelUp);
 
             TextView lvText = FindViewById<TextView>(Resource.Id.lvLabel);
-            UserObject user = SingleUserObject.getObject();
-            string text = user.Level.ToString();
-            lvText.Text = "You are now level" + text + "!"; 
+            lvText.Text = "You are now level" + SingleUserObject.getObject().Level.ToString() + "!"; 
             var searchTimer = new Timer(600);
             searchTimer.Elapsed += delegate
             {

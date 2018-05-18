@@ -17,10 +17,10 @@ namespace EFRFrontEndTest2.Fragments
         public Question(JsonValue block)
         {
             m_QuestionText = WebUtility.HtmlDecode(block["QuestionText"].ToString());
-            m_QuestionOne = WebUtility.HtmlDecode(block["QuestionOne"].ToString());
-            m_QuestionTwo = WebUtility.HtmlDecode(block["QuestionTwo"].ToString());
-            m_QuestionThree = WebUtility.HtmlDecode(block["QuestionThree"].ToString());
-            m_QuestionFour = WebUtility.HtmlDecode(block["QuestionFour"].ToString());
+            m_AnswerOne = WebUtility.HtmlDecode(block["QuestionOne"].ToString());
+            m_AnswerTwo = WebUtility.HtmlDecode(block["QuestionTwo"].ToString());
+            m_AnswerThree = WebUtility.HtmlDecode(block["QuestionThree"].ToString());
+            m_AnswerFour = WebUtility.HtmlDecode(block["QuestionFour"].ToString());
             m_CorrectAnswer = WebUtility.HtmlDecode(block["CorrectAnswer"].ToString());
             m_StatsOne = block["StatsOne"];
             m_StatsTwo = block["StatsTwo"];
@@ -32,10 +32,10 @@ namespace EFRFrontEndTest2.Fragments
         }
 
         public string m_QuestionText;
-        public string m_QuestionOne;
-        public string m_QuestionTwo;
-        public string m_QuestionThree;
-        public string m_QuestionFour;
+        public string m_AnswerOne;
+        public string m_AnswerTwo;
+        public string m_AnswerThree;
+        public string m_AnswerFour;
         public string m_CorrectAnswer;
         public int m_StatsOne;
         public int m_StatsTwo;
@@ -63,6 +63,8 @@ namespace EFRFrontEndTest2.Fragments
         private UserObject user = SingleUserObject.getObject();
         private View view = null;
         private BottomMenuTest _main;
+        private bool finished = false;
+        private bool QuestionAnswered = false;
 
         public Questions(BottomMenuTest main)
         {
@@ -102,7 +104,6 @@ namespace EFRFrontEndTest2.Fragments
             setup();
             SetBackgrounds();
 
-            bool QuestionAnswered = false;
 
             next_button.Click += (sender, e) =>
             {
@@ -136,14 +137,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionOne == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerOne == currentquestion.m_CorrectAnswer)
                     {
-                        answer_one.Text = "correct";
+                        answer_one.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_one.Text = "incorrect";
+                        answer_one.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -153,14 +155,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionTwo == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerTwo == currentquestion.m_CorrectAnswer)
                     {
-                        answer_two.Text = "correct";
+                        answer_two.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_two.Text = "incorrect";
+                        answer_two.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -170,14 +173,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionThree == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerThree == currentquestion.m_CorrectAnswer)
                     {
-                        answer_three.Text = "correct";
+                        answer_three.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_three.Text = "incorrect";
+                        answer_three.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -187,14 +191,15 @@ namespace EFRFrontEndTest2.Fragments
                 if (!QuestionAnswered)
                 {
                     QuestionAnswered = true;
-                    if (currentquestion.m_QuestionFour == currentquestion.m_CorrectAnswer)
+                    if (currentquestion.m_AnswerFour == currentquestion.m_CorrectAnswer)
                     {
-                        answer_four.Text = "correct";
+                        answer_four.SetBackgroundColor(Android.Graphics.Color.LightGreen);
                         CorrectAnswer();
                     }
                     else
                     {
-                        answer_four.Text = "incorrect";
+                        answer_four.SetBackgroundColor(Android.Graphics.Color.IndianRed);
+                        HighlightAnswer();
                     }
                 }
             };
@@ -225,7 +230,6 @@ namespace EFRFrontEndTest2.Fragments
                 blockID = m_questionBlock[0]["QuestionBlockID"];
                 QuestionCount = localData.GetInt("QuestionNum", 0);
                 currentquestion = new Question(m_questionBlock[QuestionCount]);
-
             }
 
             NextQuestion();
@@ -257,52 +261,90 @@ namespace EFRFrontEndTest2.Fragments
                     edit.Apply();
                 }
             }
+            else
+            {
+                finished = true;
+                QuestionAnswered = true;
+            }
         }
 
         private void NextQuestion()
         {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
-            AlertDialog alert = dialog.Create();
-            alert.SetButton("OK", (c, ev) =>
+            answer_one.SetBackgroundColor(Android.Graphics.Color.White);
+            answer_two.SetBackgroundColor(Android.Graphics.Color.White);
+            answer_three.SetBackgroundColor(Android.Graphics.Color.White);
+            answer_four.SetBackgroundColor(Android.Graphics.Color.White);
+            if (finished == false)
             {
-                _main.OnBackPressed();
-                _main.OnBackPressed();
-            });
-            switch (m_database.responce.m_code)
-            {
-                case 200:
-                case 0:
-                    {
-                        if (user.BlocksRemaining != 0)
+                AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
+                AlertDialog alert = dialog.Create();
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    _main.OnBackPressed();
+                    _main.OnBackPressed();
+                });
+                switch (m_database.responce.m_code)
+                {
+                    case 200:
+                    case 0:
                         {
-                            question_view.Text = currentquestion.m_QuestionText;
-                            answer_one.Text = currentquestion.m_QuestionOne;
-                            answer_two.Text = currentquestion.m_QuestionTwo;
-                            answer_three.Text = currentquestion.m_QuestionThree;
-                            answer_four.Text = currentquestion.m_QuestionFour;
+                            if (user.BlocksRemaining != 0)
+                            {
+                                question_view.Text = currentquestion.m_QuestionText;
+                                answer_one.Text = currentquestion.m_AnswerOne;
+                                answer_two.Text = currentquestion.m_AnswerTwo;
+                                answer_three.Text = currentquestion.m_AnswerThree;
+                                answer_four.Text = currentquestion.m_AnswerFour;
+                            }
+                            else
+                            {
+                                finished = true;
+                                QuestionAnswered = true;
+
+                                question_view.Text = "You've answered all of the questions for this subject and difficulty";
+                                alert.SetTitle("Congratulations!");
+                                alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                                alert.Show();
+                                answer_one.Clickable = false;
+                                answer_one.Text = "";
+                                answer_two.Clickable = false;
+                                answer_two.Text = "";
+                                answer_three.Clickable = false;
+                                answer_three.Text = "";
+                                answer_four.Clickable = false;
+                                answer_four.Text = "";
+                            }
+                            break;
                         }
-                        else
+                    case 503: // Network issues
+                    case 504:
                         {
-                            question_view.Text = "You've answered all of the questions for this subject and difficulty";
-                            alert.SetTitle("Congratulations!");
-                            alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                            alert.SetMessage(m_database.responce.m_reason);
                             alert.Show();
+                            break;
                         }
-                        break;
-                    }
-                case 503: // Network issues
-                case 504:
-                    {
-                        alert.SetMessage(m_database.responce.m_reason);
-                        alert.Show();
-                        break;
-                    }
-                default:
-                    {
-                        alert.SetMessage("Unknown Error");
-                        alert.Show();
-                        break;
-                    }
+                    default:
+                        {
+                            alert.SetMessage("Unknown Error");
+                            alert.Show();
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(_main);
+                AlertDialog alert = dialog.Create();
+                alert.SetButton("OK", (c, ev) =>
+                {
+                    _main.OnBackPressed();
+                    _main.OnBackPressed();
+                });
+                alert.SetTitle("Congratulations!");
+                alert.SetMessage("It looks like you've completed this subjects difficulty. Now it's time to try another!");
+                alert.Show();
+                finished = true;
+                QuestionAnswered = true;
             }
         }
 
@@ -321,6 +363,18 @@ namespace EFRFrontEndTest2.Fragments
                 builder.SetView(view);
                 builder.Show();
             }
+        }
+
+        private void HighlightAnswer()
+        {
+                    if (currentquestion.m_AnswerOne == currentquestion.m_CorrectAnswer)
+                        answer_one.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                    else if (currentquestion.m_AnswerTwo == currentquestion.m_CorrectAnswer)
+                        answer_two.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                    else if (currentquestion.m_AnswerThree == currentquestion.m_CorrectAnswer)
+                        answer_three.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+                    else if (currentquestion.m_AnswerFour == currentquestion.m_CorrectAnswer)
+                        answer_four.SetBackgroundColor(Android.Graphics.Color.LightGreen);
         }
 
         protected void SetBackgrounds()

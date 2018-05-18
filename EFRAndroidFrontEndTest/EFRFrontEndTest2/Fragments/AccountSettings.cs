@@ -12,7 +12,11 @@ namespace EFRFrontEndTest2.Fragments
         private UserObject uo = SingleUserObject.getObject();
         private CallDatabase m_database;
         private TextView charity;
-        View view = null;
+        private EditText firstName;
+        private EditText lastName;
+
+        private View view = null;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             m_database = new CallDatabase();
@@ -38,9 +42,9 @@ namespace EFRFrontEndTest2.Fragments
             setBackgrounds();
 
             TextView username = view.FindViewById<TextView>(Resource.Id.accountname);
-            EditText firstName = view.FindViewById<EditText>(Resource.Id.accountfirstname);
-            EditText lastName = view.FindViewById<EditText>(Resource.Id.accountlastname);
             charity = view.FindViewById<TextView>(Resource.Id.currentcharityname);
+            firstName = view.FindViewById<EditText>(Resource.Id.accountfirstname); ;
+            lastName = view.FindViewById<EditText>(Resource.Id.accountlastname);
             TextView pwresetbtn = view.FindViewById<TextView>(Resource.Id.pwresetbtn);
             TextView gameresetbtn = view.FindViewById<TextView>(Resource.Id.gameresetbtn);
             Button savebtn = view.FindViewById<Button>(Resource.Id.accountsavebtn);
@@ -111,6 +115,13 @@ namespace EFRFrontEndTest2.Fragments
                 });
                 alert.Show();
             };
+            
+            lastName.Click += delegate
+            {
+                // Used for after user resets application
+                lastName.SetCursorVisible(true);
+            };
+
             return view;
         }
 
@@ -127,7 +138,7 @@ namespace EFRFrontEndTest2.Fragments
             });
             switch (responce.m_code)
             {
-                case 201:
+                case 200:
                     {
                         Toast.MakeText(Context, "Email sent!", ToastLength.Long).Show();
                         break;
@@ -163,10 +174,46 @@ namespace EFRFrontEndTest2.Fragments
             uo.SubjectName = "Mathematics";
             uo.TotalDonated = 0;
             uo.TotalQuestions = 0;
-            await m_database.ResetPassword(uo.Username, uo.Email);
+            await m_database.UpdateUO();
+            Responce responce = m_database.responce;
 
+            AlertDialog.Builder dialog = new AlertDialog.Builder(Context);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Unable to reset account");
+            alert.SetButton("OK", (c, ev) =>
+            { });
+
+            switch (responce.m_code)
+            {
+                case 200:
+                    {
+                        Toast.MakeText(Context, "Account reset!", ToastLength.Long).Show();
+                        firstName.Hint = "";
+                        firstName.Text = "";
+                        lastName.Hint = "";
+                        lastName.Text = "";
+                        charity.Text = "";
+                        lastName.SetCursorVisible(false);
+
+                        break;
+                    }
+                case 100:
+                    {
+                        alert.SetMessage(responce.m_reason);
+                        alert.Show();
+                        break;
+                    }
+                case 503: // Network issues
+                case 504:
+                    {
+                        alert.SetMessage(responce.m_reason);
+                        alert.Show();
+                        break;
+                    }
+            }
             return 0;
         }
+
         protected void setBackgrounds()
         {
             if (AppBackground.background != null)
