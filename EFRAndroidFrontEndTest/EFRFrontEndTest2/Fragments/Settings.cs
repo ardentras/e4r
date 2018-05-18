@@ -49,7 +49,10 @@ namespace EFRFrontEndTest2.Fragments
             TextView charitySelection = view.FindViewById<TextView>(Resource.Id.charity_selection);
             TextView logoutBTN = view.FindViewById<TextView>(Resource.Id.logout);
             TextView initials = view.FindViewById<TextView>(Resource.Id.initials);
+            TextView playerLevel = view.FindViewById<TextView>(Resource.Id.playerLevel);
             TextView backgroundSelection = view.FindViewById<TextView>(Resource.Id.Color_Picker);
+
+            playerLevel.Text = "Level " + uo.Level.ToString();
 
             if (uo.FirstName != "" && uo.LastName != "")
             {
