@@ -98,7 +98,7 @@ namespace EFRFrontEndTest2.Assets.Charities_Selection_Layout
         }
         private void CreateChildComponents()
         {
-            _favoriteBtn = new CharityFavorite(_ctx);
+            _favoriteBtn = new CharityFavorite(_ctx, Charity.Name);
             CheckBox = new CharityCheckBox(_ctx);
             _logoBtn = new CharityButton(_ctx, Charity.Name);
             initClickhandlers();

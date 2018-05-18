@@ -9,6 +9,7 @@ using Android.Gms.Ads;
 
 using EFRFrontEndTest2.Assets;
 using System.Net;
+using System.Threading;
 
 namespace EFRFrontEndTest2.Fragments
 {
@@ -384,10 +385,13 @@ namespace EFRFrontEndTest2.Fragments
             int newlv = user.Level;
             if (lv != newlv)
             {
-                user.Level = newlv;
                 View view = LayoutInflater.Inflate(Resource.Layout.LevelUp, null);
                 AlertDialog builder = new AlertDialog.Builder(_main).Create();
                 builder.SetView(view);
+                TextView lvText = view.FindViewById<TextView>(Resource.Id.lvLabel);
+                UserObject obj = SingleUserObject.getObject();
+                string text = obj.Level.ToString();
+                lvText.Text = "You are now level " + text + "!";
                 builder.Show();
             }
         }

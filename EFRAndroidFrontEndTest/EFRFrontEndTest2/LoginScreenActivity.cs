@@ -17,21 +17,30 @@ namespace EFRFrontEndTest2
         protected override void OnCreate(Bundle savedInstanceState)
         {
             m_database = new CallDatabase();
+            var localData = Application.Context.GetSharedPreferences("CurrentUser", FileCreationMode.Private);
 
             //Removes title bar
             RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.LoginPageScreen);
-
             EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
             EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
             Button login = FindViewById<Button>(Resource.Id.loginButton);
             Button guestLogin = FindViewById<Button>(Resource.Id.guestLoginButton);
             TextView forgotPassword = FindViewById<TextView>(Resource.Id.ForgotPasswordButton);
             TextView createAccount = FindViewById<TextView>(Resource.Id.createAccountButton);
+
             //Used as a switch to keep multiple async calls to a new activity
             bool clicked = false;
+
+
+            if (localData.GetString("username","") != "" && localData.GetString("password","") != "")
+            {
+                Login();
+                Finish();
+            }
 
             //Made this async so while we wait for the server to reply, the main GUI thread doesn't freeze up.
             login.Click += async (sender, e) =>
@@ -39,54 +48,7 @@ namespace EFRFrontEndTest2
                 if (!clicked)
                 {
                     clicked = true;
-                    // Fetch the login information asynchronously, parse the results, then update the screen.
-                    Responce responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    AlertDialog alert = dialog.Create();
-                    alert.SetTitle("Unable to log in");
-                    alert.SetButton("OK", (c, ev) =>
-                    {
-                        passBox.Text = "";
-                    });
-                    switch (responce.m_code)
-                    {
-                        case 200:
-                            {
-                                //m_database.GetUserObject.Save(this);
-                                //changed into dashboard activity for new userdashboard, only test
-                                var intent = new Intent(this, typeof(BottomMenuTest));
-                                StartActivity(intent);
-                                //finish will destory this page
-                                Finish();
-                                break;
-                            }
-                        case 401:
-                            {
-                                alert.SetMessage("Invalid username/password");
-                                alert.Show();
-                                break;
-                            }
-                        case 428:
-                            {
-                                alert.SetMessage("Check your email to verify your account");
-                                alert.Show();
-                                break;
-                            }
-                        case 503: // Network issues
-                        case 504:
-                            {
-                                alert.SetMessage(responce.m_reason);
-                                alert.Show();
-                                break;
-                            }
-                        default:
-                            {
-                                alert.SetMessage("Unknown Error");
-                                alert.Show();
-                                break;
-                            }
-                    }
-
+                    Login();
                     clicked = false;
                 }
             };
@@ -193,6 +155,77 @@ namespace EFRFrontEndTest2
 
             //Calls new activity with transition animation. (Requires changing focus in axml so text isnt selected at the beginning)
             createAccount.Click += StartCreateAccountActivity;
+        }
+        async void Login()
+        {
+            var localData = Application.Context.GetSharedPreferences("CurrentUser", FileCreationMode.Private);
+            EditText userBox = FindViewById<EditText>(Resource.Id.usernameBox);
+            EditText passBox = FindViewById<EditText>(Resource.Id.passwordBox);
+            // Fetch the login information asynchronously, parse the results, then update the screen.
+            Responce responce;
+            if (localData.GetString("username", "") != "" && localData.GetString("password", "") != "")
+            {
+                responce = await m_database.FetchLogin(localData.GetString("username",""), localData.GetString("password", ""));
+            }
+            else
+            {
+                responce = await m_database.FetchLogin(userBox.Text, passBox.Text);
+            }
+                
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Unable to log in");
+            alert.SetButton("OK", (c, ev) =>
+            {
+                passBox.Text = "";
+            });
+            switch (responce.m_code)
+            {
+                case 200:
+                    {
+                        //m_database.GetUserObject.Save(this);
+                        //changed into dashboard activity for new userdashboard, only test
+                        var intent = new Intent(this, typeof(BottomMenuTest));
+                        StartActivity(intent);
+                        //finish will destory this page
+
+                        var edit = localData.Edit();
+                        if (localData.GetString("username", "") == "" || localData.GetString("password", "") == "")
+                        {
+                            edit.PutString("username", userBox.Text);
+                            edit.PutString("password", passBox.Text);
+                        }
+                        edit.Apply();
+
+                        Finish();
+                        break;
+                    }
+                case 401:
+                    {
+                        alert.SetMessage("Invalid username/password");
+                        alert.Show();
+                        break;
+                    }
+                case 428:
+                    {
+                        alert.SetMessage("Check your email to verify your account");
+                        alert.Show();
+                        break;
+                    }
+                case 503: // Network issues
+                case 504:
+                    {
+                        alert.SetMessage(responce.m_reason);
+                        alert.Show();
+                        break;
+                    }
+                default:
+                    {
+                        alert.SetMessage("Unknown Error");
+                        alert.Show();
+                        break;
+                    }
+            }
         }
 
         private void StartCreateAccountActivity(object sender, EventArgs e)
