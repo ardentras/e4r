@@ -62,10 +62,13 @@ namespace EFRFrontEndTest2
 
         public void LogOut()
         {
-            //Changed into dashboard activity for new userdashboard, only test
+
+            var localData = Application.Context.GetSharedPreferences("CurrentUser", FileCreationMode.Private);
+            var edit = localData.Edit();
+            edit.Clear();
+            edit.Apply();
             var intent = new Intent(this, typeof(LoginScreenActivity));
             StartActivity(intent);
-            //Finish will destory this page
             Finish();
         }
 

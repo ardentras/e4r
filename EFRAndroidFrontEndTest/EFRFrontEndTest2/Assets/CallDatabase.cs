@@ -86,6 +86,16 @@ namespace EFRFrontEndTest2.Assets
 
             return LastResponce;
         }
+        public async Task<Responce> RenewSession(string session)
+        {
+            byte[] bytestream = Encoding.ASCII.GetBytes("{ \"user\": { \"session\": \"{" + session + "}\"} }");
+            CancellationTokenSource cts = new CancellationTokenSource();
+            Task task = APICall("PUT", "/renew", bytestream, true); //True because session ID is in the UO and needs to be updated to be saved
+            await Task.WhenAny(task, Task.Delay(2000, cts.Token));
+            CheckTask(task);
+
+            return LastResponce;
+        }
 
         public async Task<Responce> ResetPassword(string username, string email)
         {
@@ -179,7 +189,7 @@ namespace EFRFrontEndTest2.Assets
             }
         }
 
-        private void CreateUserObject(JsonValue json)
+        public void CreateUserObject(JsonValue json)
         {
             try
             { // UO updating doesn't come with a session ID
