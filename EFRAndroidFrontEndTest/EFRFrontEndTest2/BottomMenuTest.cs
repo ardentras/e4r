@@ -87,8 +87,8 @@ namespace EFRFrontEndTest2
                 fragment = Settings.NewInstance(this);
             else if (id == Resource.Id.account_settings)
                 fragment = AccountSettings.NewInstance();
-            //else if (id == Resource.Id.general_settings)
-            //fragment = GeneralSettings.NewInstance();
+            else if (id == Resource.Id.general_settings)
+                fragment = Achievements.NewInstance(this);
             else if (id == Resource.Id.charity_selection)
                 fragment = CharitySelection.NewInstance(this);
             else if (id == Resource.Id.Color_Picker)

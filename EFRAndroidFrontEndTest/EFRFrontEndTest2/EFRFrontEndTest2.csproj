@@ -162,6 +162,7 @@
     <Compile Include="Fragments\ColorPicker.cs" />
     <Compile Include="Fragments\Difficulty.cs" />
     <Compile Include="Fragments\Feeds.cs" />
+    <Compile Include="Fragments\Achievements.cs" />
     <Compile Include="Fragments\GeneralSettings.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="Fragments\Questions.cs" />

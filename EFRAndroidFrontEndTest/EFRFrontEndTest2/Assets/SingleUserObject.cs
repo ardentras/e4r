@@ -7,6 +7,7 @@
         // and you should get the user object.
         public SingleUserObject()
         {
+
             if(singleObj == null)
             {
                 singleObj = new UserObject();
