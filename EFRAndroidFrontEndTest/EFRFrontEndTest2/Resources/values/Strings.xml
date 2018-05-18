@@ -2,4 +2,6 @@
 <resources>
   <string name="app_name">Education for Revitalization</string>
   <string name="changeImage">Change Image</string>
+  <string name="interstitial_button_text">Show Interstitial Ad</string>
+  <string name="test_banner_ad_unit_id">ca-app-pub-2195532870517006/9733045050</string>
 </resources>

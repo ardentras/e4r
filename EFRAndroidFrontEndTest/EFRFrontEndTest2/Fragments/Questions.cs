@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
+using Android.Gms.Ads;
 
 using EFRFrontEndTest2.Assets;
 using System.Net;
@@ -48,6 +49,7 @@ namespace EFRFrontEndTest2.Fragments
 
     public class Questions : Android.Support.V4.App.Fragment
     {
+        protected AdView mAdView;
         private CallDatabase m_database;
         private JsonValue m_questionBlock;
         private Question currentquestion;
@@ -71,12 +73,6 @@ namespace EFRFrontEndTest2.Fragments
             _main = main;
         }
 
-        public override void OnStop()
-        {
-            m_database.UpdateUO().Wait();
-            base.OnStop();
-        }
-        
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -84,10 +80,38 @@ namespace EFRFrontEndTest2.Fragments
             // Create your fragment here
         }
 
+        public override void OnStop()
+        {
+            m_database.UpdateUO().Wait();
+            base.OnStop();
+        }
+
         public override void OnResume()
         {
             base.OnResume();
             SetBackgrounds();
+            if (mAdView != null)
+            {
+                mAdView.Resume();
+            }
+        }
+
+        public override void OnPause()
+        {
+            if (mAdView != null)
+            {
+                mAdView.Pause();
+            }
+            base.OnPause();
+        }
+
+        public override void OnDestroy()
+        {
+            if (mAdView != null)
+            {
+                mAdView.Destroy();
+            }
+            base.OnDestroy();
         }
 
         public static Questions NewInstance(BottomMenuTest main)
@@ -115,7 +139,7 @@ namespace EFRFrontEndTest2.Fragments
                     edit.PutInt("QuestionNum", QuestionCount);
                     edit.Apply();
                     QuestionAnswered = false;
-                    if (QuestionCount >= QuestionsInBlock)    
+                    if (QuestionCount >= QuestionsInBlock)
                     {
                         Task.Run(async () => { await NextBlock(); }).Wait();
                         QuestionCount = 0;
@@ -209,9 +233,12 @@ namespace EFRFrontEndTest2.Fragments
 
         private void setup()
         {
-
             m_database = new CallDatabase();
             user = SingleUserObject.getObject();
+            MobileAds.Initialize(_main, "ca-app-pub-2195532870517006~6130155042");
+            mAdView = view.FindViewById<AdView>(Resource.Id.adView);
+            var adRequest = new AdRequest.Builder().Build();
+            mAdView.LoadAd(adRequest);
             next_button = view.FindViewById<Button>(Resource.Id.next_button);
             question_view = view.FindViewById<TextView>(Resource.Id.question_view);
             answer_one = view.FindViewById<Button>(Resource.Id.answer_one);
@@ -367,14 +394,14 @@ namespace EFRFrontEndTest2.Fragments
 
         private void HighlightAnswer()
         {
-                    if (currentquestion.m_AnswerOne == currentquestion.m_CorrectAnswer)
-                        answer_one.SetBackgroundColor(Android.Graphics.Color.LightGreen);
-                    else if (currentquestion.m_AnswerTwo == currentquestion.m_CorrectAnswer)
-                        answer_two.SetBackgroundColor(Android.Graphics.Color.LightGreen);
-                    else if (currentquestion.m_AnswerThree == currentquestion.m_CorrectAnswer)
-                        answer_three.SetBackgroundColor(Android.Graphics.Color.LightGreen);
-                    else if (currentquestion.m_AnswerFour == currentquestion.m_CorrectAnswer)
-                        answer_four.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+            if (currentquestion.m_AnswerOne == currentquestion.m_CorrectAnswer)
+                answer_one.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+            else if (currentquestion.m_AnswerTwo == currentquestion.m_CorrectAnswer)
+                answer_two.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+            else if (currentquestion.m_AnswerThree == currentquestion.m_CorrectAnswer)
+                answer_three.SetBackgroundColor(Android.Graphics.Color.LightGreen);
+            else if (currentquestion.m_AnswerFour == currentquestion.m_CorrectAnswer)
+                answer_four.SetBackgroundColor(Android.Graphics.Color.LightGreen);
         }
 
         protected void SetBackgrounds()
@@ -385,5 +412,6 @@ namespace EFRFrontEndTest2.Fragments
                 background.Background = AppBackground.background;
             }
         }
+
     }
 }
