@@ -1,0 +1,205 @@
+//========================================================================================//
+
+Running load test on /api/check_username endpoint.
+
+Sending username and email.
+
+# of concurrent connections: 10
+# of requests per second:    250
+Total runtime for this test: 20s
+Type of request:             POST
+
+//========================================================================================//
+[Tue May 29 2018 12:52:42 GMT-0700 (PDT)] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+[Tue May 29 2018 12:52:47 GMT-0700 (PDT)] INFO Requests: 933, requests per second: 187, mean latency: 1037.1 ms
+[Tue May 29 2018 12:52:47 GMT-0700 (PDT)] INFO Errors: 1, accumulated errors: 1, 0.1% of total requests
+[Tue May 29 2018 12:52:52 GMT-0700 (PDT)] INFO Requests: 2143, requests per second: 242, mean latency: 4001.6 ms
+[Tue May 29 2018 12:52:52 GMT-0700 (PDT)] INFO Errors: 101, accumulated errors: 102, 4.8% of total requests
+[Tue May 29 2018 12:52:57 GMT-0700 (PDT)] INFO Requests: 3883, requests per second: 348, mean latency: 5583.3 ms
+[Tue May 29 2018 12:52:57 GMT-0700 (PDT)] INFO Errors: 37, accumulated errors: 139, 3.6% of total requests
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Target URL:          http://34.216.143.255:3002/api/check_username
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Max time (s):        20
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Concurrency level:   10
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Agent:               keepalive
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Requests per second: 500
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Completed requests:  5651
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Total errors:        188
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Total time:          20.007095826 s
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Requests per second: 282
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Mean latency:        4996 ms
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO Percentage of the requests served within a certain time
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO   50%      5195 ms
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO   90%      7619 ms
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO   95%      8115 ms
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO   99%      9724 ms
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO  100%      15807 ms (longest request)
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO  100%      15807 ms (longest request)
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:02 GMT-0700 (PDT)] INFO    -1:   188 errors
+//========================================================================================//
+
+Running load test on /api/login endpoint.
+
+Sending username and password.
+
+# of concurrent connections: 10
+# of requests per second:    250
+Total runtime for this test: 20s
+Type of request:             POST
+
+//========================================================================================//
+[Tue May 29 2018 12:53:20 GMT-0700 (PDT)] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+[Tue May 29 2018 12:53:25 GMT-0700 (PDT)] INFO Requests: 690, requests per second: 138, mean latency: 1028.8 ms
+[Tue May 29 2018 12:53:30 GMT-0700 (PDT)] INFO Requests: 1627, requests per second: 187, mean latency: 2611.4 ms
+[Tue May 29 2018 12:53:30 GMT-0700 (PDT)] INFO Errors: 1, accumulated errors: 1, 0.1% of total requests
+[Tue May 29 2018 12:53:35 GMT-0700 (PDT)] INFO Requests: 2938, requests per second: 262, mean latency: 2891.8 ms
+[Tue May 29 2018 12:53:35 GMT-0700 (PDT)] INFO Errors: 3, accumulated errors: 4, 0.1% of total requests
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Target URL:          http://34.216.143.255:3002/api/login
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Max time (s):        20
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Concurrency level:   10
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Agent:               keepalive
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Requests per second: 250
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Completed requests:  3979
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Total errors:        4
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Total time:          20.00895324 s
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Requests per second: 199
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Mean latency:        2416.2 ms
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO Percentage of the requests served within a certain time
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO   50%      2620 ms
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO   90%      3063 ms
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO   95%      3190 ms
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO   99%      4439 ms
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO  100%      6517 ms (longest request)
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO  100%      6517 ms (longest request)
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:53:40 GMT-0700 (PDT)] INFO    -1:   4 errors
+//========================================================================================//
+
+Running load test on /api/update_uo endpoint.
+
+Sending session_id token and user object.
+
+# of concurrent connections: 10
+# of requests per second:    250
+Total runtime for this test: 20s
+Type of request:             PUT
+
+//========================================================================================//
+[Tue May 29 2018 12:53:48 GMT-0700 (PDT)] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+[Tue May 29 2018 12:53:53 GMT-0700 (PDT)] INFO Requests: 621, requests per second: 124, mean latency: 1277.9 ms
+[Tue May 29 2018 12:53:58 GMT-0700 (PDT)] INFO Requests: 1596, requests per second: 195, mean latency: 2762.7 ms
+[Tue May 29 2018 12:53:58 GMT-0700 (PDT)] INFO Errors: 2, accumulated errors: 2, 0.1% of total requests
+[Tue May 29 2018 12:54:03 GMT-0700 (PDT)] INFO Requests: 2781, requests per second: 242, mean latency: 3439 ms
+[Tue May 29 2018 12:54:03 GMT-0700 (PDT)] INFO Errors: 23, accumulated errors: 25, 0.9% of total requests
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Target URL:          http://34.216.143.255:3002/api/update_uo
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Max time (s):        20
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Concurrency level:   10
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Agent:               keepalive
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Requests per second: 250
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Completed requests:  4060
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Total errors:        31
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Total time:          20.007100645999998 s
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Requests per second: 203
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Mean latency:        2970.4 ms
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO Percentage of the requests served within a certain time
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO   50%      2985 ms
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO   90%      3916 ms
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO   95%      5160 ms
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO   99%      7229 ms
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO  100%      10386 ms (longest request)
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO  100%      10386 ms (longest request)
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:08 GMT-0700 (PDT)] INFO    -1:   31 errors
+//========================================================================================//
+
+Running load test on /api/q/request_block endpoint.
+
+Sending session_id token, user object, and total donated.
+
+# of concurrent connections: 10
+# of requests per second:    250
+Total runtime for this test: 20s
+Type of request:             PUT
+
+//========================================================================================//
+[Tue May 29 2018 12:54:15 GMT-0700 (PDT)] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+[Tue May 29 2018 12:54:20 GMT-0700 (PDT)] INFO Requests: 307, requests per second: 61, mean latency: 1739.2 ms
+[Tue May 29 2018 12:54:25 GMT-0700 (PDT)] INFO Requests: 764, requests per second: 91, mean latency: 4795.9 ms
+[Tue May 29 2018 12:54:25 GMT-0700 (PDT)] INFO Errors: 49, accumulated errors: 49, 6.4% of total requests
+[Tue May 29 2018 12:54:30 GMT-0700 (PDT)] INFO Requests: 1251, requests per second: 97, mean latency: 7754.1 ms
+[Tue May 29 2018 12:54:30 GMT-0700 (PDT)] INFO Errors: 59, accumulated errors: 108, 8.6% of total requests
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Target URL:          http://34.216.143.255:3002/api/q/request_block
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Max time (s):        20
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Concurrency level:   10
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Agent:               keepalive
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Requests per second: 250
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Completed requests:  1844
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Total errors:        167
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Total time:          20.015340573 s
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Requests per second: 92
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Mean latency:        6904 ms
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO Percentage of the requests served within a certain time
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO   50%      7126 ms
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO   90%      10885 ms
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO   95%      11588 ms
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO   99%      13118 ms
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO  100%      17355 ms (longest request)
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO  100%      17355 ms (longest request)
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:54:36 GMT-0700 (PDT)] INFO    -1:   167 errors
+//========================================================================================//
+
+Running load test on /api/top_ten_q endpoint.
+
+# of concurrent connections: 10
+# of requests per second:    500
+Total runtime for this test: 20s
+Type of request:             GET
+
+//========================================================================================//
+[Tue May 29 2018 12:55:09 GMT-0700 (PDT)] INFO Requests: 0, requests per second: 0, mean latency: 0 ms
+[Tue May 29 2018 12:55:14 GMT-0700 (PDT)] INFO Requests: 645, requests per second: 129, mean latency: 1361.8 ms
+[Tue May 29 2018 12:55:14 GMT-0700 (PDT)] INFO Errors: 1, accumulated errors: 1, 0.2% of total requests
+[Tue May 29 2018 12:55:19 GMT-0700 (PDT)] INFO Requests: 1797, requests per second: 235, mean latency: 4694.3 ms
+[Tue May 29 2018 12:55:19 GMT-0700 (PDT)] INFO Errors: 17, accumulated errors: 18, 1% of total requests
+[Tue May 29 2018 12:55:24 GMT-0700 (PDT)] INFO Requests: 3351, requests per second: 317, mean latency: 6681.2 ms
+[Tue May 29 2018 12:55:24 GMT-0700 (PDT)] INFO Errors: 67, accumulated errors: 85, 2.5% of total requests
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Target URL:          http://34.216.143.255:3002/api/top_ten_q
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Max time (s):        20
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Concurrency level:   10
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Agent:               keepalive
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Requests per second: 500
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Completed requests:  5316
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Total errors:        139
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Total time:          20.008147676 s
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Requests per second: 266
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Mean latency:        6224.7 ms
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO Percentage of the requests served within a certain time
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO   50%      6655 ms
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO   90%      8754 ms
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO   95%      9377 ms
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO   99%      10980 ms
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO  100%      13728 ms (longest request)
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO  100%      13728 ms (longest request)
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO 
+[Tue May 29 2018 12:55:29 GMT-0700 (PDT)] INFO    -1:   139 errors
